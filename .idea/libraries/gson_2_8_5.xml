@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="gson-2.8.5">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../3r carrera/DPO/practica 2.0/DPOO_P2_Battleships/libs/gson-2.8.5.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../3r carrera/DPO/practica 2.0/DPOO_P2_Battleships/libs/mysql-connector-java-8.0.17.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -3,14 +3,11 @@ package Persistance.dao.sql;
 import Business.Song;
 import Persistance.dao.SongDao;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class SQLSongDao implements SongDao {
 
-    private Connection remoteConnection =  DatabaseConnector.getInstance();
+    private final Connection remoteConnection;
     public SQLSongDao(Connection remoteConnection){
         this.remoteConnection = remoteConnection;
     }
@@ -24,7 +21,7 @@ public class SQLSongDao implements SongDao {
                 String genre = song.getGenre();
                 String album = song.getAlbum();
                 String author = song.getAuthor();
-                String register = "INSERT INTO game (title, genre, album, author) VALUES (?, ?, ?, ?)";
+                String register = "INSERT INTO song (title, genre, album, author) VALUES (?, ?, ?, ?)";
                 PreparedStatement preparedStmt = remoteConnection.prepareStatement(register);
                 preparedStmt.setString (1, title);
                 preparedStmt.setString (2, genre);

@@ -3,11 +3,8 @@ package Persistance.dao.sql;
 import Persistance.dao.UserDao;
 import Business.User;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.PreparedStatement;
+import java.sql.*;
+
 
 public class SQLUserDao implements UserDao {
 
@@ -21,13 +18,13 @@ public class SQLUserDao implements UserDao {
         try {
             Statement statement = remoteConnection.createStatement();
             statement.executeQuery("USE espotifai");
-            String username = user.getUsername();
-            String email = user.getEmail();
-            String password = user.getPassword();
             try {
+                String username = user.getUsername();
+                String email = user.getEmail();
+                String password = user.getPassword();
                 String register = "INSERT INTO user (username, email, password) VALUES (?, ?, ?)";
                 PreparedStatement preparedStmt = remoteConnection.prepareStatement(register);
-                preparedStmt.setString (1, username );
+                preparedStmt.setString (1, username);
                 preparedStmt.setString (2, email);
                 preparedStmt.setString (3, password);
                 preparedStmt.execute();
@@ -39,8 +36,8 @@ public class SQLUserDao implements UserDao {
         }
     }
 
-    public int userExists(User user){
-        int error = 0;
+    public boolean userExists(User user){
+        boolean error = false;
         try{
             Statement statement = remoteConnection.createStatement();
             statement.executeQuery("USE espotifai");
@@ -54,9 +51,9 @@ public class SQLUserDao implements UserDao {
                 ResultSet rs = prepared.executeQuery();
                 while (rs.next()) {
                     if (rs.getInt(1) == 0) {
-                        error = 0;
+                        error = false;
                     }else{
-                        error = 1;
+                        error = true;
                     }
                 }
             }catch(SQLException e){

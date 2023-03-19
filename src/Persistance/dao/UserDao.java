@@ -4,7 +4,7 @@ import Business.User;
 
 public interface UserDao {
     void register(User user);
-    int userExists(User user);
+    boolean userExists(User user);
     void Delete(User user);
     int Login(User user);
 }

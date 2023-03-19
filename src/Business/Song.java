@@ -31,4 +31,19 @@ public class Song {
     }
 
 
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setGenre(String genre) {
+        this.genre = genre;
+    }
+
+    public void setAlbum(String album) {
+        this.album = album;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
 }
