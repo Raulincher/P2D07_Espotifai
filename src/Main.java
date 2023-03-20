@@ -31,9 +31,8 @@ public class Main {
             songDao.SaveSong(song2);
             userDao.register(user2);
         }
-
-
         //to delete user
         //userDao.Delete(user1);
+        //userDao.Delete(user2);
     }
 }
