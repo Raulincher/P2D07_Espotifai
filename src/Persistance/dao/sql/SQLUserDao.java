@@ -1,7 +1,7 @@
 package Persistance.dao.sql;
 
 import Persistance.dao.UserDao;
-import Business.User;
+import Business.Entities.User;
 
 import java.sql.*;
 
@@ -13,7 +13,7 @@ public class SQLUserDao implements UserDao {
         this.remoteConnection = remoteConnection;
     }
 
-    public void register(User user) {
+    public void Register(User user) {
 
         try {
             Statement statement = remoteConnection.createStatement();
@@ -96,8 +96,8 @@ public class SQLUserDao implements UserDao {
         }
     }
 
-    public int Login(User user){
-        int error = 0;
+    public boolean Login(User user){
+        boolean error = false;
         try{
             Statement statement = remoteConnection.createStatement();
             statement.executeQuery("USE espotifai");
@@ -113,13 +113,9 @@ public class SQLUserDao implements UserDao {
                 ResultSet rs = prepared.executeQuery();
 
                 while (rs.next()) {
-                    if (rs.getInt(1) == 0) {
-                        error = 1;
-                        //no login
-                    }else{
-                        error = 0;
-                        //login
-                    }
+                    //no login
+                    //login
+                    error = rs.getInt(1) == 0;
                 }
             }catch(SQLException e){
                 System.err.println("Error at login");

@@ -1,6 +1,6 @@
 package Persistance.dao;
 
-import Business.Song;
+import Business.Entities.Song;
 
 public interface SongDao {
 

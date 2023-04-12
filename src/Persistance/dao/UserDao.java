@@ -1,10 +1,10 @@
 package Persistance.dao;
 
-import Business.User;
+import Business.Entities.User;
 
 public interface UserDao {
-    void register(User user);
+    void Register(User user);
     boolean userExists(User user);
     void Delete(User user);
-    int Login(User user);
+    boolean Login(User user);
 }

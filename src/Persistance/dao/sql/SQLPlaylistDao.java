@@ -1,38 +1,37 @@
 package Persistance.dao.sql;
 
+import Business.Entities.Playlist;
 import Business.Entities.Song;
-import Persistance.dao.SongDao;
+import Persistance.dao.PlaylistDao;
 
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.sql.Statement;
 
-public class SQLSongDao implements SongDao {
+public class SQLPlaylistDao implements PlaylistDao {
 
     private final Connection remoteConnection;
-    public SQLSongDao(Connection remoteConnection){
+    public SQLPlaylistDao(Connection remoteConnection){
         this.remoteConnection = remoteConnection;
     }
 
-    public void SaveSong(Song song) {
+    public void SavePlaylist(Playlist playlist) {
         try {
             Statement statement = remoteConnection.createStatement();
             statement.executeQuery("USE espotifai");
             try {
-                String title = song.getTile();
-                String genre = song.getGenre();
-                String album = song.getAlbum();
-                String author = song.getAuthor();
-                String register = "INSERT INTO song (title, genre, album, author) VALUES (?, ?, ?, ?)";
+                String title = playlist.getTitle();
+                String username = playlist.getUsername();
+                String register = "INSERT INTO song (title, username) VALUES (?, ?)";
                 PreparedStatement preparedStmt = remoteConnection.prepareStatement(register);
                 preparedStmt.setString (1, title);
-                preparedStmt.setString (2, genre);
-                preparedStmt.setString (3, album);
-                preparedStmt.setString (4, author);
-
+                preparedStmt.setString (2, username);
                 preparedStmt.execute();
                 remoteConnection.close();
 
             }catch (SQLException e){
-                System.err.println("Song already exists");
+                System.err.println("error in playlist");
             }
         } catch (SQLException e) {
             System.err.println("Espotifai not found");
