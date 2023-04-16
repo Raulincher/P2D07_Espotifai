@@ -9,12 +9,16 @@ public class InitialView extends JPanel {
 
     private JButton jLogin;
     private JButton jRegister;
+    private JButton jTest;
+
 
     private JPanel logo;
     private JPanel buttons;
 
     public static final String BTN_LOGIN = "BTN_LOGIN";
     public static final String BTN_REGISTER = "BTN_REGISTER";
+    public static final String BTN_TEST = "BTN_TEST";
+
 
 
     public void configureInitialView(){
@@ -46,26 +50,30 @@ public class InitialView extends JPanel {
     public void buttonsZone(){
         buttons = new JPanel();
 
-        jLogin = new JButton("Login");
         jRegister = new JButton("Register");
-
-        jLogin.setActionCommand(BTN_LOGIN);
-        jLogin.setFont(new Font("Helvetica", Font.ITALIC, 20));
-
         jRegister.setActionCommand(BTN_REGISTER);
         jRegister.setFont(new Font("Helvetica", Font.ITALIC, 20));
-
-        jLogin.setMaximumSize(new Dimension(200,100));
         jRegister.setMaximumSize(new Dimension (200,100));
-
         buttons.add(jRegister);
+
+        jLogin = new JButton("Login");
+        jLogin.setActionCommand(BTN_LOGIN);
+        jLogin.setFont(new Font("Helvetica", Font.ITALIC, 20));
+        jLogin.setMaximumSize(new Dimension(200,100));
         buttons.add(jLogin);
+
+        jTest = new JButton("Test");
+        jTest.setActionCommand(BTN_TEST);
+        jTest.setFont(new Font("Helvetica", Font.ITALIC, 20));
+        jTest.setMaximumSize(new Dimension (200,100));
+        buttons.add(jTest);
     }
 
 
     public void addInitialViewController(InitialViewController initialViewController){
         jLogin.addActionListener(initialViewController);
         jRegister.addActionListener(initialViewController);
+        jTest.addActionListener(initialViewController);
     }
 
 

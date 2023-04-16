@@ -24,7 +24,10 @@ public class UserManager {
         return userDao.userExists(user);
     }
 
-    public void Delete(User user){
+    public void Delete(){
+
+        User user = new User("pepe", "prueba1234", "pepe@gmail.com");
+
         userDao.Delete(user);
     }
 }
