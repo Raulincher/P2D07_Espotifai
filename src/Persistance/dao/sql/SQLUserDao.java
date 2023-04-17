@@ -50,11 +50,7 @@ public class SQLUserDao implements UserDao {
                 prepared.setString (2, username);
                 ResultSet rs = prepared.executeQuery();
                 while (rs.next()) {
-                    if (rs.getInt(1) == 0) {
-                        error = false;
-                    }else{
-                        error = true;
-                    }
+                    error = rs.getInt(1) != 0;
                 }
             }catch(SQLException e){
                 System.err.println("Error at UserExists");
@@ -68,7 +64,6 @@ public class SQLUserDao implements UserDao {
     }
 
     public void Delete(User user){
-        int error = 0;
         try{
             Statement statement = remoteConnection.createStatement();
             statement.executeQuery("USE espotifai");

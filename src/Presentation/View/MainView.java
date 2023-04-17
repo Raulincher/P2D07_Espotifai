@@ -40,7 +40,7 @@ public class MainView extends JFrame {
     private void configureWindow(){
         setTitle("Espotifai");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(1920,1080);
+        setSize(1280,720);
         setLocationRelativeTo(null);
     }
 

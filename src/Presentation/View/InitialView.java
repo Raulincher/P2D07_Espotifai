@@ -41,8 +41,9 @@ public class InitialView extends JPanel {
     public void logoZone(){
         logo = new JPanel();
 
-        ImageIcon space0 = new ImageIcon("Media/placeholder.png");
+        ImageIcon space0 = new ImageIcon("Media/placeholder2.png");
         JLabel jLogo = new JLabel("", space0, JLabel.CENTER);
+        jLogo.setMaximumSize(new Dimension (400,300));
 
         logo.add(jLogo);
     }
