@@ -7,6 +7,9 @@ public class UserManager {
 
     private final UserDao userDao;
 
+    User user = new User("pepe", "prueba1234", "pepe@gmail.com");
+
+
 
     public UserManager(UserDao userDao) {
         this.userDao = userDao;
@@ -20,14 +23,11 @@ public class UserManager {
         return userDao.Login(user);
     }
 
-    public boolean UserExistence(User user){
+    public boolean UserExistence(){
         return userDao.userExists(user);
     }
 
     public void Delete(){
-
-        User user = new User("pepe", "prueba1234", "pepe@gmail.com");
-
         userDao.Delete(user);
     }
 }

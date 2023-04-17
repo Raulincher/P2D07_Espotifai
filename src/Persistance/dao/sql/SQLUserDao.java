@@ -14,7 +14,6 @@ public class SQLUserDao implements UserDao {
     }
 
     public void Register(User user) {
-
         try {
             Statement statement = remoteConnection.createStatement();
             statement.executeQuery("USE espotifai");
@@ -64,6 +63,7 @@ public class SQLUserDao implements UserDao {
     }
 
     public void Delete(User user){
+        int affected = 0;
         try{
             Statement statement = remoteConnection.createStatement();
             statement.executeQuery("USE espotifai");
@@ -79,8 +79,7 @@ public class SQLUserDao implements UserDao {
                 prepared.setString (1, email);
                 prepared.setString (2, username);
                 prepared.setString (3, password);
-                prepared.execute();
-                System.out.println("deleted Successfully");
+                affected = prepared.executeUpdate();
 
             }catch(SQLException e){
                 System.err.println("The user you try to delete doesn't exist");
@@ -88,6 +87,13 @@ public class SQLUserDao implements UserDao {
         }catch (SQLException e){
             //error = 1;
             System.err.println("Espotifai not found in Delete");
+        }
+
+        if(affected > 0){
+            System.out.println("deleted Successfully");
+
+        }else{
+            System.err.println("The user you try to delete doesn't exist");
         }
     }
 

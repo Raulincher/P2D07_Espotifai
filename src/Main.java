@@ -1,4 +1,5 @@
 
+import Business.Entities.User;
 import Business.PlaylistManager;
 import Business.SongManager;
 import Business.UserManager;
@@ -49,7 +50,19 @@ public class Main {
         registerView.addRegisterController(registerViewController);
         testView.addTestController(testViewController);
 
+        if(userManager.UserExistence()){
 
+            System.out.println("Existo 1");
+
+        }
+
+        userManager.Delete();
+
+        if(userManager.UserExistence()){
+
+            System.out.println("Existo 2");
+
+        }
         mainView.start();
     }
 }
