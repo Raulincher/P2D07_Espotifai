@@ -50,19 +50,6 @@ public class Main {
         registerView.addRegisterController(registerViewController);
         testView.addTestController(testViewController);
 
-        if(userManager.UserExistence()){
-
-            System.out.println("Existo 1");
-
-        }
-
-        userManager.Delete();
-
-        if(userManager.UserExistence()){
-
-            System.out.println("Existo 2");
-
-        }
         mainView.start();
     }
 }
