@@ -79,6 +79,9 @@ public class MainView extends JFrame {
         cardManager.show(getContentPane(), CARD_TEST);
     }
 
+    /*public void showPopUpsLogin(String error) {
+        this.loginView.showPopUps(error);
+    }*/
 
     public void start() {
         showMainCard();
