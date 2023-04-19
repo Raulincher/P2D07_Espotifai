@@ -48,13 +48,13 @@ public class Main {
         InitialViewController initialViewController = new InitialViewController(mainView);
         LoginViewController loginViewController = new LoginViewController(mainView, loginView, userManager);
         RegisterViewController registerViewController = new RegisterViewController(mainView, registerView, userManager);
-        AddSongViewController addSongViewController = new AddSongViewController(addSongView);
-        DeleteSongViewController deleteSongViewController = new DeleteSongViewController(deleteSongView);
-        DetailedPlaylistViewController detailedPlaylistViewController = new DetailedPlaylistViewController(detailedPlaylistView);
-        DetailedSongViewController detailedSongViewController = new DetailedSongViewController(detailedSongView);
-        GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView);
-        GeneralPlaylistViewController generalPlaylistViewController = new GeneralPlaylistViewController(generalPlaylistView);
-        MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView);
+        AddSongViewController addSongViewController = new AddSongViewController(addSongView, mainView);
+        DeleteSongViewController deleteSongViewController = new DeleteSongViewController(deleteSongView, mainView);
+        DetailedPlaylistViewController detailedPlaylistViewController = new DetailedPlaylistViewController(detailedPlaylistView, mainView);
+        DetailedSongViewController detailedSongViewController = new DetailedSongViewController(detailedSongView, mainView);
+        GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView, mainView);
+        GeneralPlaylistViewController generalPlaylistViewController = new GeneralPlaylistViewController(generalPlaylistView, mainView);
+        MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView);
         TestViewController testViewController = new TestViewController(mainView, userManager);
 
 

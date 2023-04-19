@@ -23,7 +23,7 @@ public class LoginViewController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getActionCommand().equals("CARD_LOGIN")){
             if (userManager.Login(loginView.getLoginData())){
-                mainView.showLoginCard();
+                mainView.showMainMenuCard();
             }else{
                 if (userManager.IsEmpty(loginView.getLoginData())){
                     loginView.showPopUps("It's Empty!");

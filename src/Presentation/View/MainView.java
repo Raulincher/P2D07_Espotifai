@@ -22,6 +22,14 @@ public class MainView extends JFrame {
 
 
     private static final String CARD_MAIN = "CARD_MAIN";
+    private static final String CARD_ADD_SONG = "CARD_ADD_SONG";
+    private static final String CARD_DELETE_SONG = "CARD_DELETE_SONG";
+    private static final String CARD_DETAILED_PLAYLIST = "CARD_DETAILED_PLAYLIST";
+    private static final String CARD_DETAILED_SONG = "CARD_DETAILED_SONG";
+    private static final String CARD_GENERAL_SONG = "CARD_GENERAL_SONG";
+    private static final String CARD_GENERAL_PLAYLIST = "CARD_GENERAL_PLAYLIST";
+    private static final String CARD_MAIN_MENU = "CARD_MAIN_MENU";
+    private static final String CARD_STATISTICS = "CARD_STATISTICS";
     private static final String CARD_LOGIN = "CARD_LOGIN";
     private static final String CARD_REGISTER = "CARD_REGISTER";
     private static final String CARD_TEST = "CARD_TEST";
@@ -84,6 +92,39 @@ public class MainView extends JFrame {
         this.registerView.configureRegisterView();
         this.getContentPane().add(registerView, CARD_REGISTER);
     }
+    private void configureAddSong(){
+        this.addSongView.configureAddSongView();
+        this.getContentPane().add(addSongView, CARD_ADD_SONG);
+    }
+    private void configureDeleteSong(){
+        this.deleteSongView.configureDeleteSongView();
+        this.getContentPane().add(deleteSongView, CARD_DELETE_SONG);
+    }
+    private void configureDetailedPlaylist(){
+        this.detailedPlaylistView.configureDetailedPlaylistView();
+        this.getContentPane().add(detailedPlaylistView, CARD_DETAILED_PLAYLIST);
+    }
+    private void configureDetailedSong(){
+        this.detailedSongView.configureDetailedSongView();
+        this.getContentPane().add(detailedSongView, CARD_DETAILED_SONG);
+    }
+    private void configureGeneralPlaylist(){
+        this.generalPlaylistView.configureGeneralPlaylistView();
+        this.getContentPane().add(generalPlaylistView, CARD_GENERAL_PLAYLIST);
+    }
+    private void configureGeneralSongList(){
+        this.generalSongListView.configureGeneralSonglistView();
+        this.getContentPane().add(generalSongListView, CARD_GENERAL_SONG);
+    }
+    private void configureMainMenuView(){
+        this.mainMenuView.configureMainMenuView();
+        this.getContentPane().add(mainMenuView, CARD_MAIN_MENU);
+    }
+    private void configureStatisticsView(){
+        this.statisticsView.configureStatisticsView();
+        this.getContentPane().add(statisticsView, CARD_STATISTICS);
+    }
+
 
     private void configureTestView(){
         this.testView.configureTestView();

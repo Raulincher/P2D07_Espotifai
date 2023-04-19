@@ -19,7 +19,7 @@ public class InitialViewController implements ActionListener {
         switch (e.getActionCommand()) {
             case InitialView.BTN_LOGIN -> mainView.showLoginCard();
             case InitialView.BTN_REGISTER -> mainView.showRegisterCard();
-            case InitialView.BTN_TEST -> mainView.showTestCard();
+            case InitialView.BTN_TEST -> mainView.showMainMenuCard();
         }
     }
 
