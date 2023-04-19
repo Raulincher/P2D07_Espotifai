@@ -1,5 +1,6 @@
 package Presentation.Controller;
 
+import Presentation.View.InitialView;
 import Presentation.View.LoginView;
 import Presentation.View.MainView;
 
@@ -18,6 +19,9 @@ public class LoginViewController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        switch (e.getActionCommand()) {
+            case LoginView.BTN_BACK -> mainView.showLoginCard();
+            case LoginView.BTN_LOGIN -> System.out.println("log in");
+        }
     }
 }
