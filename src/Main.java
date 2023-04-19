@@ -40,7 +40,7 @@ public class Main {
 
         InitialViewController initialViewController = new InitialViewController(mainView);
         LoginViewController loginViewController = new LoginViewController(mainView, loginView, userManager);
-        RegisterViewController registerViewController = new RegisterViewController(mainView, registerView);
+        RegisterViewController registerViewController = new RegisterViewController(mainView, registerView, userManager);
         TestViewController testViewController = new TestViewController(mainView, userManager);
 
 

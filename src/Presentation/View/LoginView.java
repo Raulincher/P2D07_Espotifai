@@ -21,12 +21,27 @@ public class LoginView extends JPanel {
     public static final String BTN_LOGIN = "BTN_LOGIN";
 
     public static final String BTN_BACK = "BTN_BACK";
+
     public void configureLoginView() {
+
+        buttonsZoneLogin();
+        add(buttonsLogin);
         jSubmitLogin = new JButton("Submit");
+        jSubmitBack = new JButton("Back");
+
+
     }
 
     public void buttonsZoneLogin () {
         buttonsLogin = new JPanel();
+
+        jUsername = new JTextField();
+        jUsername.setPreferredSize(new Dimension(300, 50));
+        buttonsLogin.add(jUsername);
+
+        jPassword = new JPasswordField();
+        jUsername.setPreferredSize(new Dimension(300, 50));
+        buttonsLogin.add(jPassword);
 
         jSubmitLogin = new JButton("Login");
         jSubmitLogin.setActionCommand(BTN_LOGIN);
@@ -39,12 +54,6 @@ public class LoginView extends JPanel {
         jSubmitBack.setFont(new Font("Helvetica", Font.ITALIC, 20));
         jSubmitBack.setMaximumSize(new Dimension(200,100));
         buttonsLogin.add(jSubmitBack);
-
-        jUsername = new JTextField();
-        jUsername.setMaximumSize(new Dimension(300, 50));
-
-        jPassword = new JPasswordField();
-        jUsername.setMaximumSize(new Dimension(300, 50));
     }
 
     public void addLoginController(LoginViewController loginController){
