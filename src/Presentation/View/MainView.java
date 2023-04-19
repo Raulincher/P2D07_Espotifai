@@ -79,7 +79,6 @@ public class MainView extends JFrame {
         cardManager.show(getContentPane(), CARD_TEST);
     }
 
-
     public void start() {
         showMainCard();
         setVisible(true);
