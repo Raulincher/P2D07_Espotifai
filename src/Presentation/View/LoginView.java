@@ -22,12 +22,7 @@ public class LoginView extends JPanel {
 
     public static final String BTN_BACK = "BTN_BACK";
     public void configureLoginView() {
-
-        JPanel layout = new JPanel();
-
-        buttonsZoneLogin();
-        layout.add(buttonsLogin);
-        add(layout);
+        jSubmitLogin = new JButton("Submit");
     }
 
     public void buttonsZoneLogin () {
@@ -53,6 +48,7 @@ public class LoginView extends JPanel {
     }
 
     public void addLoginController(LoginViewController loginController){
+        //set action command
         jSubmitLogin.addActionListener(loginController);
         jSubmitBack.addActionListener(loginController);
     }
@@ -62,6 +58,10 @@ public class LoginView extends JPanel {
         loginData.add(jUsername.getText());
         loginData.add(String.valueOf(jPassword.getPassword()));
         return loginData;
+    }
+
+    public void showPopUps(String error) {
+        JOptionPane.showMessageDialog(this,error);
     }
 
 }

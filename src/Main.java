@@ -1,5 +1,4 @@
 
-import Business.Entities.User;
 import Business.PlaylistManager;
 import Business.SongManager;
 import Business.UserManager;
@@ -40,7 +39,7 @@ public class Main {
         MainView mainView = new MainView(initialView, registerView, loginView, testView);
 
         InitialViewController initialViewController = new InitialViewController(mainView);
-        LoginViewController loginViewController = new LoginViewController(mainView, loginView);
+        LoginViewController loginViewController = new LoginViewController(mainView, loginView, userManager);
         RegisterViewController registerViewController = new RegisterViewController(mainView, registerView);
         TestViewController testViewController = new TestViewController(mainView, userManager);
 

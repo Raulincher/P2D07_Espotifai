@@ -24,6 +24,4 @@ public class InitialViewController implements ActionListener {
     }
 
 
-
-
 }

@@ -1,6 +1,6 @@
 package Presentation.Controller;
 
-import Presentation.View.InitialView;
+import Business.UserManager;
 import Presentation.View.LoginView;
 import Presentation.View.MainView;
 
@@ -11,17 +11,28 @@ public class LoginViewController implements ActionListener {
 
     private final MainView mainView;
     private final LoginView loginView;
+    private final UserManager userManager;
 
-    public LoginViewController(MainView mainView, LoginView loginView) {
+    public LoginViewController(MainView mainView, LoginView loginView, UserManager userManager) {
         this.mainView = mainView;
         this.loginView = loginView;
+        this.userManager = userManager;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        switch (e.getActionCommand()) {
-            case LoginView.BTN_BACK -> mainView.showMainCard();
-            case LoginView.BTN_LOGIN -> System.out.println("log in");
+        if (e.getActionCommand().equals("CARD_LOGIN")){
+            if (userManager.Login(loginView.getLoginData())){
+                mainView.showLoginCard();
+            }else{
+                if (userManager.IsEmpty(loginView.getLoginData())){
+                    loginView.showPopUps("It's Empty!");
+                }else{
+                    loginView.showPopUps("User not found!");
+                }
+            }
+        }else{
+            mainView.showMainCard();
         }
     }
 }
