@@ -14,7 +14,7 @@ public class AddSongView extends JPanel {
         jback.addActionListener(addSongController);
     }
 
-    public void configureAddSongView() {
+    public void configureAddSong() {
         JLabel jLogo = new JLabel("add song");
         jback.setActionCommand(BTN_BACK);
 

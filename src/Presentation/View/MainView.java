@@ -61,14 +61,15 @@ public class MainView extends JFrame {
         configureLogin();
         configureRegister();
         configureTestView();
-        showAddSongCard();
-        showDeleteSongCard();
-        showDetailedPlaylistCard();
-        showDetailedSongCard();
-        showGeneralPlaylistCard();
-        showGeneralSongListCard();
-        showMainMenuCard();
-        showStatisticsCard();
+        configureAddSong();
+        configureDeleteSong();
+        configureDetailedPlaylist();
+        configureMainMenuView();
+        configureStatisticsView();
+        configureAddSong();
+        configureDetailedSong();
+        configureGeneralPlaylist();
+        configureGeneralSongList();
     }
 
     private void configureWindow(){
@@ -93,7 +94,7 @@ public class MainView extends JFrame {
         this.getContentPane().add(registerView, CARD_REGISTER);
     }
     private void configureAddSong(){
-        this.addSongView.configureAddSongView();
+        this.addSongView.configureAddSong();
         this.getContentPane().add(addSongView, CARD_ADD_SONG);
     }
     private void configureDeleteSong(){
@@ -144,28 +145,28 @@ public class MainView extends JFrame {
         cardManager.show(getContentPane(), CARD_TEST);
     }
     public void showAddSongCard(){
-        cardManager.show(getContentPane(), CARD_MAIN);
+        cardManager.show(getContentPane(), CARD_ADD_SONG);
     }
     public void showDeleteSongCard(){
-        cardManager.show(getContentPane(), CARD_MAIN);
+        cardManager.show(getContentPane(), CARD_DELETE_SONG);
     }
     public void showDetailedPlaylistCard(){
-        cardManager.show(getContentPane(), CARD_MAIN);
+        cardManager.show(getContentPane(), CARD_DETAILED_PLAYLIST);
     }
     public void showDetailedSongCard(){
-        cardManager.show(getContentPane(), CARD_MAIN);
+        cardManager.show(getContentPane(), CARD_DETAILED_SONG);
     }
     public void showGeneralPlaylistCard(){
-        cardManager.show(getContentPane(), CARD_MAIN);
+        cardManager.show(getContentPane(), CARD_GENERAL_PLAYLIST);
     }
     public void showGeneralSongListCard(){
-        cardManager.show(getContentPane(), CARD_MAIN);
+        cardManager.show(getContentPane(), CARD_GENERAL_SONG);
     }
     public void showMainMenuCard(){
-        cardManager.show(getContentPane(), CARD_MAIN);
+        cardManager.show(getContentPane(), CARD_MAIN_MENU);
     }
     public void showStatisticsCard(){
-        cardManager.show(getContentPane(), CARD_MAIN);
+        cardManager.show(getContentPane(), CARD_STATISTICS);
     }
 
 
