@@ -8,16 +8,26 @@ import java.util.ArrayList;
 public class UserManager {
 
     private final UserDao userDao;
+    private User user;
 
-    User user = new User("pepe", "prueba1234", "pepe@gmail.com");
+    public boolean checkIfPasswordsEqual(String password, String repeatedPassword) {
+        return password.equals(repeatedPassword);
+    }
 
     public UserManager(UserDao userDao) {
         this.userDao = userDao;
     }
 
-    public void Register(User user){
+    public void Register(String username, String email, String password){
+        user = new User(username,email,password);
         userDao.Register(user);
     }
+
+   /* public void Register(User user){
+        userDao.Register(user);
+    }
+
+    */
 
     public boolean Login(ArrayList<String> data){
         User user = new User(data.get(0),data.get(1));

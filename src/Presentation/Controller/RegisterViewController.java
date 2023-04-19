@@ -17,7 +17,6 @@ public class RegisterViewController implements ActionListener {
         this.registerView = registerView;
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
 
