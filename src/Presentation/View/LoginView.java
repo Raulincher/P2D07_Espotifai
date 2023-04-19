@@ -57,7 +57,6 @@ public class LoginView extends JPanel {
     }
 
     public void addLoginController(LoginViewController loginController){
-        //set action command
         jSubmitLogin.addActionListener(loginController);
         jSubmitBack.addActionListener(loginController);
     }
@@ -68,6 +67,16 @@ public class LoginView extends JPanel {
         loginData.add(String.valueOf(jPassword.getPassword()));
         return loginData;
     }
+
+    public JTextField getJtfUsername() {
+        return jUsername;
+    }
+
+    public JPasswordField getJtfPassword() {
+        return jPassword;
+    }
+
+
 
     public void showPopUps(String error) {
         JOptionPane.showMessageDialog(this,error);

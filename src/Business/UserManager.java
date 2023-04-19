@@ -4,6 +4,7 @@ import Business.Entities.User;
 import Persistance.dao.UserDao;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class UserManager {
 
@@ -36,7 +37,6 @@ public class UserManager {
 
     public boolean IsEmpty(ArrayList<String> data) { //data = info del view
         boolean empty = false;
-
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).isEmpty()) {
                 empty = true;

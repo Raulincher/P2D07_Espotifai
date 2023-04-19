@@ -171,10 +171,6 @@ public class MainView extends JFrame {
 
 
 
-    /*public void showPopUpsLogin(String error) {
-        this.loginView.showPopUps(error);
-    }*/
-
     public void start() {
         showMainCard();
         setVisible(true);

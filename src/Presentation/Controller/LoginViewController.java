@@ -6,6 +6,8 @@ import Presentation.View.MainView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Arrays;
 
 public class LoginViewController implements ActionListener {
 
@@ -21,18 +23,29 @@ public class LoginViewController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getActionCommand().equals("CARD_LOGIN")){
-            if (userManager.Login(loginView.getLoginData())){
-                mainView.showMainMenuCard();
-            }else{
-                if (userManager.IsEmpty(loginView.getLoginData())){
+        ArrayList<String> data = new ArrayList<>();
+
+        switch(e.getActionCommand()){
+            case LoginView.BTN_LOGIN :
+                mainView.showLoginCard();
+                String username = loginView.getJtfUsername().getText();
+                String password = Arrays.toString(loginView.getJtfPassword().getPassword());
+                data.add(username);
+                data.add(password);
+                if(userManager.IsEmpty(data)){
                     loginView.showPopUps("It's Empty!");
                 }else{
-                    loginView.showPopUps("User not found!");
+                    if (userManager.Login(data)) {
+                        //canviem vista al seguent
+                        mainView.showMainMenuCard();
+                    }else{
+                        loginView.showPopUps("User not found!");
+                    }
                 }
-            }
-        }else{
-            mainView.showMainCard();
+                break;
+            case LoginView.BTN_BACK:
+                mainView.showMainCard();
+                break;
         }
     }
 }
