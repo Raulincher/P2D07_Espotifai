@@ -8,9 +8,11 @@ import javax.swing.*;
 public class GeneralSongListView extends JPanel {
 
     public static final String BTN_BACK = "BTN_BACK";
+    private JButton jback = new JButton("back");
 
     public void addGeneralSongListController(GeneralSongListViewController generalSongListViewController){
         //set action command
+        jback.addActionListener(generalSongListViewController);
 
     }
 

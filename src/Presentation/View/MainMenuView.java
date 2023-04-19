@@ -18,25 +18,35 @@ public class MainMenuView extends JPanel {
     public static final String BTN_PLAYLIST = "BTN_PLAYLIST";
 
 
+    private JButton jback = new JButton("back");
+    private JButton jSongList = new JButton("song list");
+    private JButton jAddSong = new JButton("add song");
+    private JButton jDeleteSong = new JButton("Delete song");
+    private JButton jStatistics = new JButton("statistics");
+    private JButton jPlaylist = new JButton("playlist");
+
+
+
     public void addMainMenuController(MainMenuViewController mainMenuController){
         //set action command
+        jback.addActionListener(mainMenuController);
+        jSongList.addActionListener(mainMenuController);
+        jAddSong.addActionListener(mainMenuController);
+        jDeleteSong.addActionListener(mainMenuController);
+        jStatistics.addActionListener(mainMenuController);
+        jPlaylist.addActionListener(mainMenuController);
+
 
     }
 
     public void configureMainMenuView() {
 
         JLabel jLogo = new JLabel("general song list");
-        JButton jSongList = new JButton("song list");
         jSongList.setActionCommand(BTN_SONG_LIST);
-        JButton jAddSong = new JButton("add song");
         jAddSong.setActionCommand(BTN_ADD_SONG);
-        JButton jDeleteSong = new JButton("back");
         jDeleteSong.setActionCommand(BTN_DELETE_SONG);
-        JButton jStatistics = new JButton("statistics");
         jStatistics.setActionCommand(BTN_STATISTICS);
-        JButton jPlaylist = new JButton("playlist");
         jPlaylist.setActionCommand(BTN_PLAYLIST);
-        JButton jback = new JButton("back");
         jback.setActionCommand(BTN_BACK);
 
 

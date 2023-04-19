@@ -6,12 +6,12 @@ import javax.swing.*;
 
 public class DeleteSongView extends JPanel {
 
-
+    private JButton jback = new JButton("back");
     public static final String BTN_BACK = "BTN_BACK";
 
     public void addDeleteSongController(DeleteSongViewController DeleteSongController){
         //set action command
-
+        jback.addActionListener(DeleteSongController);
     }
 
     public void configureDeleteSongView() {

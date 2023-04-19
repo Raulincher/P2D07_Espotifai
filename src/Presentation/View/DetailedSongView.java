@@ -7,9 +7,11 @@ import javax.swing.*;
 public class DetailedSongView extends JPanel {
 
     public static final String BTN_BACK = "BTN_BACK";
+    private JButton jback = new JButton("back");
 
     public void addDetailedSongController(DetailedSongViewController detailedSongViewController){
         //set action command
+        jback.addActionListener(detailedSongViewController);
 
     }
 
