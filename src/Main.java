@@ -9,10 +9,7 @@ import Persistance.dao.sql.DatabaseConnector;
 import Persistance.dao.sql.SQLPlaylistDao;
 import Persistance.dao.sql.SQLSongDao;
 import Persistance.dao.sql.SQLUserDao;
-import Presentation.Controller.InitialViewController;
-import Presentation.Controller.LoginViewController;
-import Presentation.Controller.RegisterViewController;
-import Presentation.Controller.TestViewController;
+import Presentation.Controller.*;
 import Presentation.View.*;
 
 import java.sql.Connection;
@@ -36,17 +33,41 @@ public class Main {
         RegisterView registerView = new RegisterView();
         LoginView loginView = new LoginView();
         TestView testView = new TestView();
-        MainView mainView = new MainView(initialView, registerView, loginView, testView);
+        AddSongView addSongView = new AddSongView();
+        DeleteSongView deleteSongView = new DeleteSongView();
+        DetailedPlaylistView detailedPlaylistView = new DetailedPlaylistView();
+        DetailedSongView detailedSongView = new DetailedSongView();
+        GeneralPlaylistView generalPlaylistView = new GeneralPlaylistView();
+        GeneralSongListView generalSongListView = new GeneralSongListView();
+        MainMenuView mainMenuView = new MainMenuView();
+        StatisticsView statisticsView = new StatisticsView();
+
+
+        MainView mainView = new MainView(initialView, deleteSongView, statisticsView, mainMenuView, generalPlaylistView, generalSongListView, detailedSongView, detailedPlaylistView, registerView, loginView, testView, addSongView);
 
         InitialViewController initialViewController = new InitialViewController(mainView);
         LoginViewController loginViewController = new LoginViewController(mainView, loginView, userManager);
         RegisterViewController registerViewController = new RegisterViewController(mainView, registerView, userManager);
+        AddSongViewController addSongViewController = new AddSongViewController(addSongView);
+        DeleteSongViewController deleteSongViewController = new DeleteSongViewController(deleteSongView);
+        DetailedPlaylistViewController detailedPlaylistViewController = new DetailedPlaylistViewController(detailedPlaylistView);
+        DetailedSongViewController detailedSongViewController = new DetailedSongViewController(detailedSongView);
+        GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView);
+        GeneralPlaylistViewController generalPlaylistViewController = new GeneralPlaylistViewController(generalPlaylistView);
+        MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView);
         TestViewController testViewController = new TestViewController(mainView, userManager);
 
 
         initialView.addInitialViewController(initialViewController);
         loginView.addLoginController(loginViewController);
         registerView.addRegisterController(registerViewController);
+        addSongView.addAddSongController(addSongViewController);
+        deleteSongView.addDeleteSongController(deleteSongViewController);
+        detailedPlaylistView.addDetailedPlaylistController(detailedPlaylistViewController);
+        detailedSongView.addDetailedSongController(detailedSongViewController);
+        generalSongListView.addGeneralSongListController(generalSongListViewController);
+        generalPlaylistView.addGeneralPlaylistController(generalPlaylistViewController);
+        mainMenuView.addMainMenuController(mainMenuViewController);
         testView.addTestController(testViewController);
 
         mainView.start();
