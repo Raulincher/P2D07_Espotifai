@@ -6,6 +6,7 @@ import Presentation.View.RegisterView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class RegisterViewController implements ActionListener {
@@ -21,6 +22,8 @@ public class RegisterViewController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        ArrayList<String> data = new ArrayList<>();
+
         switch (e.getActionCommand()) {
             case RegisterView.BTN_BACK:
                 mainView.showMainCard();
@@ -30,12 +33,15 @@ public class RegisterViewController implements ActionListener {
                 String email = registerView.getJtfEmail().getText();
                 String password = Arrays.toString(registerView.getJtfPassword().getPassword());
                 password = password.substring(1,password.length()-1);
-                System.out.println("Password: " + password);
                 String repeatPassword = Arrays.toString(registerView.getJtfRepeatPassword().getPassword());
                 repeatPassword = repeatPassword.substring(1, repeatPassword.length()-1);
-                System.out.println("RepPassword: " + repeatPassword);
 
-                if (username.length() == 0 || email.length() == 0 || password.length() == 0 || repeatPassword.length() == 0) {
+                data.add(username);
+                data.add(email);
+                data.add(password);
+                data.add(repeatPassword);
+
+                if (userManager.IsEmpty(data)) {
                     registerView.emptyFields();
                 } else {
                     if (userManager.checkIfPasswordsEqual(password,repeatPassword)) {
