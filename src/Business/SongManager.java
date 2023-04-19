@@ -29,7 +29,4 @@ public class SongManager {
 
         clip.loop(Clip.LOOP_CONTINUOUSLY);
     }
-
-
-
 }

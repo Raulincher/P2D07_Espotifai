@@ -75,6 +75,7 @@ public class InitialView extends JPanel {
         jLogin.addActionListener(initialViewController);
         jRegister.addActionListener(initialViewController);
         jTest.addActionListener(initialViewController);
+
     }
 
 
