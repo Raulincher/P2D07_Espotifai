@@ -28,8 +28,8 @@ public class LoginViewController implements ActionListener {
         switch(e.getActionCommand()){
             case LoginView.BTN_LOGIN :
                 mainView.showLoginCard();
-                String username = loginView.getJtfUsername().getText();
-                String password = Arrays.toString(loginView.getJtfPassword().getPassword());
+                String username = loginView.getJUsername().getText();
+                String password = Arrays.toString(loginView.getJPassword().getPassword());
                 data.add(username);
                 data.add(password);
                 if(userManager.IsEmpty(data)){

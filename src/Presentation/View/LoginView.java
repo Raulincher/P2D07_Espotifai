@@ -1,5 +1,6 @@
 package Presentation.View;
 
+import Presentation.AssetsFiles;
 import Presentation.Controller.InitialViewController;
 import Presentation.Controller.LoginViewController;
 
@@ -16,70 +17,90 @@ public class LoginView extends JPanel {
 
     private JPasswordField jPassword;
 
-    private JPanel buttonsLogin;
-
     public static final String BTN_LOGIN = "BTN_LOGIN";
 
     public static final String BTN_BACK = "BTN_BACK";
 
     public void configureLoginView() {
 
-        buttonsZoneLogin();
-        add(buttonsLogin);
         jSubmitLogin = new JButton("Submit");
         jSubmitBack = new JButton("Back");
 
+        setLayout(new BorderLayout());
 
-    }
+        // NORTH
+        JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        north.setBackground(Color.black);
+        add(north, BorderLayout.NORTH);
 
-    public void buttonsZoneLogin () {
-        buttonsLogin = new JPanel();
+        Icon loginImg = new ImageIcon(String.valueOf(AssetsFiles.LOGIN_LABEL));
+        JLabel loginLabel = new JLabel(loginImg);
+        north.add(loginLabel);
 
+        // CENTER
+        JPanel center = new JPanel(new GridBagLayout());
+        center.setBackground(Color.black);
+        add(center, BorderLayout.CENTER);
+
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.insets = new Insets(5, 5, 5, 5);
+        constraints.anchor = GridBagConstraints.WEST;
+
+        JLabel label1 = new JLabel("USERNAME");
+        label1.setForeground(Color.WHITE);
+        label1.setFont(new Font("Gotham", Font.BOLD, 20));
         jUsername = new JTextField();
-        jUsername.setPreferredSize(new Dimension(300, 50));
-        buttonsLogin.add(jUsername);
+        jUsername.setPreferredSize(new Dimension(200, 40));
 
-        jPassword = new JPasswordField();
-        jUsername.setPreferredSize(new Dimension(300, 50));
-        buttonsLogin.add(jPassword);
+        JLabel label2 = new JLabel("PASSWORD");
+        label2.setForeground(Color.WHITE);
+        label2.setFont(new Font("Gotham", Font.BOLD, 20));
+        jPassword= new JPasswordField();
+        jPassword.setPreferredSize(new Dimension(200,40));
 
-        jSubmitLogin = new JButton("Login");
-        jSubmitLogin.setActionCommand(BTN_LOGIN);
-        jSubmitLogin.setFont(new Font("Helvetica", Font.ITALIC, 20));
-        jSubmitLogin.setMaximumSize(new Dimension(200,100));
-        buttonsLogin.add(jSubmitLogin);
+        center.add(label1, constraints);
+        constraints.gridy++;
+        center.add(jUsername, constraints);
+        constraints.gridy++;
+        center.add(label2, constraints);
+        constraints.gridy++;
+        center.add(jPassword, constraints);
 
-        jSubmitBack = new JButton("Back");
+        JPanel south = new JPanel();
+        south.setBackground(Color.black);
+
+        Icon backBtn = new ImageIcon(String.valueOf(AssetsFiles.BACK_BUTTON_IMG));
+        jSubmitBack = new JButton(backBtn);
         jSubmitBack.setActionCommand(BTN_BACK);
-        jSubmitBack.setFont(new Font("Helvetica", Font.ITALIC, 20));
-        jSubmitBack.setMaximumSize(new Dimension(200,100));
-        buttonsLogin.add(jSubmitBack);
+        jSubmitBack.setBackground(Color.decode("#00000000"));
+
+        Icon loginBtn = new ImageIcon(String.valueOf(AssetsFiles.LOGIN_BUTTON_IMG));
+        jSubmitLogin = new JButton(loginBtn);
+        jSubmitLogin.setActionCommand(BTN_LOGIN);
+        jSubmitLogin.setBackground(Color.decode("#00000000"));
+
+        south.add(jSubmitBack);
+        south.add(jSubmitLogin);
+        add(south, BorderLayout.SOUTH);
     }
 
     public void addLoginController(LoginViewController loginController){
-        jSubmitLogin.addActionListener(loginController);
+        //set action command
         jSubmitBack.addActionListener(loginController);
+        jSubmitLogin.addActionListener(loginController);
     }
 
-    public ArrayList<String> getLoginData() {
-        ArrayList<String> loginData = new ArrayList<>();
-        loginData.add(jUsername.getText());
-        loginData.add(String.valueOf(jPassword.getPassword()));
-        return loginData;
-    }
-
-    public JTextField getJtfUsername() {
+    public JTextField getJUsername() {
         return jUsername;
     }
 
-    public JPasswordField getJtfPassword() {
+    public JPasswordField getJPassword() {
         return jPassword;
     }
-
-
 
     public void showPopUps(String error) {
         JOptionPane.showMessageDialog(this,error);
     }
-
 }

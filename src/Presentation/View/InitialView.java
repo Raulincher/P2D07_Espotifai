@@ -1,5 +1,6 @@
 package Presentation.View;
 
+import Presentation.AssetsFiles;
 import Presentation.Controller.InitialViewController;
 
 import javax.swing.*;
@@ -25,6 +26,8 @@ public class InitialView extends JPanel {
 
         JPanel exterior = new JPanel();
 
+        exterior.setBackground(Color.black);
+
         buttonsZone();
         logoZone();
 
@@ -41,9 +44,8 @@ public class InitialView extends JPanel {
     public void logoZone(){
         logo = new JPanel();
 
-        ImageIcon space0 = new ImageIcon("Media/placeholder2.png");
-        JLabel jLogo = new JLabel("", space0, JLabel.CENTER);
-        jLogo.setMaximumSize(new Dimension (400,300));
+        Icon logoLbl = new ImageIcon(String.valueOf(AssetsFiles.LOGO_LABEL));
+        JLabel jLogo = new JLabel(logoLbl);
 
         logo.add(jLogo);
     }
@@ -51,16 +53,16 @@ public class InitialView extends JPanel {
     public void buttonsZone(){
         buttons = new JPanel();
 
-        jRegister = new JButton("Register");
+        Icon registerBtn = new ImageIcon(String.valueOf(AssetsFiles.REGISTER_BUTTON_IMG));
+        jRegister = new JButton(registerBtn);
         jRegister.setActionCommand(BTN_REGISTER);
-        jRegister.setFont(new Font("Helvetica", Font.ITALIC, 20));
-        jRegister.setMaximumSize(new Dimension (200,100));
+        jRegister.setBackground(Color.decode("#00000000"));
         buttons.add(jRegister);
 
-        jLogin = new JButton("Login");
+        Icon loginBtn = new ImageIcon(String.valueOf(AssetsFiles.LOGIN_BUTTON_IMG));
+        jLogin = new JButton(loginBtn);
         jLogin.setActionCommand(BTN_LOGIN);
-        jLogin.setFont(new Font("Helvetica", Font.ITALIC, 20));
-        jLogin.setMaximumSize(new Dimension(200,100));
+        jLogin.setBackground(Color.decode("#00000000"));
         buttons.add(jLogin);
 
         jTest = new JButton("Test");
