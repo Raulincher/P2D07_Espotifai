@@ -32,7 +32,7 @@ public class LoginViewController implements ActionListener {
                 String password = Arrays.toString(loginView.getJPassword().getPassword());
                 data.add(username);
                 data.add(password);
-                if(userManager.IsEmpty(data)){
+                if(userManager.isEmpty(data)){
                     loginView.showPopUps("It's Empty!");
                 }else{
                     if (userManager.Login(data)) {

@@ -19,13 +19,11 @@ public class TestViewController implements ActionListener {
         this.userManager = userManager;
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case TestView.BTN_LOGOUT -> mainView.showMainCard();
-            case TestView.BTN_DELETE -> userManager.Delete();
+            case TestView.BTN_DELETE -> userManager.delete();
         }
     }
-
 }

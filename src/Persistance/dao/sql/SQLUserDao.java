@@ -13,7 +13,7 @@ public class SQLUserDao implements UserDao {
         this.remoteConnection = remoteConnection;
     }
 
-    public void Register(User user) {
+    public void register(User user) {
         try {
             Statement statement = remoteConnection.createStatement();
             statement.executeQuery("USE espotifai");
@@ -62,7 +62,7 @@ public class SQLUserDao implements UserDao {
 
     }
 
-    public void Delete(User user){
+    public void delete(User user){
         int affected = 0;
         try{
             Statement statement = remoteConnection.createStatement();
@@ -97,7 +97,7 @@ public class SQLUserDao implements UserDao {
         }
     }
 
-    public boolean Login(User user){
+    public boolean login(User user){
         boolean error = false;
         try{
             Statement statement = remoteConnection.createStatement();

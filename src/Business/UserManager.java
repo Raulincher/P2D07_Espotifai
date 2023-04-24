@@ -21,7 +21,7 @@ public class UserManager {
 
     public void Register(String username, String email, String password){
         user = new User(username,email,password);
-        userDao.Register(user);
+        userDao.register(user);
     }
 
    /* public void Register(User user){
@@ -32,10 +32,10 @@ public class UserManager {
 
     public boolean Login(ArrayList<String> data){
         User user = new User(data.get(0),data.get(1));
-        return userDao.Login(user);
+        return userDao.login(user);
     }
 
-    public boolean IsEmpty(ArrayList<String> data) { //data = info del view
+    public boolean isEmpty(ArrayList<String> data) { //data = info del view
         boolean empty = false;
         for (int i = 0; i < data.size(); i++) {
             if (data.get(i).isEmpty()) {
@@ -47,11 +47,11 @@ public class UserManager {
     }
 
 
-    public boolean UserExistence(){
+    public boolean userExistence(){
         return userDao.userExists(user);
     }
 
-    public void Delete(){
-        userDao.Delete(user);
+    public void delete(){
+        userDao.delete(user);
     }
 }

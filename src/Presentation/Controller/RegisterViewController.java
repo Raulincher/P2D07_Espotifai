@@ -41,7 +41,7 @@ public class RegisterViewController implements ActionListener {
                 data.add(password);
                 data.add(repeatPassword);
 
-                if (userManager.IsEmpty(data)) {
+                if (userManager.isEmpty(data)) {
                     registerView.emptyFields();
                 } else {
                     if (userManager.checkIfPasswordsEqual(password,repeatPassword)) {

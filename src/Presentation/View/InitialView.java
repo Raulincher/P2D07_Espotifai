@@ -35,6 +35,7 @@ public class InitialView extends JPanel {
         exterior.setLayout(new BoxLayout(exterior, BoxLayout.PAGE_AXIS));
         exterior.add(logo);
         exterior.add(buttons);
+        setBackground(Color.BLACK);
 
         add(exterior);
 
