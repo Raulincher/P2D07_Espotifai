@@ -8,6 +8,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
 
+import static javax.swing.BorderFactory.createEmptyBorder;
+
 public class LoginView extends JPanel {
     private JButton jSubmitLogin;
 
@@ -23,18 +25,17 @@ public class LoginView extends JPanel {
 
     public void configureLoginView() {
 
-        jSubmitLogin = new JButton("Submit");
-        jSubmitBack = new JButton("Back");
-
         setLayout(new BorderLayout());
 
         // NORTH
         JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
         north.setBackground(Color.black);
+        north.setBorder(createEmptyBorder(100, 0, 0, 0));
         add(north, BorderLayout.NORTH);
 
         Icon loginImg = new ImageIcon(String.valueOf(AssetsFiles.LOGIN_LABEL));
         JLabel loginLabel = new JLabel(loginImg);
+        loginLabel.setLayout(new GridLayout(4, 1, 0, 50));
         north.add(loginLabel);
 
         // CENTER
@@ -70,6 +71,7 @@ public class LoginView extends JPanel {
 
         JPanel south = new JPanel();
         south.setBackground(Color.black);
+        south.setBorder(createEmptyBorder(0, 0, 100, 0));
 
         Icon backBtn = new ImageIcon(String.valueOf(AssetsFiles.BACK_BUTTON_IMG));
         jSubmitBack = new JButton(backBtn);

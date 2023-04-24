@@ -30,7 +30,7 @@ public class UserManager {
 
     */
 
-    public boolean Login(ArrayList<String> data){
+    public boolean login(ArrayList<String> data){
         User user = new User(data.get(0),data.get(1));
         return userDao.login(user);
     }

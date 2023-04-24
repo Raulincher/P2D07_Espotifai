@@ -6,6 +6,8 @@ import Presentation.Controller.RegisterViewController;
 import javax.swing.*;
 import java.awt.*;
 
+import static javax.swing.BorderFactory.createEmptyBorder;
+
 public class RegisterView extends JPanel {
 
     // Action commands
@@ -43,6 +45,7 @@ public class RegisterView extends JPanel {
         // NORTH
         JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
         north.setBackground(Color.black);
+        north.setBorder(createEmptyBorder(50, 0, 0, 0));
         add(north, BorderLayout.NORTH);
 
         Icon signUpLbl = new ImageIcon(String.valueOf(AssetsFiles.REGISTER_LABEL));
@@ -107,6 +110,7 @@ public class RegisterView extends JPanel {
 
         JPanel south = new JPanel();
         south.setBackground(Color.black);
+        south.setBorder(createEmptyBorder(0, 0, 100, 0));
 
         Icon backBtn = new ImageIcon(String.valueOf(AssetsFiles.BACK_BUTTON_IMG));
         jbBack = new JButton(backBtn);

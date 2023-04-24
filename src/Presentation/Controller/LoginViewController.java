@@ -35,7 +35,7 @@ public class LoginViewController implements ActionListener {
                 if(userManager.isEmpty(data)){
                     loginView.showPopUps("It's Empty!");
                 }else{
-                    if (userManager.Login(data)) {
+                    if (userManager.login(data)) {
                         //canviem vista al seguent
                         mainView.showMainMenuCard();
                     }else{

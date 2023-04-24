@@ -6,6 +6,8 @@ import Presentation.Controller.InitialViewController;
 import javax.swing.*;
 import java.awt.*;
 
+import static javax.swing.BorderFactory.createEmptyBorder;
+
 public class InitialView extends JPanel {
 
     private JButton jLogin;
@@ -26,8 +28,6 @@ public class InitialView extends JPanel {
 
         JPanel exterior = new JPanel();
 
-        exterior.setBackground(Color.black);
-
         buttonsZone();
         logoZone();
 
@@ -38,15 +38,16 @@ public class InitialView extends JPanel {
         setBackground(Color.BLACK);
 
         add(exterior);
-
     }
 
 
     public void logoZone(){
         logo = new JPanel();
 
+        logo.setBackground(Color.black);
         Icon logoLbl = new ImageIcon(String.valueOf(AssetsFiles.LOGO_LABEL));
         JLabel jLogo = new JLabel(logoLbl);
+        logo.setBorder(createEmptyBorder(150, 0, 0, 0));
 
         logo.add(jLogo);
     }
@@ -54,6 +55,8 @@ public class InitialView extends JPanel {
     public void buttonsZone(){
         buttons = new JPanel();
 
+        buttons.setBackground(Color.black);
+        buttons.setBorder(createEmptyBorder(200, 0, 0, 0));
         Icon registerBtn = new ImageIcon(String.valueOf(AssetsFiles.REGISTER_BUTTON_IMG));
         jRegister = new JButton(registerBtn);
         jRegister.setActionCommand(BTN_REGISTER);
