@@ -7,14 +7,16 @@ import Presentation.Controller.LoginViewController;
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+import Presentation.Utils;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
 
 public class LoginView extends JPanel {
     private JButton jSubmitLogin;
 
-    private JButton jSubmitBack;
+    private JButton jSubmitBack2 = new JButton();
 
+    private JButton jSubmitBack;
     private JTextField jUsername;
 
     private JPasswordField jPassword;
@@ -29,14 +31,9 @@ public class LoginView extends JPanel {
 
         // NORTH
         JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        north.setBackground(Color.black);
-        north.setBorder(createEmptyBorder(100, 0, 0, 0));
-        add(north, BorderLayout.NORTH);
 
-        Icon loginImg = new ImageIcon(String.valueOf(AssetsFiles.LOGIN_LABEL));
-        JLabel loginLabel = new JLabel(loginImg);
-        loginLabel.setLayout(new GridLayout(4, 1, 0, 50));
-        north.add(loginLabel);
+        Utils.header(north, jSubmitBack2);
+        add(north, BorderLayout.NORTH);
 
         // CENTER
         JPanel center = new JPanel(new GridBagLayout());

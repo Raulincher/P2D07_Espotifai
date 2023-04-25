@@ -6,6 +6,7 @@ import Presentation.View.MainView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -35,7 +36,7 @@ public class LoginViewController implements ActionListener {
                 if(userManager.isEmpty(data)){
                     loginView.showPopUps("It's Empty!");
                 }else{
-                    if (userManager.login(data)) {
+                    if (!userManager.login(data)) {
                         //canviem vista al seguent
                         mainView.showMainMenuCard();
                     }else{
@@ -44,6 +45,7 @@ public class LoginViewController implements ActionListener {
                 }
                 break;
             case LoginView.BTN_BACK:
+                System.out.println("Hola");
                 mainView.showMainCard();
                 break;
         }
