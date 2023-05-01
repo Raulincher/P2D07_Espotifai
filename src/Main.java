@@ -49,7 +49,7 @@ public class Main {
         InitialViewController initialViewController = new InitialViewController(mainView);
         LoginViewController loginViewController = new LoginViewController(mainView, loginView, userManager);
         RegisterViewController registerViewController = new RegisterViewController(mainView, registerView, userManager);
-        AddSongViewController addSongViewController = new AddSongViewController(addSongView, mainView);
+        AddSongViewController addSongViewController = new AddSongViewController(addSongView, mainView, songManager);
         DeleteSongViewController deleteSongViewController = new DeleteSongViewController(deleteSongView, mainView);
         DetailedPlaylistViewController detailedPlaylistViewController = new DetailedPlaylistViewController(detailedPlaylistView, mainView);
         DetailedSongViewController detailedSongViewController = new DetailedSongViewController(detailedSongView, mainView);

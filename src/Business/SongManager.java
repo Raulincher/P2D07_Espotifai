@@ -3,9 +3,11 @@ package Business;
 import Persistance.dao.SongDao;
 
 import javax.sound.sampled.*;
+import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.nio.file.Path;
 
 public class SongManager {
 
@@ -76,6 +78,21 @@ public class SongManager {
     public void loopList(){
 
         System.out.println("loopeo lista");
+    }
+
+
+    public void fileSongSelector(){
+
+        JFileChooser fileChooser = new JFileChooser();
+
+        int response = fileChooser.showOpenDialog(null);
+
+        if(response == JFileChooser.APPROVE_OPTION){
+            File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+            String fileName = file.getName();
+            file.renameTo(new File("files/music/" + fileName));
+        }
+
     }
 
 }
