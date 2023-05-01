@@ -10,10 +10,8 @@ public class TestView extends JPanel {
     public static final String BTN_LOGOUT = "BTN_LOGOUT";
     public static final String BTN_DELETE = "BTN_DELETE";
 
-
     private JButton jLogout;
     private JButton jDeleteAccount;
-
 
     public void configureTestView() {
         jLogout = new JButton("Log out");
@@ -28,7 +26,6 @@ public class TestView extends JPanel {
         add(jLogout);
         add(jDeleteAccount);
     }
-
 
     public void addTestController(TestViewController testController){
         jLogout.addActionListener(testController);

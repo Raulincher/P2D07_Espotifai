@@ -46,12 +46,11 @@ public class UserManager {
          return empty;
     }
 
-
     public boolean userExistence(){
         return userDao.userExists(user);
     }
 
     public void delete(){
-        userDao.delete(user);
+        //userDao.delete(user);
     }
 }

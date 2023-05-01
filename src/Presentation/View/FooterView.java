@@ -7,8 +7,6 @@ import javax.swing.*;
 
 public class FooterView extends JPanel {
 
-
-
     public static final String BTN_PLAY = "BTN_PLAY";
     private final JButton jplay = new JButton("play");
 

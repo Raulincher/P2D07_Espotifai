@@ -2,6 +2,7 @@ package Persistance.dao.sql;
 
 import Persistance.dao.UserDao;
 import Business.Entities.User;
+import Persistance.dao.UserNotFoundException;
 
 import java.sql.*;
 
@@ -59,10 +60,9 @@ public class SQLUserDao implements UserDao {
             System.err.println("Espotifai not found in UserExists");
         }
         return error;
-
     }
 
-    public void delete(User user){
+    public void delete(User user) throws UserNotFoundException {
         int affected = 0;
         try{
             Statement statement = remoteConnection.createStatement();
@@ -82,7 +82,7 @@ public class SQLUserDao implements UserDao {
                 affected = prepared.executeUpdate();
 
             }catch(SQLException e){
-                System.err.println("The user you try to delete doesn't exist");
+                throw new UserNotFoundException("The user you are trying to delete doesn't exist");
             }
         }catch (SQLException e){
             //error = 1;

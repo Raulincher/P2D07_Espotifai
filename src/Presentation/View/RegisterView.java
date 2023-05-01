@@ -124,6 +124,7 @@ public class RegisterView extends JPanel {
         south.add(jbBack);
         south.add(jbRegister);
         add(south, BorderLayout.SOUTH);
+
     }
 
     // TODO: Es pot fer amb getters o no?

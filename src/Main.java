@@ -42,7 +42,6 @@ public class Main {
         MainMenuView mainMenuView = new MainMenuView(footerView);
         StatisticsView statisticsView = new StatisticsView();
 
-
         MainView mainView = new MainView(initialView, deleteSongView, statisticsView, mainMenuView, generalPlaylistView, generalSongListView, detailedSongView, detailedPlaylistView, registerView, loginView, testView, addSongView);
 
         InitialViewController initialViewController = new InitialViewController(mainView);
