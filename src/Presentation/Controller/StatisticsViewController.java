@@ -1,7 +1,5 @@
 package Presentation.Controller;
 
-import Presentation.View.DeleteSongView;
-import Presentation.View.GeneralSongListView;
 import Presentation.View.MainView;
 import Presentation.View.StatisticsView;
 
@@ -21,7 +19,7 @@ public class StatisticsViewController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case GeneralSongListView.BTN_BACK -> mainView.showMainMenuCard();
+            case StatisticsView.BTN_BACK -> mainView.showMainMenuCard();
         }
     }
 }

@@ -8,7 +8,7 @@ import javax.swing.*;
 public class GeneralPlaylistView extends JPanel {
 
     public static final String BTN_BACK = "BTN_BACK";
-    private JButton jback = new JButton("back");
+    private final JButton jback = new JButton("back");
 
     public void addGeneralPlaylistController(GeneralPlaylistViewController generalPlaylistViewController){
         //set action command

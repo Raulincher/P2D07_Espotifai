@@ -1,14 +1,17 @@
 package Presentation.View;
 
-import Presentation.Controller.LoginViewController;
+import Presentation.View.FooterView;
 import Presentation.Controller.MainMenuViewController;
 
 import javax.swing.*;
-import java.awt.*;
-
 
 public class MainMenuView extends JPanel {
 
+    FooterView footerView;
+
+    public MainMenuView(FooterView footerView){
+        this.footerView = footerView;
+    }
 
     public static final String BTN_BACK = "BTN_BACK";
     public static final String BTN_SONG_LIST = "BTN_SONG_LIST";
@@ -41,7 +44,7 @@ public class MainMenuView extends JPanel {
 
     public void configureMainMenuView() {
 
-        JLabel jLogo = new JLabel("general song list");
+        JLabel jLogo = new JLabel("main menu when log in");
         jSongList.setActionCommand(BTN_SONG_LIST);
         jAddSong.setActionCommand(BTN_ADD_SONG);
         jDeleteSong.setActionCommand(BTN_DELETE_SONG);
@@ -57,6 +60,7 @@ public class MainMenuView extends JPanel {
         add(jStatistics);
         add(jPlaylist);
         add(jback);
+        add(footerView.configureFooter());
 
     }
 }

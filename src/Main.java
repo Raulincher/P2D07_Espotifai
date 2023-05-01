@@ -28,7 +28,7 @@ public class Main {
         SongManager songManager = new SongManager(songDao);
         PlaylistManager playlistManager = new PlaylistManager(playlistDao);
 
-
+        FooterView footerView = new FooterView();
         InitialView initialView = new InitialView();
         RegisterView registerView = new RegisterView();
         LoginView loginView = new LoginView();
@@ -39,7 +39,7 @@ public class Main {
         DetailedSongView detailedSongView = new DetailedSongView();
         GeneralPlaylistView generalPlaylistView = new GeneralPlaylistView();
         GeneralSongListView generalSongListView = new GeneralSongListView();
-        MainMenuView mainMenuView = new MainMenuView();
+        MainMenuView mainMenuView = new MainMenuView(footerView);
         StatisticsView statisticsView = new StatisticsView();
 
 
@@ -56,8 +56,10 @@ public class Main {
         GeneralPlaylistViewController generalPlaylistViewController = new GeneralPlaylistViewController(generalPlaylistView, mainView);
         MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView);
         TestViewController testViewController = new TestViewController(mainView, userManager);
+        FooterController footerController = new FooterController(footerView, songManager);
 
 
+        footerView.addFooterController(footerController);
         initialView.addInitialViewController(initialViewController);
         loginView.addLoginController(loginViewController);
         registerView.addRegisterController(registerViewController);

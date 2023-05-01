@@ -15,11 +15,9 @@ public class DeleteSongView extends JPanel {
     }
 
     public void configureDeleteSongView() {
-
         JLabel jLogo = new JLabel("delete song");
         JButton jback = new JButton("back");
         jback.setActionCommand(BTN_BACK);
-
 
         add(jLogo);
         add(jback);
