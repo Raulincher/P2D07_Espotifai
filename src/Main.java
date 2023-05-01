@@ -28,6 +28,8 @@ public class Main {
         SongManager songManager = new SongManager(songDao);
         PlaylistManager playlistManager = new PlaylistManager(playlistDao);
 
+        songManager.getSong();
+
         FooterView footerView = new FooterView();
         InitialView initialView = new InitialView();
         RegisterView registerView = new RegisterView();

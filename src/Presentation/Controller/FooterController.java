@@ -11,6 +11,8 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+
+
 public class FooterController implements ActionListener {
 
     private final FooterView footerView;
@@ -25,23 +27,22 @@ public class FooterController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println(e.getActionCommand());
         switch (e.getActionCommand()) {
             case FooterView.BTN_PLAY -> {
-                try {
-                    Path p = Paths.get("mama.wav");
-                    Path folder = p.getParent();
-                    System.out.println(folder);
-                    System.out.println(p);
+                boolean stop = songManager.simpleAudioPlayer();
 
-                    songManager.SimpleAudioPlayer("files/music/mama.wav");
-                } catch (UnsupportedAudioFileException ex) {
-                    ex.printStackTrace();
-                } catch (IOException ex) {
-                    ex.printStackTrace();
-                } catch (LineUnavailableException ex) {
-                    ex.printStackTrace();
+                if(stop){
+                    footerView.stop();
+                }else{
+                    footerView.start();
                 }
             }
+
+            case FooterView.BTN_REPEAT -> songManager.loopAudio();
+            case FooterView.BTN_BACKWARD -> songManager.moveBackward();
+            case FooterView.BTN_FORWARD -> songManager.moveForward();
+            case FooterView.BTN_REPEAT_LIST -> songManager.loopList();
         }
     }
 }
