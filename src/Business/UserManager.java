@@ -2,6 +2,7 @@ package Business;
 
 import Business.Entities.User;
 import Persistance.dao.UserDao;
+import Persistance.dao.UserNotFoundException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,7 +33,13 @@ public class UserManager {
 
     public boolean login(ArrayList<String> data){
         User user = new User(data.get(0),data.get(1));
-        return userDao.login(user);
+
+        try {
+            userDao.login(user);
+            return true;
+        } catch (UserNotFoundException e) {
+            return false;
+        }
     }
 
     public boolean isEmpty(ArrayList<String> data) { //data = info del view

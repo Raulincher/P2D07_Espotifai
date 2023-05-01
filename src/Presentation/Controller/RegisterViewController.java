@@ -50,7 +50,6 @@ public class RegisterViewController implements ActionListener {
                         registerView.differentPassword();
                     }
                 }
-
                 break;
         }
     }

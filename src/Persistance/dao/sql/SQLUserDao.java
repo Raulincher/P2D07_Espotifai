@@ -97,7 +97,7 @@ public class SQLUserDao implements UserDao {
         }
     }
 
-    public boolean login(User user){
+    public boolean login(User user) throws UserNotFoundException{
         boolean error = false;
         try{
             Statement statement = remoteConnection.createStatement();
@@ -119,7 +119,7 @@ public class SQLUserDao implements UserDao {
                     error = rs.getInt(1) == 0;
                 }
             }catch(SQLException e){
-                System.err.println("Error at login");
+                throw new UserNotFoundException("User not found");
             }
         }catch (SQLException e){
             //error = 1;

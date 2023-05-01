@@ -6,5 +6,5 @@ public interface UserDao {
     void register(User user);
     boolean userExists(User user);
     void delete(User user) throws UserNotFoundException;
-    boolean login(User user);
+    boolean login(User user) throws UserNotFoundException;
 }
