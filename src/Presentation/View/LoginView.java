@@ -13,9 +13,6 @@ import static javax.swing.BorderFactory.createEmptyBorder;
 
 public class LoginView extends JPanel {
     private JButton jSubmitLogin;
-
-    private JButton jSubmitBack2 = new JButton();
-
     private JButton jSubmitBack;
     private JTextField jUsername;
 
@@ -31,9 +28,13 @@ public class LoginView extends JPanel {
 
         // NORTH
         JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
-
-        Utils.header(north, jSubmitBack2);
+        north.setBorder(createEmptyBorder(100, 0, 0, 0));
+        north.setBackground(Color.black);
         add(north, BorderLayout.NORTH);
+
+        Icon loginImg = new ImageIcon(String.valueOf(AssetsFiles.LOGIN_LABEL));
+        JLabel loginLabel = new JLabel(loginImg);
+        north.add(loginLabel);
 
         // CENTER
         JPanel center = new JPanel(new GridBagLayout());

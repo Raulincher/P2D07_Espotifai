@@ -110,7 +110,7 @@ public class RegisterView extends JPanel {
 
         JPanel south = new JPanel();
         south.setBackground(Color.black);
-        south.setBorder(createEmptyBorder(0, 0, 100, 0));
+        south.setBorder(createEmptyBorder(0, 0, 50, 0));
 
         Icon backBtn = new ImageIcon(String.valueOf(AssetsFiles.BACK_BUTTON_IMG));
         jbBack = new JButton(backBtn);

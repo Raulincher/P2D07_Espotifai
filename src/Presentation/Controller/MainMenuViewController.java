@@ -25,7 +25,7 @@ public class MainMenuViewController implements ActionListener{
             case MainMenuView.BTN_BACK -> mainView.showMainCard();
             case MainMenuView.BTN_ADD_SONG -> mainView.showAddSongCard();
             case MainMenuView.BTN_DELETE_SONG -> mainView.showDeleteSongCard();
-            case MainMenuView.BTN_PLAYLIST -> mainView.showGeneralPlaylistCard();
+            case MainMenuView.BTN_MANAGE -> mainView.showGeneralPlaylistCard();
             case MainMenuView.BTN_SONG_LIST -> mainView.showGeneralSongListCard();
             case MainMenuView.BTN_STATISTICS -> mainView.showStatisticsCard();
 
