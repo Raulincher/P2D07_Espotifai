@@ -2,13 +2,19 @@ package Presentation.View;
 
 import Presentation.Controller.DetailedSongViewController;
 import Presentation.Controller.GeneralSongListViewController;
+import Presentation.Utils;
 
 import javax.swing.*;
 
 public class GeneralSongListView extends JPanel {
 
     public static final String BTN_BACK = "BTN_BACK";
-    private JButton jback = new JButton("back");
+    private JButton jback;
+    private final Utils utils;
+
+    public GeneralSongListView(Utils utils){
+        this.utils = utils;
+    }
 
     public void addGeneralSongListController(GeneralSongListViewController generalSongListViewController){
         //set action command
@@ -18,7 +24,8 @@ public class GeneralSongListView extends JPanel {
 
     public void configureGeneralSonglistView() {
         JLabel jLogo = new JLabel("general song list");
-        JButton jback = new JButton("back");
+
+        jback = utils.buttonText("back");
         jback.setActionCommand(BTN_BACK);
 
 

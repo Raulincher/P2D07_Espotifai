@@ -2,13 +2,21 @@ package Presentation.View;
 
 import Presentation.Controller.AddSongViewController;
 import Presentation.Controller.GeneralPlaylistViewController;
+import Presentation.Utils;
 
 import javax.swing.*;
 
 public class GeneralPlaylistView extends JPanel {
 
+    private final Utils utils;
+
+
     public static final String BTN_BACK = "BTN_BACK";
-    private final JButton jback = new JButton("back");
+    private JButton jback;
+
+    public GeneralPlaylistView(Utils utils){
+        this.utils = utils;
+    }
 
     public void addGeneralPlaylistController(GeneralPlaylistViewController generalPlaylistViewController){
         //set action command
@@ -18,7 +26,8 @@ public class GeneralPlaylistView extends JPanel {
 
     public void configureGeneralPlaylistView() {
         JLabel jLogo = new JLabel("general playlist");
-        JButton jback = new JButton("back");
+
+        jback = utils.buttonText("back");
         jback.setActionCommand(BTN_BACK);
 
 

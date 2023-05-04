@@ -22,6 +22,11 @@ public class LoginView extends JPanel {
     public static final String BTN_LOGIN = "BTN_LOGIN";
     public static final String BTN_BACK = "BTN_BACK";
 
+    private final Utils utils;
+
+    public LoginView(Utils utils){
+        this.utils = utils;
+    }
 
     public void configureLoginView() {
 
@@ -73,14 +78,12 @@ public class LoginView extends JPanel {
         south.setBorder(createEmptyBorder(0, 0, 100, 0));
 
         Icon backBtn = new ImageIcon(String.valueOf(AssetsFiles.BACK_BUTTON_IMG));
-        jSubmitBack = new JButton(backBtn);
+        jSubmitBack = utils.buttonImg(backBtn);
         jSubmitBack.setActionCommand(BTN_BACK);
-        jSubmitBack.setBackground(Color.decode("#00000000"));
 
         Icon loginBtn = new ImageIcon(String.valueOf(AssetsFiles.LOGIN_BUTTON_IMG));
-        jSubmitLogin = new JButton(loginBtn);
+        jSubmitLogin = utils.buttonImg(loginBtn);
         jSubmitLogin.setActionCommand(BTN_LOGIN);
-        jSubmitLogin.setBackground(Color.decode("#00000000"));
 
         south.add(jSubmitBack);
         south.add(jSubmitLogin);

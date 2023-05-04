@@ -1,5 +1,6 @@
 package Business;
 
+import Business.Entities.Song;
 import Persistance.dao.SongDao;
 
 import javax.sound.sampled.*;
@@ -7,12 +8,14 @@ import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.nio.file.Files;
 import java.nio.file.Path;
 
 public class SongManager {
 
     private final SongDao songDao;
     private Clip myClip;
+    private String errorInUpload;
 
     public SongManager(SongDao songDao) {
         this.songDao = songDao;
@@ -20,7 +23,11 @@ public class SongManager {
 
     public void getSong(){
         try {
-            String filePath = "files/music/prueba.wav";
+
+            File music = new File("files/music/");
+            File[] files = music.listFiles();
+            assert files != null;
+            String filePath = "files/music/" + files[0].getName();
 
             File file = new File(filePath);
 
@@ -70,28 +77,47 @@ public class SongManager {
     }
 
     public void moveBackward(){
-
         System.out.println("1 cancion atras");
-
     }
 
     public void loopList(){
-
         System.out.println("loopeo lista");
     }
-
 
     public void fileSongSelector(){
 
         JFileChooser fileChooser = new JFileChooser();
-
+        String[] aux;
         int response = fileChooser.showOpenDialog(null);
 
         if(response == JFileChooser.APPROVE_OPTION){
             File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
             String fileName = file.getName();
-            file.renameTo(new File("files/music/" + fileName));
+            aux = fileName.split("\\.");
+            if(aux[1].equals("wav")){
+                file.renameTo(new File("files/music/" + fileName));
+                errorInUpload = fileName;
+            }else{
+                //error;
+                System.out.println("error, solo .wav");
+            }
         }
+    }
+
+    public void addMusic(String author, String genre, String album, String title, boolean error) throws IOException {
+        Song song = new Song(title, genre, album, author);
+
+        if(!error){
+            songDao.SaveSong(song);
+        }else{
+            errorInMusicUpload();
+        }
+    }
+
+    public void errorInMusicUpload() throws IOException {
+        Path path = Path.of("files/music/" + errorInUpload);
+
+        Files.deleteIfExists(path);
 
     }
 

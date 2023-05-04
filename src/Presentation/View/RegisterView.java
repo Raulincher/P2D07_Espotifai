@@ -2,6 +2,7 @@ package Presentation.View;
 
 import Presentation.AssetsFiles;
 import Presentation.Controller.RegisterViewController;
+import Presentation.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,6 +36,12 @@ public class RegisterView extends JPanel {
 
 
     private JButton jSubmitRegister;
+
+    private final Utils utils;
+
+    public RegisterView(Utils utils){
+        this.utils = utils;
+    }
 
     public void configureRegisterView() {
         setBackground(Color.black);
@@ -113,14 +120,12 @@ public class RegisterView extends JPanel {
         south.setBorder(createEmptyBorder(0, 0, 50, 0));
 
         Icon backBtn = new ImageIcon(String.valueOf(AssetsFiles.BACK_BUTTON_IMG));
-        jbBack = new JButton(backBtn);
+        jbBack = utils.buttonImg(backBtn);
         jbBack.setActionCommand(BTN_BACK);
-        jbBack.setBackground(Color.decode("#00000000"));
 
         Icon registerBtn = new ImageIcon(String.valueOf(AssetsFiles.REGISTER_BUTTON_IMG));
-        jbRegister = new JButton(registerBtn);
+        jbRegister = utils.buttonImg(registerBtn);
         jbRegister.setActionCommand(BTN_REGISTER);
-        jbRegister.setBackground(Color.decode("#00000000"));
         south.add(jbBack);
         south.add(jbRegister);
         add(south, BorderLayout.SOUTH);

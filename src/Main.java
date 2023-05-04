@@ -33,20 +33,20 @@ public class Main {
 
         songManager.getSong();
 
-        FooterView footerView = new FooterView();
+        InitialView initialView = new InitialView(utils);
+        FooterView footerView = new FooterView(utils);
         HeaderView headerView = new HeaderView(utils);
-        InitialView initialView = new InitialView();
-        RegisterView registerView = new RegisterView();
-        LoginView loginView = new LoginView();
+        RegisterView registerView = new RegisterView(utils);
+        LoginView loginView = new LoginView(utils);
         TestView testView = new TestView();
-        AddSongView addSongView = new AddSongView();
-        DeleteSongView deleteSongView = new DeleteSongView();
-        DetailedPlaylistView detailedPlaylistView = new DetailedPlaylistView();
-        DetailedSongView detailedSongView = new DetailedSongView();
-        GeneralPlaylistView generalPlaylistView = new GeneralPlaylistView();
-        GeneralSongListView generalSongListView = new GeneralSongListView();
+        AddSongView addSongView = new AddSongView(utils);
+        DeleteSongView deleteSongView = new DeleteSongView(utils);
+        DetailedPlaylistView detailedPlaylistView = new DetailedPlaylistView(utils);
+        DetailedSongView detailedSongView = new DetailedSongView(utils);
+        GeneralPlaylistView generalPlaylistView = new GeneralPlaylistView(utils);
+        GeneralSongListView generalSongListView = new GeneralSongListView(utils);
         MainMenuView mainMenuView = new MainMenuView(footerView, utils, headerView);
-        StatisticsView statisticsView = new StatisticsView();
+        StatisticsView statisticsView = new StatisticsView(utils);
 
         MainView mainView = new MainView(initialView, deleteSongView, statisticsView, mainMenuView, generalPlaylistView, generalSongListView, detailedSongView, detailedPlaylistView, registerView, loginView, testView, addSongView);
 

@@ -29,8 +29,6 @@ public class MainMenuView extends JPanel {
     private JButton jStatistics;
     private JButton jManage;
 
-    private JButton jSubmitBack2 = new JButton();
-
 
     public static final String BTN_BACK = "BTN_BACK";
     public static final String BTN_SONG_LIST = "BTN_SONG_LIST";
@@ -98,7 +96,6 @@ public class MainMenuView extends JPanel {
 
     public void addMainMenuController(MainMenuViewController mainMenuController){
         //set action command
-        jSubmitBack2.addActionListener(mainMenuController);
         jSongList.addActionListener(mainMenuController);
         jAddSong.addActionListener(mainMenuController);
         jDeleteSong.addActionListener(mainMenuController);

@@ -1,13 +1,20 @@
 package Presentation.View;
 
 import Presentation.Controller.DeleteSongViewController;
+import Presentation.Utils;
 
 import javax.swing.*;
 
 public class DeleteSongView extends JPanel {
 
-    private JButton jback = new JButton("back");
+    private final Utils utils;
+
+    private JButton jback;
     public static final String BTN_BACK = "BTN_BACK";
+
+    public DeleteSongView(Utils utils){
+        this.utils = utils;
+    }
 
     public void addDeleteSongController(DeleteSongViewController DeleteSongController){
         //set action command
@@ -16,7 +23,8 @@ public class DeleteSongView extends JPanel {
 
     public void configureDeleteSongView() {
         JLabel jLogo = new JLabel("delete song");
-        JButton jback = new JButton("back");
+
+        jback = utils.buttonText("back");
         jback.setActionCommand(BTN_BACK);
 
         add(jLogo);

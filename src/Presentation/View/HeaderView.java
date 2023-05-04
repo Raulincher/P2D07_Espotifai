@@ -15,7 +15,7 @@ public class HeaderView extends JPanel {
     public static final String BTN_BACK = "BTN_BACK";
     public static final String BTN_DELETEACC = "BTN_DELETEACC";
 
-    private Utils utils;
+    private final Utils utils;
 
 
     private JButton jLogOut;

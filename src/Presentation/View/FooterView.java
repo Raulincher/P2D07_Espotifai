@@ -2,12 +2,13 @@ package Presentation.View;
 
 import Presentation.Controller.FooterController;
 import Presentation.Controller.GeneralPlaylistViewController;
+import Presentation.Utils;
 
 import javax.swing.*;
 
 public class FooterView extends JPanel {
 
-
+    private final Utils utils;
 
     public static final String BTN_PLAY = "BTN_PLAY";
     public static final String BTN_FORWARD = "BTN_FORWARD";
@@ -15,12 +16,15 @@ public class FooterView extends JPanel {
     public static final String BTN_REPEAT = "BTN_REPEAT";
     public static final String BTN_REPEAT_LIST = "BTN_REPEAT_LIST";
 
-    private final JButton jplay = new JButton("play");
-    private final JButton jForward = new JButton("forward");
-    private final JButton jBackward = new JButton("backward");
-    private final JButton jRepeat = new JButton("repeatSong");
-    private final JButton jRepeatList = new JButton("repeatList");
+    private JButton jplay;
+    private JButton jForward;
+    private JButton jBackward;
+    private JButton jRepeat;
+    private JButton jRepeatList;
 
+    public FooterView(Utils utils){
+        this.utils = utils;
+    }
 
     public void addFooterController(FooterController footerController){
         //set action command
@@ -33,8 +37,14 @@ public class FooterView extends JPanel {
 
     public JPanel configureFooter() {
         JPanel footer = new JPanel();
-
         JLabel jLogo = new JLabel("song name");
+
+        jplay = utils.buttonText("play");
+        jForward = utils.buttonText("forward");
+        jBackward = utils.buttonText("backward");
+        jRepeat = utils.buttonText("repeatSong");
+        jRepeatList = utils.buttonText("repeatList");
+
         jplay.setActionCommand(BTN_PLAY);
         jForward.setActionCommand(BTN_FORWARD);
         jBackward.setActionCommand(BTN_BACKWARD);

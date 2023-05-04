@@ -2,6 +2,7 @@ package Presentation.View;
 
 import Presentation.AssetsFiles;
 import Presentation.Controller.InitialViewController;
+import Presentation.Utils;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,6 +23,12 @@ public class InitialView extends JPanel {
     public static final String BTN_REGISTER = "BTN_REGISTER";
     public static final String BTN_TEST = "BTN_TEST";
 
+    private final Utils utils;
+
+
+    public InitialView(Utils utils){
+        this.utils = utils;
+    }
 
 
     public void configureInitialView(){
@@ -30,7 +37,6 @@ public class InitialView extends JPanel {
 
         buttonsZone();
         logoZone();
-
 
         exterior.setLayout(new BoxLayout(exterior, BoxLayout.PAGE_AXIS));
         exterior.add(logo);
@@ -54,25 +60,21 @@ public class InitialView extends JPanel {
 
     public void buttonsZone(){
         buttons = new JPanel();
-
         buttons.setBackground(Color.black);
         buttons.setBorder(createEmptyBorder(200, 0, 0, 0));
+
         Icon registerBtn = new ImageIcon(String.valueOf(AssetsFiles.REGISTER_BUTTON_IMG));
-        jRegister = new JButton(registerBtn);
+        jRegister = utils.buttonImg(registerBtn);
         jRegister.setActionCommand(BTN_REGISTER);
-        jRegister.setBackground(Color.decode("#00000000"));
         buttons.add(jRegister);
 
         Icon loginBtn = new ImageIcon(String.valueOf(AssetsFiles.LOGIN_BUTTON_IMG));
-        jLogin = new JButton(loginBtn);
+        jLogin = utils.buttonImg(loginBtn);
         jLogin.setActionCommand(BTN_LOGIN);
-        jLogin.setBackground(Color.decode("#00000000"));
         buttons.add(jLogin);
 
-        jTest = new JButton("Test");
+        jTest = utils.buttonText("test");
         jTest.setActionCommand(BTN_TEST);
-        jTest.setFont(new Font("Helvetica", Font.ITALIC, 20));
-        jTest.setMaximumSize(new Dimension (200,100));
         buttons.add(jTest);
     }
 
@@ -81,8 +83,5 @@ public class InitialView extends JPanel {
         jLogin.addActionListener(initialViewController);
         jRegister.addActionListener(initialViewController);
         jTest.addActionListener(initialViewController);
-
     }
-
-
 }
