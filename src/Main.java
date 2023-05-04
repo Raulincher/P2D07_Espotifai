@@ -10,6 +10,7 @@ import Persistance.dao.sql.SQLPlaylistDao;
 import Persistance.dao.sql.SQLSongDao;
 import Persistance.dao.sql.SQLUserDao;
 import Presentation.Controller.*;
+import Presentation.Utils;
 import Presentation.View.*;
 
 import java.sql.Connection;
@@ -28,9 +29,12 @@ public class Main {
         SongManager songManager = new SongManager(songDao);
         PlaylistManager playlistManager = new PlaylistManager(playlistDao);
 
+        Utils utils = new Utils();
+
         songManager.getSong();
 
         FooterView footerView = new FooterView();
+        HeaderView headerView = new HeaderView(utils);
         InitialView initialView = new InitialView();
         RegisterView registerView = new RegisterView();
         LoginView loginView = new LoginView();
@@ -41,7 +45,7 @@ public class Main {
         DetailedSongView detailedSongView = new DetailedSongView();
         GeneralPlaylistView generalPlaylistView = new GeneralPlaylistView();
         GeneralSongListView generalSongListView = new GeneralSongListView();
-        MainMenuView mainMenuView = new MainMenuView(footerView);
+        MainMenuView mainMenuView = new MainMenuView(footerView, utils, headerView);
         StatisticsView statisticsView = new StatisticsView();
 
         MainView mainView = new MainView(initialView, deleteSongView, statisticsView, mainMenuView, generalPlaylistView, generalSongListView, detailedSongView, detailedPlaylistView, registerView, loginView, testView, addSongView);
@@ -58,8 +62,9 @@ public class Main {
         MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView);
         TestViewController testViewController = new TestViewController(mainView, userManager);
         FooterController footerController = new FooterController(footerView, songManager);
+        HeaderController headerController = new HeaderController(headerView, userManager, mainView);
 
-
+        headerView.addHeaderController(headerController);
         footerView.addFooterController(footerController);
         initialView.addInitialViewController(initialViewController);
         loginView.addLoginController(loginViewController);

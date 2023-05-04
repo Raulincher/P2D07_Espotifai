@@ -16,11 +16,12 @@ public class LoginView extends JPanel {
     private JButton jSubmitBack;
     private JTextField jUsername;
 
+
     private JPasswordField jPassword;
 
     public static final String BTN_LOGIN = "BTN_LOGIN";
-
     public static final String BTN_BACK = "BTN_BACK";
+
 
     public void configureLoginView() {
 

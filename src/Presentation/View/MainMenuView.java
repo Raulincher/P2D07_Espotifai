@@ -13,9 +13,14 @@ import static javax.swing.BorderFactory.createEmptyBorder;
 public class MainMenuView extends JPanel {
 
     FooterView footerView;
+    Utils utils;
+    HeaderView headerView;
 
-    public MainMenuView(FooterView footerView){
+    public MainMenuView(FooterView footerView, Utils utils, HeaderView headerView){
+
         this.footerView = footerView;
+        this.headerView = headerView;
+        this.utils = utils;
     }
 
     private JButton jSongList;
@@ -41,7 +46,7 @@ public class MainMenuView extends JPanel {
         // NORTH
         JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
         Icon menuImg = new ImageIcon(String.valueOf(AssetsFiles.MENU_LABEL));
-        Utils.header(north, jSubmitBack2, menuImg);
+        north.add(headerView.configureHeader(menuImg));
         add(north, BorderLayout.NORTH);
 
         // CENTER
@@ -51,29 +56,25 @@ public class MainMenuView extends JPanel {
         add(center, BorderLayout.CENTER);
 
         Icon songListBtn = new ImageIcon(String.valueOf(AssetsFiles.SONGLIST_BUTTON_IMG));
-        jSongList = new JButton(songListBtn);
+        jSongList = utils.buttonImg(songListBtn);
         jSongList.setActionCommand(BTN_SONG_LIST);
-        jSongList.setBackground(Color.decode("#00000000"));
+
 
         Icon addSongBtn = new ImageIcon(String.valueOf(AssetsFiles.ADDSONG_BUTTON_IMG));
-        jAddSong = new JButton(addSongBtn);
+        jAddSong = utils.buttonImg(addSongBtn);
         jAddSong.setActionCommand(BTN_ADD_SONG);
-        jAddSong.setBackground(Color.decode("#00000000"));
 
         Icon deleteSongBtn = new ImageIcon(String.valueOf(AssetsFiles.DELETESONG_BUTTON_IMG));
-        jDeleteSong = new JButton(deleteSongBtn);
+        jDeleteSong = utils.buttonImg(deleteSongBtn);
         jDeleteSong.setActionCommand(BTN_DELETE_SONG);
-        jDeleteSong.setBackground(Color.decode("#00000000"));
 
         Icon statisticsBtn = new ImageIcon(String.valueOf(AssetsFiles.STATISTICS_BUTTON_IMG));
-        jStatistics = new JButton(statisticsBtn);
+        jStatistics = utils.buttonImg(statisticsBtn);
         jStatistics.setActionCommand(BTN_STATISTICS);
-        jStatistics.setBackground(Color.decode("#00000000"));
 
         Icon manageBtn = new ImageIcon(String.valueOf(AssetsFiles.MANAGELISTS_BUTTON_IMG));
-        jManage = new JButton(manageBtn);
+        jManage = utils.buttonImg(manageBtn);
         jManage.setActionCommand(BTN_MANAGE);
-        jManage.setBackground(Color.decode("#00000000"));
 
         center.add(jSongList);
         center.add(jAddSong);
@@ -88,8 +89,10 @@ public class MainMenuView extends JPanel {
 
         // Aquí anirà el reproductor
 
+        south.add(footerView.configureFooter());
 
         add(south, BorderLayout.SOUTH);
+
     }
 
 

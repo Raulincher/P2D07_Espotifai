@@ -21,9 +21,8 @@ public class TestViewController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        switch (e.getActionCommand()) {
-            case TestView.BTN_LOGOUT -> mainView.showMainCard();
-            case TestView.BTN_DELETE -> userManager.delete();
+        if (TestView.BTN_LOGOUT.equals(e.getActionCommand())) {
+            mainView.showMainCard();
         }
     }
 }

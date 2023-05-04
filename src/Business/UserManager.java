@@ -25,7 +25,15 @@ public class UserManager {
         userDao.register(user);
     }
 
-   /* public void Register(User user){
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser(){
+        return user;
+    }
+
+    /* public void Register(User user){
         userDao.Register(user);
     }
 
@@ -40,6 +48,10 @@ public class UserManager {
         } catch (UserNotFoundException e) {
             return false;
         }
+    }
+
+    public void logout(){
+
     }
 
     public boolean isEmpty(ArrayList<String> data) { //data = info del view
@@ -57,7 +69,7 @@ public class UserManager {
         return userDao.userExists(user);
     }
 
-    public void delete(){
-        //userDao.delete(user);
+    public void delete() throws UserNotFoundException {
+        userDao.delete(user);
     }
 }
