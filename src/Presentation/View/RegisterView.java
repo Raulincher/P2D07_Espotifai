@@ -57,9 +57,7 @@ public class RegisterView extends JPanel {
 
 
         ImageIcon labelIcon = new ImageIcon(String.valueOf(AssetsFiles.REGISTER_LABEL));
-        Image scaledImageLabel = labelIcon.getImage().getScaledInstance(200, 100, Image.SCALE_SMOOTH);
-        ImageIcon scaledIconLabel = new ImageIcon(scaledImageLabel);
-        JLabel signUpLabel = new JLabel(scaledIconLabel);
+        JLabel signUpLabel = new JLabel(labelIcon);
         north.add(signUpLabel);
 
         // CENTER
@@ -79,32 +77,32 @@ public class RegisterView extends JPanel {
         label1.setFont(new Font("Gotham", Font.BOLD, 20));
         jtfUsername = new JTextField();
         jtfUsername.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfUsername.setPreferredSize(new Dimension(200, 40));
-        jtfUsername.setMinimumSize(new Dimension(200,40));
+        jtfUsername.setPreferredSize(new Dimension(300, 40));
+        jtfUsername.setMinimumSize(new Dimension(300,40));
 
         JLabel label2 = new JLabel(EMAIL_LABEL);
         label2.setForeground(Color.WHITE);
         label2.setFont(new Font("Gotham", Font.BOLD, 20));
         jtfEmail = new JTextField();
         jtfEmail.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfEmail.setPreferredSize(new Dimension(200, 40));
-        jtfEmail.setMinimumSize(new Dimension(200,40));
+        jtfEmail.setPreferredSize(new Dimension(300, 40));
+        jtfEmail.setMinimumSize(new Dimension(300,40));
 
         JLabel label3 = new JLabel(PASSWORD_LABEL);
         label3.setForeground(Color.WHITE);
         label3.setFont(new Font("Gotham", Font.BOLD, 20));
         jtfPassword = new JPasswordField();
         jtfPassword.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfPassword.setPreferredSize(new Dimension(200, 40));
-        jtfPassword.setMinimumSize(new Dimension(200,40));
+        jtfPassword.setPreferredSize(new Dimension(300, 40));
+        jtfPassword.setMinimumSize(new Dimension(300,40));
 
         JLabel label4 = new JLabel(REPEAT_PASSWORD_LABEL);
         label4.setForeground(Color.WHITE);
         label4.setFont(new Font("Gotham", Font.BOLD, 20));
         jtfRepeatPassword = new JPasswordField();
         jtfRepeatPassword.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfRepeatPassword.setPreferredSize(new Dimension(200, 40));
-        jtfRepeatPassword.setMinimumSize(new Dimension(200,40));
+        jtfRepeatPassword.setPreferredSize(new Dimension(300, 40));
+        jtfRepeatPassword.setMinimumSize(new Dimension(300,40));
 
         center.add(label1, constraints);
         constraints.gridy++;

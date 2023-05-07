@@ -89,9 +89,10 @@ public class MainMenuView extends JPanel {
         center.add(fila2);
 
         // SOUTH
+        Color gris = new Color(26,26,26);
         JPanel south = new JPanel();
-        south.setBackground(Color.black);
-        south.setBorder(createEmptyBorder(0, 0, 100, 0));
+        south.setBackground(gris);
+        south.setBorder(createEmptyBorder(30, 0, 30, 0));
 
         // Aquí anirà el reproductor
 

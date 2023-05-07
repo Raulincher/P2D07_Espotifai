@@ -6,6 +6,7 @@ import Presentation.Controller.GeneralPlaylistViewController;
 import Presentation.Utils;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class FooterView extends JPanel {
 
@@ -37,8 +38,10 @@ public class FooterView extends JPanel {
     }
 
     public JPanel configureFooter() {
+        Color gris = new Color(26,26,26);
         JPanel footer = new JPanel();
         JLabel jLogo = new JLabel("song name");
+        footer.setBackground(gris);
 
         Icon playBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_PLAYBUTTON_IMG));
         Icon forwardBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_NEXTBUTTON_IMG));
@@ -47,10 +50,15 @@ public class FooterView extends JPanel {
         Icon repeatListBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_REPEAT_PLAYLIST_BUTTON_IMG));
 
         jplay = utils.buttonImg(playBtn);
+        jplay.setBackground(gris);
         jForward = utils.buttonImg(forwardBtn);
+        jForward.setBackground(gris);
         jBackward = utils.buttonImg(backwardBtn);
+        jBackward.setBackground(gris);
         jRepeat = utils.buttonImg(repeatBtn);
+        jRepeat.setBackground(gris);
         jRepeatList = utils.buttonImg(repeatListBtn);
+        jRepeatList.setBackground(gris);
 
         jplay.setActionCommand(BTN_PLAY);
         jForward.setActionCommand(BTN_FORWARD);
@@ -59,10 +67,10 @@ public class FooterView extends JPanel {
         jRepeatList.setActionCommand(BTN_REPEAT_LIST);
 
         footer.add(jLogo);
+        footer.add(jRepeat);
+        footer.add(jBackward);
         footer.add(jplay);
         footer.add(jForward);
-        footer.add(jBackward);
-        footer.add(jRepeat);
         footer.add(jRepeatList);
         return footer;
     }

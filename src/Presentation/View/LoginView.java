@@ -44,9 +44,7 @@ public class LoginView extends JPanel {
 
 
         ImageIcon labelIcon = new ImageIcon(String.valueOf(AssetsFiles.LOGIN_LABEL));
-        Image scaledImageLabel = labelIcon.getImage().getScaledInstance(200, 100, Image.SCALE_SMOOTH);
-        ImageIcon scaledIconLabel = new ImageIcon(scaledImageLabel);
-        JLabel loginLabel = new JLabel(scaledIconLabel);
+        JLabel loginLabel = new JLabel(labelIcon);
         north.add(loginLabel);
 
         //Utils.header(north, jSubmitBack2);
@@ -67,6 +65,7 @@ public class LoginView extends JPanel {
         label1.setForeground(Color.WHITE);
         label1.setFont(new Font("Gotham", Font.BOLD, 20));
         jUsername = new JTextField();
+        jUsername.setFont(new Font("Gotham", Font.BOLD, 20));
         jUsername.setPreferredSize(new Dimension(300, 40));
         jUsername.setMinimumSize(new Dimension(300,40));
 
@@ -74,6 +73,7 @@ public class LoginView extends JPanel {
         label2.setForeground(Color.WHITE);
         label2.setFont(new Font("Gotham", Font.BOLD, 20));
         jPassword= new JPasswordField();
+        jPassword.setFont(new Font("Gotham", Font.BOLD, 20));
         jPassword.setPreferredSize(new Dimension(300,40));
         jPassword.setMinimumSize(new Dimension(300,40));
 
