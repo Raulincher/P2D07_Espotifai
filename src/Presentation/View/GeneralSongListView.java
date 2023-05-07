@@ -19,7 +19,6 @@ public class GeneralSongListView extends JPanel {
     public void addGeneralSongListController(GeneralSongListViewController generalSongListViewController){
         //set action command
         jback.addActionListener(generalSongListViewController);
-
     }
 
     public void configureGeneralSonglistView() {
@@ -27,7 +26,6 @@ public class GeneralSongListView extends JPanel {
 
         jback = utils.buttonText("back");
         jback.setActionCommand(BTN_BACK);
-
 
         add(jLogo);
         add(jback);

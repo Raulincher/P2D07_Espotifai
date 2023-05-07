@@ -55,8 +55,11 @@ public class RegisterView extends JPanel {
         north.setBorder(createEmptyBorder(50, 0, 0, 0));
         add(north, BorderLayout.NORTH);
 
-        Icon signUpLbl = new ImageIcon(String.valueOf(AssetsFiles.REGISTER_LABEL));
-        JLabel signUpLabel = new JLabel(signUpLbl);
+
+        ImageIcon labelIcon = new ImageIcon(String.valueOf(AssetsFiles.REGISTER_LABEL));
+        Image scaledImageLabel = labelIcon.getImage().getScaledInstance(200, 100, Image.SCALE_SMOOTH);
+        ImageIcon scaledIconLabel = new ImageIcon(scaledImageLabel);
+        JLabel signUpLabel = new JLabel(scaledIconLabel);
         north.add(signUpLabel);
 
         // CENTER
@@ -76,28 +79,32 @@ public class RegisterView extends JPanel {
         label1.setFont(new Font("Gotham", Font.BOLD, 20));
         jtfUsername = new JTextField();
         jtfUsername.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfUsername.setPreferredSize(new Dimension(200,40));
+        jtfUsername.setPreferredSize(new Dimension(200, 40));
+        jtfUsername.setMinimumSize(new Dimension(200,40));
 
         JLabel label2 = new JLabel(EMAIL_LABEL);
         label2.setForeground(Color.WHITE);
         label2.setFont(new Font("Gotham", Font.BOLD, 20));
         jtfEmail = new JTextField();
         jtfEmail.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfEmail.setPreferredSize(new Dimension(200,40));
+        jtfEmail.setPreferredSize(new Dimension(200, 40));
+        jtfEmail.setMinimumSize(new Dimension(200,40));
 
         JLabel label3 = new JLabel(PASSWORD_LABEL);
         label3.setForeground(Color.WHITE);
         label3.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfPassword= new JPasswordField();
+        jtfPassword = new JPasswordField();
         jtfPassword.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfPassword.setPreferredSize(new Dimension(200,40));
+        jtfPassword.setPreferredSize(new Dimension(200, 40));
+        jtfPassword.setMinimumSize(new Dimension(200,40));
 
         JLabel label4 = new JLabel(REPEAT_PASSWORD_LABEL);
         label4.setForeground(Color.WHITE);
         label4.setFont(new Font("Gotham", Font.BOLD, 20));
         jtfRepeatPassword = new JPasswordField();
         jtfRepeatPassword.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfRepeatPassword.setPreferredSize(new Dimension(200,40));
+        jtfRepeatPassword.setPreferredSize(new Dimension(200, 40));
+        jtfRepeatPassword.setMinimumSize(new Dimension(200,40));
 
         center.add(label1, constraints);
         constraints.gridy++;
@@ -120,16 +127,17 @@ public class RegisterView extends JPanel {
         south.setBorder(createEmptyBorder(0, 0, 50, 0));
 
         Icon backBtn = new ImageIcon(String.valueOf(AssetsFiles.BACK_BUTTON_IMG));
-        jbBack = utils.buttonImg(backBtn);
+        jbBack = new JButton(backBtn);
         jbBack.setActionCommand(BTN_BACK);
+        jbBack.setBackground(Color.decode("#00000000"));
 
         Icon registerBtn = new ImageIcon(String.valueOf(AssetsFiles.REGISTER_BUTTON_IMG));
-        jbRegister = utils.buttonImg(registerBtn);
+        jbRegister = new JButton(registerBtn);
         jbRegister.setActionCommand(BTN_REGISTER);
+        jbRegister.setBackground(Color.decode("#00000000"));
         south.add(jbBack);
         south.add(jbRegister);
         add(south, BorderLayout.SOUTH);
-
     }
 
     // TODO: Es pot fer amb getters o no?
@@ -157,7 +165,7 @@ public class RegisterView extends JPanel {
         JOptionPane.showMessageDialog(this, DIFFERENT_PASSWORD_MESSAGE);
     }
 
-    public void addRegisterController(RegisterViewController registerController){
+    public void addRegisterController(RegisterViewController registerController) {
         jbBack.addActionListener(registerController);
         jbRegister.addActionListener(registerController);
     }

@@ -1,9 +1,11 @@
 package Presentation.View;
 
+import Presentation.AssetsFiles;
 import Presentation.Controller.DetailedPlaylistViewController;
 import Presentation.Utils;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class DetailedPlaylistView extends JPanel {
 

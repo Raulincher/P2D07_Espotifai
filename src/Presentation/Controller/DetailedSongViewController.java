@@ -23,6 +23,8 @@ public class DetailedSongViewController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case DetailedSongView.BTN_BACK -> mainView.showMainMenuCard();
+            //case DetailedSongView.BTN_LOGOUT -> mainView.
+            //case DetailedSongView.BTN_DELETE -> mainView.
         }
     }
 }

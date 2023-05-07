@@ -44,8 +44,11 @@ public class InitialView extends JPanel {
         logo = new JPanel();
 
         logo.setBackground(Color.black);
-        Icon logoLbl = new ImageIcon(String.valueOf(AssetsFiles.LOGO_LABEL));
-        JLabel jLogo = new JLabel(logoLbl);
+        ImageIcon logoLbl = new ImageIcon(String.valueOf(AssetsFiles.LOGO_LABEL));
+        Image scaledImageLabel = logoLbl.getImage().getScaledInstance(500, 150, Image.SCALE_SMOOTH);
+        ImageIcon scaledIconLabel = new ImageIcon(scaledImageLabel);
+        JLabel jLogo = new JLabel(scaledIconLabel);
+        jLogo.setMinimumSize(new Dimension(500,150));
         logo.setBorder(createEmptyBorder(150, 0, 0, 0));
 
         logo.add(jLogo);
@@ -53,19 +56,23 @@ public class InitialView extends JPanel {
 
     public void buttonsZone(){
         buttons = new JPanel();
-
         buttons.setBackground(Color.black);
         buttons.setBorder(createEmptyBorder(200, 0, 0, 0));
+
         Icon registerBtn = new ImageIcon(String.valueOf(AssetsFiles.REGISTER_BUTTON_IMG));
         jRegister = new JButton(registerBtn);
         jRegister.setActionCommand(BTN_REGISTER);
         jRegister.setBackground(Color.decode("#00000000"));
         buttons.add(jRegister);
 
-        Icon loginBtn = new ImageIcon(String.valueOf(AssetsFiles.LOGIN_BUTTON_IMG));
-        jLogin = new JButton(loginBtn);
+        ImageIcon loginBtn = new ImageIcon(String.valueOf(AssetsFiles.LOGIN_BUTTON_IMG));
+        Image imageScaledLogin = loginBtn.getImage().getScaledInstance(250, 100, Image.SCALE_SMOOTH);
+        ImageIcon iconScaleLogin = new ImageIcon(imageScaledLogin);
+        jLogin = new JButton(iconScaleLogin);
         jLogin.setActionCommand(BTN_LOGIN);
         jLogin.setBackground(Color.decode("#00000000"));
+        jLogin.setPreferredSize(new Dimension(250,100));
+        jLogin.setMinimumSize(new Dimension(250,100));
         buttons.add(jLogin);
 
         jTest = new JButton("Test");
@@ -80,8 +87,5 @@ public class InitialView extends JPanel {
         jLogin.addActionListener(initialViewController);
         jRegister.addActionListener(initialViewController);
         jTest.addActionListener(initialViewController);
-
     }
-
-
 }

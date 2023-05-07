@@ -13,6 +13,9 @@ import static javax.swing.BorderFactory.createEmptyBorder;
 
 public class LoginView extends JPanel {
     private JButton jSubmitLogin;
+
+    private JButton jSubmitBack2 = new JButton();
+
     private JButton jSubmitBack;
     private JTextField jUsername;
 
@@ -20,6 +23,7 @@ public class LoginView extends JPanel {
     private JPasswordField jPassword;
 
     public static final String BTN_LOGIN = "BTN_LOGIN";
+
     public static final String BTN_BACK = "BTN_BACK";
 
     private final Utils utils;
@@ -34,13 +38,19 @@ public class LoginView extends JPanel {
 
         // NORTH
         JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        north.setBorder(createEmptyBorder(100, 0, 0, 0));
         north.setBackground(Color.black);
+        north.setBorder(createEmptyBorder(50, 0, 0, 0));
         add(north, BorderLayout.NORTH);
 
-        Icon loginImg = new ImageIcon(String.valueOf(AssetsFiles.LOGIN_LABEL));
-        JLabel loginLabel = new JLabel(loginImg);
+
+        ImageIcon labelIcon = new ImageIcon(String.valueOf(AssetsFiles.LOGIN_LABEL));
+        Image scaledImageLabel = labelIcon.getImage().getScaledInstance(200, 100, Image.SCALE_SMOOTH);
+        ImageIcon scaledIconLabel = new ImageIcon(scaledImageLabel);
+        JLabel loginLabel = new JLabel(scaledIconLabel);
         north.add(loginLabel);
+
+        //Utils.header(north, jSubmitBack2);
+        add(north, BorderLayout.NORTH);
 
         // CENTER
         JPanel center = new JPanel(new GridBagLayout());
@@ -57,13 +67,15 @@ public class LoginView extends JPanel {
         label1.setForeground(Color.WHITE);
         label1.setFont(new Font("Gotham", Font.BOLD, 20));
         jUsername = new JTextField();
-        jUsername.setPreferredSize(new Dimension(200, 40));
+        jUsername.setPreferredSize(new Dimension(300, 40));
+        jUsername.setMinimumSize(new Dimension(300,40));
 
         JLabel label2 = new JLabel("PASSWORD");
         label2.setForeground(Color.WHITE);
         label2.setFont(new Font("Gotham", Font.BOLD, 20));
         jPassword= new JPasswordField();
-        jPassword.setPreferredSize(new Dimension(200,40));
+        jPassword.setPreferredSize(new Dimension(300,40));
+        jPassword.setMinimumSize(new Dimension(300,40));
 
         center.add(label1, constraints);
         constraints.gridy++;
@@ -78,12 +90,14 @@ public class LoginView extends JPanel {
         south.setBorder(createEmptyBorder(0, 0, 100, 0));
 
         Icon backBtn = new ImageIcon(String.valueOf(AssetsFiles.BACK_BUTTON_IMG));
-        jSubmitBack = utils.buttonImg(backBtn);
+        jSubmitBack = new JButton(backBtn);
         jSubmitBack.setActionCommand(BTN_BACK);
+        jSubmitBack.setBackground(Color.decode("#00000000"));
 
         Icon loginBtn = new ImageIcon(String.valueOf(AssetsFiles.LOGIN_BUTTON_IMG));
-        jSubmitLogin = utils.buttonImg(loginBtn);
+        jSubmitLogin = new JButton(loginBtn);
         jSubmitLogin.setActionCommand(BTN_LOGIN);
+        jSubmitLogin.setBackground(Color.decode("#00000000"));
 
         south.add(jSubmitBack);
         south.add(jSubmitLogin);
