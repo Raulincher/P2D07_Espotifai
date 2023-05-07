@@ -17,7 +17,6 @@ public class HeaderView extends JPanel {
 
     private final Utils utils;
 
-
     private JButton jLogOut;
     private JButton jDeleteAcc;
     private JButton jBack;

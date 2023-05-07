@@ -36,9 +36,8 @@ public class LoginViewController implements ActionListener {
                 if(userManager.isEmpty(data)){
                     loginView.showPopUps("It's Empty!");
                 }else{
-                    if (userManager.login(data)) {
-                        //mainView.showMainMenuCard();
-                        mainView.showDetailedSongCard();
+                    if (!userManager.login(data)) {
+                        mainView.showMainMenuCard();
                     }else{
                         loginView.showPopUps("User not found!");
                     }

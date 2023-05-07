@@ -42,7 +42,7 @@ public class Main {
         AddSongView addSongView = new AddSongView(utils, headerView);
         DeleteSongView deleteSongView = new DeleteSongView(utils, headerView);
         DetailedPlaylistView detailedPlaylistView = new DetailedPlaylistView(utils);
-        DetailedSongView detailedSongView = new DetailedSongView(utils);
+        DetailedSongView detailedSongView = new DetailedSongView(utils, headerView, footerView);
         GeneralPlaylistView generalPlaylistView = new GeneralPlaylistView(utils);
         GeneralSongListView generalSongListView = new GeneralSongListView(utils);
         MainMenuView mainMenuView = new MainMenuView(footerView, utils, headerView);

@@ -1,11 +1,17 @@
 package Presentation.View;
 
 import Business.Entities.Song;
+import Business.UserManager;
 import Presentation.AssetsFiles;
 import Presentation.Controller.DetailedSongViewController;
+import Presentation.Controller.HeaderController;
 import Presentation.Utils;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableColumn;
+import javax.swing.table.TableColumnModel;
+import javax.swing.text.TableView;
 import java.awt.*;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
@@ -18,10 +24,14 @@ public class DetailedSongView extends JPanel {
     private JButton jback = new JButton("back");
     private JButton jlogout = new JButton("logout");
     private JButton jdelete = new JButton("delete account");
+    private HeaderView headerView;
+    private FooterView footerView;
 
 
-    public DetailedSongView(Utils utils){
+    public DetailedSongView(Utils utils,HeaderView headerView,FooterView footerView){
         this.utils = utils;
+        this.headerView = headerView;
+        this.footerView = footerView;
     }
 
     public void addDetailedSongController(DetailedSongViewController detailedSongViewController){
@@ -33,50 +43,21 @@ public class DetailedSongView extends JPanel {
 
     public void configureDetailedSongView() {
 
-        JLabel jLogo = new JLabel("detailed song");
-
-        jback = utils.buttonText("back");
-        //JLabel jLogo = new JLabel("detailed song");
-        //JButton jback = new JButton("back");
-        //jback.setActionCommand(BTN_BACK);
         setLayout(new BorderLayout());
+        setBackground(Color.BLACK);
+        Color gris = new Color(26,26,26);
 
         //North
         JPanel north = new JPanel();
         north.setBackground(Color.black);
-        north.setBorder(createEmptyBorder(50, 0, 0, 0));
-
-        Icon logo = new ImageIcon(String.valueOf(AssetsFiles.LOGO_LABEL));
-        JLabel logolabel = new JLabel(logo);
-        logolabel.setLayout(new GridLayout(4,1,0,50));
-
-        Icon backBtn = new ImageIcon(String.valueOf(AssetsFiles.BACK_LITTLEBUTTON_IMG));
-        jback = new JButton(backBtn);
-        jback.setActionCommand(BTN_BACK);
-        jback.setBackground(Color.decode("#00000000"));
-        //jback.setPreferredSize(new Dimension(200,100));
-
-        Icon logoutBtn = new ImageIcon(String.valueOf(AssetsFiles.LOGOUT_LITTLEBUTTON_IMG));
-        jlogout = new JButton(logoutBtn);
-        jlogout.setActionCommand(BTN_LOGOUT);
-        jlogout.setBackground(Color.decode("#00000000"));
-       // jlogout.setPreferredSize(new Dimension(200,100));
-
-        Icon deleteBtn = new ImageIcon(String.valueOf(AssetsFiles.DELETEACC_LITTLEBUTTON_IMG));
-        jdelete = new JButton(deleteBtn);
-        jdelete.setActionCommand(BTN_DELETE);
-        jdelete.setBackground(Color.decode("#00000000"));
-       // jdelete.setPreferredSize(new Dimension(200,100));
-
-        north.add(logolabel);
-        north.add(jback);
-        north.add(jlogout);
-        north.add(jdelete);
+        Icon logo = new ImageIcon(String.valueOf(AssetsFiles.SONG_LABEL));;
+        north.add(headerView.configureHeader(logo));
         add(north, BorderLayout.NORTH);
 
         //Taula Song
         JPanel center = new JPanel(new BorderLayout());
         center.setBackground(Color.BLACK);
+        center.setBorder(BorderFactory.createEmptyBorder(0, 200, 80, 200));
 
         String[] columnNames = {"", ""};
         Object[][] data = {
@@ -87,10 +68,39 @@ public class DetailedSongView extends JPanel {
                 {"Uploaded by", "Prova_by"}
         };
         JTable table = new JTable(data, columnNames);
-        JScrollPane scrollpane = new JScrollPane(table);
 
+        TableColumn columna;
+        columna = table.getColumnModel().getColumn(0);
+        columna.setPreferredWidth(300);
+        columna.setMaxWidth(300);
+        columna.setMinWidth(300);
+        table.setRowHeight(60);
+        table.setGridColor(Color.gray);
+        table.setBackground(gris);
+
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        renderer.setForeground(Color.decode("#00DC00"));
+        renderer.setFont(new Font("Gotham", Font.BOLD, 35));
+        table.getColumnModel().getColumn(0).setCellRenderer(renderer);
+
+        DefaultTableCellRenderer renderer2 = new DefaultTableCellRenderer();
+        renderer2.setForeground(Color.white);
+        renderer2.setFont(new Font("Gotham", Font.BOLD, 20));
+        table.getColumnModel().getColumn(1).setCellRenderer(renderer2);
+
+        table.setFont(new Font("Gotham", Font.BOLD, 35));
+        JScrollPane scrollpane = new JScrollPane(table);
+        //scrollpane.setBackground(gris);
+        //scrollpane.getVerticalScrollBar().setBackground(Color.BLACK);
         center.add(scrollpane, BorderLayout.CENTER);
-        add(center);
+        add(center, BorderLayout.CENTER);
+
+        JPanel south = new JPanel();
+        south.setBackground(gris);
+        south.setBorder(createEmptyBorder(30, 0, 30, 0));
+
+        south.add(footerView.configureFooter());
+        add(south, BorderLayout.SOUTH);
 
     }
 }
