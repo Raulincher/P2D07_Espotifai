@@ -45,9 +45,7 @@ public class InitialView extends JPanel {
 
         logo.setBackground(Color.black);
         ImageIcon logoLbl = new ImageIcon(String.valueOf(AssetsFiles.LOGO_LABEL));
-        Image scaledImageLabel = logoLbl.getImage().getScaledInstance(500, 150, Image.SCALE_SMOOTH);
-        ImageIcon scaledIconLabel = new ImageIcon(scaledImageLabel);
-        JLabel jLogo = new JLabel(scaledIconLabel);
+        JLabel jLogo = new JLabel(logoLbl);
         jLogo.setMinimumSize(new Dimension(500,150));
         logo.setBorder(createEmptyBorder(150, 0, 0, 0));
 
@@ -66,13 +64,9 @@ public class InitialView extends JPanel {
         buttons.add(jRegister);
 
         ImageIcon loginBtn = new ImageIcon(String.valueOf(AssetsFiles.LOGIN_BUTTON_IMG));
-        Image imageScaledLogin = loginBtn.getImage().getScaledInstance(250, 100, Image.SCALE_SMOOTH);
-        ImageIcon iconScaleLogin = new ImageIcon(imageScaledLogin);
-        jLogin = new JButton(iconScaleLogin);
+        jLogin = new JButton(loginBtn);
         jLogin.setActionCommand(BTN_LOGIN);
         jLogin.setBackground(Color.decode("#00000000"));
-        jLogin.setPreferredSize(new Dimension(250,100));
-        jLogin.setMinimumSize(new Dimension(250,100));
         buttons.add(jLogin);
 
         jTest = new JButton("Test");

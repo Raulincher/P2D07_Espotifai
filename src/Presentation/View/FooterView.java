@@ -1,5 +1,6 @@
 package Presentation.View;
 
+import Presentation.AssetsFiles;
 import Presentation.Controller.FooterController;
 import Presentation.Controller.GeneralPlaylistViewController;
 import Presentation.Utils;
@@ -39,11 +40,17 @@ public class FooterView extends JPanel {
         JPanel footer = new JPanel();
         JLabel jLogo = new JLabel("song name");
 
-        jplay = utils.buttonText("play");
-        jForward = utils.buttonText("forward");
-        jBackward = utils.buttonText("backward");
-        jRepeat = utils.buttonText("repeatSong");
-        jRepeatList = utils.buttonText("repeatList");
+        Icon playBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_PLAYBUTTON_IMG));
+        Icon forwardBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_NEXTBUTTON_IMG));
+        Icon backwardBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_OLDBUTTON_IMG));
+        Icon repeatBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_REPEATBUTTON_IMG));
+        Icon repeatListBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_REPEAT_PLAYLIST_BUTTON_IMG));
+
+        jplay = utils.buttonImg(playBtn);
+        jForward = utils.buttonImg(forwardBtn);
+        jBackward = utils.buttonImg(backwardBtn);
+        jRepeat = utils.buttonImg(repeatBtn);
+        jRepeatList = utils.buttonImg(repeatListBtn);
 
         jplay.setActionCommand(BTN_PLAY);
         jForward.setActionCommand(BTN_FORWARD);

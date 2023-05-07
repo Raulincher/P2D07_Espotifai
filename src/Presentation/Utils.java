@@ -15,7 +15,6 @@ public class Utils extends JFrame {
         return button;
     }
 
-
     public JButton buttonImg(Icon labelImg){
         JButton button = new JButton(labelImg);
         button.setBackground(Color.decode("#00000000"));

@@ -45,6 +45,7 @@ public class MainMenuView extends JPanel {
         JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
         Icon menuImg = new ImageIcon(String.valueOf(AssetsFiles.MENU_LABEL));
         north.add(headerView.configureHeader(menuImg));
+        north.setBackground(Color.black);
         add(north, BorderLayout.NORTH);
 
         // CENTER
@@ -53,10 +54,14 @@ public class MainMenuView extends JPanel {
         center.setBorder(createEmptyBorder(50, 0, 0, 0));
         add(center, BorderLayout.CENTER);
 
+        JPanel fila1 = new JPanel();
+        fila1.setBackground(Color.black);
+        JPanel fila2 = new JPanel();
+        fila2.setBackground(Color.black);
+
         Icon songListBtn = new ImageIcon(String.valueOf(AssetsFiles.SONGLIST_BUTTON_IMG));
         jSongList = utils.buttonImg(songListBtn);
         jSongList.setActionCommand(BTN_SONG_LIST);
-
 
         Icon addSongBtn = new ImageIcon(String.valueOf(AssetsFiles.ADDSONG_BUTTON_IMG));
         jAddSong = utils.buttonImg(addSongBtn);
@@ -74,11 +79,14 @@ public class MainMenuView extends JPanel {
         jManage = utils.buttonImg(manageBtn);
         jManage.setActionCommand(BTN_MANAGE);
 
-        center.add(jSongList);
-        center.add(jAddSong);
-        center.add(jDeleteSong);
-        center.add(jStatistics);
-        center.add(jManage);
+        fila1.add(jSongList);
+        fila1.add(jAddSong);
+        fila1.add(jDeleteSong);
+        fila2.add(jStatistics);
+        fila2.add(jManage);
+
+        center.add(fila1);
+        center.add(fila2);
 
         // SOUTH
         JPanel south = new JPanel();
