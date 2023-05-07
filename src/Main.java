@@ -39,8 +39,8 @@ public class Main {
         RegisterView registerView = new RegisterView(utils);
         LoginView loginView = new LoginView(utils);
         TestView testView = new TestView();
-        AddSongView addSongView = new AddSongView(utils);
-        DeleteSongView deleteSongView = new DeleteSongView(utils);
+        AddSongView addSongView = new AddSongView(utils, headerView);
+        DeleteSongView deleteSongView = new DeleteSongView(utils, headerView);
         DetailedPlaylistView detailedPlaylistView = new DetailedPlaylistView(utils);
         DetailedSongView detailedSongView = new DetailedSongView(utils);
         GeneralPlaylistView generalPlaylistView = new GeneralPlaylistView(utils);

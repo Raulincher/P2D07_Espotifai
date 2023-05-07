@@ -23,8 +23,7 @@ public class HeaderController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-
-            case HeaderView.BTN_BACK -> mainView.showMainCard();
+            case HeaderView.BTN_BACK -> mainView.showMainMenuCard();
             case HeaderView.BTN_DELETEACC -> {
                 try {
                     userManager.delete();
@@ -37,7 +36,6 @@ public class HeaderController implements ActionListener {
                 userManager.logout();
                 mainView.showMainCard();
             }
-
         }
     }
 }
