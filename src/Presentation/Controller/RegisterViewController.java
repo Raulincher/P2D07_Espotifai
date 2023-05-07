@@ -45,7 +45,9 @@ public class RegisterViewController implements ActionListener {
                     registerView.emptyFields();
                 } else {
                     if (userManager.checkIfPasswordsEqual(password,repeatPassword)) {
-                        //  userManager.Register(username, email, password);
+                        userManager.Register(username, email, password);
+                        mainView.showMainMenuCard();
+
                     } else {
                         registerView.differentPassword();
                     }

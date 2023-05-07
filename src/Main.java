@@ -33,7 +33,7 @@ public class Main {
 
         songManager.getSong();
 
-        InitialView initialView = new InitialView(utils);
+        InitialView initialView = new InitialView();
         FooterView footerView = new FooterView(utils);
         HeaderView headerView = new HeaderView(utils);
         RegisterView registerView = new RegisterView(utils);
