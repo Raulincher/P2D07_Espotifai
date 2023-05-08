@@ -2,6 +2,7 @@ package Presentation.Controller;
 
 import Presentation.View.DeleteSongView;
 import Presentation.View.DetailedPlaylistView;
+import Presentation.View.HeaderView;
 import Presentation.View.MainView;
 
 import java.awt.event.ActionEvent;
@@ -20,7 +21,7 @@ public class DetailedPlaylistViewController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            //case DeleteSongView.BTN_BACK -> mainView.showMainMenuCard();
+            case DetailedPlaylistView.BTN_BACK -> mainView.showGeneralPlaylistCard();
         }
     }
 }

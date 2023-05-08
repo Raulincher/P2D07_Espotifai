@@ -36,9 +36,9 @@ public class DetailedSongView extends JPanel {
 
     public void addDetailedSongController(DetailedSongViewController detailedSongViewController){
         //set action command
-        jback.addActionListener(detailedSongViewController);
-        jlogout.addActionListener(detailedSongViewController);
-        jdelete.addActionListener(detailedSongViewController);
+        //jback.addActionListener(detailedSongViewController);
+        //jlogout.addActionListener(detailedSongViewController);
+        //jdelete.addActionListener(detailedSongViewController);
     }
 
     public void configureDetailedSongView() {

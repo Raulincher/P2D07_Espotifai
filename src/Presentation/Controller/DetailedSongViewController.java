@@ -1,9 +1,6 @@
 package Presentation.Controller;
 
-import Presentation.View.AddSongView;
-import Presentation.View.DeleteSongView;
-import Presentation.View.DetailedSongView;
-import Presentation.View.MainView;
+import Presentation.View.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -22,7 +19,7 @@ public class DetailedSongViewController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case DetailedSongView.BTN_BACK -> mainView.showMainMenuCard();
+            case DetailedSongView.BTN_BACK -> mainView.showGeneralSongListCard();
             case DetailedSongView.BTN_LOGOUT -> mainView.showMainCard();
             case DetailedSongView.BTN_DELETE -> mainView.showMainCard();
         }

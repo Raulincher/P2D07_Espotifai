@@ -21,7 +21,13 @@ public class GeneralSongListViewController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case GeneralSongListView.BTN_BACK -> mainView.showMainMenuCard();
+            case GeneralSongListView.BTN_BACK:
+                mainView.showMainMenuCard();
+                break;
+            case GeneralSongListView.BTN_BUSCADOR:
+                String buscador = generalSongListView.getjBuscador().getText();
+                mainView.showDetailedSongCard();
+                break;
         }
     }
 

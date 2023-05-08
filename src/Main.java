@@ -44,7 +44,7 @@ public class Main {
         DetailedPlaylistView detailedPlaylistView = new DetailedPlaylistView(utils);
         DetailedSongView detailedSongView = new DetailedSongView(utils, headerView, footerView);
         GeneralPlaylistView generalPlaylistView = new GeneralPlaylistView(headerView, footerView, utils);
-        GeneralSongListView generalSongListView = new GeneralSongListView(utils);
+        GeneralSongListView generalSongListView = new GeneralSongListView(utils, headerView, footerView);
         MainMenuView mainMenuView = new MainMenuView(footerView, utils, headerView);
         StatisticsView statisticsView = new StatisticsView(headerView, utils);
 
