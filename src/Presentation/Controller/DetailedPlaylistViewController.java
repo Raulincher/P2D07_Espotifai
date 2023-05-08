@@ -20,7 +20,7 @@ public class DetailedPlaylistViewController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case DeleteSongView.BTN_BACK -> mainView.showMainMenuCard();
+            //case DeleteSongView.BTN_BACK -> mainView.showMainMenuCard();
         }
     }
 }

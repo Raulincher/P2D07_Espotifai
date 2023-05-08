@@ -1,5 +1,6 @@
 package Presentation.View;
 
+import Presentation.AssetsFiles;
 import Presentation.Controller.StatisticsViewController;
 import Presentation.Utils;
 
@@ -11,25 +12,21 @@ public class StatisticsView extends JPanel {
     private JButton jback;
 
     private final Utils utils;
+    private final HeaderView headerView;
 
-    public StatisticsView(Utils utils){
+    public StatisticsView(HeaderView headerView, Utils utils){
+        this.headerView = headerView;
         this.utils = utils;
     }
 
-
     public void addStatisticsController(StatisticsViewController statisticsViewController){
         //set action command
-        jback.addActionListener(statisticsViewController);
+        //jback.addActionListener(statisticsViewController);
     }
 
     public void configureStatisticsView() {
-
-        JLabel jLogo = new JLabel("statistics");
-
-        jback = utils.buttonText("back");
-        jback.setActionCommand(BTN_BACK);
-
-        add(jLogo);
-        add(jback);
+        Icon statsImg = new ImageIcon(String.valueOf(AssetsFiles.STATISTICS_LABEL));
+        add(headerView.configureHeader(statsImg));
     }
+
 }

@@ -17,7 +17,6 @@ public class MainMenuView extends JPanel {
     HeaderView headerView;
 
     public MainMenuView(FooterView footerView, Utils utils, HeaderView headerView){
-
         this.footerView = footerView;
         this.headerView = headerView;
         this.utils = utils;
@@ -37,8 +36,17 @@ public class MainMenuView extends JPanel {
     public static final String BTN_STATISTICS = "BTN_STATISTICS";
     public static final String BTN_MANAGE = "BTN_MANAGE";
 
-    public void configureMainMenuView() {
 
+    public void addMainMenuController(MainMenuViewController mainMenuController){
+        //set action command
+        jSongList.addActionListener(mainMenuController);
+        jAddSong.addActionListener(mainMenuController);
+        jDeleteSong.addActionListener(mainMenuController);
+        jStatistics.addActionListener(mainMenuController);
+        jManage.addActionListener(mainMenuController);
+    }
+
+    public void configureMainMenuView() {
         setLayout(new BorderLayout());
 
         // NORTH
@@ -47,6 +55,7 @@ public class MainMenuView extends JPanel {
         north.add(headerView.configureHeader(menuImg));
         north.setBackground(Color.black);
         add(north, BorderLayout.NORTH);
+
 
         // CENTER
         JPanel center = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -93,23 +102,10 @@ public class MainMenuView extends JPanel {
         JPanel south = new JPanel();
         south.setBackground(gris);
         south.setBorder(createEmptyBorder(30, 0, 30, 0));
-
-        // Aquí anirà el reproductor
-
         south.add(footerView.configureFooter());
-
         add(south, BorderLayout.SOUTH);
 
     }
 
-
-    public void addMainMenuController(MainMenuViewController mainMenuController){
-        //set action command
-        jSongList.addActionListener(mainMenuController);
-        jAddSong.addActionListener(mainMenuController);
-        jDeleteSong.addActionListener(mainMenuController);
-        jStatistics.addActionListener(mainMenuController);
-        jManage.addActionListener(mainMenuController);
-    }
 
 }

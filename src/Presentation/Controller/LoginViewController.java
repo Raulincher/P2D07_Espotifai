@@ -30,13 +30,16 @@ public class LoginViewController implements ActionListener {
             case LoginView.BTN_LOGIN :
                 mainView.showLoginCard();
                 String username = loginView.getJUsername().getText();
-                String password = Arrays.toString(loginView.getJPassword().getPassword());
+                String password = new String(loginView.getJPassword().getPassword());
                 data.add(username);
                 data.add(password);
+                System.out.println(username);
+                System.out.println(password);
                 if(userManager.isEmpty(data)){
                     loginView.showPopUps("It's Empty!");
                 }else{
-                    if (!userManager.login(data)) {
+                    if (userManager.login(data)) {
+                        userManager.setUser(username, username, password);
                         mainView.showMainMenuCard();
                     }else{
                         loginView.showPopUps("User not found!");
@@ -44,7 +47,6 @@ public class LoginViewController implements ActionListener {
                 }
                 break;
             case LoginView.BTN_BACK:
-                System.out.println("Hola");
                 mainView.showMainCard();
                 break;
         }

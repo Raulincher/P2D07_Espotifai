@@ -59,12 +59,12 @@ public class MainView extends JFrame {
         configureTestView();
         configureDeleteSong();
         configureDetailedPlaylist();
-        configureMainMenuView();
         configureStatisticsView();
-        configureAddSong();
         configureDetailedSong();
         configureGeneralPlaylist();
         configureGeneralSongList();
+        configureAddSong();
+        configureMainMenuView();
     }
 
     private void configureWindow(){

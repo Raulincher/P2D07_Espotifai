@@ -23,6 +23,8 @@ public class RegisterView extends JPanel {
     public static final String EMPTY_FIELDS_MESSAGE = "Information missing! Please enter it\n" +
             "before registering.";
     public static final String DIFFERENT_PASSWORD_MESSAGE = "The passwords entered do not match!";
+    public static final String USER_EXISTENCE_MESSAGE = "User already exists!";
+
 
     // JTextFields
     private JTextField jtfUsername;
@@ -162,6 +164,11 @@ public class RegisterView extends JPanel {
     public void differentPassword() {
         JOptionPane.showMessageDialog(this, DIFFERENT_PASSWORD_MESSAGE);
     }
+
+    public void userExistence() {
+        JOptionPane.showMessageDialog(this, USER_EXISTENCE_MESSAGE);
+    }
+
 
     public void addRegisterController(RegisterViewController registerController) {
         jbBack.addActionListener(registerController);

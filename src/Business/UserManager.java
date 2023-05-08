@@ -25,7 +25,9 @@ public class UserManager {
         userDao.register(user);
     }
 
-    public void setUser(User user) {
+    public void setUser(String username, String email, String password) {
+        User user = new User(username, email, password);
+
         this.user = user;
     }
 
@@ -51,6 +53,11 @@ public class UserManager {
     }
 
     public void logout(){
+        System.out.println(user.getEmail());
+        System.out.println(user.getUsername());
+        System.out.println(user.getPassword());
+
+        user = null;
 
     }
 
@@ -65,7 +72,8 @@ public class UserManager {
          return empty;
     }
 
-    public boolean userExistence(){
+    public boolean userExistence(String username, String email, String password){
+        User user = new User(username, email, password);
         return userDao.userExists(user);
     }
 
