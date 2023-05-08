@@ -47,17 +47,20 @@ public class AddSongView extends JPanel {
         JPanel center = new JPanel(new GridBagLayout());
 
         // CENTER LEFT
-        JLabel songNameLabel = new JLabel("Song Name");
         center.setBackground(Color.BLACK);
 
         add(center, BorderLayout.CENTER);
 
+        BoxLayout column1 = new BoxLayout(this, BoxLayout.Y_AXIS);
+        setLayout(column1);
+
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.insets = new Insets(5, 2, 5, 5);
+        constraints.insets = new Insets(0, 0, 0, 10);
         constraints.anchor = GridBagConstraints.WEST;
 
+        JLabel songNameLabel = new JLabel("Song Name");
         songNameLabel.setForeground(Color.WHITE);
         songNameLabel.setFont(new Font("Gotham", Font.BOLD, 20));
         JTextField jtfSongName = new JTextField();
@@ -118,9 +121,10 @@ public class AddSongView extends JPanel {
         center.add(genreLabel, constraints);
         constraints.gridy++;
         center.add(jtfGenre, constraints);
-
+        constraints.gridy++;
         center.add(addFileLabel, constraints);
         constraints.gridy++;
+        constraints.gridheight = 4;
         center.add(FCaddFile, constraints);
 
         /*jback = utils.buttonText("back");

@@ -9,11 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AddSongViewController implements ActionListener {
-
     private final AddSongView addSongView;
     private final MainView mainView;
     private final SongManager songManager;
-
 
     public AddSongViewController(AddSongView addSongView, MainView mainView, SongManager songManager) {
         this.addSongView = addSongView;
