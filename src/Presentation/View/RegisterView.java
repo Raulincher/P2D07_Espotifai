@@ -39,9 +39,6 @@ public class RegisterView extends JPanel {
     private JButton jbBack;
     private JButton jbRegister;
 
-
-    private JButton jSubmitRegister;
-
     private final Utils utils;
 
     public RegisterView(Utils utils){
@@ -51,8 +48,6 @@ public class RegisterView extends JPanel {
     public void configureRegisterView() {
         setBackground(Color.black);
         setLayout(new BorderLayout());
-
-        jSubmitRegister = new JButton("Submit");
 
         // NORTH
         JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -77,37 +72,17 @@ public class RegisterView extends JPanel {
         constraints.anchor = GridBagConstraints.WEST;
 
 
-        JLabel label1 = new JLabel(USERNAME_LABEL);
-        label1.setForeground(Color.WHITE);
-        label1.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfUsername = new JTextField();
-        jtfUsername.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfUsername.setPreferredSize(new Dimension(300, 40));
-        jtfUsername.setMinimumSize(new Dimension(300,40));
+        JLabel label1 = utils.label(USERNAME_LABEL);
+        jtfUsername = utils.textField();
 
-        JLabel label2 = new JLabel(EMAIL_LABEL);
-        label2.setForeground(Color.WHITE);
-        label2.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfEmail = new JTextField();
-        jtfEmail.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfEmail.setPreferredSize(new Dimension(300, 40));
-        jtfEmail.setMinimumSize(new Dimension(300,40));
+        JLabel label2 = utils.label(EMAIL_LABEL);
+        jtfEmail = utils.textField();
 
-        JLabel label3 = new JLabel(PASSWORD_LABEL);
-        label3.setForeground(Color.WHITE);
-        label3.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfPassword = new JPasswordField();
-        jtfPassword.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfPassword.setPreferredSize(new Dimension(300, 40));
-        jtfPassword.setMinimumSize(new Dimension(300,40));
+        JLabel label3 = utils.label(PASSWORD_LABEL);
+        jtfPassword = utils.passwordField();
 
-        JLabel label4 = new JLabel(REPEAT_PASSWORD_LABEL);
-        label4.setForeground(Color.WHITE);
-        label4.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfRepeatPassword = new JPasswordField();
-        jtfRepeatPassword.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfRepeatPassword.setPreferredSize(new Dimension(300, 40));
-        jtfRepeatPassword.setMinimumSize(new Dimension(300,40));
+        JLabel label4 = utils.label(REPEAT_PASSWORD_LABEL);
+        jtfRepeatPassword = utils.passwordField();
 
         center.add(label1, constraints);
         constraints.gridy++;
@@ -130,14 +105,13 @@ public class RegisterView extends JPanel {
         south.setBorder(createEmptyBorder(0, 0, 50, 0));
 
         Icon backBtn = new ImageIcon(String.valueOf(AssetsFiles.BACK_BUTTON_IMG));
-        jbBack = new JButton(backBtn);
+        jbBack = utils.buttonImg(backBtn);
         jbBack.setActionCommand(BTN_BACK);
-        jbBack.setBackground(Color.decode("#00000000"));
 
         Icon registerBtn = new ImageIcon(String.valueOf(AssetsFiles.REGISTER_BUTTON_IMG));
-        jbRegister = new JButton(registerBtn);
+        jbRegister = utils.buttonImg(registerBtn);
         jbRegister.setActionCommand(BTN_REGISTER);
-        jbRegister.setBackground(Color.decode("#00000000"));
+
         south.add(jbBack);
         south.add(jbRegister);
         add(south, BorderLayout.SOUTH);

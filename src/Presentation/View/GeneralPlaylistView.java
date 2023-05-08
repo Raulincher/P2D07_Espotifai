@@ -2,6 +2,7 @@ package Presentation.View;
 
 import Presentation.AssetsFiles;
 import Presentation.Controller.GeneralPlaylistViewController;
+import Presentation.Controller.HeaderController;
 import Presentation.Utils;
 
 import javax.swing.*;
@@ -21,6 +22,7 @@ public class GeneralPlaylistView extends JPanel {
     public void addGeneralPlaylistController(GeneralPlaylistViewController generalPlaylistViewController){
         //set action command
     }
+
 
     public void configureGeneralPlaylistView() {
         Icon statisticsBtn = new ImageIcon(String.valueOf(AssetsFiles.LISTMANAGING_LABEL));

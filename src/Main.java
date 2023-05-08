@@ -33,7 +33,7 @@ public class Main {
 
         songManager.getSong();
 
-        InitialView initialView = new InitialView();
+        InitialView initialView = new InitialView(utils);
         FooterView footerView = new FooterView(utils);
         HeaderView headerView = new HeaderView(utils);
         RegisterView registerView = new RegisterView(utils);
@@ -56,7 +56,7 @@ public class Main {
         LoginViewController loginViewController = new LoginViewController(mainView, loginView, userManager);
         RegisterViewController registerViewController = new RegisterViewController(mainView, registerView, userManager);
         AddSongViewController addSongViewController = new AddSongViewController(addSongView, mainView, songManager);
-        DeleteSongViewController deleteSongViewController = new DeleteSongViewController(deleteSongView, mainView);
+        DeleteSongViewController deleteSongViewController = new DeleteSongViewController(deleteSongView, mainView, songManager);
         DetailedPlaylistViewController detailedPlaylistViewController = new DetailedPlaylistViewController(detailedPlaylistView, mainView);
         DetailedSongViewController detailedSongViewController = new DetailedSongViewController(detailedSongView, mainView);
         GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView, mainView);

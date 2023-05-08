@@ -11,13 +11,20 @@ public class DeleteSongView extends JPanel {
     private final Utils utils;
     private final HeaderView headerView;
 
+    public static final String BTN_DELETE = "BTN_DELETE";
+
+
+    private JLabel name;
+    private JTextField input;
+    private JButton delete;
+
     public DeleteSongView(HeaderView headerView, Utils utils){
         this.utils = utils;
         this.headerView = headerView;
     }
 
-    public void addDeleteSongController(DeleteSongViewController DeleteSongController){
-
+    public void addDeleteSongController(DeleteSongViewController deleteSongController){
+        delete.addActionListener(deleteSongController);
     }
 
     public void configureDeleteSongView() {
@@ -25,12 +32,17 @@ public class DeleteSongView extends JPanel {
         Icon deleteSongImg = new ImageIcon(String.valueOf(AssetsFiles.DELETE_LABEL));
         add(headerView.configureHeader(deleteSongImg));
 
+        name = utils.label("Song name");
 
+        input = utils.textField();
 
+        Icon deleteBtn = new ImageIcon(String.valueOf(AssetsFiles.DELETESONG_BUTTON_IMG));
+        delete = utils.buttonImg(deleteBtn);
+        delete.setActionCommand(BTN_DELETE);
 
-
-
-
+        add(name);
+        add(input);
+        add(delete);
 
         // EL JPanel en si de deleteSong
         //setBackground(Color.black);
@@ -44,4 +56,9 @@ public class DeleteSongView extends JPanel {
         add(north, BorderLayout.NORTH);*/
 
     }
+
+    public JTextField getInput() {
+        return input;
+    }
+
 }
