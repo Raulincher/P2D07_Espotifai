@@ -99,6 +99,10 @@ public class SQLUserDao implements UserDao {
 
     public boolean login(User user) throws UserNotFoundException{
         boolean error = false;
+        System.out.println(user.getPassword());
+        System.out.println(user.getUsername());
+        System.out.println(user.getEmail());
+
         try{
             Statement statement = remoteConnection.createStatement();
             statement.executeQuery("USE espotifai");
@@ -112,11 +116,15 @@ public class SQLUserDao implements UserDao {
                 prepared.setString (2, username);
                 prepared.setString (3, password);
                 ResultSet rs = prepared.executeQuery();
-
+                System.out.println(rs);
                 while (rs.next()) {
-                    //no login
-                    //login
-                    error = rs.getInt(1) == 0;
+                    if (rs.getInt(1) == 0) {
+                        error = false;
+                        //no login
+                    }else{
+                        error = true;
+                        //login
+                    }
                 }
             }catch(SQLException e){
                 throw new UserNotFoundException("User not found");
@@ -125,6 +133,8 @@ public class SQLUserDao implements UserDao {
             //error = 1;
             System.err.println("Espotifai not found in login");
         }
+
+        System.out.println(error);
         return error;
     }
 

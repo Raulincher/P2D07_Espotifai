@@ -1,6 +1,7 @@
 package Presentation.Controller;
 
 import Business.UserManager;
+import Persistance.dao.UserNotFoundException;
 import Presentation.View.LoginView;
 import Presentation.View.MainView;
 
@@ -38,11 +39,15 @@ public class LoginViewController implements ActionListener {
                 if(userManager.isEmpty(data)){
                     loginView.showPopUps("It's Empty!");
                 }else{
-                    if (userManager.login(data)) {
-                        userManager.setUser(username, username, password);
-                        mainView.showMainMenuCard();
-                    }else{
-                        loginView.showPopUps("User not found!");
+                    try {
+                        if (userManager.login(data)) {
+                            userManager.setUser(username, username, password);
+                            mainView.showMainMenuCard();
+                        }else{
+                            loginView.showPopUps("User not found!");
+                        }
+                    } catch (UserNotFoundException ex) {
+                        ex.printStackTrace();
                     }
                 }
                 break;

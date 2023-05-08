@@ -41,15 +41,13 @@ public class UserManager {
 
     */
 
-    public boolean login(ArrayList<String> data){
+    public boolean login(ArrayList<String> data) throws UserNotFoundException {
         User user = new User(data.get(0),data.get(1));
+        System.out.println("pepe");
+        System.out.println(data.get(0));
+        System.out.println(data.get(1));
 
-        try {
-            userDao.login(user);
-            return true;
-        } catch (UserNotFoundException e) {
-            return false;
-        }
+        return userDao.login(user);
     }
 
     public void logout(){
