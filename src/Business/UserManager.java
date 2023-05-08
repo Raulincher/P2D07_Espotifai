@@ -6,18 +6,45 @@ import Persistance.dao.UserNotFoundException;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.regex.Pattern;
 
 public class UserManager {
 
     private final UserDao userDao;
     private User user;
 
+    public UserManager(UserDao userDao) {
+        this.userDao = userDao;
+    }
+
+    private static final String emailRegex = "^[a-zA-Z0-9_+&*-]+(?:\\.[a-zA-Z0-9_+&*-]+)*@(?:[a-zA-Z0-9-]+\\.)+[a-zA-Z]{2,7}$";
+    private static final String passwordRegex = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[a-zA-Z]).{8,}$";
+
     public boolean checkIfPasswordsEqual(String password, String repeatedPassword) {
         return password.equals(repeatedPassword);
     }
 
-    public UserManager(UserDao userDao) {
-        this.userDao = userDao;
+
+    public boolean errorInMail(String email){
+        boolean error = false;
+        Pattern patt1 = Pattern.compile(emailRegex);
+
+        if(!patt1.matcher(email).matches()){
+            error = true;
+        }
+
+        return error;
+    }
+
+    public boolean errorInPassword(String password){
+        boolean error = false;
+        Pattern patt2 = Pattern.compile(passwordRegex);
+
+        if(!patt2.matcher(password).matches()){
+            error = true;
+        }
+
+        return error;
     }
 
     public void Register(String username, String email, String password){

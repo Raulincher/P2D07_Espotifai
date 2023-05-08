@@ -24,6 +24,9 @@ public class RegisterView extends JPanel {
             "before registering.";
     public static final String DIFFERENT_PASSWORD_MESSAGE = "The passwords entered do not match!";
     public static final String USER_EXISTENCE_MESSAGE = "User already exists!";
+    public static final String MAIL_ERROR = "Error in mail";
+    public static final String PASSWORD_ERROR = "Error in password! Must contain a number, a capital letter and a lower case letter ";
+
 
 
     // JTextFields
@@ -167,6 +170,14 @@ public class RegisterView extends JPanel {
 
     public void userExistence() {
         JOptionPane.showMessageDialog(this, USER_EXISTENCE_MESSAGE);
+    }
+
+    public void mailError() {
+        JOptionPane.showMessageDialog(this, MAIL_ERROR);
+    }
+
+    public void passwordError() {
+        JOptionPane.showMessageDialog(this, PASSWORD_ERROR);
     }
 
 

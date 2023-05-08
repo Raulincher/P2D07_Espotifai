@@ -43,12 +43,23 @@ public class RegisterViewController implements ActionListener {
                     registerView.emptyFields();
                 } else {
                     if (userManager.checkIfPasswordsEqual(password,repeatPassword)) {
-                        if(userManager.userExistence(username, email, password)){
-                            registerView.userExistence();
+
+                        boolean errorInMail = userManager.errorInMail(email);
+                        if(errorInMail){
+                           registerView.mailError();
                         }else{
-                            userManager.Register(username, email, password);
-                            userManager.setUser(username, email, password);
-                            mainView.showMainMenuCard();
+                            boolean errorInPassword = userManager.errorInPassword(password);
+                            if(errorInPassword){
+                                registerView.passwordError();
+                            }else{
+                                if(userManager.userExistence(username, email, password)){
+                                    registerView.userExistence();
+                                }else{
+                                    userManager.Register(username, email, password);
+                                    userManager.setUser(username, email, password);
+                                    mainView.showMainMenuCard();
+                                }
+                            }
                         }
                     } else {
                         registerView.differentPassword();
