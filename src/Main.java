@@ -61,7 +61,7 @@ public class Main {
         DetailedSongViewController detailedSongViewController = new DetailedSongViewController(detailedSongView, mainView);
         GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView, mainView);
         GeneralPlaylistViewController generalPlaylistViewController = new GeneralPlaylistViewController(generalPlaylistView, mainView);
-        MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView);
+        MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView, songManager  );
         StatisticsViewController statisticsViewController = new StatisticsViewController(statisticsView, mainView);
 
         headerView.addHeaderController(headerController);

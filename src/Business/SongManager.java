@@ -155,4 +155,8 @@ public class SongManager {
         return error;
     }
 
+    public void printAllSongs() {
+        songDao.readAllSongsSQL();
+    }
+
 }

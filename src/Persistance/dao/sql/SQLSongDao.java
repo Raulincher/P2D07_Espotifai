@@ -4,6 +4,7 @@ import Business.Entities.Song;
 import Persistance.dao.SongDao;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class SQLSongDao implements SongDao {
 
@@ -44,6 +45,40 @@ public class SQLSongDao implements SongDao {
         } catch (SQLException e) {
             System.err.println("Espotifai not found");
         }
+    }
+
+    public ArrayList<Song> readAllSongsSQL() {
+        ArrayList<Song> songList = new ArrayList<Song>();
+        try {
+            Statement statement = remoteConnection.createStatement();
+            ResultSet resultSet = statement.executeQuery("USE espotifai");
+
+            if (!resultSet.next()) {
+                System.out.println("Base de dades buida");
+            } else {
+
+                resultSet.beforeFirst();
+
+                while (resultSet.next()) {
+                    String title = resultSet.getString("title");
+                    System.out.println(title);
+                    String genre = resultSet.getString("genre");
+                    System.out.println(genre);
+                    String album = resultSet.getString("album");
+                    System.out.println(album);
+                    String author = resultSet.getString("author");
+                    System.out.println(author);
+                    String filePath = resultSet.getString("filePath");
+                    System.out.println(filePath);
+                    Song song = new Song(title, genre, album, author, filePath);
+                    System.out.println("******");
+                    songList.add(song);
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error llegint les cançons de la base de dades: " + e.getMessage());
+        }
+        return songList;
     }
 
 }
