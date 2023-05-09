@@ -1,6 +1,7 @@
 package Presentation.View;
 
 import Business.Entities.Song;
+import Business.SongManager;
 import Presentation.AssetsFiles;
 import Presentation.Controller.DetailedSongViewController;
 import Presentation.Controller.GeneralSongListViewController;
@@ -11,6 +12,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.io.File;
 import java.util.ArrayList;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
@@ -19,16 +21,20 @@ public class GeneralSongListView extends JPanel {
 
     public static final String BTN_BACK = "BTN_BACK";
     public static final String BTN_BUSCADOR = "BTN_BUSCADOR";
+    public static final String BTN_SONG = "BTN_SONG";
     private final Utils utils;
     private HeaderView headerView;
     private FooterView footerView;
     private JTextField jBuscador;
     private JButton jCerca;
+    private SongManager songManager;
+    private String songSelected;
 
-    public GeneralSongListView(Utils utils, HeaderView headerView, FooterView footerView){
+    public GeneralSongListView(Utils utils, HeaderView headerView, FooterView footerView, SongManager songManager){
         this.utils = utils;
         this.footerView = footerView;
         this.headerView = headerView;
+        this.songManager = songManager;
     }
 
     public void addGeneralSongListController(GeneralSongListViewController generalSongListViewController){
@@ -55,8 +61,8 @@ public class GeneralSongListView extends JPanel {
         //Buscador
         JPanel panelBuscador = new JPanel();
         panelBuscador.setBackground(Color.BLACK);
-        Icon backBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_PLAYBUTTON_IMG));
-        jCerca = new JButton(backBtn);
+        Icon buscadorBtn = new ImageIcon(String.valueOf(AssetsFiles.BUSCADOR_BUTTON_IMG));
+        jCerca = new JButton(buscadorBtn);
         jCerca.setActionCommand(BTN_BUSCADOR);
         jBuscador = new JTextField();
         jBuscador.setPreferredSize(new Dimension(300, 40));
@@ -66,13 +72,7 @@ public class GeneralSongListView extends JPanel {
 
         center.add(panelBuscador,BorderLayout.NORTH);
 
-
-        //CANVIAR PER LA LLISTA DE CANÇONS
-        ArrayList<Song> songList = new ArrayList<>();
-        Song song = new Song("Hola", "Pop","2001","TRE", "HOLA");
-        songList.add(song);
-        song = new Song("Adeu", "Pop","2001","Wer", "hOLE");
-        songList.add(song);
+        ArrayList<Song> songList = songManager.listSongs();
 
         String[] columnNames = {"Song", "Artist"};
         Object[][] data = new Object[songList.size()][2];
@@ -104,6 +104,10 @@ public class GeneralSongListView extends JPanel {
 
         table.setFont(new Font("Gotham", Font.BOLD, 20));
 
+        int row = table.getSelectedRow();
+        songSelected = table.getValueAt(row, 0).toString();
+
+
         JScrollPane scrollpane = new JScrollPane(table);
         //scrollpane.setBackground(gris);
         //scrollpane.getVerticalScrollBar().setBackground(Color.BLACK);
@@ -121,5 +125,12 @@ public class GeneralSongListView extends JPanel {
 
     public JTextField getjBuscador() {
         return jBuscador;
+    }
+
+    public boolean songShow(){
+        return songSelected != null;
+    }
+    public String getSongSelected(){
+        return songSelected;
     }
 }

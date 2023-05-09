@@ -11,6 +11,7 @@ import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class SongManager {
@@ -28,7 +29,6 @@ public class SongManager {
 
     public void getSong(){
         try {
-
             File music = new File("files/music/");
             File[] files = music.listFiles();
             assert files != null;
@@ -155,8 +155,8 @@ public class SongManager {
         return error;
     }
 
-    public void printAllSongs() {
-        songDao.readAllSongsSQL();
+    public ArrayList<Song> listSongs () {
+        return songDao.readAllSongsSQL();
     }
 
 }

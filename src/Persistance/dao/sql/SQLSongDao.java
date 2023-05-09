@@ -1,7 +1,9 @@
 package Persistance.dao.sql;
 
 import Business.Entities.Song;
+import Business.Entities.User;
 import Persistance.dao.SongDao;
+import Persistance.dao.UserNotFoundException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -48,30 +50,27 @@ public class SQLSongDao implements SongDao {
     }
 
     public ArrayList<Song> readAllSongsSQL() {
-        ArrayList<Song> songList = new ArrayList<Song>();
+        ArrayList<Song> songList = new ArrayList<>();
         try {
             Statement statement = remoteConnection.createStatement();
-            ResultSet resultSet = statement.executeQuery("USE espotifai");
-
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM song");
             if (!resultSet.next()) {
                 System.out.println("Base de dades buida");
             } else {
-
                 resultSet.beforeFirst();
-
                 while (resultSet.next()) {
                     String title = resultSet.getString("title");
-                    System.out.println(title);
+                   // System.out.println(title);
                     String genre = resultSet.getString("genre");
-                    System.out.println(genre);
+                    //System.out.println(genre);
                     String album = resultSet.getString("album");
-                    System.out.println(album);
+                    //System.out.println(album);
                     String author = resultSet.getString("author");
-                    System.out.println(author);
+                    //System.out.println(author);
                     String filePath = resultSet.getString("filePath");
-                    System.out.println(filePath);
+                    //System.out.println(filePath);
                     Song song = new Song(title, genre, album, author, filePath);
-                    System.out.println("******");
+                    //System.out.println("******");
                     songList.add(song);
                 }
             }
