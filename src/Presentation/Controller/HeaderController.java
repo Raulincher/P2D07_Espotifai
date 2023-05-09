@@ -27,11 +27,14 @@ public class HeaderController implements ActionListener {
                 break;
             case HeaderView.BTN_DELETEACC:
                 try {
-                    userManager.delete();
+                    int resposta = headerView.showPopUps("Are you sure?","Confirmation");
+                    if (resposta == 0) {
+                        userManager.delete();
+                        mainView.showMainCard();
+                    }
                 } catch (UserNotFoundException ex) {
                     ex.printStackTrace();
                 }
-                mainView.showMainCard();
                 break;
             case HeaderView.BTN_LOGOUT:
                 userManager.logout();
