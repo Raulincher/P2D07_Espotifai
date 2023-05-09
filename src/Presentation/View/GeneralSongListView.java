@@ -105,7 +105,7 @@ public class GeneralSongListView extends JPanel {
         table.setFont(new Font("Gotham", Font.BOLD, 20));
 
         int row = table.getSelectedRow();
-        songSelected = table.getValueAt(row, 0).toString();
+        //songSelected = table.getValueAt(row, 0).toString();
 
 
         JScrollPane scrollpane = new JScrollPane(table);

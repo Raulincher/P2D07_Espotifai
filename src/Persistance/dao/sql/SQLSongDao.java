@@ -77,6 +77,7 @@ public class SQLSongDao implements SongDao {
         } catch (SQLException e) {
             System.out.println("Error llegint les cançons de la base de dades: " + e.getMessage());
         }
+
         return songList;
     }
 
