@@ -1,5 +1,7 @@
 package Presentation.Controller;
 
+import Business.Entities.Song;
+import Business.SongManager;
 import Presentation.View.DetailedSongView;
 import Presentation.View.GeneralSongListView;
 import Presentation.View.MainView;
@@ -11,11 +13,13 @@ public class GeneralSongListViewController implements ActionListener {
 
     private final GeneralSongListView generalSongListView;
     private final MainView mainView;
+    private final SongManager songManager;
 
 
-    public GeneralSongListViewController(GeneralSongListView generalSongListView, MainView mainView) {
+    public GeneralSongListViewController(GeneralSongListView generalSongListView, MainView mainView, SongManager songManager) {
         this.generalSongListView = generalSongListView;
         this.mainView = mainView;
+        this.songManager = songManager;
     }
 
     @Override
@@ -32,6 +36,7 @@ public class GeneralSongListViewController implements ActionListener {
         }
         if (generalSongListView.songShow()){
             String selected = generalSongListView.getSongSelected();
+            Song songSelected = songManager.searchSong(selected);
             mainView.showDetailedSongCard();
         }
     }

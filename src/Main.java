@@ -59,7 +59,7 @@ public class Main {
         DeleteSongViewController deleteSongViewController = new DeleteSongViewController(deleteSongView, mainView, songManager);
         DetailedPlaylistViewController detailedPlaylistViewController = new DetailedPlaylistViewController(detailedPlaylistView, mainView);
         DetailedSongViewController detailedSongViewController = new DetailedSongViewController(detailedSongView, mainView);
-        GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView, mainView);
+        GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView, mainView, songManager);
         GeneralPlaylistViewController generalPlaylistViewController = new GeneralPlaylistViewController(generalPlaylistView, mainView);
         MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView, songManager  );
         StatisticsViewController statisticsViewController = new StatisticsViewController(statisticsView, mainView);

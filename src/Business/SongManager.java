@@ -159,4 +159,15 @@ public class SongManager {
         return songDao.readAllSongsSQL();
     }
 
+    public Song searchSong(String nameSong){
+        Song songSelected = null;
+        ArrayList<Song> listSongs = listSongs();
+        for (Song song1: listSongs){
+            if (song1.getTile().equals(nameSong)){
+                songSelected = song1;
+            }
+        }
+        return songSelected;
+    }
+
 }
