@@ -68,41 +68,19 @@ public class AddSongView extends JPanel {
         constraints.insets = new Insets(5, 10, 10, 5);
         constraints.anchor = GridBagConstraints.WEST;
 
-        JLabel songNameLabel = new JLabel("Song Name");
-        songNameLabel.setForeground(Color.WHITE);
-        songNameLabel.setFont(new Font("Gotham", Font.BOLD, 20));
-        JTextField jtfSongName = new JTextField();
-        jtfSongName.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfSongName.setPreferredSize(new Dimension(300, 40));
-        jtfSongName.setMinimumSize(new Dimension(300,40));
+        JLabel songNameLabel = utils.label("Song Name");
+        JTextField jtfSongName = utils.textField();
 
-        JLabel albumLabel = new JLabel("Album");
-        albumLabel.setForeground(Color.WHITE);
-        albumLabel.setFont(new Font("Gotham", Font.BOLD, 20));
-        JTextField jtfAlbum = new JTextField();
-        jtfAlbum.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfAlbum.setPreferredSize(new Dimension(300, 40));
-        jtfAlbum.setMinimumSize(new Dimension(300,40));
+        JLabel albumLabel = utils.label("Album");
+        JTextField jtfAlbum = utils.textField();
 
-        JLabel ArtistLabel = new JLabel("Artist");
-        ArtistLabel.setForeground(Color.WHITE);
-        ArtistLabel.setFont(new Font("Gotham", Font.BOLD, 20));
-        JTextField jtfArtist = new JTextField();
-        jtfArtist.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfArtist.setPreferredSize(new Dimension(300, 40));
-        jtfArtist.setMinimumSize(new Dimension(300,40));
+        JLabel ArtistLabel = utils.label("Artist");
+        JTextField jtfArtist = utils.textField();
 
-        JLabel genreLabel = new JLabel("Genre");
-        genreLabel.setForeground(Color.WHITE);
-        genreLabel.setFont(new Font("Gotham", Font.BOLD, 20));
-        JTextField jtfGenre = new JTextField();
-        jtfGenre.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfGenre.setPreferredSize(new Dimension(300, 40));
-        jtfGenre.setMinimumSize(new Dimension(300,40));
+        JLabel genreLabel = utils.label("Genre");
+        JTextField jtfGenre = utils.textField();
 
-        JLabel addFileLabel = new JLabel("Add File");
-        addFileLabel.setForeground(Color.WHITE);
-        addFileLabel.setFont(new Font("Gotham", Font.BOLD, 20));
+        JLabel addFileLabel = utils.label("Add file");
         JFileChooser FCaddFile = new JFileChooser();
         ImageIcon addFileBtnAux = new ImageIcon(String.valueOf(AssetsFiles.ADD_SONG_FILE_BUTTON_IMG));
         int newWidth = 320;

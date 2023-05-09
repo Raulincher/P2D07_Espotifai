@@ -83,7 +83,6 @@ public class UserManager {
         System.out.println(user.getPassword());
 
         user = null;
-
     }
 
     public boolean isEmpty(ArrayList<String> data) { //data = info del view

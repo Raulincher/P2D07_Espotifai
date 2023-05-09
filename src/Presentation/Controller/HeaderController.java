@@ -22,21 +22,21 @@ public class HeaderController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case HeaderView.BTN_BACK -> {
+            case HeaderView.BTN_BACK:
                 mainView.showMainMenuCard();
-            }
-            case HeaderView.BTN_DELETEACC -> {
+                break;
+            case HeaderView.BTN_DELETEACC:
                 try {
                     userManager.delete();
                 } catch (UserNotFoundException ex) {
                     ex.printStackTrace();
                 }
                 mainView.showMainCard();
-            }
-            case HeaderView.BTN_LOGOUT -> {
+                break;
+            case HeaderView.BTN_LOGOUT:
                 userManager.logout();
                 mainView.showMainCard();
-            }
+                break;
         }
     }
 }

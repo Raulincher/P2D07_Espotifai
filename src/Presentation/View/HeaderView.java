@@ -26,15 +26,6 @@ public class HeaderView extends JPanel {
     }
 
 
-
-    public void addHeaderController(HeaderController headerController){
-        //set action command
-        jLogOut.addActionListener(headerController);
-        jDeleteAcc.addActionListener(headerController);
-        jBack.addActionListener(headerController);
-
-    }
-
     public JPanel configureHeader(Icon icon) {
         JPanel north = new JPanel();
         north.setBackground(Color.black);
@@ -66,5 +57,10 @@ public class HeaderView extends JPanel {
         return north;
     }
 
-
+    public void addHeaderController(HeaderController headerController){
+        //set action command
+        jLogOut.addActionListener(headerController);
+        jDeleteAcc.addActionListener(headerController);
+        jBack.addActionListener(headerController);
+    }
 }
