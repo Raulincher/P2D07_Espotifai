@@ -6,21 +6,25 @@ import Presentation.Controller.HeaderController;
 import Presentation.Utils;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class AddSongView extends JPanel {
+import static javax.swing.BorderFactory.createEmptyBorder;
 
+public class AddSongView extends JPanel {
     private final Utils utils;
     private final HeaderView headerView;
+    private final FooterView footerView;
     public static final String BTN_BACK = "BTN_BACK";
     public static final String BTN_ADD_FILE = "BTN_ADD_FILE";
 
     private JButton jback;
     private JButton jfile;
 
-    public AddSongView(Utils utils, HeaderView headerView){
+    public AddSongView(Utils utils, HeaderView headerView, FooterView footerView){
         this.utils = utils;
         this.headerView = headerView;
+        this.footerView = footerView;
     }
 
     public void addAddSongController(AddSongViewController addSongController) {
@@ -33,7 +37,7 @@ public class AddSongView extends JPanel {
 
         // EL JPanel en si de addSong
         setBackground(Color.black);
-        setLayout(new BorderLayout()); // Fem quesigui border layout
+        setLayout(new BorderLayout()); // Fem que sigui border layout
 
         // NORTH
         JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -46,17 +50,18 @@ public class AddSongView extends JPanel {
         JPanel center = new JPanel(new GridBagLayout());
 
         // CENTER LEFT
-        JLabel songNameLabel = new JLabel("Song Name");
-        center.setBackground(Color.BLACK);
 
+        center.setBackground(Color.BLACK);
         add(center, BorderLayout.CENTER);
 
+        Insets columnSpacing = new Insets(0, 100, 0, 0);
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.insets = new Insets(5, 2, 5, 5);
+        constraints.insets = new Insets(5, 10, 10, 5);
         constraints.anchor = GridBagConstraints.WEST;
 
+        JLabel songNameLabel = new JLabel("Song Name");
         songNameLabel.setForeground(Color.WHITE);
         songNameLabel.setFont(new Font("Gotham", Font.BOLD, 20));
         JTextField jtfSongName = new JTextField();
@@ -117,10 +122,10 @@ public class AddSongView extends JPanel {
         center.add(jtfArtist, constraints);
 
 
-        // DESPLAÇEM A LA DRETA
-        constraints.gridx = 100;
+        // DESPLACEM A LA DRETA
+        constraints.gridx = 1000;
         constraints.gridy = 0;
-        constraints.insets = new Insets(5, 5, 5, 100);
+        constraints.insets = columnSpacing;
 
         center.add(genreLabel, constraints);
         constraints.gridy++;
@@ -130,7 +135,16 @@ public class AddSongView extends JPanel {
         constraints.gridy++;
         constraints.gridheight = 4;
         center.add(jfile, constraints);
-       // center.add(FCaddFile, constraints);
+
+        // SOUTH
+        Color gris = new Color(26,26,26);
+        JPanel south = new JPanel();
+        south.setBackground(gris);
+        south.setBorder(createEmptyBorder(30, 0, 30, 0));
+        south.add(footerView.configureFooter());
+        add(south, BorderLayout.SOUTH);
+
+        // center.add(FCaddFile, constraints);
 
         /*jback = utils.buttonText("back");
         jback.setActionCommand(BTN_BACK);

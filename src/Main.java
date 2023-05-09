@@ -39,7 +39,7 @@ public class Main {
         RegisterView registerView = new RegisterView(utils);
         LoginView loginView = new LoginView(utils);
         TestView testView = new TestView();
-        AddSongView addSongView = new AddSongView(utils, headerView);
+        AddSongView addSongView = new AddSongView(utils, headerView, footerView);
         DeleteSongView deleteSongView = new DeleteSongView(headerView, utils);
         DetailedPlaylistView detailedPlaylistView = new DetailedPlaylistView(utils);
         DetailedSongView detailedSongView = new DetailedSongView(utils, headerView, footerView);
