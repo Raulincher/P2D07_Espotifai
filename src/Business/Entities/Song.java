@@ -6,12 +6,14 @@ public class Song {
     private String genre;
     private String album;
     private String author;
+    private String filePath;
 
-    public Song(String title, String genre, String album, String author){
+    public Song(String title, String genre, String album, String author, String filePath){
         this.title = title;
         this.genre = genre;
         this.album = album;
         this.author = author;
+        this.filePath = filePath;
     }
 
     public String getTile() {
@@ -30,6 +32,9 @@ public class Song {
         return author;
     }
 
+    public String getFilePath() {
+        return filePath;
+    }
 
     public void setTitle(String title) {
         this.title = title;

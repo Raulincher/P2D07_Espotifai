@@ -22,8 +22,33 @@ public class AddSongViewController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case AddSongView.BTN_BACK -> mainView.showMainMenuCard();
-            case AddSongView.BTN_ADD_FILE -> songManager.fileSongSelector();
+            case AddSongView.BTN_ADD_FILE:
+                if (!songManager.fileSongSelector()) {
+                    // Pop up
+                    addSongView.showPopUps("Error, the song should be in .wav format!");
+                }
+                break;
+            case AddSongView.BTN_ADD_SONG:
+                // Guardar dades
+                String songName = addSongView.getJtfSongName().getText();
+                String artist = addSongView.getJtfArtist().getText();
+                String album = addSongView.getJtfAlbum().getText();
+                String genre = addSongView.getJtfGenre().getText();
+
+                if (songManager.isEmpty(songName, artist, album, genre)) {
+                    addSongView.showPopUps("Error, empty field, can't upload the song!");
+                } else {
+                    songManager.addSong(songName, artist, album, genre);
+                }
+                // Algun camp buit
+
+                // Fitxer buit
+
+
+                break;
+
         }
     }
+
+
 }

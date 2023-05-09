@@ -7,11 +7,13 @@ import Presentation.Utils;
 import javax.swing.*;
 import java.awt.*;
 
+import static javax.swing.BorderFactory.createEmptyBorder;
+
 public class DeleteSongView extends JPanel {
 
     private final Utils utils;
     private final HeaderView headerView;
-
+    private final FooterView footerView;
     public static final String BTN_DELETE = "BTN_DELETE";
 
 
@@ -19,9 +21,10 @@ public class DeleteSongView extends JPanel {
     private JTextField input;
     private JButton delete;
 
-    public DeleteSongView(HeaderView headerView, Utils utils){
+    public DeleteSongView(HeaderView headerView, Utils utils, FooterView footerView){
         this.utils = utils;
         this.headerView = headerView;
+        this.footerView = footerView;
     }
 
     public void addDeleteSongController(DeleteSongViewController deleteSongController){
@@ -66,6 +69,15 @@ public class DeleteSongView extends JPanel {
         deleteBox.gridy++;
 
         add(center, BorderLayout.CENTER);
+
+        // SOUTH
+        Color gris = new Color(26,26,26);
+        JPanel south = new JPanel();
+        south.setBackground(gris);
+        south.setBorder(createEmptyBorder(30, 0, 30, 0));
+        south.add(footerView.configureFooter());
+        add(south, BorderLayout.SOUTH);
+
         // EL JPanel en si de deleteSong
         //setBackground(Color.black);
         //setLayout(new BorderLayout()); // Fem que sigui border layout

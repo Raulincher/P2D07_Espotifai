@@ -4,5 +4,5 @@ import Business.Entities.Song;
 
 public interface SongDao {
 
-    void SaveSong(Song song);
+    void saveSong(Song song);
 }

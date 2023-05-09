@@ -17,6 +17,9 @@ public class SongManager {
     private final SongDao songDao;
     private Clip myClip;
     private String errorInUpload;
+    private String filePath;
+    private File file;
+    private Song song;
 
     public SongManager(SongDao songDao) {
         this.songDao = songDao;
@@ -85,27 +88,48 @@ public class SongManager {
         System.out.println("loopeo lista");
     }
 
-    public void fileSongSelector(){
-
+    public boolean fileSongSelector(){
         JFileChooser fileChooser = new JFileChooser();
         String[] aux;
         int response = fileChooser.showOpenDialog(null);
+        boolean fileFormatCorrect = false;
 
         if(response == JFileChooser.APPROVE_OPTION){
-            File file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+            file = new File(fileChooser.getSelectedFile().getAbsolutePath());
             String fileName = file.getName();
             aux = fileName.split("\\.");
+
             if(aux[1].equals("wav")){
-                file.renameTo(new File("files/music/" + fileName));
-                errorInUpload = fileName;
+                //file.renameTo(new File("files/music/" + fileName));
+                filePath = "files/music/" + fileName;
+                //errorInUpload = fileName;
+                fileFormatCorrect = true;
             }else{
                 //error;
                 System.out.println("error, solo .wav");
             }
         }
+
+        return fileFormatCorrect;
     }
 
-    public void addMusic(String author, String genre, String album, String title, boolean error) throws IOException {
+    public boolean isEmpty(String songName, String artist, String album, String genre) {
+        boolean emptyField = false;
+
+        if (songName.isEmpty() || artist.isEmpty() || album.isEmpty() || genre.isEmpty()) {
+            emptyField = true;
+        }
+        return emptyField;
+    }
+    public void addSong(String songName, String artist, String album, String genre) {
+        // Guardar fitxer
+        file.renameTo(new File(filePath));
+        // Guardar a base de dades
+        song = new Song(songName, artist, album, genre, filePath);
+        songDao.saveSong(song);
+    }
+
+    /*public void addMusic(String author, String genre, String album, String title, boolean error) throws IOException {
         Song song = new Song(title, genre, album, author);
 
         if(!error){
@@ -113,13 +137,13 @@ public class SongManager {
         }else{
             errorInMusicUpload();
         }
-    }
+    }*/
 
-    public void errorInMusicUpload() throws IOException {
+    /*public void errorInMusicUpload() throws IOException {
         Path path = Path.of("files/music/" + errorInUpload);
 
         Files.deleteIfExists(path);
-    }
+    }*/
 
     public boolean deleteSong(String name){
         File folder = new File("files/music/");

@@ -40,7 +40,7 @@ public class Main {
         LoginView loginView = new LoginView(utils);
         TestView testView = new TestView();
         AddSongView addSongView = new AddSongView(utils, headerView, footerView);
-        DeleteSongView deleteSongView = new DeleteSongView(headerView, utils);
+        DeleteSongView deleteSongView = new DeleteSongView(headerView, utils, footerView);
         DetailedPlaylistView detailedPlaylistView = new DetailedPlaylistView(utils);
         DetailedSongView detailedSongView = new DetailedSongView(utils, headerView, footerView);
         GeneralPlaylistView generalPlaylistView = new GeneralPlaylistView(headerView, footerView, utils);

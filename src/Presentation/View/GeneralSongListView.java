@@ -69,9 +69,9 @@ public class GeneralSongListView extends JPanel {
 
         //CANVIAR PER LA LLISTA DE CANÇONS
         ArrayList<Song> songList = new ArrayList<>();
-        Song song = new Song("Hola", "Pop","2001","TRE");
+        Song song = new Song("Hola", "Pop","2001","TRE", "HOLA");
         songList.add(song);
-        song = new Song("Adeu", "Pop","2001","Wer");
+        song = new Song("Adeu", "Pop","2001","Wer", "hOLE");
         songList.add(song);
 
         String[] columnNames = {"Song", "Artist"};
@@ -116,7 +116,6 @@ public class GeneralSongListView extends JPanel {
 
         south.add(footerView.configureFooter());
         add(south, BorderLayout.SOUTH);
-
 
     }
 
