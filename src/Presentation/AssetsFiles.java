@@ -59,6 +59,8 @@ public enum AssetsFiles {
 
     FOOT_REPEAT_PLAYLIST_BUTTON_IMG("files/imgs/FrepeatPlaylistButton.png");
 
+    ADD_SONG_FILE_BUTTON_IMG("files/imgs/addSongFile.png");
+
     private final String files;
     AssetsFiles(String files) { this.files = files; }
 
