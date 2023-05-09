@@ -5,6 +5,7 @@ import Presentation.Controller.DeleteSongViewController;
 import Presentation.Utils;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class DeleteSongView extends JPanel {
 
@@ -29,21 +30,42 @@ public class DeleteSongView extends JPanel {
 
     public void configureDeleteSongView() {
 
-        Icon deleteSongImg = new ImageIcon(String.valueOf(AssetsFiles.DELETE_LABEL));
-        add(headerView.configureHeader(deleteSongImg));
+        // EL JPanel en si de addSong
+
+        setLayout(new BorderLayout()); // Fem que sigui border layout
+
+        // NORTH
+        JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        Icon addSongImg = new ImageIcon(String.valueOf(AssetsFiles.DELETE_LABEL));
+        north.add(headerView.configureHeader(addSongImg));
+        north.setBackground(Color.black);
+        add(north, BorderLayout.NORTH);
+
+        // CENTER
+        JPanel center = new JPanel(new GridBagLayout());
+        center.setBackground(Color.black);
+
+        Insets lineSpacing = new Insets(20, 0, 20, 0);
+        GridBagConstraints deleteBox = new GridBagConstraints();
+        deleteBox.gridy = 0;
+        deleteBox.gridx = 0;
+        deleteBox.anchor = GridBagConstraints.CENTER;
+        deleteBox.insets = lineSpacing;
 
         name = utils.label("Song name");
-
         input = utils.textField();
-
         Icon deleteBtn = new ImageIcon(String.valueOf(AssetsFiles.DELETESONG_BUTTON_IMG));
         delete = utils.buttonImg(deleteBtn);
         delete.setActionCommand(BTN_DELETE);
 
-        add(name);
-        add(input);
-        add(delete);
+        center.add(name, deleteBox);
+        deleteBox.gridy++;
+        center.add(input, deleteBox);
+        deleteBox.gridy++;
+        center.add(delete, deleteBox);
+        deleteBox.gridy++;
 
+        add(center, BorderLayout.CENTER);
         // EL JPanel en si de deleteSong
         //setBackground(Color.black);
         //setLayout(new BorderLayout()); // Fem que sigui border layout

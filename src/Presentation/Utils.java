@@ -28,7 +28,7 @@ public class Utils extends JFrame {
     public JLabel label(String text){
         JLabel label = new JLabel(text);
         label.setForeground(Color.WHITE);
-        label.setFont(new Font("Gotham", Font.BOLD, 20));
+        label.setFont(new Font("Gotham", Font.BOLD, 27));
 
         return label;
     }
