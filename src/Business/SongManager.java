@@ -129,21 +129,6 @@ public class SongManager {
         songDao.saveSong(song);
     }
 
-    /*public void addMusic(String author, String genre, String album, String title, boolean error) throws IOException {
-        Song song = new Song(title, genre, album, author);
-
-        if(!error){
-            songDao.SaveSong(song);
-        }else{
-            errorInMusicUpload();
-        }
-    }*/
-
-    /*public void errorInMusicUpload() throws IOException {
-        Path path = Path.of("files/music/" + errorInUpload);
-
-        Files.deleteIfExists(path);
-    }*/
 
     public boolean deleteSong(String name){
         File folder = new File("files/music/");
