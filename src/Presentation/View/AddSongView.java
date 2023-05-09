@@ -17,8 +17,10 @@ public class AddSongView extends JPanel {
     private final FooterView footerView;
     public static final String BTN_BACK = "BTN_BACK";
     public static final String BTN_ADD_FILE = "BTN_ADD_FILE";
+    public static final String BTN_ADD_SONG = "BTN_ADD_SONG";
 
     private JButton jback;
+    private JButton jadd;
     private JButton jfile;
 
     public AddSongView(Utils utils, HeaderView headerView, FooterView footerView){
@@ -47,12 +49,17 @@ public class AddSongView extends JPanel {
         add(north, BorderLayout.NORTH);
 
         // CENTER
+        JPanel centerTotal = new JPanel(new GridBagLayout());
+        centerTotal.setBackground(Color.BLACK);
+        add(centerTotal, BorderLayout.CENTER);
+
         JPanel center = new JPanel(new GridBagLayout());
+        center.setBackground(Color.BLACK);
 
         // CENTER LEFT
 
-        center.setBackground(Color.BLACK);
-        add(center, BorderLayout.CENTER);
+        //center.setBackground(Color.BLACK);
+        //add(centerTotal, BorderLayout.CENTER);
 
         Insets columnSpacing = new Insets(0, 100, 0, 0);
         GridBagConstraints constraints = new GridBagConstraints();
@@ -143,6 +150,30 @@ public class AddSongView extends JPanel {
         south.setBorder(createEmptyBorder(30, 0, 30, 0));
         south.add(footerView.configureFooter());
         add(south, BorderLayout.SOUTH);
+
+        //JPanel centerPanel = new JPanel();
+
+        //centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
+
+        //centerPanel.add(center);
+
+        // Botó
+        JPanel button = new JPanel();
+        button.setBackground(Color.BLACK);
+        ImageIcon addSongBtn = new ImageIcon(String.valueOf(AssetsFiles.ADDSONG_BUTTON_IMG));
+        jadd = utils.buttonImg(addSongBtn);
+        jadd.setActionCommand(BTN_ADD_SONG);
+        button.add(jadd);
+
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.insets = new Insets(0,0,0,0);
+        centerTotal.add(center);
+        constraints.gridy++;
+        centerTotal.add(button);
+
+
+
 
         // center.add(FCaddFile, constraints);
 
