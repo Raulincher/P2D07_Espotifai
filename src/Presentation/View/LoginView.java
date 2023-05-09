@@ -61,21 +61,12 @@ public class LoginView extends JPanel {
         constraints.insets = new Insets(5, 5, 5, 5);
         constraints.anchor = GridBagConstraints.WEST;
 
-        JLabel label1 = new JLabel("USERNAME");
-        label1.setForeground(Color.WHITE);
-        label1.setFont(new Font("Gotham", Font.BOLD, 20));
-        jUsername = new JTextField();
-        jUsername.setFont(new Font("Gotham", Font.BOLD, 20));
-        jUsername.setPreferredSize(new Dimension(300, 40));
-        jUsername.setMinimumSize(new Dimension(300,40));
+        JLabel label1 = utils.label("USERNAME");
+        jUsername = utils.textField();
 
-        JLabel label2 = new JLabel("PASSWORD");
-        label2.setForeground(Color.WHITE);
-        label2.setFont(new Font("Gotham", Font.BOLD, 20));
-        jPassword= new JPasswordField();
-        jPassword.setFont(new Font("Gotham", Font.BOLD, 20));
-        jPassword.setPreferredSize(new Dimension(300,40));
-        jPassword.setMinimumSize(new Dimension(300,40));
+        JLabel label2 = utils.label("PASSWORD");
+        jPassword = utils.passwordField();
+
 
         center.add(label1, constraints);
         constraints.gridy++;
@@ -90,14 +81,12 @@ public class LoginView extends JPanel {
         south.setBorder(createEmptyBorder(0, 0, 100, 0));
 
         Icon backBtn = new ImageIcon(String.valueOf(AssetsFiles.BACK_BUTTON_IMG));
-        jSubmitBack = new JButton(backBtn);
+        jSubmitBack = utils.buttonImg(backBtn);
         jSubmitBack.setActionCommand(BTN_BACK);
-        jSubmitBack.setBackground(Color.decode("#00000000"));
 
         Icon loginBtn = new ImageIcon(String.valueOf(AssetsFiles.LOGIN_BUTTON_IMG));
-        jSubmitLogin = new JButton(loginBtn);
+        jSubmitLogin = utils.buttonImg(loginBtn);
         jSubmitLogin.setActionCommand(BTN_LOGIN);
-        jSubmitLogin.setBackground(Color.decode("#00000000"));
 
         south.add(jSubmitBack);
         south.add(jSubmitLogin);

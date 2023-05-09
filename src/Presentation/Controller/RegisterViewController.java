@@ -31,10 +31,8 @@ public class RegisterViewController implements ActionListener {
             case RegisterView.BTN_REGISTER:
                 String username = registerView.getJtfUsername().getText();
                 String email = registerView.getJtfEmail().getText();
-                String password = Arrays.toString(registerView.getJtfPassword().getPassword());
-                password = password.substring(1,password.length()-1);
-                String repeatPassword = Arrays.toString(registerView.getJtfRepeatPassword().getPassword());
-                repeatPassword = repeatPassword.substring(1, repeatPassword.length()-1);
+                String password = new String(registerView.getJtfPassword().getPassword());
+                String repeatPassword = new String(registerView.getJtfRepeatPassword().getPassword());
 
                 data.add(username);
                 data.add(email);
@@ -45,9 +43,24 @@ public class RegisterViewController implements ActionListener {
                     registerView.emptyFields();
                 } else {
                     if (userManager.checkIfPasswordsEqual(password,repeatPassword)) {
-                        userManager.Register(username, email, password);
-                        mainView.showMainMenuCard();
 
+                        boolean errorInMail = userManager.errorInMail(email);
+                        if(errorInMail){
+                           registerView.mailError();
+                        }else{
+                            boolean errorInPassword = userManager.errorInPassword(password);
+                            if(errorInPassword){
+                                registerView.passwordError();
+                            }else{
+                                if(userManager.userExistence(username, email, password)){
+                                    registerView.userExistence();
+                                }else{
+                                    userManager.Register(username, email, password);
+                                    userManager.setUser(username, email, password);
+                                    mainView.showMainMenuCard();
+                                }
+                            }
+                        }
                     } else {
                         registerView.differentPassword();
                     }

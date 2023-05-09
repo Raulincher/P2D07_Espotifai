@@ -26,7 +26,7 @@ public class AddSongView extends JPanel {
 
     public void addAddSongController(AddSongViewController addSongController) {
         //jback.addActionListener(addSongController);
-        //jfile.addActionListener(addSongController);
+        jfile.addActionListener(addSongController);
     }
 
     public void configureAddSong() {
@@ -47,58 +47,35 @@ public class AddSongView extends JPanel {
         JPanel center = new JPanel(new GridBagLayout());
 
         // CENTER LEFT
+        JLabel songNameLabel = utils.label("Song Name");
+        JTextField jtfSongName = utils.textField();
         center.setBackground(Color.BLACK);
 
         add(center, BorderLayout.CENTER);
 
-        BoxLayout column1 = new BoxLayout(this, BoxLayout.Y_AXIS);
-        setLayout(column1);
-
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
-        constraints.insets = new Insets(0, 0, 0, 10);
+        constraints.insets = new Insets(5, 2, 5, 5);
         constraints.anchor = GridBagConstraints.WEST;
 
-        JLabel songNameLabel = new JLabel("Song Name");
-        songNameLabel.setForeground(Color.WHITE);
-        songNameLabel.setFont(new Font("Gotham", Font.BOLD, 20));
-        JTextField jtfSongName = new JTextField();
-        jtfSongName.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfSongName.setPreferredSize(new Dimension(300, 40));
-        jtfSongName.setMinimumSize(new Dimension(300,40));
+        JLabel albumLabel = utils.label("Album");
+        JTextField jtfAlbum = utils.textField();
 
-        JLabel albumLabel = new JLabel("Album");
-        albumLabel.setForeground(Color.WHITE);
-        albumLabel.setFont(new Font("Gotham", Font.BOLD, 20));
-        JTextField jtfAlbum = new JTextField();
-        jtfAlbum.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfAlbum.setPreferredSize(new Dimension(300, 40));
-        jtfAlbum.setMinimumSize(new Dimension(300,40));
-
-        JLabel ArtistLabel = new JLabel("Artist");
-        ArtistLabel.setForeground(Color.WHITE);
-        ArtistLabel.setFont(new Font("Gotham", Font.BOLD, 20));
+        JLabel ArtistLabel = utils.label("Artist");
         JTextField jtfArtist = new JTextField();
-        jtfArtist.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfArtist.setPreferredSize(new Dimension(300, 40));
-        jtfArtist.setMinimumSize(new Dimension(300,40));
 
-        JLabel genreLabel = new JLabel("Genre");
-        genreLabel.setForeground(Color.WHITE);
-        genreLabel.setFont(new Font("Gotham", Font.BOLD, 20));
-        JTextField jtfGenre = new JTextField();
-        jtfGenre.setFont(new Font("Gotham", Font.BOLD, 20));
-        jtfGenre.setPreferredSize(new Dimension(300, 40));
-        jtfGenre.setMinimumSize(new Dimension(300,40));
+        JLabel genreLabel = utils.label("Genre");
+        JTextField jtfGenre = utils.textField();
 
-        JLabel addFileLabel = new JLabel("Add File");
-        addFileLabel.setForeground(Color.WHITE);
-        addFileLabel.setFont(new Font("Gotham", Font.BOLD, 20));
-        JFileChooser FCaddFile = new JFileChooser();
+        JLabel addFileLabel = utils.label("Add File");
+        Icon addFileBtn = new ImageIcon(String.valueOf(AssetsFiles.ADD_BUTTON_IMG));
+        jfile = utils.buttonImg(addFileBtn);
+        jfile.setActionCommand(BTN_ADD_FILE);
+        /*JFileChooser FCaddFile = new JFileChooser();
         FCaddFile.setFont(new Font("Gotham", Font.BOLD, 20));
         FCaddFile.setPreferredSize(new Dimension(500, 300));
-        FCaddFile.setMinimumSize(new Dimension(500,300));
+        FCaddFile.setMinimumSize(new Dimension(500,300));*/
 
         center.add(songNameLabel, constraints);
         constraints.gridy++;
@@ -121,12 +98,11 @@ public class AddSongView extends JPanel {
         center.add(genreLabel, constraints);
         constraints.gridy++;
         center.add(jtfGenre, constraints);
-        constraints.gridy++;
+
         center.add(addFileLabel, constraints);
         constraints.gridy++;
-        constraints.gridheight = 4;
-        center.add(FCaddFile, constraints);
-
+        //center.add(FCaddFile, constraints);
+        center.add(jfile, constraints);
         /*jback = utils.buttonText("back");
         jback.setActionCommand(BTN_BACK);
         jfile = utils.buttonText("add file");

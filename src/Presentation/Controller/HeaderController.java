@@ -19,11 +19,12 @@ public class HeaderController implements ActionListener {
         this.mainView = mainView;
     }
 
-
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case HeaderView.BTN_BACK -> mainView.showMainMenuCard();
+            case HeaderView.BTN_BACK -> {
+                mainView.showMainMenuCard();
+            }
             case HeaderView.BTN_DELETEACC -> {
                 try {
                     userManager.delete();

@@ -18,8 +18,35 @@ public class Utils extends JFrame {
     public JButton buttonImg(Icon labelImg){
         JButton button = new JButton(labelImg);
         button.setBackground(Color.decode("#00000000"));
-
+        button.setBorderPainted(false);
+        button.setContentAreaFilled(false);
+        //button.setFocusPainted(false);
+        //button.setOpaque(false);
         return button;
+    }
+
+    public JLabel label(String text){
+        JLabel label = new JLabel(text);
+        label.setForeground(Color.WHITE);
+        label.setFont(new Font("Gotham", Font.BOLD, 20));
+
+        return label;
+    }
+
+    public JPasswordField passwordField(){
+        JPasswordField jPassword = new JPasswordField();
+        jPassword.setFont(new Font("Gotham", Font.BOLD, 20));
+        jPassword.setPreferredSize(new Dimension(300,40));
+        jPassword.setMinimumSize(new Dimension(300,40));
+        return jPassword;
+    }
+
+    public JTextField textField(){
+        JTextField jUsername = new JTextField();
+        jUsername.setFont(new Font("Gotham", Font.BOLD, 20));
+        jUsername.setPreferredSize(new Dimension(300, 40));
+        jUsername.setMinimumSize(new Dimension(300,40));
+        return jUsername;
     }
 
 }

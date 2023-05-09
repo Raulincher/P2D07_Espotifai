@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Objects;
 
 public class SongManager {
 
@@ -118,7 +119,22 @@ public class SongManager {
         Path path = Path.of("files/music/" + errorInUpload);
 
         Files.deleteIfExists(path);
+    }
 
+    public boolean deleteSong(String name){
+        File folder = new File("files/music/");
+        File[] listOfFiles = folder.listFiles();
+        boolean error = true;
+        System.out.println(name);
+        for (int i = 0; i < Objects.requireNonNull(listOfFiles).length; i++) {
+            String[] auxNames = listOfFiles[i].getName().split("\\.");
+            String auxName = auxNames[0];
+            if (auxName.equals(name)) {
+                error = false;
+                listOfFiles[i].delete();
+            }
+        }
+        return error;
     }
 
 }

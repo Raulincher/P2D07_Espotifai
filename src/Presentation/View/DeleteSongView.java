@@ -5,45 +5,60 @@ import Presentation.Controller.DeleteSongViewController;
 import Presentation.Utils;
 
 import javax.swing.*;
-import java.awt.*;
 
 public class DeleteSongView extends JPanel {
 
     private final Utils utils;
-
     private final HeaderView headerView;
-    private JButton jback;
-    public static final String BTN_BACK = "BTN_BACK";
 
-    public DeleteSongView(Utils utils, HeaderView headerView){
+    public static final String BTN_DELETE = "BTN_DELETE";
+
+
+    private JLabel name;
+    private JTextField input;
+    private JButton delete;
+
+    public DeleteSongView(HeaderView headerView, Utils utils){
         this.utils = utils;
         this.headerView = headerView;
     }
 
-    public void addDeleteSongController(DeleteSongViewController DeleteSongController){
-        //set action command
-        //jback.addActionListener(DeleteSongController);
+    public void addDeleteSongController(DeleteSongViewController deleteSongController){
+        delete.addActionListener(deleteSongController);
     }
 
     public void configureDeleteSongView() {
-        //JLabel jLogo = new JLabel("delete song");
+
+        Icon deleteSongImg = new ImageIcon(String.valueOf(AssetsFiles.DELETE_LABEL));
+        add(headerView.configureHeader(deleteSongImg));
+
+        name = utils.label("Song name");
+
+        input = utils.textField();
+
+        Icon deleteBtn = new ImageIcon(String.valueOf(AssetsFiles.DELETESONG_BUTTON_IMG));
+        delete = utils.buttonImg(deleteBtn);
+        delete.setActionCommand(BTN_DELETE);
+
+        add(name);
+        add(input);
+        add(delete);
 
         // EL JPanel en si de deleteSong
-        setBackground(Color.black);
-        setLayout(new BorderLayout()); // Fem que sigui border layout
+        //setBackground(Color.black);
+        //setLayout(new BorderLayout()); // Fem que sigui border layout
 
         // NORTH
-        JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        /*JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
         Icon deleteSongImg = new ImageIcon(String.valueOf(AssetsFiles.DELETE_LABEL));
         north.add(headerView.configureHeader(deleteSongImg));
         north.setBackground(Color.black);
-        add(north, BorderLayout.NORTH);
+        add(north, BorderLayout.NORTH);*/
 
-
-        /*jback = utils.buttonText("back");
-        jback.setActionCommand(BTN_BACK);
-
-        add(jLogo);
-        add(jback);*/
     }
+
+    public JTextField getInput() {
+        return input;
+    }
+
 }

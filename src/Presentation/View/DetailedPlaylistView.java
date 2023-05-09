@@ -31,6 +31,8 @@ public class DetailedPlaylistView extends JPanel {
         jback.setActionCommand(BTN_BACK);
 
 
+
+
         add(jLogo);
         add(jback);
     }

@@ -1,7 +1,8 @@
 package Presentation.View;
 
-import Presentation.Controller.AddSongViewController;
+import Presentation.AssetsFiles;
 import Presentation.Controller.GeneralPlaylistViewController;
+import Presentation.Controller.HeaderController;
 import Presentation.Utils;
 
 import javax.swing.*;
@@ -9,29 +10,24 @@ import javax.swing.*;
 public class GeneralPlaylistView extends JPanel {
 
     private final Utils utils;
+    private final HeaderView headerView;
+    private final FooterView footerView;
 
-
-    public static final String BTN_BACK = "BTN_BACK";
-    private JButton jback;
-
-    public GeneralPlaylistView(Utils utils){
+    public GeneralPlaylistView(HeaderView headerView,FooterView footerView, Utils utils){
         this.utils = utils;
+        this.headerView = headerView;
+        this.footerView = footerView;
     }
 
     public void addGeneralPlaylistController(GeneralPlaylistViewController generalPlaylistViewController){
         //set action command
-        jback.addActionListener(generalPlaylistViewController);
-
     }
 
+
     public void configureGeneralPlaylistView() {
-        JLabel jLogo = new JLabel("general playlist");
+        Icon statisticsBtn = new ImageIcon(String.valueOf(AssetsFiles.LISTMANAGING_LABEL));
+        add(headerView.configureHeader(statisticsBtn));
+        add(footerView.configureFooter());
 
-        jback = utils.buttonText("back");
-        jback.setActionCommand(BTN_BACK);
-
-
-        add(jLogo);
-        add(jback);
     }
 }

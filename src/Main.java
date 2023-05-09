@@ -33,36 +33,36 @@ public class Main {
 
         songManager.getSong();
 
-        InitialView initialView = new InitialView();
+        InitialView initialView = new InitialView(utils);
         FooterView footerView = new FooterView(utils);
         HeaderView headerView = new HeaderView(utils);
         RegisterView registerView = new RegisterView(utils);
         LoginView loginView = new LoginView(utils);
         TestView testView = new TestView();
         AddSongView addSongView = new AddSongView(utils, headerView);
-        DeleteSongView deleteSongView = new DeleteSongView(utils, headerView);
+        DeleteSongView deleteSongView = new DeleteSongView(headerView, utils);
         DetailedPlaylistView detailedPlaylistView = new DetailedPlaylistView(utils);
         DetailedSongView detailedSongView = new DetailedSongView(utils, headerView, footerView);
-        GeneralPlaylistView generalPlaylistView = new GeneralPlaylistView(utils);
-        GeneralSongListView generalSongListView = new GeneralSongListView(utils);
+        GeneralPlaylistView generalPlaylistView = new GeneralPlaylistView(headerView, footerView, utils);
+        GeneralSongListView generalSongListView = new GeneralSongListView(utils, headerView, footerView);
         MainMenuView mainMenuView = new MainMenuView(footerView, utils, headerView);
-        StatisticsView statisticsView = new StatisticsView(utils);
+        StatisticsView statisticsView = new StatisticsView(headerView, utils);
 
         MainView mainView = new MainView(initialView, deleteSongView, statisticsView, mainMenuView, generalPlaylistView, generalSongListView, detailedSongView, detailedPlaylistView, registerView, loginView, testView, addSongView);
 
+        FooterController footerController = new FooterController(footerView, songManager);
+        HeaderController headerController = new HeaderController(headerView, userManager, mainView);
         InitialViewController initialViewController = new InitialViewController(mainView);
         LoginViewController loginViewController = new LoginViewController(mainView, loginView, userManager);
         RegisterViewController registerViewController = new RegisterViewController(mainView, registerView, userManager);
         AddSongViewController addSongViewController = new AddSongViewController(addSongView, mainView, songManager);
-        DeleteSongViewController deleteSongViewController = new DeleteSongViewController(deleteSongView, mainView);
+        DeleteSongViewController deleteSongViewController = new DeleteSongViewController(deleteSongView, mainView, songManager);
         DetailedPlaylistViewController detailedPlaylistViewController = new DetailedPlaylistViewController(detailedPlaylistView, mainView);
         DetailedSongViewController detailedSongViewController = new DetailedSongViewController(detailedSongView, mainView);
         GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView, mainView);
         GeneralPlaylistViewController generalPlaylistViewController = new GeneralPlaylistViewController(generalPlaylistView, mainView);
         MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView);
-        TestViewController testViewController = new TestViewController(mainView, userManager);
-        FooterController footerController = new FooterController(footerView, songManager);
-        HeaderController headerController = new HeaderController(headerView, userManager, mainView);
+        StatisticsViewController statisticsViewController = new StatisticsViewController(statisticsView, mainView);
 
         headerView.addHeaderController(headerController);
         footerView.addFooterController(footerController);
@@ -76,7 +76,7 @@ public class Main {
         generalSongListView.addGeneralSongListController(generalSongListViewController);
         generalPlaylistView.addGeneralPlaylistController(generalPlaylistViewController);
         mainMenuView.addMainMenuController(mainMenuViewController);
-        testView.addTestController(testViewController);
+        statisticsView.addStatisticsController(statisticsViewController);
 
         mainView.start();
     }

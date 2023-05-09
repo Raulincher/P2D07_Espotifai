@@ -2,7 +2,6 @@ package Presentation.View;
 
 import Presentation.AssetsFiles;
 import Presentation.Controller.FooterController;
-import Presentation.Controller.GeneralPlaylistViewController;
 import Presentation.Utils;
 
 import javax.swing.*;
@@ -76,11 +75,13 @@ public class FooterView extends JPanel {
     }
 
     public void stop(){
-        jplay.setText("stop");
+        Icon playBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_OLDBUTTON_IMG));
+        jplay.setIcon(playBtn);
     }
 
     public void start(){
-        jplay.setText("play");
+        Icon playBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_PLAYBUTTON_IMG));
+        jplay.setIcon(playBtn);
     }
 
 

@@ -1,6 +1,7 @@
 package Presentation.Controller;
 
 import Business.UserManager;
+import Persistance.dao.UserNotFoundException;
 import Presentation.View.LoginView;
 import Presentation.View.MainView;
 
@@ -30,21 +31,25 @@ public class LoginViewController implements ActionListener {
             case LoginView.BTN_LOGIN :
                 mainView.showLoginCard();
                 String username = loginView.getJUsername().getText();
-                String password = Arrays.toString(loginView.getJPassword().getPassword());
+                String password = new String(loginView.getJPassword().getPassword());
                 data.add(username);
                 data.add(password);
                 if(userManager.isEmpty(data)){
                     loginView.showPopUps("It's Empty!");
                 }else{
-                    if (!userManager.login(data)) {
-                        mainView.showMainMenuCard();
-                    }else{
-                        loginView.showPopUps("User not found!");
+                    try {
+                        if (userManager.login(data)) {
+                            userManager.setUser(username, username, password);
+                            mainView.showMainMenuCard();
+                        }else{
+                            loginView.showPopUps("User not found!");
+                        }
+                    } catch (UserNotFoundException ex) {
+                        ex.printStackTrace();
                     }
                 }
                 break;
             case LoginView.BTN_BACK:
-                System.out.println("Hola");
                 mainView.showMainCard();
                 break;
         }

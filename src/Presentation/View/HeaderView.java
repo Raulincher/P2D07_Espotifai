@@ -25,13 +25,15 @@ public class HeaderView extends JPanel {
         this.utils = utils;
     }
 
+
+
     public void addHeaderController(HeaderController headerController){
         //set action command
         jLogOut.addActionListener(headerController);
         jDeleteAcc.addActionListener(headerController);
         jBack.addActionListener(headerController);
-    }
 
+    }
 
     public JPanel configureHeader(Icon icon) {
         JPanel north = new JPanel();
@@ -42,9 +44,12 @@ public class HeaderView extends JPanel {
         usedLabel.setLayout(new GridLayout(4, 1, 0, 50));
         north.add(usedLabel);
 
+        //Icon menuImg = new ImageIcon(String.valueOf(AssetsFiles.MENU_LABEL));
+
         Icon loginBtn2 = new ImageIcon(String.valueOf(AssetsFiles.BACK_LITTLEBUTTON_IMG));
         jBack = utils.buttonImg(loginBtn2);
         jBack.setActionCommand(BTN_BACK);
+
 
         Icon loginBtn = new ImageIcon(String.valueOf(AssetsFiles.LOGOUT_LITTLEBUTTON_IMG));
         jLogOut = utils.buttonImg(loginBtn);
@@ -57,7 +62,9 @@ public class HeaderView extends JPanel {
         north.add(jBack);
         north.add(jLogOut);
         north.add(jDeleteAcc);
+
         return north;
     }
+
 
 }
