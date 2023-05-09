@@ -18,7 +18,6 @@ public class SongManager {
 
     private final SongDao songDao;
     private Clip myClip;
-    private String errorInUpload;
     private String filePath;
     private File file;
     private Song song;
@@ -59,8 +58,7 @@ public class SongManager {
         }
     }
 
-    public boolean simpleAudioPlayer()
-    {
+    public boolean simpleAudioPlayer() {
         boolean stopped = true;
         if(myClip.isRunning()){
             myClip.stop();
@@ -72,30 +70,30 @@ public class SongManager {
         return stopped;
     }
 
-    public void loopAudio(){
+    public void loopAudio() {
         myClip.loop(Clip.LOOP_CONTINUOUSLY);
         System.out.println("loop on");
     }
 
-    public void moveForward(){
+    public void moveForward() {
         System.out.println("1 cancion delante");
     }
 
-    public void moveBackward(){
+    public void moveBackward() {
         System.out.println("1 cancion atras");
     }
 
-    public void loopList(){
+    public void loopList() {
         System.out.println("loopeo lista");
     }
 
-    public boolean fileSongSelector(){
+    public boolean fileSongSelector() {
         JFileChooser fileChooser = new JFileChooser();
         String[] aux;
         int response = fileChooser.showOpenDialog(null);
         boolean fileFormatCorrect = false;
 
-        if(response == JFileChooser.APPROVE_OPTION){
+        if(response == JFileChooser.APPROVE_OPTION) {
             file = new File(fileChooser.getSelectedFile().getAbsolutePath());
             String fileName = file.getName();
             aux = fileName.split("\\.");
@@ -139,20 +137,26 @@ public class SongManager {
     }
 
 
-    public boolean deleteSong(String name){
-        File folder = new File("files/music/");
-        File[] listOfFiles = folder.listFiles();
-        boolean error = true;
-        System.out.println(name);
-        for (int i = 0; i < Objects.requireNonNull(listOfFiles).length; i++) {
-            String[] auxNames = listOfFiles[i].getName().split("\\.");
-            String auxName = auxNames[0];
-            if (auxName.equals(name)) {
-                error = false;
-                listOfFiles[i].delete();
-            }
+    public boolean songExists(String songName) {
+        // Si troba la cançó EN EL DAO
+        if (songDao.songInDatabase(songName) ) {
+            return true;
         }
-        return error;
+        else {
+            return false;
+        }
+    }
+    public boolean deleteSong(String name) {
+        boolean deletedOk = false;
+
+        // Si troba la cançó EN EL DAO
+        String filePath = songDao.deleteSong(name);
+        file = new File(filePath);
+        if (file.delete()) {
+            deletedOk = true;
+        }
+
+        return deletedOk;
     }
 
     public ArrayList<Song> listSongs () {

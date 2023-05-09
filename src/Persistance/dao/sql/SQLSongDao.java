@@ -51,6 +51,7 @@ public class SQLSongDao implements SongDao {
 
     public ArrayList<Song> readAllSongsSQL() {
         ArrayList<Song> songList = new ArrayList<>();
+
         try {
             Statement statement = remoteConnection.createStatement();
             ResultSet resultSet = statement.executeQuery("SELECT * FROM song");
@@ -81,4 +82,69 @@ public class SQLSongDao implements SongDao {
         return songList;
     }
 
+    public boolean songInDatabase(String songName) {
+        boolean exist = false;
+
+        try {
+            Statement statement = remoteConnection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM song");
+
+            if (!resultSet.next()) {
+                System.out.println("Base de dades buida");
+            } else {
+                resultSet.beforeFirst();
+
+                while (resultSet.next()) {
+                    String title = resultSet.getString("title");
+
+                    if (songName.equals(title)) {
+                        exist = true;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error llegint les cançons de la base de dades: " + e.getMessage());
+        }
+
+        return exist;
+    }
+
+    public String deleteSong(String songName) {
+        String filePath = null;
+
+        try {
+            Statement statement = remoteConnection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM song");
+
+            if (!resultSet.next()) {
+                System.out.println("Base de dades buida");
+            } else {
+                resultSet.beforeFirst();
+
+                while (resultSet.next()) {
+                    String title = resultSet.getString("title");
+
+                    if (songName.equals(title)) {
+                        //Guardem el filePath per a poder borrar el fitxer local
+                        filePath = resultSet.getString("filePath");
+
+                        try {
+                            String deleteQuery = "DELETE FROM song WHERE title = ?";
+                            PreparedStatement preparedStatement = remoteConnection.prepareStatement(deleteQuery);
+                            preparedStatement.setString(1, songName);
+                            int affectedRows = preparedStatement.executeUpdate();
+                            if (affectedRows == 0) {
+                                System.out.println("Song not found in the database");
+                            }
+                        } catch (SQLException e) {
+                            System.out.println("Error eliminating the song");
+                        }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error llegint les cançons de la base de dades: " + e.getMessage());
+        }
+        return filePath;
+    }
 }

@@ -9,4 +9,9 @@ public interface SongDao {
 
     void saveSong(Song song) throws SQLException;
     ArrayList<Song> readAllSongsSQL();
+
+    boolean songInDatabase(String songName);
+
+    String deleteSong(String name);
+
 }

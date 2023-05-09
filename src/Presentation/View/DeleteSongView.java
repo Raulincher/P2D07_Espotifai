@@ -95,4 +95,8 @@ public class DeleteSongView extends JPanel {
         return input;
     }
 
+    public void showPopUps(String error) {
+        JOptionPane.showMessageDialog(this,error);
+    }
+
 }
