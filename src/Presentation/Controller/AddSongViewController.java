@@ -38,7 +38,11 @@ public class AddSongViewController implements ActionListener {
                 if (songManager.isEmpty(songName, artist, album, genre)) {
                     addSongView.showPopUps("Error, empty field, can't upload the song!");
                 } else {
-                    songManager.addSong(songName, artist, album, genre);
+                    if (songManager.addSong(songName, artist, album, genre)) {
+                        addSongView.showPopUps("Song saved!");
+                    } else {
+                        addSongView.showPopUps("Error while saving the song!");
+                    }
                 }
                 // Algun camp buit
 

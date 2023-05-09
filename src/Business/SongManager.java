@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class SongManager {
@@ -121,12 +122,20 @@ public class SongManager {
         }
         return emptyField;
     }
-    public void addSong(String songName, String artist, String album, String genre) {
+    public boolean addSong(String songName, String artist, String album, String genre) {
+        boolean songSaved = true;
         // Guardar fitxer
         file.renameTo(new File(filePath));
         // Guardar a base de dades
         song = new Song(songName, artist, album, genre, filePath);
-        songDao.saveSong(song);
+        try {
+            songDao.saveSong(song);
+            songSaved = true;
+        } catch (SQLException e) {
+            songSaved = false;
+        }
+
+        return songSaved;
     }
 
 

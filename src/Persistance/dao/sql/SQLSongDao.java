@@ -3,7 +3,6 @@ package Persistance.dao.sql;
 import Business.Entities.Song;
 import Persistance.dao.SongDao;
 
-import java.io.File;
 import java.sql.*;
 
 public class SQLSongDao implements SongDao {
@@ -13,7 +12,7 @@ public class SQLSongDao implements SongDao {
         this.remoteConnection = remoteConnection;
     }
 
-    public void saveSong(Song song) {
+    public void saveSong(Song song) throws SQLException {
         try {
             Statement statement = remoteConnection.createStatement();
             statement.executeQuery("USE espotifai");
@@ -35,7 +34,7 @@ public class SQLSongDao implements SongDao {
                 preparedStmt.execute();
                 //remoteConnection.close();
 
-            } catch (SQLException e){
+            } catch (SQLException e) {
                 if (e.getSQLState().equals("23505")) {
                     System.err.println("Song already exists");
                 } else {
@@ -46,4 +45,5 @@ public class SQLSongDao implements SongDao {
             System.err.println("Espotifai not found");
         }
     }
+
 }
