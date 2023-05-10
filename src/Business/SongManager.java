@@ -2,6 +2,7 @@ package Business;
 
 import Business.Entities.Song;
 import Persistance.dao.SongDao;
+import Presentation.Controller.GeneralSongListViewController;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -21,6 +22,7 @@ public class SongManager {
     private String filePath;
     private File file;
     private Song song;
+   // private Song songSelected;
 
     public SongManager(SongDao songDao) {
         this.songDao = songDao;
@@ -162,17 +164,6 @@ public class SongManager {
 
     public ArrayList<Song> listSongs () {
         return songDao.readAllSongsSQL();
-    }
-
-    public Song searchSong(String nameSong){
-        Song songSelected = null;
-        ArrayList<Song> listSongs = listSongs();
-        for (Song song1: listSongs){
-            if (song1.getTile().equals(nameSong)){
-                songSelected = song1;
-            }
-        }
-        return songSelected;
     }
 
 }

@@ -163,7 +163,6 @@ public class MainView extends JFrame {
     }
 
 
-
     public void start() {
         showMainCard();
         setVisible(true);

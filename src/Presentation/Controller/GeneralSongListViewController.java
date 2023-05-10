@@ -13,13 +13,11 @@ public class GeneralSongListViewController implements ActionListener {
 
     private final GeneralSongListView generalSongListView;
     private final MainView mainView;
-    private final SongManager songManager;
 
 
-    public GeneralSongListViewController(GeneralSongListView generalSongListView, MainView mainView, SongManager songManager) {
+    public GeneralSongListViewController(GeneralSongListView generalSongListView, MainView mainView) {
         this.generalSongListView = generalSongListView;
         this.mainView = mainView;
-        this.songManager = songManager;
     }
 
     @Override
@@ -30,18 +28,12 @@ public class GeneralSongListViewController implements ActionListener {
                 mainView.showMainMenuCard();
                 break;
             case GeneralSongListView.BTN_BUSCADOR:
-                String buscador = generalSongListView.getjBuscador().getText();
+               // String buscador = generalSongListView.getjBuscador().getText();
                 mainView.showDetailedSongCard();
                 break;
         }
-        if (generalSongListView.songShow()){
-            String selected = generalSongListView.getSongSelected();
-            Song songSelected = songManager.searchSong(selected);
-            mainView.showDetailedSongCard();
-        }
+
     }
-
-
 
 
 }

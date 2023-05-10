@@ -1,6 +1,7 @@
 package Presentation.View;
 
 import Business.Entities.Song;
+import Business.SongManager;
 import Business.UserManager;
 import Presentation.AssetsFiles;
 import Presentation.Controller.DetailedSongViewController;
@@ -26,12 +27,14 @@ public class DetailedSongView extends JPanel {
     private JButton jdelete = new JButton("delete account");
     private HeaderView headerView;
     private FooterView footerView;
+    private SongManager songManager;
 
 
-    public DetailedSongView(Utils utils,HeaderView headerView,FooterView footerView){
+    public DetailedSongView(Utils utils,HeaderView headerView,FooterView footerView, SongManager songManager){
         this.utils = utils;
         this.headerView = headerView;
         this.footerView = footerView;
+        this.songManager = songManager;
     }
 
     public void addDetailedSongController(DetailedSongViewController detailedSongViewController){
@@ -59,12 +62,16 @@ public class DetailedSongView extends JPanel {
         center.setBackground(Color.BLACK);
         center.setBorder(BorderFactory.createEmptyBorder(0, 200, 80, 200));
 
+        //Song song = songManager.getSelectedSong();
+        /*if (song == null){
+            song = new Song("Prova", "pop","album","author","file");
+        }*/
         String[] columnNames = {"", ""};
         Object[][] data = {
                 {"Song", "song.getTile()"},
                 {"Genre", "song.getGenre()"},
                 {"Artist", "song.getAuthor()"},
-                {"Album", "song.setAlbum()"},
+                {"Album", "song.getAlbum()"},
                 {"Uploaded by", "Prova_by"}
         };
         JTable table = new JTable(data, columnNames);
@@ -77,6 +84,9 @@ public class DetailedSongView extends JPanel {
         table.setRowHeight(60);
         table.setGridColor(Color.gray);
         table.setBackground(gris);
+        table.setDefaultEditor(Object.class, null);
+        table.setSelectionBackground(gris);
+        table.setSelectionForeground(Color.WHITE);
 
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
         renderer.setForeground(Color.decode("#00DC00"));

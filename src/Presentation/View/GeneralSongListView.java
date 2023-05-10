@@ -91,6 +91,11 @@ public class GeneralSongListView extends JPanel {
         table.setGridColor(Color.gray);
         table.setBackground(gris);
         table.setForeground(Color.WHITE);
+        table.setDefaultEditor(Object.class, null);
+        //table.setSelectionBackground(Color.decode("#8B898B"));
+        //table.setSelectionForeground(gris);
+        table.setSelectionBackground(table.getBackground());
+        table.setSelectionForeground(table.getForeground());
 
         DefaultTableCellRenderer header = new DefaultTableCellRenderer();
         header.setHorizontalAlignment(SwingConstants.LEFT);
@@ -102,8 +107,9 @@ public class GeneralSongListView extends JPanel {
         table.setFont(new Font("Gotham", Font.BOLD, 20));
 
         int row = table.getSelectedRow();
-        //songSelected = table.getValueAt(row, 0).toString();
-
+        if (row != -1) {
+            songSelected = table.getValueAt(row, 0).toString();
+        }
 
         JScrollPane scrollpane = new JScrollPane(table);
         //scrollpane.setBackground(gris);
