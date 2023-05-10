@@ -1,6 +1,7 @@
 package Presentation.Controller;
 
 import Business.SongManager;
+import Business.UserManager;
 import Presentation.View.AddSongView;
 import Presentation.View.InitialView;
 import Presentation.View.MainView;
@@ -12,11 +13,13 @@ public class AddSongViewController implements ActionListener {
     private final AddSongView addSongView;
     private final MainView mainView;
     private final SongManager songManager;
+    private final UserManager userManager;
 
-    public AddSongViewController(AddSongView addSongView, MainView mainView, SongManager songManager) {
+    public AddSongViewController(AddSongView addSongView, MainView mainView, SongManager songManager, UserManager userManager) {
         this.addSongView = addSongView;
         this.mainView = mainView;
         this.songManager = songManager;
+        this.userManager = userManager;
     }
 
     @Override
@@ -39,7 +42,8 @@ public class AddSongViewController implements ActionListener {
                     addSongView.showPopUps("Error, empty field, can't upload the song!");
                 } else {
                     //songManager.songExists(songName);
-                    if (songManager.addSong(songName, artist, album, genre)) {
+                    String username = userManager.currentUsername();
+                    if (songManager.addSong(songName, artist, album, genre, username)) {
                         addSongView.showPopUps("Song saved!");
                         mainView.showMainMenuCard();
                     } else {

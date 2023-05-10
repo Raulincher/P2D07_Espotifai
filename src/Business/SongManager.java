@@ -120,12 +120,12 @@ public class SongManager {
         }
         return emptyField;
     }
-    public boolean addSong(String songName, String artist, String album, String genre) {
+    public boolean addSong(String songName, String artist, String album, String genre, String username) {
         boolean songSaved = true;
         // Guardar fitxer
         file.renameTo(new File(filePath));
         // Guardar a base de dades
-        song = new Song(songName, artist, album, genre, filePath);
+        song = new Song(songName, artist, album, genre, filePath, username);
         try {
             songDao.saveSong(song);
             songSaved = true;
@@ -146,6 +146,7 @@ public class SongManager {
             return false;
         }
     }
+
     public boolean deleteSong(String name) {
         boolean deletedOk = false;
 

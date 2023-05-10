@@ -5,6 +5,7 @@ import Presentation.Controller.DeleteSongViewController;
 import Presentation.Utils;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
@@ -28,11 +29,17 @@ public class DeleteSongView extends JPanel {
     }
 
     public void addDeleteSongController(DeleteSongViewController deleteSongController){
-        delete.addActionListener(deleteSongController);
+     //   delete.addActionListener(deleteSongController);
     }
 
     public void configureDeleteSongView() {
 
+        DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel.setColumnIdentifiers(new String[]{"Títol", "Artista", "Àlbum", "Any", "Durada"});
+        JTable table = new JTable(tableModel);
+        add(table);
+
+        /*
         // EL JPanel en si de addSong
 
         setLayout(new BorderLayout()); // Fem que sigui border layout

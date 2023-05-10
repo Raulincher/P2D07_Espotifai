@@ -104,4 +104,8 @@ public class UserManager {
     public void delete() throws UserNotFoundException {
         userDao.delete(user);
     }
+
+    public String currentUsername() {
+        return user.getUsername();
+    }
 }

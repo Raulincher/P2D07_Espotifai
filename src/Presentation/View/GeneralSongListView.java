@@ -3,16 +3,13 @@ package Presentation.View;
 import Business.Entities.Song;
 import Business.SongManager;
 import Presentation.AssetsFiles;
-import Presentation.Controller.DetailedSongViewController;
 import Presentation.Controller.GeneralSongListViewController;
 import Presentation.Utils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
-import javax.swing.table.JTableHeader;
 import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.io.File;
 import java.util.ArrayList;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
@@ -80,7 +77,7 @@ public class GeneralSongListView extends JPanel {
         for (int i = 0; i < songList.size(); i++) {
             Song song1 = songList.get(i);
             data[i][0] = song1.getTile();
-            data[i][1] = song1.getAuthor();
+            data[i][1] = song1.getArtist();
         }
 
         JTable table = new JTable(data, columnNames);

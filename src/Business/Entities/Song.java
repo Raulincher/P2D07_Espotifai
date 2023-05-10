@@ -5,15 +5,18 @@ public class Song {
     private String title;
     private String genre;
     private String album;
-    private String author;
+    private String artist;
     private String filePath;
 
-    public Song(String title, String genre, String album, String author, String filePath){
+    private String username;
+
+    public Song(String title, String genre, String album, String artist, String filePath, String username){
         this.title = title;
         this.genre = genre;
         this.album = album;
-        this.author = author;
+        this.artist = artist;
         this.filePath = filePath;
+        this.username = username;
     }
 
     public String getTile() {
@@ -28,8 +31,8 @@ public class Song {
         return album;
     }
 
-    public String getAuthor() {
-        return author;
+    public String getArtist() {
+        return artist;
     }
 
     public String getFilePath() {
@@ -48,7 +51,7 @@ public class Song {
         this.album = album;
     }
 
-    public void setAuthor(String author) {
-        this.author = author;
+    public void setArtist(String artist) {
+        this.artist = artist;
     }
 }

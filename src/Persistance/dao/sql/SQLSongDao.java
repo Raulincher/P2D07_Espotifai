@@ -1,9 +1,7 @@
 package Persistance.dao.sql;
 
 import Business.Entities.Song;
-import Business.Entities.User;
 import Persistance.dao.SongDao;
-import Persistance.dao.UserNotFoundException;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -23,7 +21,7 @@ public class SQLSongDao implements SongDao {
                 String title = song.getTile();
                 String genre = song.getGenre();
                 String album = song.getAlbum();
-                String author = song.getAuthor();
+                String author = song.getArtist();
                 String filePath = song.getFilePath();
 
                 String register = "INSERT INTO song (title, genre, album, author, filePath) VALUES (?, ?, ?, ?, ?)";
@@ -66,11 +64,12 @@ public class SQLSongDao implements SongDao {
                     //System.out.println(genre);
                     String album = resultSet.getString("album");
                     //System.out.println(album);
-                    String author = resultSet.getString("author");
+                    String artist = resultSet.getString("author");
+                    String username = resultSet.getString("username");
                     //System.out.println(author);
                     String filePath = resultSet.getString("filePath");
                     //System.out.println(filePath);
-                    Song song = new Song(title, genre, album, author, filePath);
+                    Song song = new Song(title, genre, album, artist, filePath, username);
                     //System.out.println("******");
                     songList.add(song);
                 }
