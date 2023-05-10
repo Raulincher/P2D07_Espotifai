@@ -38,7 +38,7 @@ public class LoginViewController implements ActionListener {
                     loginView.showPopUps("It's Empty!");
                 }else{
                     try {
-                        if (!userManager.login(data)) {
+                        if (userManager.login(data)) {
                             userManager.setUser(username, username, password);
                             mainView.showMainMenuCard();
                         }else{

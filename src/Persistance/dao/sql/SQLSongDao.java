@@ -23,14 +23,16 @@ public class SQLSongDao implements SongDao {
                 String album = song.getAlbum();
                 String author = song.getArtist();
                 String filePath = song.getFilePath();
+                String username = song.getUsername();
 
-                String register = "INSERT INTO song (title, genre, album, author, filePath) VALUES (?, ?, ?, ?, ?)";
+                String register = "INSERT INTO song (title, genre, album, author, username, filePath) VALUES (?, ?, ?, ?, ?, ?)";
                 PreparedStatement preparedStmt = remoteConnection.prepareStatement(register);
                 preparedStmt.setString (1, title);
                 preparedStmt.setString (2, genre);
                 preparedStmt.setString (3, album);
                 preparedStmt.setString (4, author);
-                preparedStmt.setString (5, filePath);
+                preparedStmt.setString (5, username);
+                preparedStmt.setString(6, filePath);
                 //preparedStmt.setBlob (5, (Blob) songFile);
                 preparedStmt.execute();
                 //remoteConnection.close();

@@ -43,6 +43,7 @@ public class AddSongViewController implements ActionListener {
                 } else {
                     //songManager.songExists(songName);
                     String username = userManager.currentUsername();
+                    System.out.println(username);
                     if (songManager.addSong(songName, artist, album, genre, username)) {
                         addSongView.showPopUps("Song saved!");
                         mainView.showMainMenuCard();

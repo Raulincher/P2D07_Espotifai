@@ -126,6 +126,7 @@ public class SongManager {
         file.renameTo(new File(filePath));
         // Guardar a base de dades
         song = new Song(songName, artist, album, genre, filePath, username);
+
         try {
             songDao.saveSong(song);
             songSaved = true;
@@ -156,7 +157,6 @@ public class SongManager {
         if (file.delete()) {
             deletedOk = true;
         }
-
         return deletedOk;
     }
 

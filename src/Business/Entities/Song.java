@@ -39,6 +39,10 @@ public class Song {
         return filePath;
     }
 
+    public String getUsername() {
+        return username;
+    }
+
     public void setTitle(String title) {
         this.title = title;
     }
