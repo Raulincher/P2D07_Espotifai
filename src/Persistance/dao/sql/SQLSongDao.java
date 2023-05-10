@@ -71,7 +71,7 @@ public class SQLSongDao implements SongDao {
                     //System.out.println(author);
                     String filePath = resultSet.getString("filePath");
                     //System.out.println(filePath);
-                    Song song = new Song(title, genre, album, artist, filePath, username);
+                    Song song = new Song(title, artist, album, genre, filePath, username);
                     //System.out.println("******");
                     songList.add(song);
                 }

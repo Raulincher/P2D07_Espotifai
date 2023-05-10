@@ -4,10 +4,12 @@ import Business.Entities.Song;
 import Business.SongManager;
 import Presentation.AssetsFiles;
 import Presentation.Controller.GeneralSongListViewController;
+import Presentation.SongTableModel;
 import Presentation.Utils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.util.ArrayList;
@@ -26,12 +28,14 @@ public class GeneralSongListView extends JPanel {
     private JButton jCerca;
     private SongManager songManager;
     private String songSelected;
+    private SongTableModel songTableModel;
 
-    public GeneralSongListView(Utils utils, HeaderView headerView, FooterView footerView, SongManager songManager){
+    public GeneralSongListView(Utils utils, HeaderView headerView, FooterView footerView, SongManager songManager, SongTableModel songTableModel){
         this.utils = utils;
         this.footerView = footerView;
         this.headerView = headerView;
         this.songManager = songManager;
+        this.songTableModel = songTableModel;
     }
 
     public void addGeneralSongListController(GeneralSongListViewController generalSongListViewController){
@@ -69,24 +73,15 @@ public class GeneralSongListView extends JPanel {
 
         center.add(panelBuscador,BorderLayout.NORTH);
 
-        ArrayList<String> songList = songManager.listSongs(false, null);
 
-        String[] columnNames = {"Song", "Artist"};
-        Object[][] data = new Object[songList.size()][2];
+        DefaultTableModel model = songTableModel.getAllSongsTableModel();
+        JTable table = new JTable(model);
 
-        for (int i = 0; i < songList.size(); i++) {
-            //Song song1 = songList.get(i);
-            //data[i][0] = song1.getTile();
-            //data[i][1] = song1.getArtist();
-        }
-
-        JTable table = new JTable(data, columnNames);
-
-        TableColumn columna;
+        /*TableColumn columna;
         columna = table.getColumnModel().getColumn(0);
         columna.setPreferredWidth(600);
         columna.setMaxWidth(600);
-        columna.setMinWidth(600);
+        columna.setMinWidth(600);*/
         table.setRowHeight(60);
         table.setGridColor(Color.gray);
         table.setBackground(gris);

@@ -30,7 +30,10 @@ public class MainMenuViewController implements ActionListener{
                 mainView.showDeleteSongCard();
             }
             case MainMenuView.BTN_MANAGE -> mainView.showGeneralPlaylistCard();
-            case MainMenuView.BTN_SONG_LIST -> mainView.showGeneralSongListCard();
+            case MainMenuView.BTN_SONG_LIST -> {
+                songTableModelController.createAllSongsJTable();
+                mainView.showGeneralSongListCard();
+            }
             case MainMenuView.BTN_STATISTICS -> mainView.showStatisticsCard();
 
         }

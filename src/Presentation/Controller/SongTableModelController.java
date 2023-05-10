@@ -21,4 +21,8 @@ public class SongTableModelController {
     public void createDeleteJTable() {
         songTableModel.buildDeleteTableModel(songManager.listSongs(true, userManager.currentUsername()));
     }
+
+    public void createAllSongsJTable() {
+        songTableModel.buildAllSongsTableModel(songManager.listSongs(false, null));
+    }
 }

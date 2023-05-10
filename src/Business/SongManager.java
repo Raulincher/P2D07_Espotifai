@@ -165,7 +165,7 @@ public class SongManager {
             ArrayList<Song> songs = songDao.readAllSongsSQL();
 
             for (Song song: songs) {
-                String songLine = song.getTile() + "-" + song.getArtist() + "-" + song.getGenre();
+                String songLine = song.getTile() + "-" + song.getArtist();
                 information.add(songLine);
             }
         } else {
