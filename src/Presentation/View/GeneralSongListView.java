@@ -69,15 +69,15 @@ public class GeneralSongListView extends JPanel {
 
         center.add(panelBuscador,BorderLayout.NORTH);
 
-        ArrayList<Song> songList = songManager.listSongs();
+        ArrayList<String> songList = songManager.listSongs(false, null);
 
         String[] columnNames = {"Song", "Artist"};
         Object[][] data = new Object[songList.size()][2];
 
         for (int i = 0; i < songList.size(); i++) {
-            Song song1 = songList.get(i);
-            data[i][0] = song1.getTile();
-            data[i][1] = song1.getArtist();
+            //Song song1 = songList.get(i);
+            //data[i][0] = song1.getTile();
+            //data[i][1] = song1.getArtist();
         }
 
         JTable table = new JTable(data, columnNames);

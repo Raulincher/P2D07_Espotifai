@@ -105,6 +105,10 @@ public class UserManager {
     }
 
     public String currentUsername() {
-        return user.getUsername();
+        if (user == null) {
+            return "";
+        } else {
+            return user.getUsername();
+        }
     }
 }

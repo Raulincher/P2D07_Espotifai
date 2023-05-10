@@ -2,18 +2,14 @@ package Business;
 
 import Business.Entities.Song;
 import Persistance.dao.SongDao;
-import Presentation.Controller.GeneralSongListViewController;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
-import java.nio.file.Files;
-import java.nio.file.Path;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.Objects;
 
 public class SongManager {
 
@@ -22,6 +18,7 @@ public class SongManager {
     private String filePath;
     private File file;
     private Song song;
+
    // private Song songSelected;
 
     public SongManager(SongDao songDao) {
@@ -162,8 +159,28 @@ public class SongManager {
         return deletedOk;
     }
 
-    public ArrayList<Song> listSongs () {
-        return songDao.readAllSongsSQL();
+    public ArrayList<String> listSongs(boolean toDelete, String currentUsername) {
+        ArrayList<String> information = new ArrayList<>();
+        if (!toDelete) {
+            ArrayList<Song> songs = songDao.readAllSongsSQL();
+
+            for (Song song: songs) {
+                String songLine = song.getTile() + "-" + song.getArtist() + "-" + song.getGenre();
+                information.add(songLine);
+            }
+        } else {
+            ArrayList<Song> allSongs = songDao.readAllSongsSQL();
+
+            for (Song allSong : allSongs) {
+                if (allSong.getUsername().equals(currentUsername)) {
+                    String songLine = allSong.getTile() + "-" + allSong.getArtist() + "-" + allSong.getGenre();
+                    information.add(songLine);
+                }
+            }
+        }
+        return information;
     }
+
+
 
 }

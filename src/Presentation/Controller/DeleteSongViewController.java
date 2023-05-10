@@ -22,11 +22,14 @@ public class DeleteSongViewController implements ActionListener {
         this.songManager = songManager;
     }
 
+    public void runDeleteSongView() {
+
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case DeleteSongView.BTN_DELETE -> {
-                String songToDelete = deleteSongView.getInput().getText();
+                /*String songToDelete = deleteSongView.getInput().getText();
 
                 if (songManager.songExists(songToDelete)) {
                     if (songManager.deleteSong(songToDelete)) {
@@ -36,7 +39,8 @@ public class DeleteSongViewController implements ActionListener {
                 }
                 else {
                     deleteSongView.showPopUps("This song doesn't exist!");
-                }
+                }*/
+
             }
         }
     }

@@ -2,6 +2,7 @@ package Presentation.View;
 
 import Presentation.AssetsFiles;
 import Presentation.Controller.DeleteSongViewController;
+import Presentation.SongTableModel;
 import Presentation.Utils;
 
 import javax.swing.*;
@@ -16,16 +17,17 @@ public class DeleteSongView extends JPanel {
     private final HeaderView headerView;
     private final FooterView footerView;
     public static final String BTN_DELETE = "BTN_DELETE";
-
+    private SongTableModel songTableModel;
 
     private JLabel name;
     private JTextField input;
     private JButton delete;
 
-    public DeleteSongView(HeaderView headerView, Utils utils, FooterView footerView){
+    public DeleteSongView(HeaderView headerView, Utils utils, FooterView footerView, SongTableModel songTableModel){
         this.utils = utils;
         this.headerView = headerView;
         this.footerView = footerView;
+        this.songTableModel = songTableModel;
     }
 
     public void addDeleteSongController(DeleteSongViewController deleteSongController){
@@ -34,11 +36,29 @@ public class DeleteSongView extends JPanel {
 
     public void configureDeleteSongView() {
 
-        DefaultTableModel tableModel = new DefaultTableModel();
-        tableModel.setColumnIdentifiers(new String[]{"Títol", "Artista", "Àlbum", "Any", "Durada"});
-        JTable table = new JTable(tableModel);
-        add(table);
+        //NORTH
+        JPanel north = new JPanel();
+        north.setBackground(Color.black);
+        Icon logo = new ImageIcon(String.valueOf(AssetsFiles.MUSIC_LABEL));;
+        north.add(headerView.configureHeader(logo));
+        add(north, BorderLayout.NORTH);
 
+
+        // SOUTH
+        Color gris = new Color(26,26,26);
+        JPanel south = new JPanel();
+        south.setBackground(gris);
+        south.setBorder(createEmptyBorder(30, 0, 30, 0));
+        south.add(footerView.configureFooter());
+        add(south, BorderLayout.SOUTH);
+
+        // CENTER
+        JPanel center = new JPanel();
+        DefaultTableModel model = songTableModel.getDeleteTableModel();
+        JTable deleteSongsTable = new JTable(model);
+        JScrollPane deleteSongsScroll = new JScrollPane(deleteSongsTable);
+        center.add(deleteSongsScroll);
+        add(center, BorderLayout.CENTER);
         /*
         // EL JPanel en si de addSong
 
