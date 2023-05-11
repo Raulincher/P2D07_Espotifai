@@ -133,7 +133,7 @@ public class SongManager {
                 }
             }
             if(auxPos < 0){
-                auxPos = files.length - 1;
+                auxPos = 0;
             }
             String filePath = "files/music/" + files[auxPos].getName();
             actualSong = files[auxPos].getName();
