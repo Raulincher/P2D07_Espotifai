@@ -54,9 +54,11 @@ public class GeneralPlaylistView extends JPanel {
         JPanel panelPlaylist = new JPanel();
         panelPlaylist.setBackground(Color.BLACK);
         JTextField jtBuscador = utils.textField();
-        Icon newPlaylist = new ImageIcon(String.valueOf(AssetsFiles.BACK_LITTLEBUTTON_IMG));
+        Icon newPlaylist = new ImageIcon(String.valueOf(AssetsFiles.CREATE_LIST_BUTTON_IMG));
         jNewPlaylist = utils.buttonImg(newPlaylist);
         jNewPlaylist.setActionCommand(BTN_NEW_PLAYLIST);
+        jNewPlaylist.setPreferredSize(new Dimension(100,50));
+        jNewPlaylist.setMaximumSize(new Dimension(100,50));
         panelPlaylist.add(jtBuscador);
         panelPlaylist.add(jNewPlaylist);
         center.add(panelPlaylist,BorderLayout.NORTH);

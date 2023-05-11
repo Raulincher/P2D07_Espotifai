@@ -54,7 +54,6 @@ public class UserManager {
 
     public void setUser(String username, String email, String password) {
         User user = new User(username, email, password);
-
         this.user = user;
     }
 
@@ -103,5 +102,13 @@ public class UserManager {
 
     public void delete() throws UserNotFoundException {
         userDao.delete(user);
+    }
+
+    public String currentUsername() {
+        if (user == null) {
+            return "";
+        } else {
+            return user.getUsername();
+        }
     }
 }

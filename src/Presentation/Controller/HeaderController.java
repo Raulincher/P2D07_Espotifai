@@ -27,7 +27,7 @@ public class HeaderController implements ActionListener {
                 break;
             case HeaderView.BTN_DELETEACC:
                 try {
-                    int resposta = headerView.showPopUps("Are you sure?","Confirmation");
+                    int resposta = headerView.showPopUps("Are you sure?","Delete Account");
                     if (resposta == 0) {
                         userManager.delete();
                         mainView.showMainCard();
@@ -37,8 +37,11 @@ public class HeaderController implements ActionListener {
                 }
                 break;
             case HeaderView.BTN_LOGOUT:
-                userManager.logout();
-                mainView.showMainCard();
+                int resposta = headerView.showPopUps("Are you sure?","Log Out");
+                if (resposta == 0) {
+                    userManager.logout();
+                    mainView.showMainCard();
+                }
                 break;
         }
     }

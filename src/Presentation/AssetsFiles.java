@@ -58,6 +58,9 @@ public enum AssetsFiles {
     FOOT_REPEATBUTTON_IMG("files/imgs/FrepeatButton.png"),
 
     FOOT_REPEAT_PLAYLIST_BUTTON_IMG("files/imgs/FrepeatPlaylistButton.png"),
+    BUSCADOR_BUTTON_IMG("files/imgs/lupaButton.png"),
+
+    CREATE_LIST_BUTTON_IMG("files/imgs/createlistButton.png"),
 
     ADD_SONG_FILE_BUTTON_IMG("files/imgs/addSongFile.png");
 

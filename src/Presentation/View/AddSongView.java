@@ -19,9 +19,12 @@ public class AddSongView extends JPanel {
     public static final String BTN_ADD_FILE = "BTN_ADD_FILE";
     public static final String BTN_ADD_SONG = "BTN_ADD_SONG";
 
-    private JButton jback;
     private JButton jadd;
     private JButton jfile;
+    private JTextField jtfSongName;
+    private JTextField jtfArtist;
+    private JTextField jtfAlbum;
+    private JTextField jtfGenre;
 
     public AddSongView(Utils utils, HeaderView headerView, FooterView footerView){
         this.utils = utils;
@@ -30,8 +33,8 @@ public class AddSongView extends JPanel {
     }
 
     public void addAddSongController(AddSongViewController addSongController) {
-        //jback.addActionListener(addSongController);
         jfile.addActionListener(addSongController);
+        jadd.addActionListener(addSongController);
     }
 
     public void configureAddSong() {
@@ -69,19 +72,19 @@ public class AddSongView extends JPanel {
         constraints.anchor = GridBagConstraints.WEST;
 
         JLabel songNameLabel = utils.label("Song Name");
-        JTextField jtfSongName = utils.textField();
+        jtfSongName = utils.textField();
 
         JLabel albumLabel = utils.label("Album");
-        JTextField jtfAlbum = utils.textField();
+        jtfAlbum = utils.textField();
 
         JLabel ArtistLabel = utils.label("Artist");
-        JTextField jtfArtist = utils.textField();
+        jtfArtist = utils.textField();
 
         JLabel genreLabel = utils.label("Genre");
-        JTextField jtfGenre = utils.textField();
+        jtfGenre = utils.textField();
 
         JLabel addFileLabel = utils.label("Add file");
-        JFileChooser FCaddFile = new JFileChooser();
+        JFileChooser fcAddFile = new JFileChooser();
         ImageIcon addFileBtnAux = new ImageIcon(String.valueOf(AssetsFiles.ADD_SONG_FILE_BUTTON_IMG));
         int newWidth = 320;
         int newHeight = 160;
@@ -90,9 +93,9 @@ public class AddSongView extends JPanel {
         Icon addFileBtn = new ImageIcon(scaledAddFileBtn);
         jfile = utils.buttonImg(addFileBtn);
         jfile.setActionCommand(BTN_ADD_FILE);
-        FCaddFile.setFont(new Font("Gotham", Font.BOLD, 20));
-        FCaddFile.setPreferredSize(new Dimension(500, 300));
-        FCaddFile.setMinimumSize(new Dimension(500,300));
+        fcAddFile.setFont(new Font("Gotham", Font.BOLD, 20));
+        fcAddFile.setPreferredSize(new Dimension(500, 300));
+        fcAddFile.setMinimumSize(new Dimension(500,300));
 
         center.add(songNameLabel, constraints);
         constraints.gridy++;
@@ -105,7 +108,6 @@ public class AddSongView extends JPanel {
         center.add(ArtistLabel, constraints);
         constraints.gridy++;
         center.add(jtfArtist, constraints);
-
 
         // DESPLACEM A LA DRETA
         constraints.gridx = 1000;
@@ -129,12 +131,6 @@ public class AddSongView extends JPanel {
         south.add(footerView.configureFooter());
         add(south, BorderLayout.SOUTH);
 
-        //JPanel centerPanel = new JPanel();
-
-        //centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
-
-        //centerPanel.add(center);
-
         // Botó
         JPanel button = new JPanel();
         button.setBackground(Color.BLACK);
@@ -149,19 +145,26 @@ public class AddSongView extends JPanel {
         centerTotal.add(center);
         constraints.gridy++;
         centerTotal.add(button);
-
-
-
-
-        // center.add(FCaddFile, constraints);
-
-        /*jback = utils.buttonText("back");
-        jback.setActionCommand(BTN_BACK);
-        jfile = utils.buttonText("add file");
-        jfile.setActionCommand(BTN_ADD_FILE);
-
-        add(jLogo);
-        add(jback);
-        add(jfile);*/
     }
+
+    public JTextField getJtfSongName() {
+        return jtfSongName;
+    }
+
+    public JTextField getJtfAlbum() {
+        return jtfAlbum;
+    }
+
+    public JTextField getJtfGenre() {
+        return jtfGenre;
+    }
+
+    public JTextField getJtfArtist() {
+        return jtfArtist;
+    }
+
+    public void showPopUps(String error) {
+        JOptionPane.showMessageDialog(this,error);
+    }
+
 }
