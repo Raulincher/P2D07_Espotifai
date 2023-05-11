@@ -9,7 +9,6 @@ public class MainView extends JFrame {
     private final InitialView initialView;
     private final RegisterView registerView;
     private final LoginView loginView;
-    private final TestView testView;
     private final AddSongView addSongView;
     private final DeleteSongView deleteSongView;
     private final DetailedPlaylistView detailedPlaylistView;
@@ -30,16 +29,14 @@ public class MainView extends JFrame {
     private static final String CARD_STATISTICS = "CARD_STATISTICS";
     private static final String CARD_LOGIN = "CARD_LOGIN";
     private static final String CARD_REGISTER = "CARD_REGISTER";
-    private static final String CARD_TEST = "CARD_TEST";
 
 
     private final CardLayout cardManager;
 
-    public MainView(InitialView initialView, DeleteSongView deleteSongView, StatisticsView statisticsView, MainMenuView mainMenuView, GeneralPlaylistView generalPlaylistView, GeneralSongListView generalSongListView, DetailedSongView detailedSongView, DetailedPlaylistView detailedPlaylistView, RegisterView registerView, LoginView loginView, TestView testView, AddSongView addSongView) {
+    public MainView(InitialView initialView, DeleteSongView deleteSongView, StatisticsView statisticsView, MainMenuView mainMenuView, GeneralPlaylistView generalPlaylistView, GeneralSongListView generalSongListView, DetailedSongView detailedSongView, DetailedPlaylistView detailedPlaylistView, RegisterView registerView, LoginView loginView, AddSongView addSongView) {
         this.initialView = initialView;
         this.registerView = registerView;
         this.loginView = loginView;
-        this.testView = testView;
         this.addSongView = addSongView;
         this.deleteSongView = deleteSongView;
         this.statisticsView = statisticsView;
@@ -56,7 +53,6 @@ public class MainView extends JFrame {
         configureInitial();
         configureLogin();
         configureRegister();
-        configureTestView();
         configureDeleteSong();
         configureDetailedPlaylist();
         configureStatisticsView();
@@ -120,10 +116,7 @@ public class MainView extends JFrame {
         this.statisticsView.configureStatisticsView();
         this.getContentPane().add(statisticsView, CARD_STATISTICS);
     }
-    private void configureTestView(){
-        this.testView.configureTestView();
-        this.getContentPane().add(testView, CARD_TEST);
-    }
+
 
     public void showMainCard(){
         cardManager.show(getContentPane(), CARD_MAIN);
@@ -133,9 +126,6 @@ public class MainView extends JFrame {
     }
     public void showRegisterCard(){
         cardManager.show(getContentPane(), CARD_REGISTER);
-    }
-    public void showTestCard(){
-        cardManager.show(getContentPane(), CARD_TEST);
     }
     public void showAddSongCard(){
         cardManager.show(getContentPane(), CARD_ADD_SONG);

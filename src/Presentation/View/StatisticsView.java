@@ -1,6 +1,7 @@
 package Presentation.View;
 
 import Presentation.AssetsFiles;
+import Presentation.Controller.HeaderController;
 import Presentation.Controller.StatisticsViewController;
 import Presentation.Utils;
 
@@ -23,6 +24,7 @@ public class StatisticsView extends JPanel {
         //set action command
         //jback.addActionListener(statisticsViewController);
     }
+
 
     public void configureStatisticsView() {
         Icon statsImg = new ImageIcon(String.valueOf(AssetsFiles.STATISTICS_LABEL));

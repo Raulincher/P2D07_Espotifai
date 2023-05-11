@@ -25,8 +25,6 @@ public class HeaderView extends JPanel {
         this.utils = utils;
     }
 
-
-
     public void addHeaderController(HeaderController headerController){
         //set action command
         jLogOut.addActionListener(headerController);

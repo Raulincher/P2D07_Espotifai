@@ -40,7 +40,6 @@ public class Main {
         HeaderView headerView = new HeaderView(utils);
         RegisterView registerView = new RegisterView(utils);
         LoginView loginView = new LoginView(utils);
-        TestView testView = new TestView();
         AddSongView addSongView = new AddSongView(utils, headerView, footerView);
         DeleteSongView deleteSongView = new DeleteSongView(headerView, utils, footerView, songTableModel);
         DetailedPlaylistView detailedPlaylistView = new DetailedPlaylistView(utils);
@@ -50,7 +49,7 @@ public class Main {
         MainMenuView mainMenuView = new MainMenuView(footerView, utils, headerView);
         StatisticsView statisticsView = new StatisticsView(headerView, utils);
 
-        MainView mainView = new MainView(initialView, deleteSongView, statisticsView, mainMenuView, generalPlaylistView, generalSongListView, detailedSongView, detailedPlaylistView, registerView, loginView, testView, addSongView);
+        MainView mainView = new MainView(initialView, deleteSongView, statisticsView, mainMenuView, generalPlaylistView, generalSongListView, detailedSongView, detailedPlaylistView, registerView, loginView, addSongView);
 
         SongTableModelController songTableModelController = new SongTableModelController(songManager, userManager, songTableModel);
         FooterController footerController = new FooterController(footerView, songManager);
