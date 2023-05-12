@@ -16,7 +16,6 @@ public class DeleteSongViewController implements ActionListener {
     private final MainView mainView;
     private final SongManager songManager;
     private SongTableModelController songTableModelController;
-
     private SongTableModel songTableModel;
 
 
