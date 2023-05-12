@@ -1,7 +1,10 @@
 package Presentation.View;
 
+import Business.Entities.Song;
+
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 
 public class MainView extends JFrame {
@@ -56,7 +59,7 @@ public class MainView extends JFrame {
         configureDeleteSong();
         configureDetailedPlaylist();
         configureStatisticsView();
-        configureDetailedSong();
+        configureDetailedSong(null);
         configureGeneralPlaylist();
         configureGeneralSongList();
         configureAddSong();
@@ -96,8 +99,8 @@ public class MainView extends JFrame {
         this.detailedPlaylistView.configureDetailedPlaylistView();
         this.getContentPane().add(detailedPlaylistView, CARD_DETAILED_PLAYLIST);
     }
-    private void configureDetailedSong(){
-        this.detailedSongView.configureDetailedSongView();
+    private void configureDetailedSong(ArrayList<String> song){
+        this.detailedSongView.configureDetailedSongView(song);
         this.getContentPane().add(detailedSongView, CARD_DETAILED_SONG);
     }
     private void configureGeneralPlaylist(){
@@ -136,9 +139,11 @@ public class MainView extends JFrame {
     public void showDetailedPlaylistCard(){
         cardManager.show(getContentPane(), CARD_DETAILED_PLAYLIST);
     }
-    public void showDetailedSongCard(){
+    public void showDetailedSongCard(ArrayList<String> song){
         cardManager.show(getContentPane(), CARD_DETAILED_SONG);
+        detailedSongView.configureDetailedSongView(song);
     }
+
     public void showGeneralPlaylistCard(){
         cardManager.show(getContentPane(), CARD_GENERAL_PLAYLIST);
     }

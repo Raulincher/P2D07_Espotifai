@@ -21,8 +21,6 @@ public class SongManager {
     private String actualSong;
 
 
-    // private Song songSelected;
-
     public SongManager(SongDao songDao) {
         this.songDao = songDao;
     }
@@ -246,6 +244,25 @@ public class SongManager {
             }
         }
         return information;
+    }
+
+    public ArrayList<Song> listAllSongs(){
+        return songDao.readAllSongsSQL();
+    }
+
+    public ArrayList<String> searchSong(String nameSong){
+        ArrayList<String> songSelected = new ArrayList<>();
+        ArrayList<Song> listSongs = listAllSongs();
+        for (Song song1: listSongs){
+            if (song1.getTile().equals(nameSong)){
+                songSelected.add(song1.getTile());
+                songSelected.add(song1.getGenre());
+                songSelected.add(song1.getArtist());
+                songSelected.add(song1.getAlbum());
+                songSelected.add(song1.getUsername());
+            }
+        }
+        return songSelected;
     }
 
 

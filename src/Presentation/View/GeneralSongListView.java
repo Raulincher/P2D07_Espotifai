@@ -1,7 +1,6 @@
 package Presentation.View;
 
 import Business.Entities.Song;
-import Business.SongManager;
 import Presentation.AssetsFiles;
 import Presentation.Controller.GeneralSongListViewController;
 import Presentation.SongTableModel;
@@ -12,7 +11,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
-import java.util.ArrayList;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
 
@@ -26,20 +24,19 @@ public class GeneralSongListView extends JPanel {
     private FooterView footerView;
     private JTextField jBuscador;
     private JButton jCerca;
-    private SongManager songManager;
-    private String songSelected;
+    private JTable table;
     private SongTableModel songTableModel;
 
-    public GeneralSongListView(Utils utils, HeaderView headerView, FooterView footerView, SongManager songManager, SongTableModel songTableModel){
+    public GeneralSongListView(Utils utils, HeaderView headerView, FooterView footerView,SongTableModel songTableModel ){
         this.utils = utils;
         this.footerView = footerView;
         this.headerView = headerView;
-        this.songManager = songManager;
         this.songTableModel = songTableModel;
     }
 
     public void addGeneralSongListController(GeneralSongListViewController generalSongListViewController){
         jCerca.addActionListener(generalSongListViewController);
+        table.addMouseListener(generalSongListViewController);
     }
 
     public void configureGeneralSonglistView() {
@@ -71,44 +68,10 @@ public class GeneralSongListView extends JPanel {
         panelBuscador.add(jBuscador);
         panelBuscador.add(jCerca);
 
+        //Taula ListSong
         center.add(panelBuscador,BorderLayout.NORTH);
+        JScrollPane scrollpane = createSongListTable();
 
-
-        DefaultTableModel model = songTableModel.getAllSongsTableModel();
-        JTable table = new JTable(model);
-
-        /*TableColumn columna;
-        columna = table.getColumnModel().getColumn(0);
-        columna.setPreferredWidth(600);
-        columna.setMaxWidth(600);
-        columna.setMinWidth(600);*/
-        table.setRowHeight(60);
-        table.setGridColor(Color.gray);
-        table.setBackground(gris);
-        table.setForeground(Color.WHITE);
-        table.setDefaultEditor(Object.class, null);
-        //table.setSelectionBackground(Color.decode("#8B898B"));
-        //table.setSelectionForeground(gris);
-        table.setSelectionBackground(table.getBackground());
-        table.setSelectionForeground(table.getForeground());
-
-        DefaultTableCellRenderer header = new DefaultTableCellRenderer();
-        header.setHorizontalAlignment(SwingConstants.LEFT);
-        header.setForeground(Color.decode("#00DC00"));
-        //header.setBorder(BorderFactory.createLineBorder(Color.gray));
-        header.setFont(new Font("Gotham", Font.BOLD, 20));
-        table.getTableHeader().setDefaultRenderer(header);
-
-        table.setFont(new Font("Gotham", Font.BOLD, 20));
-
-        int row = table.getSelectedRow();
-        if (row != -1) {
-            songSelected = table.getValueAt(row, 0).toString();
-        }
-
-        JScrollPane scrollpane = new JScrollPane(table);
-        //scrollpane.setBackground(gris);
-        //scrollpane.getVerticalScrollBar().setBackground(Color.BLACK);
         center.add(scrollpane, BorderLayout.CENTER);
         add(center, BorderLayout.CENTER);
 
@@ -121,14 +84,46 @@ public class GeneralSongListView extends JPanel {
 
     }
 
+
+    public JScrollPane createSongListTable(){
+        Color gris = new Color(26,26,26);
+
+        DefaultTableModel model = songTableModel.getAllSongsTableModel();
+        table = new JTable(model);
+
+        table.setRowHeight(60);
+        table.setGridColor(Color.gray);
+        table.setBackground(gris);
+        table.setForeground(Color.WHITE);
+        table.setDefaultEditor(Object.class, null);
+        //table.setSelectionBackground(Color.decode("#8B898B"));
+        //table.setSelectionForeground(gris);
+        table.setSelectionBackground(table.getBackground());
+        table.setSelectionForeground(Color.decode("#00DC00"));
+
+        DefaultTableCellRenderer header = new DefaultTableCellRenderer();
+        header.setHorizontalAlignment(SwingConstants.LEFT);
+        header.setForeground(Color.decode("#00DC00"));
+        //header.setBorder(BorderFactory.createLineBorder(Color.gray));
+        header.setFont(new Font("Gotham", Font.BOLD, 20));
+        table.getTableHeader().setDefaultRenderer(header);
+
+        table.setFont(new Font("Gotham", Font.BOLD, 20));
+        //scrollpane.setBackground(gris);
+        //scrollpane.getVerticalScrollBar().setBackground(Color.BLACK);
+
+        return new JScrollPane(table);
+    }
+
     public JTextField getjBuscador() {
         return jBuscador;
     }
 
-    public boolean songShow(){
-        return songSelected != null;
+    public JTable getTable() {
+        return table;
     }
-    public String getSongSelected(){
-        return songSelected;
-    }
+
+
+
+
 }

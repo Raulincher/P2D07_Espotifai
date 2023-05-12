@@ -17,6 +17,7 @@ public class LoginViewController implements ActionListener {
     private final LoginView loginView;
     private final UserManager userManager;
 
+
     public LoginViewController(MainView mainView, LoginView loginView, UserManager userManager) {
         this.mainView = mainView;
         this.loginView = loginView;

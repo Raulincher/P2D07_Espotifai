@@ -45,7 +45,7 @@ public class Main {
         DetailedPlaylistView detailedPlaylistView = new DetailedPlaylistView(utils);
         DetailedSongView detailedSongView = new DetailedSongView(utils, headerView, footerView, songManager);
         GeneralPlaylistView generalPlaylistView = new GeneralPlaylistView(headerView, footerView, utils);
-        GeneralSongListView generalSongListView = new GeneralSongListView(utils, headerView, footerView, songManager, songTableModel);
+        GeneralSongListView generalSongListView = new GeneralSongListView(utils, headerView, footerView, songTableModel);
         MainMenuView mainMenuView = new MainMenuView(footerView, utils, headerView);
         StatisticsView statisticsView = new StatisticsView(headerView, utils);
 
@@ -61,7 +61,7 @@ public class Main {
         DeleteSongViewController deleteSongViewController = new DeleteSongViewController(deleteSongView, mainView, songManager);
         DetailedPlaylistViewController detailedPlaylistViewController = new DetailedPlaylistViewController(detailedPlaylistView, mainView);
         DetailedSongViewController detailedSongViewController = new DetailedSongViewController(detailedSongView, mainView);
-        GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView, mainView);
+        GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView, mainView, songManager);
         GeneralPlaylistViewController generalPlaylistViewController = new GeneralPlaylistViewController(generalPlaylistView, mainView);
         MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView, songTableModelController);
         StatisticsViewController statisticsViewController = new StatisticsViewController(statisticsView, mainView);

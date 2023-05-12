@@ -14,6 +14,7 @@ import javax.swing.table.TableColumn;
 import javax.swing.table.TableColumnModel;
 import javax.swing.text.TableView;
 import java.awt.*;
+import java.util.ArrayList;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
 
@@ -44,7 +45,7 @@ public class DetailedSongView extends JPanel {
         //jdelete.addActionListener(detailedSongViewController);
     }
 
-    public void configureDetailedSongView() {
+    public void configureDetailedSongView(ArrayList<String> song) {
 
         setLayout(new BorderLayout());
         setBackground(Color.BLACK);
@@ -62,48 +63,51 @@ public class DetailedSongView extends JPanel {
         center.setBackground(Color.BLACK);
         center.setBorder(BorderFactory.createEmptyBorder(0, 200, 80, 200));
 
-        //Song song = songManager.getSelectedSong();
+
         /*if (song == null){
             song = new Song("Prova", "pop","album","author","file");
         }*/
-        String[] columnNames = {"", ""};
-        Object[][] data = {
-                {"Song", "song.getTile()"},
-                {"Genre", "song.getGenre()"},
-                {"Artist", "song.getAuthor()"},
-                {"Album", "song.getAlbum()"},
-                {"Uploaded by", "Prova_by"}
-        };
-        JTable table = new JTable(data, columnNames);
+        if (song != null) {
+            //Song song = new Song("Prova", "pop","album","author","file","eo");
+            String[] columnNames = {"", ""};
+            Object[][] data = {
+                    {"Song", song.get(0)},
+                    {"Genre", song.get(1)},
+                    {"Artist", song.get(2)},
+                    {"Album", song.get(3)},
+                    {"Uploaded by", song.get(4)}
+            };
+            JTable table = new JTable(data, columnNames);
 
-        TableColumn columna;
-        columna = table.getColumnModel().getColumn(0);
-        columna.setPreferredWidth(300);
-        columna.setMaxWidth(300);
-        columna.setMinWidth(300);
-        table.setRowHeight(60);
-        table.setGridColor(Color.gray);
-        table.setBackground(gris);
-        table.setDefaultEditor(Object.class, null);
-        table.setSelectionBackground(gris);
-        table.setSelectionForeground(Color.WHITE);
+            TableColumn columna;
+            columna = table.getColumnModel().getColumn(0);
+            columna.setPreferredWidth(300);
+            columna.setMaxWidth(300);
+            columna.setMinWidth(300);
+            table.setRowHeight(60);
+            table.setGridColor(Color.gray);
+            table.setBackground(gris);
+            table.setDefaultEditor(Object.class, null);
+            table.setSelectionBackground(gris);
+            table.setSelectionForeground(Color.WHITE);
 
-        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
-        renderer.setForeground(Color.decode("#00DC00"));
-        renderer.setFont(new Font("Gotham", Font.BOLD, 35));
-        table.getColumnModel().getColumn(0).setCellRenderer(renderer);
+            DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+            renderer.setForeground(Color.decode("#00DC00"));
+            renderer.setFont(new Font("Gotham", Font.BOLD, 35));
+            table.getColumnModel().getColumn(0).setCellRenderer(renderer);
 
-        DefaultTableCellRenderer renderer2 = new DefaultTableCellRenderer();
-        renderer2.setForeground(Color.white);
-        renderer2.setFont(new Font("Gotham", Font.BOLD, 20));
-        table.getColumnModel().getColumn(1).setCellRenderer(renderer2);
+            DefaultTableCellRenderer renderer2 = new DefaultTableCellRenderer();
+            renderer2.setForeground(Color.white);
+            renderer2.setFont(new Font("Gotham", Font.BOLD, 20));
+            table.getColumnModel().getColumn(1).setCellRenderer(renderer2);
 
-        table.setFont(new Font("Gotham", Font.BOLD, 35));
-        JScrollPane scrollpane = new JScrollPane(table);
-        //scrollpane.setBackground(gris);
-        //scrollpane.getVerticalScrollBar().setBackground(Color.BLACK);
-        center.add(scrollpane, BorderLayout.CENTER);
-        add(center, BorderLayout.CENTER);
+            table.setFont(new Font("Gotham", Font.BOLD, 35));
+            JScrollPane scrollpane = new JScrollPane(table);
+            //scrollpane.setBackground(gris);
+            //scrollpane.getVerticalScrollBar().setBackground(Color.BLACK);
+            center.add(scrollpane, BorderLayout.CENTER);
+            add(center, BorderLayout.CENTER);
+        }
 
         JPanel south = new JPanel();
         south.setBackground(gris);
