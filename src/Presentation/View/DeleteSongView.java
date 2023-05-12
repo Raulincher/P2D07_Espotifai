@@ -98,6 +98,7 @@ public class DeleteSongView extends JPanel {
         DefaultTableModel model = songTableModel.getDeleteTableModel();
         table = new JTable(model);
 
+
         table.setRowHeight(60);
         table.setGridColor(Color.gray);
         table.setBackground(gris);
