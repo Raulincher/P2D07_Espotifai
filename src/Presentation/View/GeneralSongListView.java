@@ -62,7 +62,7 @@ public class GeneralSongListView extends JPanel {
         jBuscador = new JTextField();
         center.add(utils.panelBuscador(jCerca, jBuscador, BTN_BUSCADOR),BorderLayout.NORTH);
 
-        //Taula ListSong
+        // Taula ListSong
         JScrollPane scrollpane = createSongListTable();
         center.add(scrollpane, BorderLayout.CENTER);
         add(center, BorderLayout.CENTER);

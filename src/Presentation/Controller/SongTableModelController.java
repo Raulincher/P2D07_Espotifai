@@ -22,6 +22,10 @@ public class SongTableModelController {
         songTableModel.buildDeleteTableModel(songManager.listSongs(true, userManager.currentUsername()));
     }
 
+    public void createSearchSongJTable(String titleName) {
+        songTableModel.buildSearchedSongTableModel(songManager.searchSong(titleName));
+    }
+
     public void createAllSongsJTable() {
         songTableModel.buildAllSongsTableModel(songManager.listSongs(false, null));
     }

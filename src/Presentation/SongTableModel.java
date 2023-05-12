@@ -6,10 +6,13 @@ import java.util.ArrayList;
 public class SongTableModel extends DefaultTableModel {
     private DefaultTableModel deleteTableModel;
     private DefaultTableModel allSongsTableModel;
+    private DefaultTableModel searchedSongTableModel;
+
 
     public SongTableModel() {
         deleteTableModel = new DefaultTableModel();
         allSongsTableModel = new DefaultTableModel();
+        searchedSongTableModel = new DefaultTableModel();
     }
 
     public void buildDeleteTableModel(ArrayList<String> information){
@@ -35,11 +38,24 @@ public class SongTableModel extends DefaultTableModel {
         }
     }
 
+    public void buildSearchedSongTableModel(ArrayList<String> information) {
+        searchedSongTableModel.addColumn("Song");
+        searchedSongTableModel.addColumn("Artist");
+        searchedSongTableModel.addColumn("Genre");
+
+        Object[] rowData = {information.get(0), information.get(1), information.get(2)};
+        searchedSongTableModel.addRow(rowData);
+    }
+
     public DefaultTableModel getDeleteTableModel() {
         return deleteTableModel;
     }
 
     public DefaultTableModel getAllSongsTableModel() {
         return allSongsTableModel;
+    }
+
+    public DefaultTableModel getSearchedSongTableModel() {
+        return searchedSongTableModel;
     }
 }

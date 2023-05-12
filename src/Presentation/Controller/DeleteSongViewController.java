@@ -1,6 +1,7 @@
 package Presentation.Controller;
 
 import Business.SongManager;
+import Presentation.SongTableModel;
 import Presentation.View.AddSongView;
 import Presentation.View.DeleteSongView;
 import Presentation.View.InitialView;
@@ -14,12 +15,15 @@ public class DeleteSongViewController implements ActionListener {
     private final DeleteSongView deleteSongView;
     private final MainView mainView;
     private final SongManager songManager;
+    private SongTableModelController songTableModelController;
 
 
-    public DeleteSongViewController(DeleteSongView deleteSongView, MainView mainView, SongManager songManager) {
+    public DeleteSongViewController(DeleteSongView deleteSongView, MainView mainView, SongManager songManager,
+                                    SongTableModelController songTableModelController) {
         this.deleteSongView = deleteSongView;
         this.mainView = mainView;
         this.songManager = songManager;
+        this.songTableModelController = songTableModelController;
     }
 
     public void runDeleteSongView() {
@@ -28,7 +32,11 @@ public class DeleteSongViewController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case DeleteSongView.BTN_DELETE -> {
+            case DeleteSongView.BTN_BUSCADOR -> {
+                String songTitle = deleteSongView.getjBuscador().toString();
+                songTableModelController.createSearchSongJTable(songTitle);
+            }
+            //case DeleteSongView.BTN_DELETE -> {
                 /*String songToDelete = deleteSongView.getInput().getText();
 
                 if (songManager.songExists(songToDelete)) {
@@ -45,4 +53,4 @@ public class DeleteSongViewController implements ActionListener {
         }
     }
 
-}
+

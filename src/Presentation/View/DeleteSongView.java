@@ -38,54 +38,49 @@ public class DeleteSongView extends JPanel {
 
     public void addDeleteSongController(DeleteSongViewController deleteSongController){
      //   delete.addActionListener(deleteSongController);
+        jCerca.addActionListener(deleteSongController);
     }
 
     public void configureDeleteSongView() {
+        setLayout(new BorderLayout());
+        setBackground(Color.BLACK);
+        Color gris = new Color(26,26,26);
 
-        //NORTH
+        // NORTH
         JPanel north = new JPanel();
         north.setBackground(Color.black);
         Icon logo = new ImageIcon(String.valueOf(AssetsFiles.MUSIC_LABEL));;
         north.add(headerView.configureHeader(logo));
         add(north, BorderLayout.NORTH);
 
-
         // CENTER
-        JPanel center = new JPanel();
+        JPanel center = new JPanel(new BorderLayout());
         center.setBackground(Color.BLACK);
         center.setBorder(BorderFactory.createEmptyBorder(0, 200, 80, 200));
 
-        //Buscador
+            // Buscador
         Icon buscadorBtn = new ImageIcon(String.valueOf(AssetsFiles.BUSCADOR_BUTTON_IMG));
         jCerca = new JButton(buscadorBtn);
         jCerca.setActionCommand(BTN_BUSCADOR);
         jBuscador = new JTextField();
         center.add(utils.panelBuscador(jCerca, jBuscador, BTN_BUSCADOR),BorderLayout.NORTH);
 
-        //Taula ListSong
+            // Taula ListSong
         JScrollPane scrollpane = createSongListTable();
         center.add(scrollpane, BorderLayout.CENTER);
         add(center, BorderLayout.CENTER);
 
-        /*DefaultTableModel model = songTableModel.getDeleteTableModel();
-        JTable deleteSongsTable = new JTable(model);
-        JScrollPane deleteSongsScroll = new JScrollPane(deleteSongsTable);
-        center.add(deleteSongsScroll);
-        add(center, BorderLayout.CENTER);*/
-
         // SOUTH
-        Color gris = new Color(26,26,26);
         JPanel south = new JPanel();
         south.setBackground(gris);
         south.setBorder(createEmptyBorder(30, 0, 30, 0));
         south.add(footerView.configureFooter());
         add(south, BorderLayout.SOUTH);
-
-
     }
 
-    public JTextField getInput() {
-        return input;
+
+    public JTextField getjBuscador() {
+        return jBuscador;
     }
 
     public void showPopUps(String error) {

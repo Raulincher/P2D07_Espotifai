@@ -58,7 +58,7 @@ public class Main {
         LoginViewController loginViewController = new LoginViewController(mainView, loginView, userManager);
         RegisterViewController registerViewController = new RegisterViewController(mainView, registerView, userManager);
         AddSongViewController addSongViewController = new AddSongViewController(addSongView, mainView, songManager, userManager);
-        DeleteSongViewController deleteSongViewController = new DeleteSongViewController(deleteSongView, mainView, songManager);
+        DeleteSongViewController deleteSongViewController = new DeleteSongViewController(deleteSongView, mainView, songManager, songTableModelController);
         DetailedPlaylistViewController detailedPlaylistViewController = new DetailedPlaylistViewController(detailedPlaylistView, mainView);
         DetailedSongViewController detailedSongViewController = new DetailedSongViewController(detailedSongView, mainView);
         GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView, mainView, songManager);
