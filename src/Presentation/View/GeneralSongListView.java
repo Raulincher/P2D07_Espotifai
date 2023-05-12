@@ -76,7 +76,6 @@ public class GeneralSongListView extends JPanel {
 
     }
 
-
     public JScrollPane createSongListTable(){
         Color gris = new Color(26,26,26);
 

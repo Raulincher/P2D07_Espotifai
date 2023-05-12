@@ -6,6 +6,7 @@ import Presentation.SongTableModel;
 import Presentation.Utils;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 
@@ -23,6 +24,7 @@ public class DeleteSongView extends JPanel {
 
     private JTextField jBuscador;
     private JButton jCerca;
+    private JTable table;
     private JLabel name;
     private JTextField input;
     private JButton delete;
@@ -60,12 +62,16 @@ public class DeleteSongView extends JPanel {
         jBuscador = new JTextField();
         center.add(utils.panelBuscador(jCerca, jBuscador, BTN_BUSCADOR),BorderLayout.NORTH);
 
+        //Taula ListSong
+        JScrollPane scrollpane = createSongListTable();
+        center.add(scrollpane, BorderLayout.CENTER);
+        add(center, BorderLayout.CENTER);
 
-        DefaultTableModel model = songTableModel.getDeleteTableModel();
+        /*DefaultTableModel model = songTableModel.getDeleteTableModel();
         JTable deleteSongsTable = new JTable(model);
         JScrollPane deleteSongsScroll = new JScrollPane(deleteSongsTable);
         center.add(deleteSongsScroll);
-        add(center, BorderLayout.CENTER);
+        add(center, BorderLayout.CENTER);*/
 
         // SOUTH
         Color gris = new Color(26,26,26);
@@ -84,6 +90,36 @@ public class DeleteSongView extends JPanel {
 
     public void showPopUps(String error) {
         JOptionPane.showMessageDialog(this,error);
+    }
+
+    public JScrollPane createSongListTable(){
+        Color gris = new Color(26,26,26);
+
+        DefaultTableModel model = songTableModel.getDeleteTableModel();
+        table = new JTable(model);
+
+        table.setRowHeight(60);
+        table.setGridColor(Color.gray);
+        table.setBackground(gris);
+        table.setForeground(Color.WHITE);
+        table.setDefaultEditor(Object.class, null);
+        //table.setSelectionBackground(Color.decode("#8B898B"));
+        //table.setSelectionForeground(gris);
+        table.setSelectionBackground(table.getBackground());
+        table.setSelectionForeground(Color.decode("#00DC00"));
+
+        DefaultTableCellRenderer header = new DefaultTableCellRenderer();
+        header.setHorizontalAlignment(SwingConstants.LEFT);
+        header.setForeground(Color.decode("#00DC00"));
+        //header.setBorder(BorderFactory.createLineBorder(Color.gray));
+        header.setFont(new Font("Gotham", Font.BOLD, 20));
+        table.getTableHeader().setDefaultRenderer(header);
+
+        table.setFont(new Font("Gotham", Font.BOLD, 20));
+        //scrollpane.setBackground(gris);
+        //scrollpane.getVerticalScrollBar().setBackground(Color.BLACK);
+
+        return new JScrollPane(table);
     }
 
 }
