@@ -16,14 +16,16 @@ public class DeleteSongViewController implements ActionListener {
     private final MainView mainView;
     private final SongManager songManager;
     private SongTableModelController songTableModelController;
+    private SongTableModel songTableModel;
 
 
     public DeleteSongViewController(DeleteSongView deleteSongView, MainView mainView, SongManager songManager,
-                                    SongTableModelController songTableModelController) {
+                                    SongTableModelController songTableModelController, SongTableModel songTableModel) {
         this.deleteSongView = deleteSongView;
         this.mainView = mainView;
         this.songManager = songManager;
         this.songTableModelController = songTableModelController;
+        this.songTableModel = songTableModel;
     }
 
     public void runDeleteSongView() {
@@ -34,7 +36,12 @@ public class DeleteSongViewController implements ActionListener {
         switch (e.getActionCommand()) {
             case DeleteSongView.BTN_BUSCADOR -> {
                 String songTitle = deleteSongView.getjBuscador().toString();
-                songTableModelController.createSearchSongJTable(songTitle);
+                boolean worked = songTableModelController.createSearchSongJTable(songTitle);
+                if (!worked) {
+                    deleteSongView.showPopUps("Error searching!");
+                } else {
+                    deleteSongView.setModel(true);
+                }
             }
             //case DeleteSongView.BTN_DELETE -> {
                 /*String songToDelete = deleteSongView.getInput().getText();

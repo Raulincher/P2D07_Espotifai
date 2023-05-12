@@ -252,7 +252,9 @@ public class SongManager {
 
     public ArrayList<String> searchSong(String nameSong){
         ArrayList<String> songSelected = new ArrayList<>();
-        ArrayList<Song> listSongs = listAllSongs();
+        ArrayList<Song> listSongs = songDao.readAllSongsSQL();
+        boolean in = false;
+
         for (Song song1: listSongs){
             if (song1.getTile().equals(nameSong)){
                 songSelected.add(song1.getTile());
@@ -260,9 +262,15 @@ public class SongManager {
                 songSelected.add(song1.getArtist());
                 songSelected.add(song1.getAlbum());
                 songSelected.add(song1.getUsername());
+                in = true;
             }
         }
-        return songSelected;
+
+        if (!in) {
+            return null;
+        } else {
+            return songSelected;
+        }
     }
 
 

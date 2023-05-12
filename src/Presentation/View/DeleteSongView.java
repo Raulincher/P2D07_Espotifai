@@ -28,6 +28,7 @@ public class DeleteSongView extends JPanel {
     private JLabel name;
     private JTextField input;
     private JButton delete;
+    private DefaultTableModel model;
 
     public DeleteSongView(HeaderView headerView, Utils utils, FooterView footerView, SongTableModel songTableModel){
         this.utils = utils;
@@ -66,7 +67,9 @@ public class DeleteSongView extends JPanel {
         center.add(utils.panelBuscador(jCerca, jBuscador, BTN_BUSCADOR),BorderLayout.NORTH);
 
             // Taula ListSong
-        JScrollPane scrollpane = createSongListTable();
+        setModel(false);
+        table = new JTable(model);
+        JScrollPane scrollpane = createSongListTable(table);
         center.add(scrollpane, BorderLayout.CENTER);
         add(center, BorderLayout.CENTER);
 
@@ -87,11 +90,10 @@ public class DeleteSongView extends JPanel {
         JOptionPane.showMessageDialog(this,error);
     }
 
-    public JScrollPane createSongListTable(){
+    public JScrollPane createSongListTable(JTable table){
         Color gris = new Color(26,26,26);
 
-        DefaultTableModel model = songTableModel.getDeleteTableModel();
-        table = new JTable(model);
+
 
         table.setRowHeight(60);
         table.setGridColor(Color.gray);
@@ -117,4 +119,11 @@ public class DeleteSongView extends JPanel {
         return new JScrollPane(table);
     }
 
+    public void setModel(boolean oneSong) {
+        if (oneSong) {
+            model = songTableModel.getSearchedSongTableModel();
+        } else {
+            model = songTableModel.getDeleteTableModel();
+        }
+    }
 }
