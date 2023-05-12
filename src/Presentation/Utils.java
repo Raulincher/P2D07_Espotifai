@@ -49,4 +49,18 @@ public class Utils extends JFrame {
         return jUsername;
     }
 
+    public JPanel panelBuscador(JButton jCerca, JTextField jBuscador, String BTN_BUSCADOR) {
+        JPanel panelBuscador = new JPanel();
+        panelBuscador.setBackground(Color.BLACK);
+        //Icon buscadorBtn = new ImageIcon(String.valueOf(AssetsFiles.BUSCADOR_BUTTON_IMG));
+        /*jCerca = new JButton(buscadorBtn);
+        jCerca.setActionCommand(BTN_BUSCADOR);*/
+        jBuscador.setPreferredSize(new Dimension(300, 40));
+        jBuscador.setMinimumSize(new Dimension(300,40));
+        panelBuscador.add(jBuscador);
+        panelBuscador.add(jCerca);
+
+        return panelBuscador;
+    }
+
 }

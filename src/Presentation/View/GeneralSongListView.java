@@ -18,7 +18,6 @@ public class GeneralSongListView extends JPanel {
 
     public static final String BTN_BACK = "BTN_BACK";
     public static final String BTN_BUSCADOR = "BTN_BUSCADOR";
-    public static final String BTN_SONG = "BTN_SONG";
     private final Utils utils;
     private HeaderView headerView;
     private FooterView footerView;
@@ -57,21 +56,14 @@ public class GeneralSongListView extends JPanel {
         center.setBorder(BorderFactory.createEmptyBorder(0, 200, 80, 200));
 
         //Buscador
-        JPanel panelBuscador = new JPanel();
-        panelBuscador.setBackground(Color.BLACK);
         Icon buscadorBtn = new ImageIcon(String.valueOf(AssetsFiles.BUSCADOR_BUTTON_IMG));
         jCerca = new JButton(buscadorBtn);
         jCerca.setActionCommand(BTN_BUSCADOR);
         jBuscador = new JTextField();
-        jBuscador.setPreferredSize(new Dimension(300, 40));
-        jBuscador.setMinimumSize(new Dimension(300,40));
-        panelBuscador.add(jBuscador);
-        panelBuscador.add(jCerca);
+        center.add(utils.panelBuscador(jCerca, jBuscador, BTN_BUSCADOR),BorderLayout.NORTH);
 
         //Taula ListSong
-        center.add(panelBuscador,BorderLayout.NORTH);
         JScrollPane scrollpane = createSongListTable();
-
         center.add(scrollpane, BorderLayout.CENTER);
         add(center, BorderLayout.CENTER);
 
