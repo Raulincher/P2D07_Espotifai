@@ -37,9 +37,13 @@ public class AddSongViewController implements ActionListener {
             case AddSongView.BTN_ADD_SONG:
                 // Guardar dades
                 String songName = addSongView.getJtfSongName().getText();
+                System.out.println(songName);
                 String artist = addSongView.getJtfArtist().getText();
+                System.out.println(artist);
                 String album = addSongView.getJtfAlbum().getText();
-                String genre = addSongView.getJcbGenre().toString();
+                System.out.println(album);
+                String genre = (String) addSongView.getJcbGenre().getSelectedItem();
+                System.out.println(genre);
 
                 if (songManager.isEmpty(songName, artist, album, genre)) {
                     addSongView.showPopUps("Error, empty field, can't upload the song!");

@@ -7,7 +7,6 @@ public class Song {
     private String album;
     private String artist;
     private String filePath;
-
     private String username;
 
     public Song(String title, String genre, String album, String artist, String filePath, String username){

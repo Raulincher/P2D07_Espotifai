@@ -193,7 +193,7 @@ public class SongManager {
         // Guardar fitxer
         file.renameTo(new File(filePath));
         // Guardar a base de dades
-        song = new Song(songName, artist, album, genre, filePath, username);
+        song = new Song(songName, genre, album, artist, filePath, username);
 
         try {
             songDao.saveSong(song);
