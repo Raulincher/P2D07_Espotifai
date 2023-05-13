@@ -20,8 +20,6 @@ public class Utils extends JFrame {
         button.setBackground(Color.decode("#00000000"));
         button.setBorderPainted(false);
         button.setContentAreaFilled(false);
-        //button.setFocusPainted(false);
-        //button.setOpaque(false);
         return button;
     }
 
@@ -29,7 +27,6 @@ public class Utils extends JFrame {
         JLabel label = new JLabel(text);
         label.setForeground(Color.WHITE);
         label.setFont(new Font("Gotham", Font.BOLD, 27));
-
         return label;
     }
 
@@ -49,12 +46,9 @@ public class Utils extends JFrame {
         return jUsername;
     }
 
-    public JPanel panelBuscador(JButton jCerca, JTextField jBuscador, String BTN_BUSCADOR) {
+    public JPanel panelBuscador(JButton jCerca, JTextField jBuscador) {
         JPanel panelBuscador = new JPanel();
         panelBuscador.setBackground(Color.BLACK);
-        //Icon buscadorBtn = new ImageIcon(String.valueOf(AssetsFiles.BUSCADOR_BUTTON_IMG));
-        /*jCerca = new JButton(buscadorBtn);
-        jCerca.setActionCommand(BTN_BUSCADOR);*/
         jBuscador.setPreferredSize(new Dimension(300, 40));
         jBuscador.setMinimumSize(new Dimension(300,40));
         panelBuscador.add(jBuscador);

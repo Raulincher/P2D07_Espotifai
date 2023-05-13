@@ -25,6 +25,7 @@ public class AddSongView extends JPanel {
     private JTextField jtfArtist;
     private JTextField jtfAlbum;
     private JTextField jtfGenre;
+    private JFileChooser fcAddFile;
 
     public AddSongView(Utils utils, HeaderView headerView, FooterView footerView){
         this.utils = utils;
@@ -38,9 +39,6 @@ public class AddSongView extends JPanel {
     }
 
     public void configureAddSong() {
-        //JLabel jLogo = new JLabel("add song");
-
-        // EL JPanel en si de addSong
         setBackground(Color.black);
         setLayout(new BorderLayout()); // Fem que sigui border layout
 
@@ -58,11 +56,6 @@ public class AddSongView extends JPanel {
 
         JPanel center = new JPanel(new GridBagLayout());
         center.setBackground(Color.BLACK);
-
-        // CENTER LEFT
-
-        //center.setBackground(Color.BLACK);
-        //add(centerTotal, BorderLayout.CENTER);
 
         Insets columnSpacing = new Insets(0, 100, 0, 0);
         GridBagConstraints constraints = new GridBagConstraints();
@@ -84,7 +77,7 @@ public class AddSongView extends JPanel {
         jtfGenre = utils.textField();
 
         JLabel addFileLabel = utils.label("Add file");
-        JFileChooser fcAddFile = new JFileChooser();
+
         ImageIcon addFileBtnAux = new ImageIcon(String.valueOf(AssetsFiles.ADD_SONG_FILE_BUTTON_IMG));
         int newWidth = 320;
         int newHeight = 160;
@@ -93,6 +86,7 @@ public class AddSongView extends JPanel {
         Icon addFileBtn = new ImageIcon(scaledAddFileBtn);
         jfile = utils.buttonImg(addFileBtn);
         jfile.setActionCommand(BTN_ADD_FILE);
+        fcAddFile = new JFileChooser();
         fcAddFile.setFont(new Font("Gotham", Font.BOLD, 20));
         fcAddFile.setPreferredSize(new Dimension(500, 300));
         fcAddFile.setMinimumSize(new Dimension(500,300));
@@ -165,6 +159,22 @@ public class AddSongView extends JPanel {
 
     public void showPopUps(String error) {
         JOptionPane.showMessageDialog(this,error);
+    }
+
+    public void addFileName(String filename) {
+        JLabel label = new JLabel(filename);
+        label.setForeground(Color.BLACK);
+        jfile.setIcon(null);
+        jfile.setBackground(Color.WHITE);
+        jfile.setForeground(Color.WHITE);
+        jfile.add(label);
+        jfile.setVerticalTextPosition(SwingConstants.NORTH);
+        jfile.setHorizontalTextPosition(SwingConstants.CENTER);
+        jfile.setOpaque(true);
+        int newWidth = 320;
+        int newHeight = 160;
+        Dimension dimension = new Dimension(newWidth,newHeight);
+        jfile.setPreferredSize(dimension);
     }
 
 }

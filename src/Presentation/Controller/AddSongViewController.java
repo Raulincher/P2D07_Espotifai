@@ -29,6 +29,8 @@ public class AddSongViewController implements ActionListener {
                 if (!songManager.fileSongSelector()) {
                     // Pop up
                     addSongView.showPopUps("Error, the song should be in .wav format!");
+                } else {
+                    addSongView.addFileName(songManager.obtainFilePath());
                 }
                 break;
             case AddSongView.BTN_ADD_SONG:

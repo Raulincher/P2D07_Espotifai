@@ -176,6 +176,10 @@ public class SongManager {
         return fileFormatCorrect;
     }
 
+    public String obtainFilePath() {
+        return file.getName();
+    }
+
     public boolean isEmpty(String songName, String artist, String album, String genre) {
         boolean emptyField = false;
 
