@@ -27,6 +27,7 @@ public class AddSongView extends JPanel {
     private JTextField jtfAlbum;
     private JTextField jtfGenre;
     private JFileChooser fcAddFile;
+    private JComboBox<String> jcbGenre;
 
     public AddSongView(Utils utils, HeaderView headerView, FooterView footerView){
         this.utils = utils;
@@ -75,7 +76,14 @@ public class AddSongView extends JPanel {
         jtfArtist = utils.textField();
 
         JLabel genreLabel = utils.label("Genre");
-        jtfGenre = utils.textField();
+        //jtfGenre = utils.textField();
+
+        String[] options = {"Pop", "Reggaeton", "Techno", "Rock",
+                            "Heavy metal", "Rap", "Balada", "Classical"};
+        jcbGenre = new JComboBox<>(options);
+        jcbGenre.setSelectedIndex(-1);
+        jcbGenre.setFont(new Font("Gotham", Font.BOLD, 20));
+        jcbGenre.setPreferredSize(new Dimension(300, 40));
 
         JLabel addFileLabel = utils.label("Add file");
 
@@ -111,7 +119,7 @@ public class AddSongView extends JPanel {
 
         center.add(genreLabel, constraints);
         constraints.gridy++;
-        center.add(jtfGenre, constraints);
+        center.add(jcbGenre, constraints);
         constraints.gridy++;
         center.add(addFileLabel, constraints);
         constraints.gridy++;
@@ -150,8 +158,8 @@ public class AddSongView extends JPanel {
         return jtfAlbum;
     }
 
-    public JTextField getJtfGenre() {
-        return jtfGenre;
+    public JComboBox<String> getJcbGenre() {
+        return jcbGenre;
     }
 
     public JTextField getJtfArtist() {
@@ -187,7 +195,7 @@ public class AddSongView extends JPanel {
         jtfSongName.setText("");
         jtfAlbum.setText("");
         jtfArtist.setText("");
-        jtfGenre.setText("");
+        jcbGenre.setSelectedIndex(-1);
         ImageIcon addFileBtnAux = new ImageIcon(String.valueOf(AssetsFiles.ADD_SONG_FILE_BUTTON_IMG));
         int newWidth = 320;
         int newHeight = 160;

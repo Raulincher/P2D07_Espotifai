@@ -33,12 +33,13 @@ public class AddSongViewController implements ActionListener {
                     addSongView.addFileName(songManager.obtainFilePath());
                 }
                 break;
+
             case AddSongView.BTN_ADD_SONG:
                 // Guardar dades
                 String songName = addSongView.getJtfSongName().getText();
                 String artist = addSongView.getJtfArtist().getText();
                 String album = addSongView.getJtfAlbum().getText();
-                String genre = addSongView.getJtfGenre().getText();
+                String genre = addSongView.getJcbGenre().toString();
 
                 if (songManager.isEmpty(songName, artist, album, genre)) {
                     addSongView.showPopUps("Error, empty field, can't upload the song!");
@@ -54,11 +55,6 @@ public class AddSongViewController implements ActionListener {
                         addSongView.showPopUps("Error while saving the song!");
                     }
                 }
-                // Algun camp buit
-
-                // Fitxer buit
-
-
                 break;
 
         }
