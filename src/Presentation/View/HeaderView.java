@@ -25,11 +25,26 @@ public class HeaderView extends JPanel {
         this.utils = utils;
     }
 
+    public void initilizeButtons(){
+        Icon loginBtn2 = new ImageIcon(String.valueOf(AssetsFiles.BACK_LITTLEBUTTON_IMG));
+        jBack = utils.buttonImg(loginBtn2);
+        jBack.setActionCommand(BTN_BACK);
+
+        Icon loginBtn = new ImageIcon(String.valueOf(AssetsFiles.LOGOUT_LITTLEBUTTON_IMG));
+        jLogOut = utils.buttonImg(loginBtn);
+        jLogOut.setActionCommand(BTN_LOGOUT);
+
+        Icon loginBtn3 = new ImageIcon(String.valueOf(AssetsFiles.DELETEACC_LITTLEBUTTON_IMG));
+        jDeleteAcc = utils.buttonImg(loginBtn3);
+        jDeleteAcc.setActionCommand(BTN_DELETEACC);
+    }
+
     public void addHeaderController(HeaderController headerController){
         //set action command
         jLogOut.addActionListener(headerController);
         jDeleteAcc.addActionListener(headerController);
         jBack.addActionListener(headerController);
+
     }
 
     public JPanel configureHeader(Icon icon) {
@@ -40,21 +55,6 @@ public class HeaderView extends JPanel {
         JLabel usedLabel = new JLabel(icon);
         usedLabel.setLayout(new GridLayout(4, 1, 0, 50));
         north.add(usedLabel);
-
-        //Icon menuImg = new ImageIcon(String.valueOf(AssetsFiles.MENU_LABEL));
-
-        Icon loginBtn2 = new ImageIcon(String.valueOf(AssetsFiles.BACK_LITTLEBUTTON_IMG));
-        jBack = utils.buttonImg(loginBtn2);
-        jBack.setActionCommand(BTN_BACK);
-
-
-        Icon loginBtn = new ImageIcon(String.valueOf(AssetsFiles.LOGOUT_LITTLEBUTTON_IMG));
-        jLogOut = utils.buttonImg(loginBtn);
-        jLogOut.setActionCommand(BTN_LOGOUT);
-
-        Icon loginBtn3 = new ImageIcon(String.valueOf(AssetsFiles.DELETEACC_LITTLEBUTTON_IMG));
-        jDeleteAcc = utils.buttonImg(loginBtn3);
-        jDeleteAcc.setActionCommand(BTN_DELETEACC);
 
         north.add(jBack);
         north.add(jLogOut);

@@ -11,16 +11,20 @@ import java.awt.event.ActionListener;
 public class HeaderController implements ActionListener {
     private final HeaderView headerView;
     private final UserManager userManager;
-    private final MainView mainView;
+    private MainView mainView;
 
-    public HeaderController(HeaderView headerView, UserManager userManager, MainView mainView) {
+    public HeaderController(HeaderView headerView, UserManager userManager) {
         this.headerView = headerView;
         this.userManager = userManager;
+    }
+
+    public void addMainView(MainView mainView){
         this.mainView = mainView;
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
+        System.out.println(e.getActionCommand());
         switch (e.getActionCommand()) {
             case HeaderView.BTN_BACK:
                 mainView.showMainMenuCard();

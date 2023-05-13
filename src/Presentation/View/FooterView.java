@@ -36,11 +36,8 @@ public class FooterView extends JPanel {
         jRepeatList.addActionListener(footerController);
     }
 
-    public JPanel configureFooter() {
+    public void initializeButtons(){
         Color gris = new Color(26,26,26);
-        JPanel footer = new JPanel();
-        JLabel jLogo = new JLabel("song name");
-        footer.setBackground(gris);
 
         Icon playBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_PLAYBUTTON_IMG));
         Icon forwardBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_NEXTBUTTON_IMG));
@@ -64,6 +61,14 @@ public class FooterView extends JPanel {
         jBackward.setActionCommand(BTN_BACKWARD);
         jRepeat.setActionCommand(BTN_REPEAT);
         jRepeatList.setActionCommand(BTN_REPEAT_LIST);
+
+    }
+
+    public JPanel configureFooter() {
+        Color gris = new Color(26,26,26);
+        JPanel footer = new JPanel();
+        JLabel jLogo = new JLabel("song name");
+        footer.setBackground(gris);
 
         footer.add(jLogo);
         footer.add(jRepeat);

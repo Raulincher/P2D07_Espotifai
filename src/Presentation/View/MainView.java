@@ -49,6 +49,7 @@ public class MainView extends JFrame {
         this.detailedPlaylistView = detailedPlaylistView;
         this.detailedSongView = detailedSongView;
 
+
         cardManager = new CardLayout();
         getContentPane().setLayout(cardManager);
         configureWindow();
