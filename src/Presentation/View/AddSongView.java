@@ -19,6 +19,7 @@ public class AddSongView extends JPanel {
     public static final String BTN_ADD_FILE = "BTN_ADD_FILE";
     public static final String BTN_ADD_SONG = "BTN_ADD_SONG";
 
+    private JLabel jlFilename;
     private JButton jadd;
     private JButton jfile;
     private JTextField jtfSongName;
@@ -161,13 +162,18 @@ public class AddSongView extends JPanel {
         JOptionPane.showMessageDialog(this,error);
     }
 
+    public void setJlFilename(String filename) {
+        jlFilename = new JLabel(filename);
+    }
+
     public void addFileName(String filename) {
-        JLabel label = new JLabel(filename);
-        label.setForeground(Color.BLACK);
+        //JLabel label = new JLabel(filename);
+        setJlFilename(filename);
+        jlFilename.setForeground(Color.BLACK);
         jfile.setIcon(null);
         jfile.setBackground(Color.WHITE);
         jfile.setForeground(Color.WHITE);
-        jfile.add(label);
+        jfile.add(jlFilename);
         jfile.setVerticalTextPosition(SwingConstants.NORTH);
         jfile.setHorizontalTextPosition(SwingConstants.CENTER);
         jfile.setOpaque(true);
@@ -177,4 +183,19 @@ public class AddSongView extends JPanel {
         jfile.setPreferredSize(dimension);
     }
 
+    public void clearFields() {
+        jtfSongName.setText("");
+        jtfAlbum.setText("");
+        jtfArtist.setText("");
+        jtfGenre.setText("");
+        ImageIcon addFileBtnAux = new ImageIcon(String.valueOf(AssetsFiles.ADD_SONG_FILE_BUTTON_IMG));
+        int newWidth = 320;
+        int newHeight = 160;
+        Image addFileBtnImg = addFileBtnAux.getImage();
+        Image scaledAddFileBtn = addFileBtnImg.getScaledInstance(newWidth,newHeight,Image.SCALE_SMOOTH);
+        Icon addFileBtn = new ImageIcon(scaledAddFileBtn);
+        jfile.remove(jlFilename);
+        jfile.setIcon(addFileBtn);
+
+    }
 }

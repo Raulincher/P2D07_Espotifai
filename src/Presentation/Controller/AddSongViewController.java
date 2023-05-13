@@ -48,6 +48,7 @@ public class AddSongViewController implements ActionListener {
                     System.out.println(username);
                     if (songManager.addSong(songName, artist, album, genre, username)) {
                         addSongView.showPopUps("Song saved!");
+                        addSongView.clearFields();
                         mainView.showMainMenuCard();
                     } else {
                         addSongView.showPopUps("Error while saving the song!");
