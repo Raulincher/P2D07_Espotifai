@@ -1,6 +1,8 @@
 package Presentation;
 
+import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import java.util.ArrayList;
 
 public class SongTableModel extends DefaultTableModel {
@@ -26,6 +28,7 @@ public class SongTableModel extends DefaultTableModel {
             deleteTableModel.addRow(rowData);
         }
     }
+
 
     public void buildAllSongsTableModel(ArrayList<String> information){
         allSongsTableModel.addColumn("Song");

@@ -6,6 +6,8 @@ import Presentation.SongTableModel;
 import Presentation.Utils;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -66,12 +68,13 @@ public class DeleteSongView extends JPanel {
         jBuscador = new JTextField();
         center.add(utils.panelBuscador(jCerca, jBuscador),BorderLayout.NORTH);
 
-            // Taula ListSong
+        // Taula ListSong
         setModel(false);
         table = new JTable(model);
         JScrollPane scrollpane = createSongListTable(table);
         center.add(scrollpane, BorderLayout.CENTER);
         add(center, BorderLayout.CENTER);
+
 
         // SOUTH
         JPanel south = new JPanel();
@@ -92,8 +95,6 @@ public class DeleteSongView extends JPanel {
 
     public JScrollPane createSongListTable(JTable table){
         Color gris = new Color(26,26,26);
-
-
 
         table.setRowHeight(60);
         table.setGridColor(Color.gray);
@@ -126,4 +127,6 @@ public class DeleteSongView extends JPanel {
             model = songTableModel.getDeleteTableModel();
         }
     }
+
+
 }

@@ -53,7 +53,6 @@ public class Utils extends JFrame {
         jBuscador.setMinimumSize(new Dimension(300,40));
         panelBuscador.add(jBuscador);
         panelBuscador.add(jCerca);
-
         return panelBuscador;
     }
 
