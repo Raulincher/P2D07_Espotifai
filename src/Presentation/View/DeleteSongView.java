@@ -29,6 +29,7 @@ public class DeleteSongView extends JPanel {
     private JTextField input;
     private JButton delete;
     private Object[][] dataTableModel;
+    private TableRowSorter<DefaultTableModel> sorter;
     private static String[] columnHeaders = {"Title", "Artist", "Genre"};
 
     public DeleteSongView(HeaderView headerView, Utils utils, FooterView footerView){
@@ -36,11 +37,14 @@ public class DeleteSongView extends JPanel {
         this.headerView = headerView;
         this.footerView = footerView;
         deleteTableModel = new DefaultTableModel(columnHeaders, 0);
+        sorter =  new TableRowSorter<>(deleteTableModel);
     }
 
     public void addDeleteSongController(DeleteSongViewController deleteSongController){
      //   delete.addActionListener(deleteSongController);
         //jCerca.addActionListener(deleteSongController);
+        jBuscador.getDocument().addDocumentListener(deleteSongController);
+        table.getSelectionModel().addListSelectionListener(deleteSongController);
     }
 
     public void configureDeleteSongView() {
@@ -51,7 +55,7 @@ public class DeleteSongView extends JPanel {
         // NORTH
         JPanel north = new JPanel();
         north.setBackground(Color.black);
-        Icon logo = new ImageIcon(String.valueOf(AssetsFiles.MUSIC_LABEL));;
+        Icon logo = new ImageIcon(String.valueOf(AssetsFiles.DELETE_LABEL));;
         north.add(headerView.configureHeader(logo));
         add(north, BorderLayout.NORTH);
 
@@ -60,10 +64,7 @@ public class DeleteSongView extends JPanel {
         center.setBackground(Color.BLACK);
         center.setBorder(BorderFactory.createEmptyBorder(0, 200, 80, 200));
 
-            // Buscador
-        //Icon buscadorBtn = new ImageIcon(String.valueOf(AssetsFiles.BUSCADOR_BUTTON_IMG));
-        //jCerca = new JButton(buscadorBtn);
-        //jCerca.setActionCommand(BTN_BUSCADOR);
+        // Declarem buscador
         jBuscador = utils.textField();
         center.add(utils.panelBuscador(jBuscador),BorderLayout.NORTH);
 
@@ -74,11 +75,11 @@ public class DeleteSongView extends JPanel {
 
         //******************************
         // Create a TableRowSorter for the deleteTableModel
-        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(deleteTableModel);
+        //TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(deleteTableModel);
         sorter.setSortsOnUpdates(true);
         table.setRowSorter(sorter);
-        jBuscador.getDocument().addDocumentListener(new DocumentListener() {
-            @Override
+       // jBuscador.getDocument().addDocumentListener(new DocumentListener() {
+            /*@Override
             public void insertUpdate(DocumentEvent e) {
                 search(jBuscador.getText(), sorter);
             }
@@ -91,9 +92,8 @@ public class DeleteSongView extends JPanel {
             @Override
             public void changedUpdate(DocumentEvent e) {
                 search(jBuscador.getText(), sorter);
-            }
-        });
-        //******************************
+            }*/
+       // });
 
         // SOUTH
         JPanel south = new JPanel();
@@ -135,6 +135,7 @@ public class DeleteSongView extends JPanel {
 
 
     public void fillDeleteTable(ArrayList<String> deleteSongs) {
+        deleteTableModel.setRowCount(0);
         for (String s : deleteSongs) {
             String[] songInfo = s.split("-");
             Object[] rowData = {songInfo[0], songInfo[1], songInfo[2]};
@@ -142,11 +143,29 @@ public class DeleteSongView extends JPanel {
         }
     }
 
-    private void search(String query, TableRowSorter<DefaultTableModel> sorter) {
+    public void search(String query, TableRowSorter<DefaultTableModel> sorter) {
         if (query.length() == 0) {
             sorter.setRowFilter(null);
         } else {
             sorter.setRowFilter(RowFilter.regexFilter("(?i)" + query, 0)); // Search by the first column (title)
         }
+    }
+
+    public TableRowSorter<DefaultTableModel> getSorter() {
+        return sorter;
+    }
+
+    public String selectDeleteSong() {
+        int indexFila = table.getSelectedRow();
+
+        // Get the data from the selected row
+        String songTitle = (String) deleteTableModel.getValueAt(indexFila, 0);
+        return songTitle;
+    }
+
+    public int confirmationDeletePopUp(String songTitle) {
+        int result = JOptionPane.showConfirmDialog(null, "Do you want to proceed deleting " + songTitle + "?", "Confirmation", JOptionPane.YES_NO_OPTION);
+
+        return result;
     }
 }
