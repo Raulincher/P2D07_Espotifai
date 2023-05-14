@@ -33,8 +33,6 @@ public class Main {
         songManager.getSong();
 
         InitialView initialView = new InitialView(utils);
-
-
         FooterView footerView = new FooterView(utils);
         FooterController footerController = new FooterController(footerView, songManager);
         footerView.initializeButtons();

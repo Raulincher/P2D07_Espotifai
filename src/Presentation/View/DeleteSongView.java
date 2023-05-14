@@ -20,9 +20,7 @@ public class DeleteSongView extends JPanel {
     private final Utils utils;
     private final HeaderView headerView;
     private final FooterView footerView;
-    public static final String BTN_DELETE = "BTN_DELETE";
     public static final String BTN_BUSCADOR = "BTN_BUSCADOR";
-
     private DefaultTableModel deleteTableModel;
     private JTextField jBuscador;
     private JButton jCerca;
