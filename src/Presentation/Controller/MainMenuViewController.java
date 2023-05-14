@@ -2,10 +2,8 @@ package Presentation.Controller;
 
 import Business.SongManager;
 import Business.UserManager;
-import Presentation.DeleteSongTableModel;
 import Presentation.View.*;
 
-import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 

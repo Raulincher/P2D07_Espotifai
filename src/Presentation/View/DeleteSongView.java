@@ -2,8 +2,6 @@ package Presentation.View;
 
 import Presentation.AssetsFiles;
 import Presentation.Controller.DeleteSongViewController;
-import Presentation.DeleteSongTableModel;
-import Presentation.SongTableModel;
 import Presentation.Utils;
 
 import javax.swing.*;
@@ -13,7 +11,6 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
@@ -36,7 +33,7 @@ public class DeleteSongView extends JPanel {
     private Object[][] dataTableModel;
     private static String[] columnHeaders = {"Title", "Artist", "Genre"};
 
-    public DeleteSongView(HeaderView headerView, Utils utils, FooterView footerView, SongTableModel songTableModel){
+    public DeleteSongView(HeaderView headerView, Utils utils, FooterView footerView){
         this.utils = utils;
         this.headerView = headerView;
         this.footerView = footerView;
@@ -154,5 +151,4 @@ public class DeleteSongView extends JPanel {
             sorter.setRowFilter(RowFilter.regexFilter("(?i)" + query, 0)); // Search by the first column (title)
         }
     }
-
 }

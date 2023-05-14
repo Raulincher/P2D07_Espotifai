@@ -1,10 +1,7 @@
 package Presentation.View;
 
-import Business.Entities.Song;
 import Presentation.AssetsFiles;
 import Presentation.Controller.GeneralSongListViewController;
-import Presentation.DeleteSongTableModel;
-import Presentation.SongTableModel;
 import Presentation.Utils;
 
 import javax.swing.*;
@@ -12,7 +9,6 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.util.ArrayList;

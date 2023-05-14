@@ -10,13 +10,9 @@ import Persistance.dao.sql.SQLPlaylistDao;
 import Persistance.dao.sql.SQLSongDao;
 import Persistance.dao.sql.SQLUserDao;
 import Presentation.Controller.*;
-import Presentation.DeleteSongTableModel;
-import Presentation.SongTableModel;
 import Presentation.Utils;
 import Presentation.View.*;
 
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
 import java.sql.Connection;
 
 public class Main {
@@ -33,7 +29,6 @@ public class Main {
         PlaylistManager playlistManager = new PlaylistManager(playlistDao);
 
         Utils utils = new Utils();
-        SongTableModel songTableModel = new SongTableModel();
 
         songManager.getSong();
 
@@ -101,7 +96,7 @@ public class Main {
         RegisterView registerView = new RegisterView(utils);
         LoginView loginView = new LoginView(utils);
         AddSongView addSongView = new AddSongView(utils, headerView, footerView);
-        DeleteSongView deleteSongView = new DeleteSongView(headerView2, utils, footerView2, songTableModel);
+        DeleteSongView deleteSongView = new DeleteSongView(headerView2, utils, footerView2);
         DetailedPlaylistView detailedPlaylistView = new DetailedPlaylistView(utils);
         DetailedSongView detailedSongView = new DetailedSongView(utils, headerView3, footerView3, songManager);
         GeneralPlaylistView generalPlaylistView = new GeneralPlaylistView(headerView4, footerView4, utils);
@@ -112,17 +107,15 @@ public class Main {
         MainView mainView = new MainView(initialView, deleteSongView, statisticsView, mainMenuView, generalPlaylistView, generalSongListView, detailedSongView, detailedPlaylistView, registerView, loginView, addSongView);
         headerController.addMainView(mainView);
 
-        SongTableModelController songTableModelController = new SongTableModelController(songManager, userManager, songTableModel);
         InitialViewController initialViewController = new InitialViewController(mainView);
         LoginViewController loginViewController = new LoginViewController(mainView, loginView, userManager);
         RegisterViewController registerViewController = new RegisterViewController(mainView, registerView, userManager);
         AddSongViewController addSongViewController = new AddSongViewController(addSongView, mainView, songManager, userManager);
-        DeleteSongViewController deleteSongViewController = new DeleteSongViewController(deleteSongView, mainView, songManager,songTableModelController, songTableModel);
+        DeleteSongViewController deleteSongViewController = new DeleteSongViewController(deleteSongView, mainView, songManager);
         DetailedPlaylistViewController detailedPlaylistViewController = new DetailedPlaylistViewController(detailedPlaylistView, mainView);
         DetailedSongViewController detailedSongViewController = new DetailedSongViewController(detailedSongView, mainView);
         GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView, mainView, songManager);
         GeneralPlaylistViewController generalPlaylistViewController = new GeneralPlaylistViewController(generalPlaylistView, mainView);
-        DeleteSongTableModel deleteSongTableModel = new DeleteSongTableModel();
         MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView, songManager, userManager, deleteSongView, generalSongListView);
         StatisticsViewController statisticsViewController = new StatisticsViewController(statisticsView, mainView);
 
@@ -137,9 +130,6 @@ public class Main {
         generalPlaylistView.addGeneralPlaylistController(generalPlaylistViewController);
         mainMenuView.addMainMenuController(mainMenuViewController);
         statisticsView.addStatisticsController(statisticsViewController);
-
-
-
 
         mainView.start();
     }

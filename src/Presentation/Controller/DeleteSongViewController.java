@@ -1,7 +1,6 @@
 package Presentation.Controller;
 
 import Business.SongManager;
-import Presentation.SongTableModel;
 import Presentation.View.AddSongView;
 import Presentation.View.DeleteSongView;
 import Presentation.View.InitialView;
@@ -15,17 +14,12 @@ public class DeleteSongViewController implements ActionListener {
     private final DeleteSongView deleteSongView;
     private final MainView mainView;
     private final SongManager songManager;
-    private SongTableModelController songTableModelController;
-    private SongTableModel songTableModel;
 
 
-    public DeleteSongViewController(DeleteSongView deleteSongView, MainView mainView, SongManager songManager,
-                                    SongTableModelController songTableModelController, SongTableModel songTableModel) {
+    public DeleteSongViewController(DeleteSongView deleteSongView, MainView mainView, SongManager songManager) {
         this.deleteSongView = deleteSongView;
         this.mainView = mainView;
         this.songManager = songManager;
-        this.songTableModelController = songTableModelController;
-        this.songTableModel = songTableModel;
     }
 
     public void runDeleteSongView() {
@@ -51,8 +45,6 @@ public class DeleteSongViewController implements ActionListener {
                     deleteSongView.showPopUps("This song doesn't exist!");
                 }*/
 
-            }
         }
     }
-
-
+}
