@@ -8,9 +8,12 @@ import Presentation.SongTableModel;
 import Presentation.Utils;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -63,12 +66,33 @@ public class GeneralSongListView extends JPanel {
         jCerca = new JButton(buscadorBtn);
         jCerca.setActionCommand(BTN_BUSCADOR);
         jBuscador = new JTextField();
-        //center.add(utils.panelBuscador(jCerca, jBuscador),BorderLayout.NORTH);
+        center.add(utils.panelBuscador(jBuscador),BorderLayout.NORTH);
 
         // Taula ListSong
-        JScrollPane scrollpane = createSongListTable();
+        table = new JTable(songsTableModel);
+        JScrollPane scrollpane = createSongListTable(table);
         center.add(scrollpane, BorderLayout.CENTER);
         add(center, BorderLayout.CENTER);
+
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(songsTableModel);
+        sorter.setSortsOnUpdates(true);
+        table.setRowSorter(sorter);
+        jBuscador.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                search(jBuscador.getText(), sorter);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                search(jBuscador.getText(), sorter);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                search(jBuscador.getText(), sorter);
+            }
+        });
 
         JPanel south = new JPanel();
         south.setBackground(gris);
@@ -79,32 +103,24 @@ public class GeneralSongListView extends JPanel {
 
     }
 
-    public JScrollPane createSongListTable(){
+    public JScrollPane createSongListTable(JTable table){
         Color gris = new Color(26,26,26);
-
-        //DefaultTableModel model = songTableModel.getAllSongsTableModel();
-        table = new JTable(songsTableModel);
 
         table.setRowHeight(60);
         table.setGridColor(Color.gray);
         table.setBackground(gris);
         table.setForeground(Color.WHITE);
         table.setDefaultEditor(Object.class, null);
-        //table.setSelectionBackground(Color.decode("#8B898B"));
-        //table.setSelectionForeground(gris);
         table.setSelectionBackground(table.getBackground());
         table.setSelectionForeground(Color.decode("#00DC00"));
 
         DefaultTableCellRenderer header = new DefaultTableCellRenderer();
         header.setHorizontalAlignment(SwingConstants.LEFT);
         header.setForeground(Color.decode("#00DC00"));
-        //header.setBorder(BorderFactory.createLineBorder(Color.gray));
         header.setFont(new Font("Gotham", Font.BOLD, 20));
         table.getTableHeader().setDefaultRenderer(header);
 
         table.setFont(new Font("Gotham", Font.BOLD, 20));
-        //scrollpane.setBackground(gris);
-        //scrollpane.getVerticalScrollBar().setBackground(Color.BLACK);
 
         return new JScrollPane(table);
     }
@@ -122,6 +138,14 @@ public class GeneralSongListView extends JPanel {
             String[] songInfo = s.split("-");
             Object[] rowData = {songInfo[0], songInfo[1], songInfo[2]};
             songsTableModel.addRow(rowData);
+        }
+    }
+
+    private void search(String query, TableRowSorter<DefaultTableModel> sorter) {
+        if (query.length() == 0) {
+            sorter.setRowFilter(null);
+        } else {
+            sorter.setRowFilter(RowFilter.regexFilter("(?i)" + query, 0)); // Search by the first column (title)
         }
     }
 }

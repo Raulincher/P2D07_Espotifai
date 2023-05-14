@@ -11,6 +11,7 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -23,11 +24,11 @@ public class DeleteSongView extends JPanel {
     private final HeaderView headerView;
     private final FooterView footerView;
     public static final String BTN_DELETE = "BTN_DELETE";
-    //public static final String BTN_BUSCADOR = "BTN_BUSCADOR";
+    public static final String BTN_BUSCADOR = "BTN_BUSCADOR";
 
     private DefaultTableModel deleteTableModel;
     private JTextField jBuscador;
-    //private JButton jCerca;
+    private JButton jCerca;
     private JTable table;
     private JLabel name;
     private JTextField input;
@@ -68,14 +69,36 @@ public class DeleteSongView extends JPanel {
         //Icon buscadorBtn = new ImageIcon(String.valueOf(AssetsFiles.BUSCADOR_BUTTON_IMG));
         //jCerca = new JButton(buscadorBtn);
         //jCerca.setActionCommand(BTN_BUSCADOR);
-        jBuscador = new JTextField();
+        jBuscador = utils.textField();
         center.add(utils.panelBuscador(jBuscador),BorderLayout.NORTH);
-
 
         table = new JTable(deleteTableModel);
         JScrollPane scrollpane = createSongListTable(table);
         center.add(scrollpane, BorderLayout.CENTER);
         add(center, BorderLayout.CENTER);
+
+        //******************************
+        // Create a TableRowSorter for the deleteTableModel
+        TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(deleteTableModel);
+        sorter.setSortsOnUpdates(true);
+        table.setRowSorter(sorter);
+        jBuscador.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+                search(jBuscador.getText(), sorter);
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+                search(jBuscador.getText(), sorter);
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                search(jBuscador.getText(), sorter);
+            }
+        });
+        //******************************
 
         // SOUTH
         JPanel south = new JPanel();
@@ -85,7 +108,7 @@ public class DeleteSongView extends JPanel {
         add(south, BorderLayout.SOUTH);
     }
 
-    public JTextField getjBuscador() {
+    public JTextField getjtfBuscador() {
         return jBuscador;
     }
 
@@ -121,6 +144,14 @@ public class DeleteSongView extends JPanel {
             String[] songInfo = s.split("-");
             Object[] rowData = {songInfo[0], songInfo[1], songInfo[2]};
             deleteTableModel.addRow(rowData);
+        }
+    }
+
+    private void search(String query, TableRowSorter<DefaultTableModel> sorter) {
+        if (query.length() == 0) {
+            sorter.setRowFilter(null);
+        } else {
+            sorter.setRowFilter(RowFilter.regexFilter("(?i)" + query, 0)); // Search by the first column (title)
         }
     }
 
