@@ -1,11 +1,11 @@
 package Presentation.Controller;
 
 import Business.SongManager;
-import Presentation.View.GeneralSongListView;
-import Presentation.View.InitialView;
-import Presentation.View.MainMenuView;
-import Presentation.View.MainView;
+import Business.UserManager;
+import Presentation.DeleteSongTableModel;
+import Presentation.View.*;
 
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -13,11 +13,19 @@ public class MainMenuViewController implements ActionListener{
 
     private final MainMenuView mainMenuView;
     private final MainView mainView;
-    private SongTableModelController songTableModelController;
-    public MainMenuViewController(MainMenuView mainMenuView, MainView mainView, SongTableModelController songTableModelController) {
+    private final SongManager songManager;
+    private final UserManager userManager;
+    private final DeleteSongView deleteSongView;
+    private final GeneralSongListView generalSongListView;
+
+    public MainMenuViewController(MainMenuView mainMenuView, MainView mainView, SongManager songManager,
+                                  UserManager userManager, DeleteSongView deleteSongView, GeneralSongListView generalSongListView) {
         this.mainMenuView = mainMenuView;
         this.mainView = mainView;
-        this.songTableModelController = songTableModelController;
+        this.songManager = songManager;
+        this.userManager = userManager;
+        this.deleteSongView = deleteSongView;
+        this.generalSongListView = generalSongListView;
     }
 
     @Override
@@ -26,12 +34,12 @@ public class MainMenuViewController implements ActionListener{
             case MainMenuView.BTN_BACK -> mainView.showMainCard();
             case MainMenuView.BTN_ADD_SONG -> mainView.showAddSongCard();
             case MainMenuView.BTN_DELETE_SONG -> {
-                songTableModelController.createDeleteJTable();
+                deleteSongView.fillDeleteTable(songManager.listSongs(true, userManager.currentUsername()));
                 mainView.showDeleteSongCard();
             }
             case MainMenuView.BTN_MANAGE -> mainView.showGeneralPlaylistCard();
             case MainMenuView.BTN_SONG_LIST -> {
-                songTableModelController.createAllSongsJTable();
+                generalSongListView.fillTable(songManager.listSongs(false, null));
                 mainView.showGeneralSongListCard();
             }
             case MainMenuView.BTN_STATISTICS -> mainView.showStatisticsCard();

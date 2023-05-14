@@ -3,6 +3,7 @@ package Presentation.View;
 import Business.Entities.Song;
 import Presentation.AssetsFiles;
 import Presentation.Controller.GeneralSongListViewController;
+import Presentation.DeleteSongTableModel;
 import Presentation.SongTableModel;
 import Presentation.Utils;
 
@@ -11,6 +12,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
+import java.util.ArrayList;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
 
@@ -24,13 +26,14 @@ public class GeneralSongListView extends JPanel {
     private JTextField jBuscador;
     private JButton jCerca;
     private JTable table;
-    private SongTableModel songTableModel;
+    private DefaultTableModel songsTableModel;
+    private static String[] columnHeaders = {"Title", "Artist", "Genre"};
 
-    public GeneralSongListView(Utils utils, HeaderView headerView, FooterView footerView,SongTableModel songTableModel ){
+    public GeneralSongListView(Utils utils, HeaderView headerView, FooterView footerView){
         this.utils = utils;
         this.footerView = footerView;
         this.headerView = headerView;
-        this.songTableModel = songTableModel;
+        songsTableModel = new DefaultTableModel(columnHeaders, 0);
     }
 
     public void addGeneralSongListController(GeneralSongListViewController generalSongListViewController){
@@ -60,7 +63,7 @@ public class GeneralSongListView extends JPanel {
         jCerca = new JButton(buscadorBtn);
         jCerca.setActionCommand(BTN_BUSCADOR);
         jBuscador = new JTextField();
-        center.add(utils.panelBuscador(jCerca, jBuscador),BorderLayout.NORTH);
+        //center.add(utils.panelBuscador(jCerca, jBuscador),BorderLayout.NORTH);
 
         // Taula ListSong
         JScrollPane scrollpane = createSongListTable();
@@ -79,8 +82,8 @@ public class GeneralSongListView extends JPanel {
     public JScrollPane createSongListTable(){
         Color gris = new Color(26,26,26);
 
-        DefaultTableModel model = songTableModel.getAllSongsTableModel();
-        table = new JTable(model);
+        //DefaultTableModel model = songTableModel.getAllSongsTableModel();
+        table = new JTable(songsTableModel);
 
         table.setRowHeight(60);
         table.setGridColor(Color.gray);
@@ -114,7 +117,11 @@ public class GeneralSongListView extends JPanel {
         return table;
     }
 
-
-
-
+    public void fillTable(ArrayList<String> songs) {
+        for (String s : songs) {
+            String[] songInfo = s.split("-");
+            Object[] rowData = {songInfo[0], songInfo[1], songInfo[2]};
+            songsTableModel.addRow(rowData);
+        }
+    }
 }

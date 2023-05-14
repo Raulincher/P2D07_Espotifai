@@ -34,15 +34,9 @@ public class DeleteSongViewController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-            case DeleteSongView.BTN_BUSCADOR -> {
-                String songTitle = deleteSongView.getjBuscador().toString();
-                boolean worked = songTableModelController.createSearchSongJTable(songTitle);
-                if (!worked) {
-                    deleteSongView.showPopUps("Error searching!");
-                } else {
-                    deleteSongView.setModel(true);
-                }
-            }
+            /*case DeleteSongView.BTN_BUSCADOR -> {
+
+            }*/
             //case DeleteSongView.BTN_DELETE -> {
                 /*String songToDelete = deleteSongView.getInput().getText();
 

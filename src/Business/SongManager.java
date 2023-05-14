@@ -230,28 +230,23 @@ public class SongManager {
 
     public ArrayList<String> listSongs(boolean toDelete, String currentUsername) {
         ArrayList<String> information = new ArrayList<>();
-        if (!toDelete) {
-            ArrayList<Song> songs = songDao.readAllSongsSQL();
+        ArrayList<Song> allSongs = songDao.readAllSongsSQL();
 
-            for (Song song: songs) {
-                String songLine = song.getTile() + "-" + song.getArtist();
+        if (!toDelete) {
+            for (Song song: allSongs) {
+                String songLine = song.getTile() + "-" + song.getArtist() + "-" + song.getGenre();
                 information.add(songLine);
             }
         } else {
-            ArrayList<Song> allSongs = songDao.readAllSongsSQL();
-
-            for (Song allSong : allSongs) {
-                if (allSong.getUsername().equals(currentUsername)) {
-                    String songLine = allSong.getTile() + "-" + allSong.getArtist() + "-" + allSong.getGenre();
+            for (Song song: allSongs) {
+                if (song.getUsername().equals(currentUsername)) {
+                    String songLine = song.getTile() + "-" + song.getArtist() + "-" + song.getGenre();
                     information.add(songLine);
                 }
             }
         }
-        return information;
-    }
 
-    public ArrayList<Song> listAllSongs(){
-        return songDao.readAllSongsSQL();
+        return information;
     }
 
     public ArrayList<String> searchSong(String nameSong){

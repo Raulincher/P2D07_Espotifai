@@ -10,6 +10,7 @@ import Persistance.dao.sql.SQLPlaylistDao;
 import Persistance.dao.sql.SQLSongDao;
 import Persistance.dao.sql.SQLUserDao;
 import Presentation.Controller.*;
+import Presentation.DeleteSongTableModel;
 import Presentation.SongTableModel;
 import Presentation.Utils;
 import Presentation.View.*;
@@ -104,7 +105,7 @@ public class Main {
         DetailedPlaylistView detailedPlaylistView = new DetailedPlaylistView(utils);
         DetailedSongView detailedSongView = new DetailedSongView(utils, headerView3, footerView3, songManager);
         GeneralPlaylistView generalPlaylistView = new GeneralPlaylistView(headerView4, footerView4, utils);
-        GeneralSongListView generalSongListView = new GeneralSongListView(utils, headerView5, footerView5, songTableModel);
+        GeneralSongListView generalSongListView = new GeneralSongListView(utils, headerView5, footerView5);
         MainMenuView mainMenuView = new MainMenuView(footerView6, utils, headerView6);
         StatisticsView statisticsView = new StatisticsView(headerView7, utils);
 
@@ -121,7 +122,8 @@ public class Main {
         DetailedSongViewController detailedSongViewController = new DetailedSongViewController(detailedSongView, mainView);
         GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView, mainView, songManager);
         GeneralPlaylistViewController generalPlaylistViewController = new GeneralPlaylistViewController(generalPlaylistView, mainView);
-        MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView, songTableModelController);
+        DeleteSongTableModel deleteSongTableModel = new DeleteSongTableModel();
+        MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView, songManager, userManager, deleteSongView, generalSongListView);
         StatisticsViewController statisticsViewController = new StatisticsViewController(statisticsView, mainView);
 
         initialView.addInitialViewController(initialViewController);

@@ -27,7 +27,6 @@ public class AddSongViewController implements ActionListener {
         switch (e.getActionCommand()) {
             case AddSongView.BTN_ADD_FILE:
                 if (!songManager.fileSongSelector()) {
-                    // Pop up
                     addSongView.showPopUps("Error, the song should be in .wav format!");
                 } else {
                     addSongView.addFileName(songManager.obtainFilePath());
@@ -35,28 +34,29 @@ public class AddSongViewController implements ActionListener {
                 break;
 
             case AddSongView.BTN_ADD_SONG:
-                // Guardar dades
                 String songName = addSongView.getJtfSongName().getText();
-                System.out.println(songName);
                 String artist = addSongView.getJtfArtist().getText();
-                System.out.println(artist);
                 String album = addSongView.getJtfAlbum().getText();
-                System.out.println(album);
                 String genre = (String) addSongView.getJcbGenre().getSelectedItem();
-                System.out.println(genre);
 
                 if (songManager.isEmpty(songName, artist, album, genre)) {
                     addSongView.showPopUps("Error, empty field, can't upload the song!");
                 } else {
-                    //songManager.songExists(songName);
-                    String username = userManager.currentUsername();
+                    if (!songManager.songExists(songName)) {
+                        String username = userManager.currentUsername();
 
-                    if (songManager.addSong(songName, artist, album, genre, username)) {
-                        addSongView.showPopUps("Song saved!");
-                        addSongView.clearFields();
-                        mainView.showMainMenuCard();
+                        if (songManager.addSong(songName, artist, album, genre, username)) {
+                            addSongView.showPopUps("Song saved!");
+                            addSongView.clearFields();
+                            mainView.showMainMenuCard();
+                        } else {
+                            addSongView.showPopUps("Error while saving the song!");
+                        }
                     } else {
-                        addSongView.showPopUps("Error while saving the song!");
+                        addSongView.showPopUps("Song previously added!\n" +
+                                                    "Please, add another one.");
+                        addSongView.clearFields();
+                        mainView.showAddSongCard();
                     }
                 }
                 break;

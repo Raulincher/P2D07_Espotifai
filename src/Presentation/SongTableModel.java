@@ -1,14 +1,19 @@
 package Presentation;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
+import java.awt.*;
 import java.util.ArrayList;
 
 public class SongTableModel extends DefaultTableModel {
     private DefaultTableModel deleteTableModel;
     private DefaultTableModel allSongsTableModel;
     private DefaultTableModel searchedSongTableModel;
+    private JTable deleteTable;
+    private JTextField jtfBuscador;
 
 
     public SongTableModel() {
@@ -18,14 +23,31 @@ public class SongTableModel extends DefaultTableModel {
     }
 
     public void buildDeleteTableModel(ArrayList<String> information){
+        JPanel panelTable = new JPanel();
+
         deleteTableModel.addColumn("Song");
         deleteTableModel.addColumn("Artist");
         deleteTableModel.addColumn("Genre");
 
-        for (int i = 0; i < information.size(); i++) {
-            String[] songInfo = information.get(i).split("-");
+        for (String s : information) {
+            String[] songInfo = s.split("-");
             Object[] rowData = {songInfo[0], songInfo[1], songInfo[2]};
             deleteTableModel.addRow(rowData);
+        }
+    }
+
+    public void filtrar() {
+        String busqueda = jtfBuscador.getText().toLowerCase();
+
+        // Limpiar datos del modelo
+        deleteTableModel.setRowCount(0);
+
+        // Filtrar datos y agregarlos al modelo
+        for (int i = 0; i < deleteTableModel.getRowCount(); i++) {
+            if (deleteTableModel.getValueAt(i,0).equals(busqueda)) {
+                System.out.println(deleteTableModel.getValueAt(1,0));
+                 break;
+            }
         }
     }
 
@@ -34,8 +56,8 @@ public class SongTableModel extends DefaultTableModel {
         allSongsTableModel.addColumn("Song");
         allSongsTableModel.addColumn("Artist");
 
-        for (int i = 0; i < information.size(); i++) {
-            String[] songInfo = information.get(i).split("-");
+        for (String s : information) {
+            String[] songInfo = s.split("-");
             Object[] rowData = {songInfo[0], songInfo[1]};
             allSongsTableModel.addRow(rowData);
         }
@@ -58,7 +80,4 @@ public class SongTableModel extends DefaultTableModel {
         return allSongsTableModel;
     }
 
-    public DefaultTableModel getSearchedSongTableModel() {
-        return searchedSongTableModel;
-    }
 }
