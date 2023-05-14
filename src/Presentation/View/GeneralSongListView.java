@@ -130,6 +130,8 @@ public class GeneralSongListView extends JPanel {
     }
 
     public void fillTable(ArrayList<String> songs) {
+        songsTableModel.setRowCount(0);
+
         for (String s : songs) {
             String[] songInfo = s.split("-");
             Object[] rowData = {songInfo[0], songInfo[1], songInfo[2]};
@@ -138,6 +140,7 @@ public class GeneralSongListView extends JPanel {
     }
 
     private void search(String query, TableRowSorter<DefaultTableModel> sorter) {
+
         if (query.length() == 0) {
             sorter.setRowFilter(null);
         } else {

@@ -168,4 +168,12 @@ public class DeleteSongView extends JPanel {
 
         return result;
     }
+
+    public void updateTable(String songTitle) {
+        for (int i = 0; i < deleteTableModel.getRowCount(); i++) {
+            if(deleteTableModel.getValueAt(i,0).equals(songTitle)) {
+                deleteTableModel.removeRow(i);
+            }
+        }
+    }
 }
