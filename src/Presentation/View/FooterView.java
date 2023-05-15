@@ -80,13 +80,13 @@ public class FooterView extends JPanel {
     }
 
     public void stop(){
-        Icon playBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_OLDBUTTON_IMG));
+        Icon playBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_PLAYBUTTON_IMG));
         jplay.setIcon(playBtn);
     }
 
     public void start(){
-        Icon playBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_PLAYBUTTON_IMG));
-        jplay.setIcon(playBtn);
+        Icon pauseBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_PAUSEBUTTON_IMG));
+        jplay.setIcon(pauseBtn);
     }
 
 

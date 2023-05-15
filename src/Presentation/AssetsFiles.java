@@ -33,6 +33,8 @@ public enum AssetsFiles {
 
     ADDSONG_BUTTON_IMG("files/imgs/addsongButton.png"),
 
+    ADD_SONG_FILE_BUTTON_IMG("files/imgs/addSongFile.png"),
+
     DELETESONG_BUTTON_IMG("files/imgs/deletesongButton.png"),
 
     STATISTICS_BUTTON_IMG("files/imgs/statisticsButton.png"),
@@ -51,6 +53,8 @@ public enum AssetsFiles {
 
     FOOT_PLAYBUTTON_IMG("files/imgs/FplayButton.png"),
 
+    FOOT_PAUSEBUTTON_IMG("files/imgs/FpauseButton.png"),
+
     FOOT_OLDBUTTON_IMG("files/imgs/FoldButton.png"),
 
     FOOT_NEXTBUTTON_IMG("files/imgs/FnextButton.png"),
@@ -60,9 +64,17 @@ public enum AssetsFiles {
     FOOT_REPEAT_PLAYLIST_BUTTON_IMG("files/imgs/FrepeatPlaylistButton.png"),
     BUSCADOR_BUTTON_IMG("files/imgs/lupaButton.png"),
 
-    CREATE_LIST_BUTTON_IMG("files/imgs/createlistButton.png"),
+    CREATE_LIST_BUTTON_IMG("files/imgs/createListLittleButton.png"),
 
-    ADD_SONG_FILE_BUTTON_IMG("files/imgs/addSongFile.png");
+    SONG_GO_UP_BUTTON_IMG("files/imgs/songGoUpLittleButton.png"),
+
+    SONG_GO_DOWN_BUTTON_IMG("files/imgs/songGoDownLittleButton.png"),
+
+    DELETE_LIST_BUTTON_IMG("files/imgs/deleteListLittleButton.png"),
+
+    DELETE_SONG_LITTLE_BUTTON_IMG("files/imgs/deleteSongLittleButton.png"),
+
+    DELETE_SONG_FROM_LIST_BUTTON_IMG("files/imgs/deleteSongFromListLittleButton.png");
 
     private final String files;
     AssetsFiles(String files) { this.files = files; }
