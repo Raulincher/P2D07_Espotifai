@@ -10,6 +10,8 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class SongManager {
 
@@ -270,6 +272,26 @@ public class SongManager {
         } else {
             return songSelected;
         }
+    }
+
+    public ArrayList<Integer> countSongsByGenre() {
+        ArrayList<Integer> genreCounts = new ArrayList<>();
+        ArrayList<String> genres = new ArrayList<>();
+        ArrayList<Song> allSongs = songDao.readAllSongsSQL();
+
+        for (Song song : allSongs) {
+            String genre = song.getGenre();
+            if (!genres.contains(genre)) {
+                genres.add(genre);
+                genreCounts.add(1);
+            } else {
+                int i = genres.indexOf(genre);
+                int count = genreCounts.get(i);
+                genreCounts.set(i, count + 1);
+            }
+        }
+
+        return genreCounts;
     }
 
 
