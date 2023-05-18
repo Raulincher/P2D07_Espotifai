@@ -103,7 +103,7 @@ public class DetailedSongView extends JPanel {
         return new JScrollPane(table);
     }
 
-    public void fillDeleteTable(ArrayList<String> song) {
+    public void fillDetailedTable(ArrayList<String> song) {
         defaultTableModel.setRowCount(0);
         int countRow = 0;
         String[] row = {"Song","Genre","Artist","Album", "Uploaded by"};

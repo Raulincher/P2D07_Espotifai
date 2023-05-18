@@ -53,7 +53,7 @@ public class GeneralSongListViewController implements ActionListener, MouseListe
         if (row != -1) {
             selected = (String) table.getValueAt(row, 0);
             ArrayList<String> song = songManager.searchSong(selected);
-            detailedSongView.fillDeleteTable(song);
+            detailedSongView.fillDetailedTable(song);
             mainView.showDetailedSongCard();
         }
     }
