@@ -18,10 +18,10 @@ public class DetailedSongViewController implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        switch (e.getActionCommand()) {
+        /*switch (e.getActionCommand()) {
             case DetailedSongView.BTN_BACK -> mainView.showGeneralSongListCard();
             case DetailedSongView.BTN_LOGOUT -> mainView.showMainCard();
             case DetailedSongView.BTN_DELETE -> mainView.showMainCard();
-        }
+        }*/
     }
 }

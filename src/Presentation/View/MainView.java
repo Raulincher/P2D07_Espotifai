@@ -60,7 +60,7 @@ public class MainView extends JFrame {
         configureDeleteSong();
         configureDetailedPlaylist();
         configureStatisticsView();
-        configureDetailedSong(null);
+        configureDetailedSong();
         configureGeneralPlaylist();
         configureGeneralSongList();
         configureAddSong();
@@ -100,8 +100,8 @@ public class MainView extends JFrame {
         this.detailedPlaylistView.configureDetailedPlaylistView();
         this.getContentPane().add(detailedPlaylistView, CARD_DETAILED_PLAYLIST);
     }
-    private void configureDetailedSong(ArrayList<String> song){
-        this.detailedSongView.configureDetailedSongView(song);
+    private void configureDetailedSong(){
+        this.detailedSongView.configureDetailedSongView();
         this.getContentPane().add(detailedSongView, CARD_DETAILED_SONG);
     }
     private void configureGeneralPlaylist(){
@@ -140,9 +140,9 @@ public class MainView extends JFrame {
     public void showDetailedPlaylistCard(){
         cardManager.show(getContentPane(), CARD_DETAILED_PLAYLIST);
     }
-    public void showDetailedSongCard(ArrayList<String> song){
+    public void showDetailedSongCard(){
         cardManager.show(getContentPane(), CARD_DETAILED_SONG);
-        detailedSongView.configureDetailedSongView(song);
+        detailedSongView.configureDetailedSongView();
     }
 
     public void showGeneralPlaylistCard(){

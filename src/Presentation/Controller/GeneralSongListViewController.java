@@ -2,6 +2,8 @@ package Presentation.Controller;
 
 import Business.Entities.Song;
 import Business.SongManager;
+import Presentation.View.DeleteSongView;
+import Presentation.View.DetailedSongView;
 import Presentation.View.GeneralSongListView;
 import Presentation.View.MainView;
 
@@ -17,12 +19,14 @@ public class GeneralSongListViewController implements ActionListener, MouseListe
     private final GeneralSongListView generalSongListView;
     private final MainView mainView;
     private SongManager songManager;
+    private DetailedSongView detailedSongView;
 
 
-    public GeneralSongListViewController(GeneralSongListView generalSongListView, MainView mainView, SongManager songManager) {
+    public GeneralSongListViewController(GeneralSongListView generalSongListView, MainView mainView, SongManager songManager, DetailedSongView detailedSongView) {
         this.generalSongListView = generalSongListView;
         this.mainView = mainView;
         this.songManager = songManager;
+        this.detailedSongView = detailedSongView;
     }
 
     @Override
@@ -49,7 +53,8 @@ public class GeneralSongListViewController implements ActionListener, MouseListe
         if (row != -1) {
             selected = (String) table.getValueAt(row, 0);
             ArrayList<String> song = songManager.searchSong(selected);
-            mainView.showDetailedSongCard(song);
+            detailedSongView.fillDeleteTable(song);
+            mainView.showDetailedSongCard();
         }
     }
 
