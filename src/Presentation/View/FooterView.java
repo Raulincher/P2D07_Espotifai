@@ -47,6 +47,7 @@ public class FooterView extends JPanel {
         Icon backwardBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_OLDBUTTON_IMG));
         Icon repeatBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_REPEATBUTTON_IMG));
         Icon repeatListBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_REPEAT_PLAYLIST_BUTTON_IMG));
+        Icon lyricsBtn = new ImageIcon(String.valueOf(AssetsFiles.LYRICS_IMG));
 
         jplay = utils.buttonImg(playBtn);
         jplay.setBackground(gris);
@@ -58,7 +59,7 @@ public class FooterView extends JPanel {
         jRepeat.setBackground(gris);
         jRepeatList = utils.buttonImg(repeatListBtn);
         jRepeatList.setBackground(gris);
-        jLyrics = utils.buttonImg(playBtn);
+        jLyrics = utils.buttonImg(lyricsBtn);
         jLyrics.setBackground(gris);
 
         jplay.setActionCommand(BTN_PLAY);
