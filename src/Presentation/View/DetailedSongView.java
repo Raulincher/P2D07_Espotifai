@@ -1,19 +1,10 @@
 package Presentation.View;
-
-import Business.Entities.Song;
-import Business.SongManager;
-import Business.UserManager;
 import Presentation.AssetsFiles;
 import Presentation.Controller.DetailedSongViewController;
-import Presentation.Controller.HeaderController;
 import Presentation.Utils;
-
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
-import javax.swing.text.TableView;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -32,11 +23,14 @@ public class DetailedSongView extends JPanel {
     private DefaultTableModel defaultTableModel;
     private JTable table;
 
+    private static String[] columnHeaders ={"", ""};
+
 
     public DetailedSongView(Utils utils,HeaderView headerView,FooterView footerView){
         this.utils = utils;
         this.headerView = headerView;
         this.footerView = footerView;
+        defaultTableModel = new DefaultTableModel(columnHeaders, 0);
     }
 
     public void addDetailedSongController(DetailedSongViewController detailedSongViewController){
@@ -58,8 +52,6 @@ public class DetailedSongView extends JPanel {
         center.setBorder(BorderFactory.createEmptyBorder(0, 200, 80, 200));
 
         //Taula Song
-        String[] columnHeaders = {"", ""};
-        defaultTableModel = new DefaultTableModel(columnHeaders, 0);
         table = new JTable(defaultTableModel);
         JScrollPane scrollpane = createSongListTable(table,gris);
         center.add(scrollpane, BorderLayout.CENTER);
@@ -76,11 +68,6 @@ public class DetailedSongView extends JPanel {
     }
 
    private JScrollPane createSongListTable(JTable table, Color gris) {
-        TableColumn columna;
-        columna = table.getColumnModel().getColumn(0);
-        columna.setPreferredWidth(300);
-        columna.setMaxWidth(300);
-        columna.setMinWidth(300);
         table.setRowHeight(60);
         table.setGridColor(Color.gray);
         table.setBackground(gris);
@@ -90,12 +77,10 @@ public class DetailedSongView extends JPanel {
 
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
         renderer.setForeground(Color.decode("#00DC00"));
-        renderer.setFont(new Font("Gotham", Font.BOLD, 35));
         table.getColumnModel().getColumn(0).setCellRenderer(renderer);
 
         DefaultTableCellRenderer renderer2 = new DefaultTableCellRenderer();
         renderer2.setForeground(Color.white);
-        renderer2.setFont(new Font("Gotham", Font.BOLD, 20));
         table.getColumnModel().getColumn(1).setCellRenderer(renderer2);
 
         table.setFont(new Font("Gotham", Font.BOLD, 35));

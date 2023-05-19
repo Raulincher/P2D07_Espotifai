@@ -20,7 +20,6 @@ public class MainView extends JFrame {
     private final GeneralPlaylistView generalPlaylistView;
     private final MainMenuView mainMenuView;
     private final StatisticsView statisticsView;
-
     private static final String CARD_MAIN = "CARD_MAIN";
     private static final String CARD_ADD_SONG = "CARD_ADD_SONG";
     private static final String CARD_DELETE_SONG = "CARD_DELETE_SONG";
@@ -32,7 +31,6 @@ public class MainView extends JFrame {
     private static final String CARD_STATISTICS = "CARD_STATISTICS";
     private static final String CARD_LOGIN = "CARD_LOGIN";
     private static final String CARD_REGISTER = "CARD_REGISTER";
-
 
     private final CardLayout cardManager;
 
@@ -121,7 +119,6 @@ public class MainView extends JFrame {
         this.getContentPane().add(statisticsView, CARD_STATISTICS);
     }
 
-
     public void showMainCard(){
         cardManager.show(getContentPane(), CARD_MAIN);
     }
@@ -157,7 +154,6 @@ public class MainView extends JFrame {
     public void showStatisticsCard(){
         cardManager.show(getContentPane(), CARD_STATISTICS);
     }
-
 
     public void start() {
         showMainCard();

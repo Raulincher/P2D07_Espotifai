@@ -2,6 +2,7 @@ package Business;
 
 import Business.Entities.Song;
 import Persistance.dao.SongDao;
+import Persistance.dao.SongLyricsApi;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
@@ -21,10 +22,12 @@ public class SongManager {
     private File file;
     private Song song;
     private String actualSong;
+    private SongLyricsApi songLyricsApi;
 
 
-    public SongManager(SongDao songDao) {
+    public SongManager(SongDao songDao,SongLyricsApi songLyricsApi) {
         this.songDao = songDao;
+        this.songLyricsApi = songLyricsApi;
     }
 
     public void getSong(){
@@ -207,6 +210,9 @@ public class SongManager {
         return songSaved;
     }
 
+    public String getActualSong() {
+        return actualSong;
+    }
 
     public boolean songExists(String songName) {
         // Si troba la cançó EN EL DAO
@@ -296,7 +302,9 @@ public class SongManager {
         return genreMap;
     }
 
-
+    public String readLyricApi(String artist, String songName){
+        return songLyricsApi.readLyrics(artist,songName);
+    }
 }
 
 

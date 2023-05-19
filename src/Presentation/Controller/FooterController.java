@@ -1,6 +1,7 @@
 package Presentation.Controller;
 
 import Business.SongManager;
+import Persistance.dao.SongLyricsApi;
 import Presentation.View.FooterView;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -8,7 +9,7 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-
+import java.util.ArrayList;
 
 
 public class FooterController implements ActionListener {
@@ -16,12 +17,10 @@ public class FooterController implements ActionListener {
     private final FooterView footerView;
     private final SongManager songManager;
 
-
     public FooterController(FooterView footerView, SongManager songManager) {
         this.footerView = footerView;
         this.songManager = songManager;
     }
-
 
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -45,6 +44,14 @@ public class FooterController implements ActionListener {
                 }
             }
             case FooterView.BTN_REPEAT_LIST -> songManager.loopList();
+            case FooterView.BTN_LYRICS -> {
+                String nameActualSong = songManager.getActualSong();
+                ArrayList<String> actualSong = songManager.searchSong(nameActualSong);
+                //Canviar per actualSong, de moment es null
+                //String lyrics = songManager.readLyricApi(actualSong.get(2) ,actualSong.get(0));
+                String lyrics = songManager.readLyricApi("pentakill","lightbringer");
+                footerView.showPopUpLyrics(lyrics,"lightbringer");
+            }
         }
     }
 }

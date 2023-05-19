@@ -2,9 +2,7 @@
 import Business.PlaylistManager;
 import Business.SongManager;
 import Business.UserManager;
-import Persistance.dao.PlaylistDao;
-import Persistance.dao.SongDao;
-import Persistance.dao.UserDao;
+import Persistance.dao.*;
 import Persistance.dao.sql.DatabaseConnector;
 import Persistance.dao.sql.SQLPlaylistDao;
 import Persistance.dao.sql.SQLSongDao;
@@ -13,19 +11,22 @@ import Presentation.Controller.*;
 import Presentation.Utils;
 import Presentation.View.*;
 
+import java.io.IOException;
 import java.sql.Connection;
 
 public class Main {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
 
         Connection remoteConnection = DatabaseConnector.getInstance();
         UserDao userDao = new SQLUserDao(remoteConnection);
         SongDao songDao = new SQLSongDao(remoteConnection);
         PlaylistDao playlistDao = new SQLPlaylistDao(remoteConnection);
+        ApiHelper apiHelper = new ApiHelper();
+        SongLyricsApi songLyricsApi = new SongLyricsApi(apiHelper);
 
         UserManager userManager = new UserManager(userDao);
-        SongManager songManager = new SongManager(songDao);
+        SongManager songManager = new SongManager(songDao,songLyricsApi);
         PlaylistManager playlistManager = new PlaylistManager(playlistDao);
 
         Utils utils = new Utils();
