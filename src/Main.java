@@ -33,7 +33,7 @@ public class Main {
 
         //songManager.getPath("prueba");
 
-        //songManager.getSong();
+        songManager.getSong("");
 
         InitialView initialView = new InitialView(utils);
         FooterView footerView = new FooterView(utils);

@@ -35,17 +35,37 @@ public class SongManager {
 
     public void getSong(String songTitle){
         try {
-            String filePath = getPath(songTitle);
-            File music = new File("files/music/");
-            File[] files = music.listFiles();
-            assert files != null;
-            actualSong = files[0].getName();
-            File file = new File(filePath);
+            File music;
+            File[] files;
+            File file;
 
+            if(myClip != null){
+                myClip.close();
+            }
+
+            if(songTitle.equals("")){
+                music = new File("files/music/");
+                files = music.listFiles();
+                if(files == null){
+                    file = null;
+                }else {
+                    actualSong = files[0].getName();
+                    String filePath = "files/music/" + files[0].getName();
+                    file = new File(filePath);
+                }
+            }else{
+                file = new File(getPath(songTitle));
+                actualSong = file.getName();
+            }
+            assert file != null;
             if (file.exists()) {
+
                 myClip = AudioSystem.getClip();
                 AudioInputStream ais = AudioSystem.getAudioInputStream(file.toURI().toURL());
                 myClip.open(ais);
+                if(!songTitle.equals("")){
+                    myClip.start();
+                }
             }
             else {
                 throw new RuntimeException("Sound: file not found: " + filePath);
@@ -79,7 +99,6 @@ public class SongManager {
 
     public void loopAudio() {
         myClip.loop(Clip.LOOP_CONTINUOUSLY);
-        System.out.println("loop on");
     }
 
     public void moveForward() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
