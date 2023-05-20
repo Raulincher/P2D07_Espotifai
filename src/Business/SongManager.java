@@ -24,7 +24,6 @@ public class SongManager {
     private String actualSong;
     private SongLyricsApi songLyricsApi;
 
-
     public SongManager(SongDao songDao,SongLyricsApi songLyricsApi) {
         this.songDao = songDao;
         this.songLyricsApi = songLyricsApi;
@@ -232,10 +231,6 @@ public class SongManager {
         return songSaved;
     }
 
-    public String getActualSong() {
-        return actualSong;
-    }
-
     public boolean songExists(String songName) {
         // Si troba la cançó EN EL DAO
         if (songDao.songInDatabase(songName) ) {
@@ -329,6 +324,16 @@ public class SongManager {
 
     public String readLyricApi(String artist, String songName){
         return songLyricsApi.readLyrics(artist,songName);
+    }
+
+    public ArrayList<String> searchLyrics(){
+        actualSong = actualSong.substring(0, actualSong.lastIndexOf(".wav"));
+        ArrayList<String> songActual = searchSong(actualSong);
+        String lyrics = readLyricApi(songActual.get(2),songActual.get(0));
+        ArrayList<String> lyricsSong = new ArrayList<>();
+        lyricsSong.add(0,songActual.get(0));
+        lyricsSong.add(1,lyrics);
+        return lyricsSong;
     }
 }
 

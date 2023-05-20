@@ -1,7 +1,6 @@
 package Presentation.Controller;
 
 import Business.SongManager;
-import Persistance.dao.SongLyricsApi;
 import Presentation.View.FooterView;
 
 import javax.sound.sampled.LineUnavailableException;
@@ -45,14 +44,11 @@ public class FooterController implements ActionListener {
             }
             case FooterView.BTN_REPEAT_LIST -> songManager.loopList();
             case FooterView.BTN_LYRICS -> {
-                String nameActualSong = songManager.getActualSong();
-                nameActualSong = nameActualSong.substring(0, nameActualSong.lastIndexOf(".wav"));
-                ArrayList<String> actualSong = songManager.searchSong(nameActualSong);
-                if (actualSong == null){
+                ArrayList<String> lyrics = songManager.searchLyrics();
+                if (lyrics == null){
                     footerView.showPopUpError("Song not found");
                 } else {
-                    String lyrics = songManager.readLyricApi(actualSong.get(2) ,actualSong.get(0));
-                    footerView.showPopUpLyrics(lyrics,actualSong.get(0));
+                    footerView.showPopUpLyrics(lyrics.get(1),lyrics.get(0));
                 }
             }
         }

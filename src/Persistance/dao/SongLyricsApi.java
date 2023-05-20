@@ -4,7 +4,7 @@ import com.google.gson.*;
 
 import java.io.IOException;
 
-public class SongLyricsApi {
+public class SongLyricsApi  {
 
     private final ApiHelper apiHelper;
 

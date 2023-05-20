@@ -12,6 +12,7 @@ import static javax.swing.BorderFactory.createEmptyBorder;
 
 public class DetailedSongView extends JPanel {
     private final Utils utils;
+
     public static final String BTN_BACK = "BTN_BACK";
     public static final String BTN_LOGOUT = "BTN_LOGOUT";
     public static final String BTN_DELETE = "BTN_DELETE";
@@ -51,33 +52,6 @@ public class DetailedSongView extends JPanel {
         north.add(headerView.configureHeader(logo));
         add(north, BorderLayout.NORTH);
 
-        /*Icon logo = new ImageIcon(String.valueOf(AssetsFiles.DELETE_LABEL));;
-        JPanel north = new JPanel();
-        north.setBackground(Color.black);
-        north.setBorder(createEmptyBorder(40, 0, 0, 0));
-
-        JLabel usedLabel = new JLabel(logo);
-        usedLabel.setLayout(new GridLayout(4, 1, 0, 50));
-        north.add(usedLabel);
-
-        Icon loginBtn2 = new ImageIcon(String.valueOf(AssetsFiles.BACK_LITTLEBUTTON_IMG));
-        jback = utils.buttonImg(loginBtn2);
-        jback.setActionCommand(BTN_BACK);
-
-        Icon loginBtn = new ImageIcon(String.valueOf(AssetsFiles.LOGOUT_LITTLEBUTTON_IMG));
-        jlogout = utils.buttonImg(loginBtn);
-        jlogout.setActionCommand(BTN_LOGOUT);
-
-        Icon loginBtn3 = new ImageIcon(String.valueOf(AssetsFiles.DELETEACC_LITTLEBUTTON_IMG));
-        jdelete = utils.buttonImg(loginBtn3);
-        jdelete.setActionCommand(BTN_DELETE);
-
-        north.add(jback);
-        north.add(jlogout);
-        north.add(jdelete);
-
-        add(north, BorderLayout.NORTH);*/
-
         //CENTER
         JPanel center = new JPanel(new BorderLayout());
         center.setBackground(Color.BLACK);
@@ -88,7 +62,6 @@ public class DetailedSongView extends JPanel {
         JScrollPane scrollpane = createSongListTable(table,gris);
         center.add(scrollpane, BorderLayout.CENTER);
         add(center, BorderLayout.CENTER);
-
 
         // SOUTH
         JPanel south = new JPanel();

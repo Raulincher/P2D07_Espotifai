@@ -68,4 +68,16 @@ public class HeaderView extends JPanel {
         return resposta;
     }
 
+    public JButton getBackButton() {
+        return jBack;
+    }
+
+    public JButton getLogoutButton() {
+        return jLogOut;
+    }
+
+    public JButton getDeleteButton() {
+        return jDeleteAcc;
+    }
+
 }
