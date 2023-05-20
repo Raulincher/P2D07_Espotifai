@@ -46,11 +46,14 @@ public class FooterController implements ActionListener {
             case FooterView.BTN_REPEAT_LIST -> songManager.loopList();
             case FooterView.BTN_LYRICS -> {
                 String nameActualSong = songManager.getActualSong();
+                nameActualSong = nameActualSong.substring(0, nameActualSong.lastIndexOf(".wav"));
                 ArrayList<String> actualSong = songManager.searchSong(nameActualSong);
-                //Canviar per actualSong, de moment es null
-                //String lyrics = songManager.readLyricApi(actualSong.get(2) ,actualSong.get(0));
-                String lyrics = songManager.readLyricApi("pentakill","lightbringer");
-                footerView.showPopUpLyrics(lyrics,"lightbringer");
+                if (actualSong == null){
+                    footerView.showPopUpError("Song not found");
+                } else {
+                    String lyrics = songManager.readLyricApi(actualSong.get(2) ,actualSong.get(0));
+                    footerView.showPopUpLyrics(lyrics,actualSong.get(0));
+                }
             }
         }
     }
