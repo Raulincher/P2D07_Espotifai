@@ -261,7 +261,6 @@ public class SongManager {
         ArrayList<String> songSelected = new ArrayList<>();
         ArrayList<Song> listSongs = songDao.readAllSongsSQL();
         boolean in = false;
-
         for (Song song1: listSongs){
             if (song1.getTile().equals(nameSong)){
                 songSelected.add(song1.getTile());

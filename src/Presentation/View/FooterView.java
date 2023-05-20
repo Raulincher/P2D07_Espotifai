@@ -141,5 +141,9 @@ public class FooterView extends JPanel {
         dialog.setVisible(true);
     }
 
+    public void showPopUpError(String error){
+        JOptionPane.showMessageDialog(this,error);
+    }
+
 
 }
