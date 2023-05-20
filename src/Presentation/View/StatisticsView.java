@@ -52,13 +52,13 @@ public class StatisticsView extends JPanel {
         center.setBackground(Color.BLACK);
         JPanel graphPanel = new JPanel() {
             @Override
-            protected void paintComponent(Graphics g) {
-                super.paintComponent(g);
-                Graphics2D g2d = (Graphics2D) g;
+            protected void paintComponent(Graphics graphics) {
+                super.paintComponent(graphics);
+                Graphics2D graph2D = (Graphics2D) graphics;
 
                 Map<String, Integer> genreMap = songManager.createGenreMap();
 
-                int maxCount = Collections.max(genreMap.values());
+                int genreValue = Collections.max(genreMap.values());
                 int barWidth = getWidth() / (genreMap.size() * 2);
                 int maxHeight = getHeight();
                 int x = 0;
@@ -67,20 +67,20 @@ public class StatisticsView extends JPanel {
                     String genre = entry.getKey();
                     int count = entry.getValue();
 
-                    int barHeight = (int) ((double) count / maxCount * maxHeight);
+                    int barHeight = (int) ((double) count / genreValue * maxHeight);
 
-                    g2d.setColor(Color.GREEN);
-                    g2d.fillRect(x, getHeight() - barHeight, barWidth, barHeight);
+                    graph2D.setColor(Color.GREEN);
+                    graph2D.fillRect(x, getHeight() - barHeight, barWidth, barHeight -25);
 
-                    g2d.setColor(Color.WHITE);
-                    g2d.setFont(new Font("Gotham", Font.BOLD, 12));
-                    g2d.drawString(genre, x, getHeight() - 5);
+                    graph2D.setColor(Color.WHITE);
+                    graph2D.setFont(new Font("Gotham", Font.BOLD, 12));
+                    graph2D.drawString(genre, x, getHeight() - 5);
 
                     x += barWidth * 2;
                 }
             }
         };
-        graphPanel.setPreferredSize(new Dimension(400, 300));
+        graphPanel.setPreferredSize(new Dimension(500, 300));
         graphPanel.setBackground(Color.BLACK);
         center.add(graphPanel);
 
