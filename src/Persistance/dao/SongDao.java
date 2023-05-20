@@ -14,4 +14,6 @@ public interface SongDao {
 
     String deleteSong(String name);
 
+    String songPath(String songName);
+
 }

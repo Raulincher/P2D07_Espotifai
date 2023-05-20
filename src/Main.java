@@ -31,7 +31,9 @@ public class Main {
 
         Utils utils = new Utils();
 
-        songManager.getSong();
+        //songManager.getPath("prueba");
+
+        //songManager.getSong();
 
         InitialView initialView = new InitialView(utils);
         FooterView footerView = new FooterView(utils);

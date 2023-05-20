@@ -29,13 +29,16 @@ public class SongManager {
         this.songDao = songDao;
         this.songLyricsApi = songLyricsApi;
     }
+    public String getPath(String songName){
+        return songDao.songPath(songName);
+    }
 
-    public void getSong(){
+    public void getSong(String songTitle){
         try {
+            String filePath = getPath(songTitle);
             File music = new File("files/music/");
             File[] files = music.listFiles();
             assert files != null;
-            String filePath = "files/music/" + files[0].getName();
             actualSong = files[0].getName();
             File file = new File(filePath);
 
@@ -261,6 +264,7 @@ public class SongManager {
         ArrayList<String> songSelected = new ArrayList<>();
         ArrayList<Song> listSongs = songDao.readAllSongsSQL();
         boolean in = false;
+        String songTitle = "";
 
         for (Song song1: listSongs){
             if (song1.getTile().equals(nameSong)){
@@ -269,6 +273,7 @@ public class SongManager {
                 songSelected.add(song1.getArtist());
                 songSelected.add(song1.getAlbum());
                 songSelected.add(song1.getUsername());
+                songTitle = song1.getTile();
                 in = true;
             }
         }
@@ -276,6 +281,7 @@ public class SongManager {
         if (!in) {
             return null;
         } else {
+            getSong(songTitle);
             return songSelected;
         }
     }

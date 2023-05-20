@@ -145,7 +145,6 @@ public class SQLUserDao implements UserDao {
                 prepared.setString (2, username);
                 prepared.setString (3, generatedPassword);
                 ResultSet rs = prepared.executeQuery();
-                System.out.println(rs);
                 while (rs.next()) {
                     if (rs.getInt(1) == 0) {
                         error = false;
