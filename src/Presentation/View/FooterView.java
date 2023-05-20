@@ -99,19 +99,6 @@ public class FooterView extends JPanel {
     }
 
     public void showPopUpLyrics(String lyrics,String title) {
-       /* Color gris = new Color(26,26,26);
-        UIManager.put("OptionPane.background", gris);
-        JTextArea textArea = new JTextArea(lyrics);
-        textArea.setEditable(false);
-        textArea.setBackground(gris);
-        textArea.setForeground(Color.decode("#00DC00"));
-        textArea.setFont(new Font("Gotham", Font.BOLD, 15));
-        JScrollPane scrollPane = new JScrollPane(textArea);
-        scrollPane.setPreferredSize(new Dimension(400, 400));
-        scrollPane.setBackground(gris);
-        JOptionPane.showMessageDialog(null, scrollPane, "Lyrics", JOptionPane.INFORMATION_MESSAGE, new ImageIcon(String.valueOf(AssetsFiles.BUSCADOR_BUTTON_IMG)));
-*/
-
         Color gris = new Color(26, 26, 26);
         JDialog dialog = new JDialog((Frame) null, "Lyrics: " + title, true);
         dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);

@@ -34,19 +34,51 @@ public class DetailedSongView extends JPanel {
     }
 
     public void addDetailedSongController(DetailedSongViewController detailedSongViewController){
+        jback.addActionListener(detailedSongViewController);
+        jlogout.addActionListener(detailedSongViewController);
+        jdelete.addActionListener(detailedSongViewController);
     }
 
     public void configureDetailedSongView() {
         setLayout(new BorderLayout());
         setBackground(Color.BLACK);
         Color gris = new Color(26,26,26);
-        //North
+
+        // NORTH
         JPanel north = new JPanel();
         north.setBackground(Color.black);
-        Icon logo = new ImageIcon(String.valueOf(AssetsFiles.SONG_LABEL));;
+        Icon logo = new ImageIcon(String.valueOf(AssetsFiles.DELETE_LABEL));;
         north.add(headerView.configureHeader(logo));
         add(north, BorderLayout.NORTH);
 
+        /*Icon logo = new ImageIcon(String.valueOf(AssetsFiles.DELETE_LABEL));;
+        JPanel north = new JPanel();
+        north.setBackground(Color.black);
+        north.setBorder(createEmptyBorder(40, 0, 0, 0));
+
+        JLabel usedLabel = new JLabel(logo);
+        usedLabel.setLayout(new GridLayout(4, 1, 0, 50));
+        north.add(usedLabel);
+
+        Icon loginBtn2 = new ImageIcon(String.valueOf(AssetsFiles.BACK_LITTLEBUTTON_IMG));
+        jback = utils.buttonImg(loginBtn2);
+        jback.setActionCommand(BTN_BACK);
+
+        Icon loginBtn = new ImageIcon(String.valueOf(AssetsFiles.LOGOUT_LITTLEBUTTON_IMG));
+        jlogout = utils.buttonImg(loginBtn);
+        jlogout.setActionCommand(BTN_LOGOUT);
+
+        Icon loginBtn3 = new ImageIcon(String.valueOf(AssetsFiles.DELETEACC_LITTLEBUTTON_IMG));
+        jdelete = utils.buttonImg(loginBtn3);
+        jdelete.setActionCommand(BTN_DELETE);
+
+        north.add(jback);
+        north.add(jlogout);
+        north.add(jdelete);
+
+        add(north, BorderLayout.NORTH);*/
+
+        //CENTER
         JPanel center = new JPanel(new BorderLayout());
         center.setBackground(Color.BLACK);
         center.setBorder(BorderFactory.createEmptyBorder(0, 200, 80, 200));
@@ -55,13 +87,13 @@ public class DetailedSongView extends JPanel {
         table = new JTable(defaultTableModel);
         JScrollPane scrollpane = createSongListTable(table,gris);
         center.add(scrollpane, BorderLayout.CENTER);
-
         add(center, BorderLayout.CENTER);
 
+
+        // SOUTH
         JPanel south = new JPanel();
         south.setBackground(gris);
         south.setBorder(createEmptyBorder(30, 0, 30, 0));
-
         south.add(footerView.configureFooter());
         add(south, BorderLayout.SOUTH);
 
@@ -99,4 +131,23 @@ public class DetailedSongView extends JPanel {
             countRow++;
         }
     }
+
+    /*public void fillDetailedTable() {
+        ArrayList<String> song = new ArrayList<>();
+        song.add(0,"nom");
+        song.add(1,"genere");
+        song.add(2,"artistaaa");
+        song.add(3,"albummm");
+        song.add(4,"uploaded byyyy");
+
+        defaultTableModel.setRowCount(0);
+        int countRow = 0;
+        String[] row = {"Song","Genre","Artist","Album", "Uploaded by"};
+        for (String s : song) {
+            String[] songInfo = s.split("-");
+            Object[] rowData = {row[countRow],songInfo[0]};
+            defaultTableModel.addRow(rowData);
+            countRow++;
+        }
+    }*/
 }
