@@ -12,7 +12,7 @@ public class SongLyricsApi  {
         this.apiHelper = apiHelper;
     }
 
-    public String readLyrics(String artist, String nameSong)  {
+    public String readLyrics(String artist, String nameSong){
         String lyricsSong = null;
         artist = artist.replaceAll(" ", "%20");
         nameSong = nameSong.replaceAll(" ", "%20");
@@ -33,23 +33,4 @@ public class SongLyricsApi  {
             return "Couldn't read the file!";
         }
     }
-
-    //Preguntar si es pot escriure...
-    /*public void writeLyrics(String artist, String nameSong, String lyrics)  {
-        Gson gson = new Gson();
-        artist = artist.replaceAll(" ", "%20");
-        nameSong = nameSong.replaceAll(" ", "%20");
-        try {
-            artist = gson.toJson(artist);
-            nameSong = gson.toJson(nameSong);
-            String body = gson.toJson(lyrics);
-            String error = apiHelper.postToUrl("https://balandrau.salle.url.edu/dpoo/lyrics/artist",artist);
-            System.out.println(error);
-            apiHelper.postToUrl("https://balandrau.salle.url.edu/dpoo/lyrics/song",nameSong);
-            apiHelper.postToUrl("https://balandrau.salle.url.edu/dpoo/lyrics/"+ artist +"/"+ nameSong, body);
-        }catch (IOException e){
-            System.out.println("Couldn't write the file!");
-        }
-    }*/
-
 }

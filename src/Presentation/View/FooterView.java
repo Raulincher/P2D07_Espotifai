@@ -131,10 +131,11 @@ public class FooterView extends JPanel {
             centeredText.append(String.format("%" + 10 + "s%s\n", "", line));
         }
         textArea.setText(centeredText.toString());
-
+        textArea.setCaretPosition(0);
         JScrollPane scrollPane = new JScrollPane(textArea);
         scrollPane.setPreferredSize(new Dimension(400, 400));
         scrollPane.setBackground(gris);
+
 
         dialog.getContentPane().setLayout(new BorderLayout());
         dialog.getContentPane().add(scrollPane, BorderLayout.CENTER);
