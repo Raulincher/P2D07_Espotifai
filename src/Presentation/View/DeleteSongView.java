@@ -41,10 +41,8 @@ public class DeleteSongView extends JPanel {
     }
 
     public void addDeleteSongController(DeleteSongViewController deleteSongController){
-     //   delete.addActionListener(deleteSongController);
-        //jCerca.addActionListener(deleteSongController);
         jBuscador.getDocument().addDocumentListener(deleteSongController);
-        table.getSelectionModel().addListSelectionListener(deleteSongController);
+        table.addMouseListener(deleteSongController);
     }
 
     public void configureDeleteSongView() {
@@ -73,27 +71,8 @@ public class DeleteSongView extends JPanel {
         center.add(scrollpane, BorderLayout.CENTER);
         add(center, BorderLayout.CENTER);
 
-        //******************************
-        // Create a TableRowSorter for the deleteTableModel
-        //TableRowSorter<DefaultTableModel> sorter = new TableRowSorter<>(deleteTableModel);
         sorter.setSortsOnUpdates(true);
         table.setRowSorter(sorter);
-       // jBuscador.getDocument().addDocumentListener(new DocumentListener() {
-            /*@Override
-            public void insertUpdate(DocumentEvent e) {
-                search(jBuscador.getText(), sorter);
-            }
-
-            @Override
-            public void removeUpdate(DocumentEvent e) {
-                search(jBuscador.getText(), sorter);
-            }
-
-            @Override
-            public void changedUpdate(DocumentEvent e) {
-                search(jBuscador.getText(), sorter);
-            }*/
-       // });
 
         // SOUTH
         JPanel south = new JPanel();
@@ -155,12 +134,22 @@ public class DeleteSongView extends JPanel {
         return sorter;
     }
 
-    public String selectDeleteSong() {
-        int indexFila = table.getSelectedRow();
-
+    public String obtainSongNameToDelete(Point point) {
+        int indexFila = table.rowAtPoint(point);
+        System.out.println(indexFila);
         // Get the data from the selected row
-        String songTitle = (String) deleteTableModel.getValueAt(indexFila, 0);
+        String songTitle = (String) table.getValueAt(indexFila, 0);
         return songTitle;
+    }
+
+    public int obtainSongIndexToDelete(String songTitle) {
+        int indexSong = 0;
+        for (int i = 0; i < deleteTableModel.getRowCount(); i++) {
+            if (deleteTableModel.getValueAt(i,0).equals(songTitle)) {
+                indexSong = i;
+            }
+        }
+        return indexSong;
     }
 
     public int confirmationDeletePopUp(String songTitle) {
@@ -169,11 +158,8 @@ public class DeleteSongView extends JPanel {
         return result;
     }
 
-    public void updateTable(String songTitle) {
-        for (int i = 0; i < deleteTableModel.getRowCount(); i++) {
-            if(deleteTableModel.getValueAt(i,0).equals(songTitle)) {
-                deleteTableModel.removeRow(i);
-            }
-        }
+    public void clearSearcher() {
+        jBuscador.setText("");
     }
+
 }

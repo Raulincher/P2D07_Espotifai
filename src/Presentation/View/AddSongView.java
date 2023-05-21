@@ -7,7 +7,10 @@ import Presentation.Utils;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import javax.swing.filechooser.FileView;
 import java.awt.*;
+import java.io.File;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
 
@@ -96,6 +99,10 @@ public class AddSongView extends JPanel {
         jfile = utils.buttonImg(addFileBtn);
         jfile.setActionCommand(BTN_ADD_FILE);
         fcAddFile = new JFileChooser();
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("WAV files (*.wav)", "wav");
+        fcAddFile.setFileFilter(filter);
+        fcAddFile.setFileSelectionMode(JFileChooser.FILES_ONLY);
+
         fcAddFile.setFont(new Font("Gotham", Font.BOLD, 20));
         fcAddFile.setPreferredSize(new Dimension(500, 300));
         fcAddFile.setMinimumSize(new Dimension(500,300));
