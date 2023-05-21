@@ -11,10 +11,13 @@ import javax.swing.*;
 import javax.swing.event.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 import javax.swing.event.DocumentEvent;
 
 
-public class DeleteSongViewController implements ActionListener, DocumentListener, ListSelectionListener {
+public class DeleteSongViewController implements ActionListener, DocumentListener, MouseListener {
     private final DeleteSongView deleteSongView;
     private final MainView mainView;
     private final SongManager songManager;
@@ -67,6 +70,43 @@ public class DeleteSongViewController implements ActionListener, DocumentListene
     }
 
     @Override
+    public void mouseClicked(MouseEvent e) {
+        String songTitle = deleteSongView.obtainSongNameToDelete(e.getPoint());
+        deleteSongView.obtainSongIndexToDelete(songTitle);
+
+        if (deleteSongView.confirmationDeletePopUp(songTitle) == 0) {
+            if (songManager.deleteSong(songTitle)) {
+                deleteSongView.showPopUps("Song Deleted Successfully");
+                mainView.showMainMenuCard();
+                deleteSongView.clearSearcher();
+            }
+        }
+        else {
+            deleteSongView.showPopUps("Song NOT deleted");
+        }
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
+    /*@Override
     public void valueChanged(ListSelectionEvent e) {
         String songTitle = deleteSongView.selectDeleteSong();
 
@@ -82,5 +122,6 @@ public class DeleteSongViewController implements ActionListener, DocumentListene
         else {
             deleteSongView.showPopUps("Song NOT deleted");
         }
-    }
+        deleteSongView.clearSelection();
+    }*/
 }
