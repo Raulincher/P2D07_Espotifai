@@ -47,7 +47,6 @@ public class LoginView extends JPanel {
         JLabel loginLabel = new JLabel(labelIcon);
         north.add(loginLabel);
 
-        //Utils.header(north, jSubmitBack2);
         add(north, BorderLayout.NORTH);
 
         // CENTER

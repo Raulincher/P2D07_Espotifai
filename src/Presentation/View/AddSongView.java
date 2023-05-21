@@ -130,7 +130,7 @@ public class AddSongView extends JPanel {
         Color gris = new Color(26,26,26);
         JPanel south = new JPanel();
         south.setBackground(gris);
-        south.setBorder(createEmptyBorder(30, 0, 30, 0));
+        south.setBorder(createEmptyBorder(2, 0, 2, 0));
         south.add(footerView.configureFooter());
         add(south, BorderLayout.SOUTH);
 

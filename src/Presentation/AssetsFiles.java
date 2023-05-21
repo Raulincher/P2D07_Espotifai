@@ -75,7 +75,7 @@ public enum AssetsFiles {
     DELETE_SONG_LITTLE_BUTTON_IMG("files/imgs/deleteSongLittleButton.png"),
 
     DELETE_SONG_FROM_LIST_BUTTON_IMG("files/imgs/deleteSongFromListLittleButton.png"),
-    LYRICS_IMG("files/imgs/iconoLyrics.png");
+    LYRICS_IMG("files/imgs/FlyricsButton.png");
 
     private final String files;
     AssetsFiles(String files) { this.files = files; }

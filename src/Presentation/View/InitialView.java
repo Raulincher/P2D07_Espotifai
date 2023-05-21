@@ -22,7 +22,6 @@ public class InitialView extends JPanel {
 
     public static final String BTN_LOGIN = "BTN_LOGIN";
     public static final String BTN_REGISTER = "BTN_REGISTER";
-    public static final String BTN_TEST = "BTN_TEST";
 
     public InitialView(Utils utils){
         this.utils = utils;
@@ -70,16 +69,11 @@ public class InitialView extends JPanel {
         jLogin = utils.buttonImg(loginBtn);
         jLogin.setActionCommand(BTN_LOGIN);
         buttons.add(jLogin);
-
-        jTest = utils.buttonText("test");
-        jTest.setActionCommand(BTN_TEST);
-        buttons.add(jTest);
     }
 
 
     public void addInitialViewController(InitialViewController initialViewController){
         jLogin.addActionListener(initialViewController);
         jRegister.addActionListener(initialViewController);
-        jTest.addActionListener(initialViewController);
     }
 }

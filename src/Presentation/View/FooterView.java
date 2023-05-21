@@ -72,19 +72,34 @@ public class FooterView extends JPanel {
     }
 
     public JPanel configureFooter() {
-        Color gris = new Color(26,26,26);
-        JPanel footer = new JPanel();
-        JLabel jLogo = new JLabel("song name");
-        footer.setBackground(gris);
+        JPanel border = new JPanel();
+        border.setLayout(new BorderLayout());
 
-        footer.add(jLogo);
+        Color gris = new Color(26,26,26);
+        JPanel footerN = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER));;
+        JPanel footerS = new JPanel(new FlowLayout(FlowLayout.CENTER));
+
+        footerN.setBackground(gris);
+        footer.setBackground(gris);
+        footerS.setBackground(gris);
+
+        JLabel jLogo = utils.label("Song Name");
+
+        footerN.add(jLogo);
+        border.add(footerN, BorderLayout.NORTH);
+
         footer.add(jRepeat);
         footer.add(jBackward);
         footer.add(jplay);
         footer.add(jForward);
         footer.add(jRepeatList);
-        footer.add(jLyrics);
-        return footer;
+        border.add(footer, BorderLayout.CENTER);
+
+        footerS.add(jLyrics);
+        border.add(footerS, BorderLayout.SOUTH);
+
+        return border;
     }
 
     public void stop(){
