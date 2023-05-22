@@ -38,32 +38,39 @@ public class Main {
         InitialView initialView = new InitialView(utils);
         FooterView footerView = new FooterView(utils);
         FooterController footerController = new FooterController(footerView, songManager);
+
         footerView.initializeButtons();
         footerView.addFooterController(footerController);
 
         FooterView footerView2 = new FooterView(utils);
+        FooterController footerController2 = new FooterController(footerView2, songManager);
         footerView2.initializeButtons();
-        footerView2.addFooterController(footerController);
+        footerView2.addFooterController(footerController2);
 
         FooterView footerView3 = new FooterView(utils);
+        FooterController footerController3 = new FooterController(footerView3, songManager);
         footerView3.initializeButtons();
-        footerView3.addFooterController(footerController);
+        footerView3.addFooterController(footerController3);
 
         FooterView footerView4 = new FooterView(utils);
+        FooterController footerController4 = new FooterController(footerView4, songManager);
         footerView4.initializeButtons();
-        footerView4.addFooterController(footerController);
+        footerView4.addFooterController(footerController4);
 
         FooterView footerView5 = new FooterView(utils);
+        FooterController footerController5 = new FooterController(footerView5, songManager);
         footerView5.initializeButtons();
-        footerView5.addFooterController(footerController);
+        footerView5.addFooterController(footerController5);
 
         FooterView footerView6 = new FooterView(utils);
+        FooterController footerController6 = new FooterController(footerView6, songManager);
         footerView6.initializeButtons();
-        footerView6.addFooterController(footerController);
+        footerView6.addFooterController(footerController6);
 
         FooterView footerView7 = new FooterView(utils);
+        FooterController footerController7 = new FooterController(footerView7, songManager);
         footerView7.initializeButtons();
-        footerView7.addFooterController(footerController);
+        footerView7.addFooterController(footerController7);
 
         HeaderView headerView = new HeaderView(utils);
         HeaderController headerController = new HeaderController(headerView, userManager);

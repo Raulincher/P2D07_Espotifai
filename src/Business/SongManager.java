@@ -55,9 +55,7 @@ public class SongManager {
             if(songTitle.equals("")){
                 music = new File("files/music/");
                 files = music.listFiles();
-                System.out.println(files);
-                assert files != null;
-                if(files.length == 0){
+                if(files.length == 0 || files == null){
                     return;
                 }else {
                     actualSong = files[0].getName();
