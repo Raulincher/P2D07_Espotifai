@@ -100,6 +100,7 @@ public class FooterView extends JPanel {
 
         footerS.add(jLyrics);
         border.add(footerS, BorderLayout.SOUTH);
+        Dimension dimension = new Dimension(10,10);
 
         return border;
     }

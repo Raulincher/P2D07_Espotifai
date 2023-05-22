@@ -8,6 +8,8 @@ import Presentation.Controller.HeaderController;
 import Presentation.Utils;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.util.ArrayList;
@@ -21,11 +23,24 @@ public class GeneralPlaylistView extends JPanel {
     private final FooterView footerView;
     private static final String BTN_NEW_PLAYLIST = "BTN_NEW_PLAYLIST";
     private JButton jNewPlaylist;
+    private DefaultTableModel myPlaylistsModel;
+    private DefaultTableModel otherPlaylistsModel;
+    private JTable myPlaylistsTable;
+    private JTable otherPlaylistsTable;
+    private JLabel jlYourPlaylists;
+    private JLabel jlOthersPlaylists;
+    private static String[] myPlaylist = {"Your library:"};
+    private static String[] otherPlaylist = {"General library:"};
+
+    private final static String MY_PLAYLISTS = "My playlists";
+    private final static String OTHERS_PLAYLISTS = "Others playlists";
 
     public GeneralPlaylistView(HeaderView headerView,FooterView footerView, Utils utils){
         this.utils = utils;
         this.headerView = headerView;
         this.footerView = footerView;
+        myPlaylistsModel = new DefaultTableModel(myPlaylist, 0);
+        otherPlaylistsModel = new DefaultTableModel(otherPlaylist, 0);
     }
 
     public void addGeneralPlaylistController(GeneralPlaylistViewController generalPlaylistViewController){
@@ -46,87 +61,88 @@ public class GeneralPlaylistView extends JPanel {
         add(north, BorderLayout.NORTH);
 
         //Center
-        JPanel center = new JPanel(new BorderLayout());
+        JPanel center = new JPanel(new GridBagLayout());
         center.setBackground(Color.BLACK);
         center.setBorder(BorderFactory.createEmptyBorder(0, 200, 80, 200));
 
-        //Taula your lists
-        JPanel panelPlaylist = new JPanel();
-        panelPlaylist.setBackground(Color.BLACK);
-        JTextField jtBuscador = utils.textField();
-        Icon newPlaylist = new ImageIcon(String.valueOf(AssetsFiles.CREATE_LIST_BUTTON_IMG));
-        jNewPlaylist = utils.buttonImg(newPlaylist);
-        jNewPlaylist.setActionCommand(BTN_NEW_PLAYLIST);
-        jNewPlaylist.setPreferredSize(new Dimension(100,50));
-        jNewPlaylist.setMaximumSize(new Dimension(100,50));
-        panelPlaylist.add(jtBuscador);
-        panelPlaylist.add(jNewPlaylist);
-        center.add(panelPlaylist,BorderLayout.NORTH);
+        // My Playlists
+        Dimension dimension = new Dimension(300,220);
+        myPlaylistsTable = new JTable(myPlaylistsModel);
+        JScrollPane scrollMyPlaylists = createSongListTable(myPlaylistsTable);
+        scrollMyPlaylists.setPreferredSize(dimension);
+        scrollMyPlaylists.setMinimumSize(dimension);
+        scrollMyPlaylists.setMaximumSize(dimension);
 
-        //CANVIAR PER LA LLISTA DE PLAYLIST your list
-        ArrayList<Playlist> playlists = new ArrayList<>();
-        Playlist yourList = new Playlist("user34", "Prova1");
-        playlists.add(yourList);
-        yourList = new Playlist("user45", "prova2");
-        playlists.add(yourList);
+        // Others
+        otherPlaylistsTable = new JTable(otherPlaylistsModel);
+        JScrollPane scrollOthersPlaylists = createSongListTable(otherPlaylistsTable);
+        scrollOthersPlaylists.setPreferredSize(dimension);
+        scrollOthersPlaylists.setMinimumSize(dimension);
+        scrollOthersPlaylists.setMaximumSize(dimension);
 
-        String[] columnNames = {""};
-        Object[][] data = new Object[playlists.size()][1];
+        // Jlables
+        jlYourPlaylists = new JLabel(MY_PLAYLISTS);
+        jlYourPlaylists.setForeground(Color.GREEN);
+        jlYourPlaylists.setFont(new Font("Gotham", Font.BOLD, 27));
 
-        for (int i = 0; i < playlists.size(); i++) {
-            Playlist playlist1 = playlists.get(i);
-            data[i][0] = playlist1.getTitle();
-        }
+        jlOthersPlaylists = new JLabel(OTHERS_PLAYLISTS);
+        jlOthersPlaylists.setForeground(Color.GREEN);
+        jlOthersPlaylists.setFont(new Font("Gotham", Font.BOLD, 27));
 
-        JTable table = new JTable(data, columnNames);
+        Insets columnSpacing = new Insets(0, 0, 0, 0);
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.weightx = 20;
+        constraints.insets = new Insets(0, 20, 0, 20);
+        constraints.anchor = GridBagConstraints.WEST;
 
+        center.add(jlYourPlaylists, constraints);
+        constraints.gridy++;
+        center.add(scrollMyPlaylists, constraints);
 
-        table.setRowHeight(60);
-        table.setGridColor(Color.gray);
-        table.setBackground(gris);
-        table.setForeground(Color.WHITE);
-        table.setFont(new Font("Gotham", Font.BOLD, 20));
+        // DESPLACEM A LA DRETA
+        constraints.gridx = 1000;
+        constraints.gridy = 0;
+        constraints.insets = columnSpacing;
 
-        JScrollPane scrollPaneYourList = new JScrollPane(table);
+        center.add(jlOthersPlaylists, constraints);
+        constraints.gridy++;
+        constraints.weighty = 15;
+        constraints.weightx = 20;
+        center.add(scrollOthersPlaylists, constraints);
+        constraints.gridy++;
 
-        //Taula 2
-        //CANVIAR PER LA LLISTA DE PLAYList others
-        ArrayList<Playlist> playlists1 = new ArrayList<>();
-        Playlist othersList = new Playlist("user34", "Prova21");
-        playlists1.add(othersList);
-        othersList = new Playlist("user45", "prova22");
-        playlists1.add(othersList);
+        add(center, BorderLayout.CENTER);
 
-        String[] columnNames1 = {""};
-        Object[][] data1 = new Object[playlists1.size()][1];
-
-        for (int i = 0; i < playlists1.size(); i++) {
-            Playlist playlist2 = playlists.get(i);
-            data[i][0] = playlist2.getTitle();
-        }
-
-        JTable table1 = new JTable(data1, columnNames1);
-
-
-        table1.setRowHeight(60);
-        table1.setGridColor(Color.gray);
-        table1.setBackground(gris);
-        table1.setForeground(Color.WHITE);
-        table1.setFont(new Font("Gotham", Font.BOLD, 20));
-
-        JScrollPane scrollPaneOthersList = new JScrollPane(table);
-
-        JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,scrollPaneYourList, scrollPaneOthersList);
-        splitPane.setDividerLocation(150);
-        center.add(splitPane,BorderLayout.CENTER);
-        add(center,BorderLayout.CENTER);
 
         //South
         JPanel south = new JPanel();
         south.setBackground(gris);
         south.setBorder(createEmptyBorder(2, 0, 2, 0));
-
         south.add(footerView.configureFooter());
         add(south, BorderLayout.SOUTH);
     }
+
+    public JScrollPane createSongListTable(JTable table){
+        Color gris = new Color(26,26,26);
+
+        table.setRowHeight(60);
+        table.setGridColor(Color.gray);
+        table.setBackground(gris);
+        table.setForeground(Color.WHITE);
+        table.setDefaultEditor(Object.class, null);
+        table.setSelectionBackground(table.getBackground());
+        table.setSelectionForeground(Color.decode("#00DC00"));
+
+        DefaultTableCellRenderer header = new DefaultTableCellRenderer();
+        header.setHorizontalAlignment(SwingConstants.LEFT);
+        header.setForeground(Color.decode("#00DC00"));
+        header.setFont(new Font("Gotham", Font.BOLD, 20));
+        table.getTableHeader().setDefaultRenderer(header);
+        table.setFont(new Font("Gotham", Font.BOLD, 20));
+
+        return new JScrollPane(table);
+    }
+
 }

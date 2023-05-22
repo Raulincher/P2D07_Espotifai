@@ -21,7 +21,6 @@ public class StatisticsView extends JPanel {
     private final Utils utils;
     private final HeaderView headerView;
     private final FooterView footerView;
-
     private final SongManager songManager;
 
 

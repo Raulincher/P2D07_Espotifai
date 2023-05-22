@@ -93,7 +93,7 @@ public class DeleteSongView extends JPanel {
     public JScrollPane createSongListTable(JTable table){
         Color gris = new Color(26,26,26);
 
-        table.setRowHeight(60);
+        table.setRowHeight(40);
         table.setGridColor(Color.gray);
         table.setBackground(gris);
         table.setForeground(Color.WHITE);
@@ -104,10 +104,10 @@ public class DeleteSongView extends JPanel {
         DefaultTableCellRenderer header = new DefaultTableCellRenderer();
         header.setHorizontalAlignment(SwingConstants.LEFT);
         header.setForeground(Color.decode("#00DC00"));
-        header.setFont(new Font("Gotham", Font.BOLD, 20));
+        header.setFont(new Font("Gotham", Font.BOLD, 15));
         table.getTableHeader().setDefaultRenderer(header);
 
-        table.setFont(new Font("Gotham", Font.BOLD, 20));
+        table.setFont(new Font("Gotham", Font.BOLD, 15));
 
         return new JScrollPane(table);
     }
