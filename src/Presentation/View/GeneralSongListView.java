@@ -208,8 +208,8 @@ public class GeneralSongListView extends JPanel {
     }
 
     /**
-     * Funció que servirà per a estructurar la informació
-     * de les cançons a la taula principal
+     * Funció que servirà per a filtrar la informació
+     * que s'hagi introduït per l'usuari
      *
      * @param songs, array amb la informació de totes les songs
      */

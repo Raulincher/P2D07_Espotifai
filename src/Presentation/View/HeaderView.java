@@ -97,11 +97,10 @@ public class HeaderView extends JPanel {
 
     /**
      * Funció que servirà per a mostrar tots els pop ups
-     * en cas que s'apreti a LogOut o Delete Account per
-     * a confirmar les accions
+     * en cas que es necessiti
      *
-     * @param error, avís en cas de LogOut
-     * @param error2, avís en cas de Delete Account
+     * @param error, avís1 a mostrar
+     * @param error2, avís2 a mostrar
      * @return resposta, pop up que avisarà a l'usuari
      */
     public int showPopUps(String error, String error2) {

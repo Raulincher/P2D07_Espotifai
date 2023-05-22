@@ -146,7 +146,7 @@ public class LoginView extends JPanel {
      * Funció que servirà per a configurar tots els pop-ups que tindrà
      * la vista
      *
-     * @param error, per a recollir la informació errònia a recalcar
+     * @param error, missatge a mostrar
      */
     public void showPopUps(String error) {
         JOptionPane.showMessageDialog(this,error);
