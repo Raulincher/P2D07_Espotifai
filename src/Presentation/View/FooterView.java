@@ -24,6 +24,7 @@ public class FooterView extends JPanel {
     private JButton jRepeat;
     private JButton jRepeatList;
     private JButton jLyrics;
+    //private String songName;
 
     public FooterView(Utils utils){
         this.utils = utils;
@@ -37,6 +38,7 @@ public class FooterView extends JPanel {
         jRepeat.addActionListener(footerController);
         jRepeatList.addActionListener(footerController);
         jLyrics.addActionListener(footerController);
+        //songName = footerController.getActualSong();
     }
 
     public void initializeButtons(){
@@ -143,6 +145,7 @@ public class FooterView extends JPanel {
         dialog.setLocationRelativeTo(null);
         dialog.setVisible(true);
     }
+
 
     public void showPopUpError(String error){
         JOptionPane.showMessageDialog(this,error);

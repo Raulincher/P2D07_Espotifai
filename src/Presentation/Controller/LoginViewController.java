@@ -2,6 +2,7 @@ package Presentation.Controller;
 
 import Business.UserManager;
 import Persistance.dao.UserNotFoundException;
+import Presentation.View.FooterView;
 import Presentation.View.LoginView;
 import Presentation.View.MainView;
 
@@ -18,7 +19,7 @@ public class LoginViewController implements ActionListener {
     private final UserManager userManager;
 
 
-    public LoginViewController(MainView mainView, LoginView loginView, UserManager userManager) {
+    public LoginViewController(MainView mainView, LoginView loginView, UserManager userManager,FooterView footerView) {
         this.mainView = mainView;
         this.loginView = loginView;
         this.userManager = userManager;

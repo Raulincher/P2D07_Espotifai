@@ -6,8 +6,11 @@ import Presentation.View.AddSongView;
 import Presentation.View.InitialView;
 import Presentation.View.MainView;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.ArrayList;
 
 public class AddSongViewController implements ActionListener {
     private final AddSongView addSongView;
@@ -38,14 +41,15 @@ public class AddSongViewController implements ActionListener {
                 String artist = addSongView.getJtfArtist().getText();
                 String album = addSongView.getJtfAlbum().getText();
                 String genre = (String) addSongView.getJcbGenre().getSelectedItem();
+                ArrayList<String> temps = songManager.timeSong();
+                String time = temps.get(1);
 
                 if (songManager.isEmpty(songName, artist, album, genre)) {
                     addSongView.showPopUps("Error, empty field, can't upload the song!");
                 } else {
                     if (!songManager.songExists(songName)) {
                         String username = userManager.currentUsername();
-
-                        if (songManager.addSong(songName, artist, album, genre, username)) {
+                        if (songManager.addSong(songName, artist, album, genre, username,time)) {
                             addSongView.showPopUps("Song saved!");
                             addSongView.clearFields();
                             mainView.showMainMenuCard();

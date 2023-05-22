@@ -8,14 +8,16 @@ public class Song {
     private String artist;
     private String filePath;
     private String username;
+    private String time;
 
-    public Song(String title, String genre, String album, String artist, String filePath, String username){
+    public Song(String title, String genre, String album, String artist, String filePath, String username, String time){
         this.title = title;
         this.genre = genre;
         this.album = album;
         this.artist = artist;
         this.filePath = filePath;
         this.username = username;
+        this.time = time;
     }
 
     public String getTile() {
@@ -40,6 +42,10 @@ public class Song {
 
     public String getUsername() {
         return username;
+    }
+
+    public String getTime() {
+        return time;
     }
 
     public void setTitle(String title) {

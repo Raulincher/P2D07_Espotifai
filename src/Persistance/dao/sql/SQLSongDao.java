@@ -24,8 +24,9 @@ public class SQLSongDao implements SongDao {
                 String author = song.getArtist();
                 String filePath = song.getFilePath();
                 String username = song.getUsername();
+                String time = song.getTime();
 
-                String register = "INSERT INTO song (title, genre, album, author, username, filePath) VALUES (?, ?, ?, ?, ?, ?)";
+                String register = "INSERT INTO song (title, genre, album, author, username, filePath, time) VALUES (?, ?, ?, ?, ?, ?, ?)";
                 PreparedStatement preparedStmt = remoteConnection.prepareStatement(register);
                 preparedStmt.setString (1, title);
                 preparedStmt.setString (2, genre);
@@ -33,6 +34,7 @@ public class SQLSongDao implements SongDao {
                 preparedStmt.setString (4, author);
                 preparedStmt.setString (5, username);
                 preparedStmt.setString(6, filePath);
+                preparedStmt.setString(7, time);
                 //preparedStmt.setBlob (5, (Blob) songFile);
                 preparedStmt.execute();
                 //remoteConnection.close();
@@ -48,6 +50,8 @@ public class SQLSongDao implements SongDao {
             System.err.println("Espotifai not found");
         }
     }
+
+
 
     public ArrayList<Song> readAllSongsSQL() {
         ArrayList<Song> songList = new ArrayList<>();
@@ -70,8 +74,9 @@ public class SQLSongDao implements SongDao {
                     String username = resultSet.getString("username");
                     //System.out.println(author);
                     String filePath = resultSet.getString("filePath");
+                    String time = resultSet.getString("time");
                     //System.out.println(filePath);
-                    Song song = new Song(title, genre, album, artist, filePath, username);
+                    Song song = new Song(title, genre, album, artist, filePath, username,time);
                     //System.out.println("******");
                     songList.add(song);
                 }

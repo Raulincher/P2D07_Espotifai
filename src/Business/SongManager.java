@@ -22,6 +22,7 @@ public class SongManager {
     private File file;
     private Song song;
     private String actualSong;
+    private String pathComputer;
     private SongLyricsApi songLyricsApi;
 
     public SongManager(SongDao songDao,SongLyricsApi songLyricsApi) {
@@ -185,6 +186,8 @@ public class SongManager {
 
         if(response == JFileChooser.APPROVE_OPTION) {
             file = new File(fileChooser.getSelectedFile().getAbsolutePath());
+            File fileSong = fileChooser.getSelectedFile();
+            pathComputer = fileSong.getAbsolutePath();
             String fileName = file.getName();
             aux = fileName.split("\\.");
 
@@ -214,12 +217,12 @@ public class SongManager {
         }
         return emptyField;
     }
-    public boolean addSong(String songName, String artist, String album, String genre, String username) {
+    public boolean addSong(String songName, String artist, String album, String genre, String username,String time) {
         boolean songSaved = true;
         // Guardar fitxer
         file.renameTo(new File(filePath));
         // Guardar a base de dades
-        song = new Song(songName, genre, album, artist, filePath, username);
+        song = new Song(songName, genre, album, artist, filePath, username,time);
 
         try {
             songDao.saveSong(song);
@@ -230,6 +233,8 @@ public class SongManager {
 
         return songSaved;
     }
+
+
 
     public boolean songExists(String songName) {
         // Si troba la cançó EN EL DAO
@@ -259,7 +264,7 @@ public class SongManager {
 
         if (!toDelete) {
             for (Song song: allSongs) {
-                String songLine = song.getTile() + "-" + song.getArtist() + "-" + song.getGenre();
+                String songLine = song.getTile() + "-" + song.getArtist() + "-" + song.getGenre() + "-"+ song.getAlbum() + "-" + song.getUsername();
                 information.add(songLine);
             }
         } else {
@@ -287,6 +292,7 @@ public class SongManager {
                 songSelected.add(song1.getArtist());
                 songSelected.add(song1.getAlbum());
                 songSelected.add(song1.getUsername());
+                songSelected.add(song1.getTime());
                 songTitle = song1.getTile();
                 in = true;
             }
@@ -334,6 +340,25 @@ public class SongManager {
         lyricsSong.add(0,songActual.get(0));
         lyricsSong.add(1,lyrics);
         return lyricsSong;
+    }
+
+
+    public ArrayList<String> timeSong() {
+        ArrayList<String> temps = new ArrayList<>();
+        try {
+            File file1 = new File(pathComputer);
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file1);
+            long milisegons = audioInputStream.getFrameLength() * 1000 / (long) audioInputStream.getFormat().getFrameRate();
+            long segons = (milisegons / 1000) % 60;
+            long minuts = milisegons / (1000 * 60);
+            temps.add(0,"true");
+            temps.add(1,minuts + ":" + segons);
+            audioInputStream.close();
+        } catch (UnsupportedAudioFileException | IOException e) {
+            temps.add(0,"false");
+            temps.add(1,"Unsupported Audio File");
+        }
+        return temps;
     }
 }
 

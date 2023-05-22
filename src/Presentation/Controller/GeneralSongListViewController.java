@@ -37,7 +37,6 @@ public class GeneralSongListViewController implements ActionListener, MouseListe
                 mainView.showMainMenuCard();
                 break;
             case GeneralSongListView.BTN_BUSCADOR:
-                //String buscador = generalSongListView.getjBuscador().getText();
                 mainView.showMainMenuCard();
                 break;
         }
@@ -54,6 +53,12 @@ public class GeneralSongListViewController implements ActionListener, MouseListe
             selected = (String) table.getValueAt(row, 0);
             ArrayList<String> song = songManager.searchSong(selected);
             detailedSongView.fillDetailedTable(song);
+            String  lyrics = songManager.readLyricApi(song.get(2),song.get(0));
+            if (lyrics == null){
+                detailedSongView.fillLyriscText("Song not found");
+            } else {
+                detailedSongView.fillLyriscText(lyrics);
+            }
             mainView.showDetailedSongCard();
         }
     }

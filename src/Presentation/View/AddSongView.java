@@ -102,7 +102,6 @@ public class AddSongView extends JPanel {
         FileNameExtensionFilter filter = new FileNameExtensionFilter("WAV files (*.wav)", "wav");
         fcAddFile.setFileFilter(filter);
         fcAddFile.setFileSelectionMode(JFileChooser.FILES_ONLY);
-
         fcAddFile.setFont(new Font("Gotham", Font.BOLD, 20));
         fcAddFile.setPreferredSize(new Dimension(500, 300));
         fcAddFile.setMinimumSize(new Dimension(500,300));
@@ -212,5 +211,9 @@ public class AddSongView extends JPanel {
         jfile.remove(jlFilename);
         jfile.setIcon(addFileBtn);
 
+    }
+
+    public JFileChooser getFcAddFile() {
+        return fcAddFile;
     }
 }

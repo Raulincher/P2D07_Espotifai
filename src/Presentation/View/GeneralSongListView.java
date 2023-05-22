@@ -26,7 +26,7 @@ public class GeneralSongListView extends JPanel {
     private JButton jCerca;
     private JTable table;
     private DefaultTableModel songsTableModel;
-    private static String[] columnHeaders = {"Title", "Artist", "Genre"};
+    private static String[] columnHeaders = {"Title", "Artist", "Genre","Album","Uploaded by"};
 
     public GeneralSongListView(Utils utils, HeaderView headerView, FooterView footerView){
         this.utils = utils;
@@ -134,7 +134,7 @@ public class GeneralSongListView extends JPanel {
 
         for (String s : songs) {
             String[] songInfo = s.split("-");
-            Object[] rowData = {songInfo[0], songInfo[1], songInfo[2]};
+            Object[] rowData = {songInfo[0], songInfo[1], songInfo[2], songInfo[3], songInfo[4]};
             songsTableModel.addRow(rowData);
         }
     }

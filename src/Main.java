@@ -109,12 +109,12 @@ public class Main {
         headerController.addMainView(mainView);
 
         InitialViewController initialViewController = new InitialViewController(mainView);
-        LoginViewController loginViewController = new LoginViewController(mainView, loginView, userManager);
+        LoginViewController loginViewController = new LoginViewController(mainView, loginView, userManager,footerView);
         RegisterViewController registerViewController = new RegisterViewController(mainView, registerView, userManager);
         AddSongViewController addSongViewController = new AddSongViewController(addSongView, mainView, songManager, userManager);
         DeleteSongViewController deleteSongViewController = new DeleteSongViewController(deleteSongView, mainView, songManager, userManager);
         DetailedPlaylistViewController detailedPlaylistViewController = new DetailedPlaylistViewController(detailedPlaylistView, mainView);
-        DetailedSongViewController detailedSongViewController = new DetailedSongViewController(detailedSongView, mainView);
+        DetailedSongViewController detailedSongViewController = new DetailedSongViewController(detailedSongView, mainView, songManager);
         GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView, mainView, songManager,detailedSongView);
         GeneralPlaylistViewController generalPlaylistViewController = new GeneralPlaylistViewController(generalPlaylistView, mainView);
         MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView, songManager, userManager, deleteSongView, generalSongListView);
