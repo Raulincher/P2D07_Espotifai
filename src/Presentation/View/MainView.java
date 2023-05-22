@@ -139,7 +139,7 @@ public class MainView extends JFrame {
     }
     public void showDetailedSongCard(){
         cardManager.show(getContentPane(), CARD_DETAILED_SONG);
-        detailedSongView.configureDetailedSongView();
+        //detailedSongView.configureDetailedSongView();
     }
 
     public void showGeneralPlaylistCard(){

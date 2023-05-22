@@ -106,9 +106,10 @@ public class FooterView extends JPanel {
     }
 
     public void stop(){
-        System.out.println("Hola");
+        System.out.println("Hola pausaa");
         Icon pauseBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_PAUSEBUTTON_IMG));
-        jplay.setIcon(pauseBtn);
+        jplay = utils.buttonImg(pauseBtn);
+        //jplay.setIcon(pauseBtn);
     }
 
     public void start(){

@@ -135,6 +135,25 @@ public class SQLSongDao implements SongDao {
         return exist;
     }
 
+    public String songArtist(String songName) {
+        String exist = "";
+
+        try {
+            Statement statement = remoteConnection.createStatement();
+            String queryExists = "SELECT author FROM song WHERE title = ?";
+            PreparedStatement prepared = remoteConnection.prepareStatement(queryExists);
+            prepared.setString (1, songName);
+            ResultSet rs = prepared.executeQuery();
+            while (rs.next()) {
+                exist = rs.getString("author");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error llegint les cançons de la base de dades: " + e.getMessage());
+        }
+
+        return exist;
+    }
+
     public String deleteSong(String songName) {
         String filePath = null;
 

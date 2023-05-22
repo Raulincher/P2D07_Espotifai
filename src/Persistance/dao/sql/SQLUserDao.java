@@ -107,7 +107,6 @@ public class SQLUserDao implements UserDao {
 
         if(affected > 0){
             System.out.println("deleted Successfully");
-
         }else{
             System.err.println("The user you try to delete doesn't exist");
         }

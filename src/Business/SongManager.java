@@ -97,7 +97,6 @@ public class SongManager {
                 myClip.start();
             }
         }
-
         return stopped;
     }
 
@@ -344,12 +343,14 @@ public class SongManager {
     }
 
     public ArrayList<String> searchLyrics(){
-        actualSong = actualSong.substring(0, actualSong.lastIndexOf(".wav"));
-        ArrayList<String> songActual = searchSong(actualSong);
-        String lyrics = readLyricApi(songActual.get(2),songActual.get(0));
+        String name = this.actualSong.substring(0, actualSong.lastIndexOf(".wav"));
+        //ArrayList<String> songActual = searchSong("Dancin");
+        String artist = songDao.songArtist(name);
+        System.out.println("Artist: " + artist + " Song: " + name);
+        String lyrics = readLyricApi(artist,name);
         ArrayList<String> lyricsSong = new ArrayList<>();
-        lyricsSong.add(0,songActual.get(0));
-        lyricsSong.add(1,lyrics);
+        lyricsSong.add(name);
+        lyricsSong.add(lyrics);
         return lyricsSong;
     }
 

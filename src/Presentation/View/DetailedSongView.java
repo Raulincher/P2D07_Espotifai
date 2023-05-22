@@ -88,7 +88,6 @@ public class DetailedSongView extends JPanel {
         center.add(scrollpane2, BorderLayout.EAST);
         add(center, BorderLayout.CENTER);
 
-
         // SOUTH
         JPanel south = new JPanel();
         south.setBackground(gris);
