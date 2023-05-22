@@ -221,10 +221,9 @@ public class FooterView extends JPanel {
     }
 
     /**
-     * Funció que servirà per activar el pop up dels errors en
-     * cas que apareixi algun tant el footer com en lyrics
+     * Funció que servirà per a mostrar pop ups
      *
-     * @param error, error en qüestió
+     * @param error, missatge en qüestió
      */
     public void showPopUpError(String error){
         JOptionPane.showMessageDialog(this,error);
