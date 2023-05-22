@@ -11,51 +11,83 @@ import static javax.swing.BorderFactory.createEmptyBorder;
 
 public class HeaderView extends JPanel {
 
+    // Preparem els botons
     public static final String BTN_LOGOUT = "BTN_LOGOUT";
     public static final String BTN_BACK = "BTN_BACK";
     public static final String BTN_DELETEACC = "BTN_DELETEACC";
 
+    // Afegim atributs
     private final Utils utils;
 
+    // Afegim JButtons
     private JButton jLogOut;
     private JButton jDeleteAcc;
     private JButton jBack;
 
+    /**
+     * Funció que servirà com a constructor del HeaderView
+     *
+     * @param utils, per a utilitzar els mètodes d'utils
+     */
     public HeaderView(Utils utils){
         this.utils = utils;
     }
 
+    /**
+     * Funció que servirà per crear els botons del header
+     *
+     * No tindrà param ni return
+     */
     public void initilizeButtons(){
-        Icon loginBtn2 = new ImageIcon(String.valueOf(AssetsFiles.BACK_LITTLEBUTTON_IMG));
-        jBack = utils.buttonImg(loginBtn2);
+        // Creem el botó de back i el configurem
+        Icon backbtn = new ImageIcon(String.valueOf(AssetsFiles.BACK_LITTLEBUTTON_IMG));
+        jBack = utils.buttonImg(backbtn);
         jBack.setActionCommand(BTN_BACK);
 
-        Icon loginBtn = new ImageIcon(String.valueOf(AssetsFiles.LOGOUT_LITTLEBUTTON_IMG));
-        jLogOut = utils.buttonImg(loginBtn);
+        // Creem el botó de LogOut i el configurem
+        Icon logoutBtn = new ImageIcon(String.valueOf(AssetsFiles.LOGOUT_LITTLEBUTTON_IMG));
+        jLogOut = utils.buttonImg(logoutBtn);
         jLogOut.setActionCommand(BTN_LOGOUT);
 
-        Icon loginBtn3 = new ImageIcon(String.valueOf(AssetsFiles.DELETEACC_LITTLEBUTTON_IMG));
-        jDeleteAcc = utils.buttonImg(loginBtn3);
+        // Creem el botó de delete account i el configurem
+        Icon deleteAccBtn = new ImageIcon(String.valueOf(AssetsFiles.DELETEACC_LITTLEBUTTON_IMG));
+        jDeleteAcc = utils.buttonImg(deleteAccBtn);
         jDeleteAcc.setActionCommand(BTN_DELETEACC);
     }
 
+    /**
+     * Funció que servirà per a vincular amb el seu controller
+     * i activar tots els listeners
+     *
+     * @param headerController, controller del HeaderView
+     */
     public void addHeaderController(HeaderController headerController){
-        //set action command
+        // Afegim tots els listeners
         jLogOut.addActionListener(headerController);
         jDeleteAcc.addActionListener(headerController);
         jBack.addActionListener(headerController);
 
     }
 
+    /**
+     * Funció de tipus JPanel que servirà per configurar com
+     * es veurà el header
+     *
+     * @param icon, label que canviarà en cada diferent vista
+     * @return north, JPanel que composarà el Header
+     */
     public JPanel configureHeader(Icon icon) {
+        // Creem el JPanel i el configurem
         JPanel north = new JPanel();
         north.setBackground(Color.black);
         north.setBorder(createEmptyBorder(40, 0, 0, 0));
 
+        // Creem el JLabel, el configurem i l'afegim
         JLabel usedLabel = new JLabel(icon);
         usedLabel.setLayout(new GridLayout(4, 1, 0, 50));
         north.add(usedLabel);
 
+        // Afegim tots els components
         north.add(jBack);
         north.add(jLogOut);
         north.add(jDeleteAcc);
@@ -63,21 +95,17 @@ public class HeaderView extends JPanel {
         return north;
     }
 
+    /**
+     * Funció que servirà per a mostrar tots els pop ups
+     * en cas que s'apreti a LogOut o Delete Account per
+     * a confirmar les accions
+     *
+     * @param error, avís en cas de LogOut
+     * @param error2, avís en cas de Delete Account
+     * @return resposta, pop up que avisarà a l'usuari
+     */
     public int showPopUps(String error, String error2) {
         int resposta = JOptionPane.showConfirmDialog(this,error, error2, JOptionPane.YES_NO_OPTION);
         return resposta;
     }
-
-    public JButton getBackButton() {
-        return jBack;
-    }
-
-    public JButton getLogoutButton() {
-        return jLogOut;
-    }
-
-    public JButton getDeleteButton() {
-        return jDeleteAcc;
-    }
-
 }

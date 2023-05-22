@@ -1,5 +1,9 @@
 package Presentation;
 
+/**
+ * Enumerations per a configurar les imatges de tots els
+ * JButtons i els JLabels
+ */
 public enum AssetsFiles {
 
     LOGO_LABEL("files/imgs/logo.png"),
@@ -78,8 +82,20 @@ public enum AssetsFiles {
     LYRICS_IMG("files/imgs/FlyricsButton.png");
 
     private final String files;
+
+    /**
+     * Funció que servirà com a referència per a poder
+     * agafar les imatges desde les diferents vistes
+     *
+     * @param files, ubicacions de les imatges
+     */
     AssetsFiles(String files) { this.files = files; }
 
+    /**
+     * Funció per a retornar el link de les imatges
+     *
+     * @return files, link en qüestió
+     */
     public String toString() {
         return this.files;
     }
