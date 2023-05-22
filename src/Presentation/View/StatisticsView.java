@@ -57,6 +57,7 @@ public class StatisticsView extends JPanel {
 
                 Map<String, Integer> genreMap = songManager.createGenreMap();
 
+
                 int genreValue = Collections.max(genreMap.values());
                 int barWidth = getWidth() / (genreMap.size() * 2);
                 int maxHeight = getHeight();
