@@ -198,22 +198,20 @@ public class SQLSongDao implements SongDao {
 
         int duration = 0;
         String time ="";
-
+        System.out.println("entro");
+        System.out.println(songName);
+        songName = "files/music/" + songName;
 
         try {
-            Statement statement = remoteConnection.createStatement();
-            String queryExists = "SELECT time FROM song WHERE title = ?";
+            String queryExists = "SELECT * FROM song WHERE filePath = ?";
             PreparedStatement prepared = remoteConnection.prepareStatement(queryExists);
             prepared.setString (1, songName);
             ResultSet rs = prepared.executeQuery();
             while (rs.next()) {
                 time = rs.getString("time");
-                System.out.println(time);
                 String[] timeSplit = time.split(":");
                 int minutes = Integer.parseInt(timeSplit[0]);
-                System.out.println(minutes);
                 int seconds = Integer.parseInt(timeSplit[1]);
-                System.out.println(seconds);
                 duration = (minutes * 60) + seconds;
                 System.out.println(duration);
             }

@@ -2,6 +2,7 @@ package Presentation.View;
 
 import Presentation.AssetsFiles;
 import Presentation.Controller.FooterController;
+import Presentation.ProgressBarThread;
 import Presentation.Utils;
 
 import javax.swing.*;
@@ -27,6 +28,8 @@ public class FooterView extends JPanel {
     private JButton jRepeat;
     private JButton jRepeatList;
     private JButton jLyrics;
+    private ProgressBarThread progressBarThread;
+
     //private String songName;
 
     public JProgressBar jProgressBar;
@@ -90,6 +93,7 @@ public class FooterView extends JPanel {
 
         // Creem la barra de progrés
         jProgressBar = utils.progressBar(10,1);
+        jProgressBar.setValue(0);
 
         // Activem les comandes d'acció en cas que es premi
         jplay.setActionCommand(BTN_PLAY);
@@ -156,6 +160,19 @@ public class FooterView extends JPanel {
     public void stop(){
         Icon pauseBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_PAUSEBUTTON_IMG));
         jplay.setIcon(pauseBtn);
+    }
+
+
+    public void iterateProgressBar(int maxValue){
+        jProgressBar.setMaximum(maxValue);
+        jProgressBar.setMinimum(0);
+        progressBarThread = new ProgressBarThread(jProgressBar);
+
+        progressBarThread.setPlaying(true);
+
+        // Start the playback thread in a separate thread
+        Thread thread = new Thread(progressBarThread);
+        thread.start();
     }
 
     /**

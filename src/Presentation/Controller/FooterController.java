@@ -27,8 +27,8 @@ public class FooterController implements ActionListener {
             case FooterView.BTN_PLAY -> {
                 footerView.jProgressBar.setMinimum(0);
                 footerView.jProgressBar.setMaximum(songManager.clipDuration());
-                System.out.println(songManager.clipDuration());
                 boolean stop = songManager.simpleAudioPlayer();
+                footerView.iterateProgressBar(songManager.clipDuration());
                 if(stop){
                     footerView.stop();
                 }else{

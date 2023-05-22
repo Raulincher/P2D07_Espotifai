@@ -36,7 +36,8 @@ public class SongManager {
 
     public int clipDuration(){
         int duration = 0;
-        if(actualSong != null && !actualSong.equals("")){
+
+        if(actualSong != null){
             duration = getSongDurationFromDatabase(actualSong);
         }
         return duration;
@@ -55,7 +56,8 @@ public class SongManager {
             if(songTitle.equals("")){
                 music = new File("files/music/");
                 files = music.listFiles();
-                if(files.length == 0 || files == null){
+                assert files != null;
+                if(files.length == 0){
                     return;
                 }else {
                     actualSong = files[0].getName();
@@ -66,7 +68,6 @@ public class SongManager {
                 file = new File(getPath(songTitle));
                 actualSong = file.getName();
             }
-            assert file != null;
             if (file.exists()) {
 
                 myClip = AudioSystem.getClip();
