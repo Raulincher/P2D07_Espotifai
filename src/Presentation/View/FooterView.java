@@ -26,6 +26,9 @@ public class FooterView extends JPanel {
     private JButton jLyrics;
     //private String songName;
 
+    public JProgressBar jProgressBar;
+
+
     public FooterView(Utils utils){
         this.utils = utils;
     }
@@ -64,6 +67,8 @@ public class FooterView extends JPanel {
         jLyrics = utils.buttonImg(lyricsBtn);
         jLyrics.setBackground(gris);
 
+        jProgressBar = utils.progressBar(10,1);
+
         jplay.setActionCommand(BTN_PLAY);
         jForward.setActionCommand(BTN_FORWARD);
         jBackward.setActionCommand(BTN_BACKWARD);
@@ -99,6 +104,7 @@ public class FooterView extends JPanel {
         border.add(footer, BorderLayout.CENTER);
 
         footerS.add(jLyrics);
+        footerS.add(jProgressBar);
         border.add(footerS, BorderLayout.SOUTH);
         Dimension dimension = new Dimension(10,10);
 
@@ -106,10 +112,8 @@ public class FooterView extends JPanel {
     }
 
     public void stop(){
-        System.out.println("Hola pausaa");
         Icon pauseBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_PAUSEBUTTON_IMG));
-        jplay = utils.buttonImg(pauseBtn);
-        //jplay.setIcon(pauseBtn);
+        jplay.setIcon(pauseBtn);
     }
 
     public void start(){

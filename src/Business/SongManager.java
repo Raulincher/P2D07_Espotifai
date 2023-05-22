@@ -32,6 +32,15 @@ public class SongManager {
     public String getPath(String songName){
         return songDao.songPath(songName);
     }
+    public int getSongDurationFromDatabase(String songName){return songDao.songDuration(songName);}
+
+    public int clipDuration(){
+        int duration = 0;
+        if(actualSong != null && !actualSong.equals("")){
+            duration = getSongDurationFromDatabase(actualSong);
+        }
+        return duration;
+    }
 
     public void getSong(String songTitle){
         try {

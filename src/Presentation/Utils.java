@@ -15,6 +15,14 @@ public class Utils extends JFrame {
         return button;
     }
 
+    public JProgressBar progressBar(int max, int min){
+        JProgressBar pbar;
+        pbar = new JProgressBar();
+        pbar.setMinimum(min);
+        pbar.setMaximum(max);
+        return pbar;
+    }
+
     public JButton buttonImg(Icon labelImg){
         JButton button = new JButton(labelImg);
         button.setBackground(Color.decode("#00000000"));

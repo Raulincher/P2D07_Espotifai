@@ -87,9 +87,6 @@ public class SQLUserDao implements UserDao {
                 String username = user.getUsername();
                 String email = user.getEmail();
                 String password = user.getPassword();
-                System.out.println(email);
-                System.out.println(password);
-                System.out.println(username);
                 String queryExists = "DELETE FROM user where ((email = ? OR username = ?) AND password = ?)";
                 PreparedStatement prepared = remoteConnection.prepareStatement(queryExists);
                 prepared.setString (1, email);
@@ -114,9 +111,6 @@ public class SQLUserDao implements UserDao {
 
     public boolean login(User user) throws UserNotFoundException{
         boolean error = false;
-        System.out.println(user.getPassword());
-        System.out.println(user.getUsername());
-        System.out.println(user.getEmail());
 
         try{
             String generatedPassword = null;
@@ -161,7 +155,6 @@ public class SQLUserDao implements UserDao {
             System.err.println("Espotifai not found in login");
         }
 
-        System.out.println(error);
         return error;
     }
 

@@ -18,4 +18,6 @@ public interface SongDao {
 
     public String songArtist(String songName);
 
+    int songDuration(String songName);
+
 }
