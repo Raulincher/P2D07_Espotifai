@@ -25,6 +25,7 @@ public class FooterController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case FooterView.BTN_PLAY -> {
+
                 boolean stop = songManager.simpleAudioPlayer();
                 if(stop){
                     footerView.stop();
