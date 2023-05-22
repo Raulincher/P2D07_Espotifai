@@ -17,6 +17,8 @@ public class DetailedSongView extends JPanel {
     public static final String BTN_LOGOUT = "BTN_LOGOUT";
     public static final String BTN_DELETE = "BTN_DELETE";
     public static final String BTN_LYRICS = "BTN_LYRICS";
+    public static final String BTN_PLAYLIST = "BTN_PLAYLIST";
+    public static final String BTN_PLAYME = "BTN_PLAYME";
     private JButton jback = new JButton("back");
     private JButton jlogout = new JButton("logout");
     private JButton jdelete = new JButton("delete account");
@@ -27,6 +29,13 @@ public class DetailedSongView extends JPanel {
     private DefaultTableModel defaultTableModel;
     private JTable table;
     private static String[] columnHeaders = {"", ""};
+    private JLabel jlLyrics;
+    private JLabel jlSong;
+    private JLabel jlPlaylist;
+    private JLabel jlPlayMe;
+    private JButton jPlaylist;
+    private JButton jPlay;
+
 
 
     public DetailedSongView(Utils utils, HeaderView headerView, FooterView footerView) {
@@ -38,7 +47,8 @@ public class DetailedSongView extends JPanel {
     }
 
     public void addDetailedSongController(DetailedSongViewController detailedSongViewController) {
-        //jLyrics.addActionListener(detailedSongViewController);
+        jPlaylist.addActionListener(detailedSongViewController);
+        jPlay.addActionListener(detailedSongViewController);
     }
 
     public void configureDetailedSongView() {
@@ -49,44 +59,111 @@ public class DetailedSongView extends JPanel {
         // NORTH
         JPanel north = new JPanel();
         north.setBackground(Color.black);
-        Icon logo = new ImageIcon(String.valueOf(AssetsFiles.DELETE_LABEL));
-        ;
+        Icon logo = new ImageIcon(String.valueOf(AssetsFiles.SONG_LABEL));
         north.add(headerView.configureHeader(logo));
         add(north, BorderLayout.NORTH);
 
         //CENTER
-        JPanel center = new JPanel(new BorderLayout());
+
+        JPanel center = new JPanel(new GridBagLayout());
         center.setBackground(Color.BLACK);
-        center.setBorder(BorderFactory.createEmptyBorder(0, 200, 80, 200));
+        center.setBorder(BorderFactory.createEmptyBorder(0, 50, 80, 50));
 
-        //Taula Song
-        /*table = new JTable(defaultTableModel);
-        JScrollPane scrollpane = createSongListTable(table,gris);
-        Icon lyricsBtn = new ImageIcon(String.valueOf(AssetsFiles.LYRICS_IMG));
-        JLabel label1 = utils.label("Lyrics");
-        jLyrics = utils.buttonImg(lyricsBtn);
-        jLyrics.setBackground(gris);
-        jLyrics.setActionCommand(BTN_LYRICS);
-        JPanel panelEast = new JPanel();
-        panelEast.setBackground(Color.BLACK);
-        panelEast.setFont(new Font("Gotham", Font.BOLD, 20));
-        panelEast.setLayout(new BoxLayout(panelEast, BoxLayout.Y_AXIS));
-        label1.setBorder(BorderFactory.createEmptyBorder(0, 20, 0, 0));
-        jLyrics.setBorder(BorderFactory.createEmptyBorder(15, 35, 0, 0));
-        panelEast.add(label1);
-        panelEast.add(jLyrics);
-
-        center.add(scrollpane, BorderLayout.CENTER);
-        center.add(panelEast, BorderLayout.EAST);
-        add(center, BorderLayout.CENTER);*/
-
+        // Table song
+        Dimension dimension = new Dimension(400,220);
         table = new JTable(defaultTableModel);
         JScrollPane scrollpane = createSongListTable(table, gris);
+        scrollpane.setPreferredSize(dimension);
+        scrollpane.setMinimumSize(dimension);
+        scrollpane.setMaximumSize(dimension);
+
+        // TextArea
         JScrollPane scrollpane2 = new JScrollPane(jTextArea);
-        //JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT, scrollpane, scrollpane2);
-        center.add(scrollpane, BorderLayout.WEST);
-        center.add(scrollpane2, BorderLayout.EAST);
+        scrollpane2.setPreferredSize(dimension);
+        scrollpane2.setMinimumSize(dimension);
+        scrollpane2.setMaximumSize(dimension);
+
+        //Boto playlist
+        Icon playlistBtn = new ImageIcon(String.valueOf(AssetsFiles.PLAYLIST_PLUS_ADD));
+        jPlaylist = utils.buttonImg(playlistBtn);
+        jPlaylist.setBackground(gris);
+        jPlaylist.setActionCommand(BTN_PLAYLIST);
+
+        //Boto palySong
+        Icon playBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_PLAYBUTTON_IMG));
+        jPlay = utils.buttonImg(playBtn);
+        jPlay.setBackground(gris);
+        jPlay.setActionCommand(BTN_PLAYME);
+
+        // Jlables
+        jlSong = new JLabel("");
+        jlSong.setForeground(Color.GREEN);
+        jlSong.setFont(new Font("Gotham", Font.BOLD, 27));
+
+        jlLyrics  = new JLabel("LYRICS");
+        jlLyrics.setForeground(Color.GREEN);
+        jlLyrics.setFont(new Font("Gotham", Font.BOLD, 27));
+
+        jlPlaylist  = new JLabel("ADD to Playlist");
+        jlPlaylist.setForeground(Color.GREEN);
+        jlPlaylist.setFont(new Font("Gotham", Font.BOLD, 20));
+
+        jlPlayMe  = new JLabel("PLAY ME");
+        jlPlayMe.setForeground(Color.GREEN);
+        jlPlayMe.setFont(new Font("Gotham", Font.BOLD, 20));
+
+        Insets columnSpacing = new Insets(0, 0, 0, 0);
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.weightx = 20;
+        constraints.insets = new Insets(0, 20, 0, 20);
+        constraints.anchor = GridBagConstraints.WEST;
+
+        center.add(jlSong, constraints);
+        constraints.gridy++;
+        center.add(scrollpane, constraints);
+
+        // DESPLACEM A LA DRETA
+        constraints.gridx = 1000;
+        constraints.gridy = 0;
+        constraints.insets = columnSpacing;
+        center.add(jlLyrics, constraints);
+
+        constraints.gridy++;
+        constraints.weighty = 15;
+        constraints.weightx = 20;
+        center.add(scrollpane2, constraints);
+
+        // Botóns
+        //constraints.insets = new Insets(0, 0, 20, 0);
+        constraints.gridx++;
+        constraints.gridy = 0;
+        constraints.weighty = 4;
+        constraints.gridheight = 6;
+        constraints.anchor = GridBagConstraints.WEST;
+        constraints.insets = new Insets(0, 0, 0, 0);
+        center.add(jlPlaylist, constraints);
+        constraints.gridx++;
+        center.add(jPlaylist, constraints);
+        constraints.gridy++;
+        constraints.gridx--;
+        constraints.insets = new Insets(80, 0, 0, 0);
+        center.add(jlPlayMe, constraints);
+        constraints.gridx++;
+        center.add(jPlay, constraints);
+
         add(center, BorderLayout.CENTER);
+
+        /*constraints.gridx = 0;
+        constraints.gridy = 0;
+        constraints.insets = new Insets(0,0,0,0);
+        centerTotal.add(center);
+        constraints.gridy++;
+        centerTotal.add(jlPlaylist);
+        centerTotal.add(jPlaylist);*/
+
+
 
         // SOUTH
         JPanel south = new JPanel();
@@ -98,7 +175,7 @@ public class DetailedSongView extends JPanel {
     }
 
     private JScrollPane createSongListTable(JTable table, Color gris) {
-        table.setRowHeight(45);
+        table.setRowHeight(40);
         table.setGridColor(Color.gray);
         table.setBackground(gris);
         table.setDefaultEditor(Object.class, null);
@@ -108,7 +185,7 @@ public class DetailedSongView extends JPanel {
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
                 Component cellComponent = super.getTableCellRendererComponent(table, value, isSelected, hasFocus, row, column);
-                cellComponent.setFont(new Font("Gotham", Font.BOLD, 30));
+                cellComponent.setFont(new Font("Gotham", Font.BOLD, 25));
                 cellComponent.setForeground(Color.decode("#00DC00"));
                 return cellComponent;
             }
@@ -153,5 +230,9 @@ public class DetailedSongView extends JPanel {
 
         jTextArea.setText(centeredText.toString());
         jTextArea.setCaretPosition(0);
+    }
+
+    public void showPopUp(String error) {
+        JOptionPane.showMessageDialog(this,error);
     }
 }

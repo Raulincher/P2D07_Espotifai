@@ -1,10 +1,13 @@
 package Presentation.View;
 
 import Business.Entities.Song;
+import Presentation.AssetsFiles;
 
 import javax.swing.*;
 import java.awt.*;
 import java.util.ArrayList;
+
+import static javax.swing.BorderFactory.createEmptyBorder;
 
 
 public class MainView extends JFrame {
@@ -36,6 +39,10 @@ public class MainView extends JFrame {
     private static final String CARD_REGISTER = "CARD_REGISTER";
 
     private final CardLayout cardManager;
+    private JPanel main;
+    private JPanel center;
+    private CardLayout cardMain;
+
 
      /**
      * Funció que servirà per a configurar el programa
@@ -54,7 +61,7 @@ public class MainView extends JFrame {
      * @param detailedPlaylistView, vista d'una playlist en concret
      * @param detailedSongView, vista d'una song en concret
      */
-    public MainView(InitialView initialView, DeleteSongView deleteSongView, StatisticsView statisticsView, MainMenuView mainMenuView, GeneralPlaylistView generalPlaylistView, GeneralSongListView generalSongListView, DetailedSongView detailedSongView, DetailedPlaylistView detailedPlaylistView, RegisterView registerView, LoginView loginView, AddSongView addSongView) {
+     public MainView(InitialView initialView, DeleteSongView deleteSongView, StatisticsView statisticsView, MainMenuView mainMenuView, GeneralPlaylistView generalPlaylistView, GeneralSongListView generalSongListView, DetailedSongView detailedSongView, DetailedPlaylistView detailedPlaylistView, RegisterView registerView, LoginView loginView, AddSongView addSongView, FooterView footerView, HeaderView headerView) {
         this.initialView = initialView;
         this.registerView = registerView;
         this.loginView = loginView;
@@ -79,11 +86,12 @@ public class MainView extends JFrame {
         configureDeleteSong();
         configureDetailedPlaylist();
         configureStatisticsView();
+        configureGeneralSongList();
         configureDetailedSong();
         configureGeneralPlaylist();
-        configureGeneralSongList();
         configureAddSong();
         configureMainMenuView();
+
     }
 
 
@@ -190,6 +198,7 @@ public class MainView extends JFrame {
      */
     private void configureGeneralSongList(){
         this.generalSongListView.configureGeneralSonglistView();
+        //this.center.add(generalSongListView, CARD_GENERAL_SONG);
         this.getContentPane().add(generalSongListView, CARD_GENERAL_SONG);
     }
 
@@ -200,6 +209,7 @@ public class MainView extends JFrame {
      */
     private void configureMainMenuView(){
         this.mainMenuView.configureMainMenuView();
+       // this.center.add(mainMenuView, CARD_MAIN_MENU);
         this.getContentPane().add(mainMenuView, CARD_MAIN_MENU);
     }
 
@@ -274,7 +284,6 @@ public class MainView extends JFrame {
      */
     public void showDetailedSongCard(){
         cardManager.show(getContentPane(), CARD_DETAILED_SONG);
-        //detailedSongView.configureDetailedSongView();
     }
 
     /**
@@ -292,6 +301,7 @@ public class MainView extends JFrame {
      * No tindrà ni param ni return
      */
     public void showGeneralSongListCard(){
+        //cardMain.show(center, CARD_GENERAL_SONG);
         cardManager.show(getContentPane(), CARD_GENERAL_SONG);
     }
 
@@ -301,6 +311,8 @@ public class MainView extends JFrame {
      * No tindrà ni param ni return
      */
     public void showMainMenuCard(){
+        //cardManager.show(getContentPane(), CARD_MAIN_MENU);
+        //cardMain.show(center, CARD_MAIN_MENU);
         cardManager.show(getContentPane(), CARD_MAIN_MENU);
     }
 

@@ -105,7 +105,7 @@ public class Main {
         MainMenuView mainMenuView = new MainMenuView(footerView6, utils, headerView6);
         StatisticsView statisticsView = new StatisticsView(headerView7, utils, footerView7, songManager);
 
-        MainView mainView = new MainView(initialView, deleteSongView, statisticsView, mainMenuView, generalPlaylistView, generalSongListView, detailedSongView, detailedPlaylistView, registerView, loginView, addSongView);
+        MainView mainView = new MainView(initialView, deleteSongView, statisticsView, mainMenuView, generalPlaylistView, generalSongListView, detailedSongView, detailedPlaylistView, registerView, loginView, addSongView, footerView, headerView);
         headerController.addMainView(mainView);
 
         InitialViewController initialViewController = new InitialViewController(mainView);

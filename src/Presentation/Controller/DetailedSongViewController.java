@@ -23,7 +23,9 @@ public class DetailedSongViewController implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
-           //Afegir add SongToList
+            case DetailedSongView.BTN_PLAYLIST -> {
+                detailedSongView.showPopUp("prova");
+            }
         }
     }
 }
