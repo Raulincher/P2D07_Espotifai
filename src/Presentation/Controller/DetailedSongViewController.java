@@ -30,12 +30,17 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
     @Override
     public void actionPerformed(ActionEvent e) {
         String username = userManager.currentUsername();
-        ArrayList<String> playlist = playlistManager.obtainPlaylistNames(true,username);
-        for (String busca: playlist){
-            if (e.getActionCommand().equals(busca)){
+        ArrayList<String> playlists = playlistManager.obtainPlaylistNames(true, username);
+        for (String playlist: playlists){
+            if (e.getActionCommand().equals(playlist)){
                 //Fer add a la playlist
+
                 String songName = detailedSongView.getSongName();
-                System.out.println("Trobada " + songName);
+                if (playlistManager.addSongToPlaylist(songName, playlist)) {
+                    detailedSongView.showPopUp("Song successfully saved in " + playlist + "!");
+                } else {
+                    detailedSongView.showPopUp("There was an error saving the song.");
+                }
             }
         }
     }

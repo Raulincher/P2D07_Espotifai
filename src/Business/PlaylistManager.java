@@ -6,9 +6,11 @@ import Persistance.dao.PlaylistNotSavedException;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.SimpleTimeZone;
 
 public class PlaylistManager {
     private final PlaylistDao playlistDao;
+    private String currentPlaylist;
 
     public PlaylistManager(PlaylistDao playlistDao) {
         this.playlistDao = playlistDao;
@@ -52,6 +54,26 @@ public class PlaylistManager {
     }
 
     public ArrayList<String> obtainSongsInPlaylist(String playlistName) {
-        return playlistDao.obtainAllSongsInPlaylist(playlistName);
+        if (playlistDao.obtainAllSongsInPlaylist(playlistName) == null) {
+            return null;
+        } else {
+            return playlistDao.obtainAllSongsInPlaylist(playlistName);
+        }
+    }
+
+    public boolean addSongToPlaylist(String songName, String playlistName) {
+        return playlistDao.addSongToPlaylistDAO(songName,playlistName);
+    }
+
+    public void setCurrentPlaylist(String currentPlaylist) {
+        this.currentPlaylist = currentPlaylist;
+    }
+
+    public String getCurrentPlaylist() {
+        return currentPlaylist;
+    }
+
+    public boolean deletePlaylist(String playListName) {
+        return playlistDao.deletePlaylistFromDAO(playListName);
     }
 }

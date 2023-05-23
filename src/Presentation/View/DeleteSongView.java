@@ -12,7 +12,6 @@ import java.awt.*;
 import java.util.ArrayList;
 
 public class DeleteSongView extends JPanel {
-    private static final String[] COLUMN_NAMES = {"Songs", "Artist", "Genre"};
 
     // Preparem tots els atributs
     private final Utils utils;

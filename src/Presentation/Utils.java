@@ -135,4 +135,11 @@ public class Utils extends JFrame {
         return panelBuscador;
     }
 
+    public JTextField textFieldPlaylists(){
+        JTextField jUsername = new JTextField();
+        jUsername.setFont(new Font("Gotham", Font.BOLD, 15));
+        jUsername.setPreferredSize(new Dimension(300, 30));
+        jUsername.setMinimumSize(new Dimension(300,30));
+        return jUsername;
+    }
 }

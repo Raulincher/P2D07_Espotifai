@@ -23,7 +23,7 @@ public class SQLPlaylistDao implements PlaylistDao {
             try {
                 String title = playlist.getTitle();
                 String username = playlist.getUsername();
-                String song = "hola";
+                String song = "";
                 String register = "INSERT INTO playlist (username, title, songs)  VALUES (?, ?, ?)";
                 PreparedStatement preparedStmt = remoteConnection.prepareStatement(register);
                 preparedStmt.setString (1, username);
@@ -33,12 +33,10 @@ public class SQLPlaylistDao implements PlaylistDao {
                 //remoteConnection.close();
 
             }catch (SQLException e){
-                System.out.println("hola");
                 throw new PlaylistNotSavedException("Error while saving the playlist");
             }
         } catch (SQLException e) {
             //Espotifai not found
-            System.out.println("adeu");
             throw new PlaylistNotSavedException("Error while saving the playlist");
         }
     }
@@ -59,8 +57,13 @@ public class SQLPlaylistDao implements PlaylistDao {
                     String title = resultSet.getString("title");
                     String username = resultSet.getString("username");
                     String allSongs = resultSet.getString("songs");
-                    String songs[] = allSongs.split(",");
-                    ArrayList<String> songNames = new ArrayList<>(Arrays.asList(songs));
+                    ArrayList<String> songNames;
+                    if (allSongs.equals("")) {
+                        songNames = null;
+                    } else {
+                        String songs[] = allSongs.split(",");
+                         songNames = new ArrayList<>(Arrays.asList(songs));
+                    }
                     Playlist playlist = new Playlist(username, title, songNames);
                     playlists.add(playlist);
                 }
@@ -87,15 +90,95 @@ public class SQLPlaylistDao implements PlaylistDao {
                 while (resultSet.next()) {
                     if (playlistName.equals(resultSet.getString("title"))) {
                         String allSongs = resultSet.getString("songs");
-                        String songs[] = allSongs.split(",");
-                        songsInPlaylist = new ArrayList<>(Arrays.asList(songs));
+                        if (allSongs.equals("")) {
+                            songsInPlaylist = null;
+                        } else {
+                            String songs[] = allSongs.split(",");
+                            songsInPlaylist = new ArrayList<>(Arrays.asList(songs));
+                        }
                     }
                 }
             }
         } catch (SQLException e) {
             System.out.println("Error llegint les cançons de la base de dades: " + e.getMessage());
         }
-
         return songsInPlaylist;
+    }
+
+    public boolean addSongToPlaylistDAO(String songName, String playlist) {
+        boolean saved = false;
+        String allSongs = null;
+        try {
+            Statement statement = remoteConnection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM playlist");
+
+            if (!resultSet.next()) {
+                System.out.println("Base de dades buida");
+            } else {
+                resultSet.beforeFirst();
+                while (resultSet.next()) {
+                    String title = resultSet.getString("title");
+                    if (title.equals(playlist)) {
+                        allSongs = resultSet.getString("songs");
+                        if (allSongs.equals("")) {
+                            allSongs += songName;
+                            System.out.println("hello");
+                            System.out.println(allSongs);
+                        } else {
+                            allSongs += "," + songName;
+                        }
+                        String register = "UPDATE playlist SET songs = ? WHERE title = ?";
+                        PreparedStatement preparedStmt = remoteConnection.prepareStatement(register);
+                        preparedStmt.setString (1, allSongs);
+                        preparedStmt.setString(2, playlist);
+                        preparedStmt.execute();
+                        saved = true;
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error llegint les cançons de la base de dades: " + e.getMessage());
+        }
+        return saved;
+    }
+
+    public boolean deletePlaylistFromDAO(String playlistName) {
+        boolean deleted = false;
+
+        try {
+            Statement statement = remoteConnection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM playlist");
+
+            if (!resultSet.next()) {
+                System.out.println("Base de dades buida");
+            } else {
+                resultSet.beforeFirst();
+
+                while (resultSet.next()) {
+                    String title = resultSet.getString("title");
+
+                    if (playlistName.equals(title)) {
+                        //Guardem el filePath per a poder borrar el fitxer local
+
+                        try {
+                            String deleteQuery = "DELETE FROM playlist WHERE title = ?";
+                            PreparedStatement preparedStatement = remoteConnection.prepareStatement(deleteQuery);
+                            preparedStatement.setString(1, playlistName);
+                            int affectedRows = preparedStatement.executeUpdate();
+                            if (affectedRows == 0) {
+                                System.out.println("Playlist not found in the database");
+                            } else {
+                                deleted = true;
+                            }
+                        } catch (SQLException e) {
+                            System.out.println("Error eliminating the song");
+                        }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error llegint les cançons de la base de dades: " + e.getMessage());
+        }
+        return deleted;
     }
 }

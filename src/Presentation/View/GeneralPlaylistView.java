@@ -86,11 +86,11 @@ public class GeneralPlaylistView extends JPanel {
         // Creem el JPanel del center i el configurem
         JPanel center = new JPanel(new GridBagLayout());
         center.setBackground(Color.BLACK);
-        center.setBorder(BorderFactory.createEmptyBorder(0, 200, 80, 200));
+        center.setBorder(BorderFactory.createEmptyBorder(0, 40, 0, 40));
 
         // Textfields per buscar + imatge create List
-        jMyPlaylistBuscador = utils.textField();
-        jOthersPlaylistBuscador = utils.textField();
+        jMyPlaylistBuscador = utils.textFieldPlaylists();
+        jOthersPlaylistBuscador = utils.textFieldPlaylists();
 
         Icon newPlaylist = new ImageIcon(String.valueOf(AssetsFiles.CREATE_LIST_BUTTON_IMG));
         jNewPlaylist = utils.buttonImg(newPlaylist);
@@ -99,7 +99,7 @@ public class GeneralPlaylistView extends JPanel {
         jNewPlaylist.setMaximumSize(new Dimension(100,50));
 
         // My Playlists
-        Dimension dimension = new Dimension(300,220);
+        Dimension dimension = new Dimension(500,220);
         myPlaylistsTable = new JTable(myPlaylistsModel);
         JScrollPane scrollMyPlaylists = createSongListTable(myPlaylistsTable);
         scrollMyPlaylists.setPreferredSize(dimension);
@@ -122,14 +122,6 @@ public class GeneralPlaylistView extends JPanel {
         jlOthersPlaylists.setForeground(Color.GREEN);
         jlOthersPlaylists.setFont(new Font("Gotham", Font.BOLD, 27));
 
-        timer = new Timer(5000, e -> {
-            // Actualizar los datos del modelo de la JTable
-            //fillMyPlaylistsTable(ArrayList<String> s);
-            // Llamar a fireTableDataChanged() para refrescar la vista
-            myPlaylistsModel.fireTableDataChanged();
-        });
-
-        Insets columnSpacing = new Insets(0, 0, 0, 0);
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
         constraints.gridy = 0;
@@ -147,14 +139,11 @@ public class GeneralPlaylistView extends JPanel {
         center.add(scrollMyPlaylists, constraints);
 
         // DESPLACEM A LA DRETA
-        constraints.gridx = 1000;
+        constraints.gridx = 500;
         constraints.gridy = 0;
-        constraints.insets = columnSpacing;
 
         center.add(jlOthersPlaylists, constraints);
         constraints.gridy++;
-        constraints.weighty = 15;
-        constraints.weightx = 20;
         center.add(jOthersPlaylistBuscador, constraints);
         constraints.gridy++;
         center.add(scrollOthersPlaylists, constraints);

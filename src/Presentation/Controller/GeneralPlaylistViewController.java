@@ -38,7 +38,7 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
                 String title = JOptionPane.showInputDialog("Playlist Name:");
                 String username = userManager.currentUsername();
                 playlistManager.savePlaylist(username, title);
-                mainView.showGeneralPlaylistCard();
+                mainView.showMainMenuCard();
             }
         }
     }
@@ -50,6 +50,8 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
 
         detailedView.fillSongsInPlaylistTable(playlistManager.obtainSongsInPlaylist(playlistName));
         detailedView.definePlaylistName(playlistName);
+        //TODO
+        playlistManager.setCurrentPlaylist(playlistName);
         //detailedView.configureDetailedPlaylistView();
         mainView.showDetailedPlaylistCard();
 

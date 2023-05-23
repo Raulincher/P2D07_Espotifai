@@ -18,12 +18,12 @@ public class DetailedPlaylistView extends JPanel {
     // Preparem tots els atributs
     private final Utils utils;
     private JLabel jlListName;
-    private JButton boto1;
+    private JButton jbDeletePlaylist;
     private JButton boto2;
 
     private DefaultTableModel songListModel;
     private JTable songListTable;
-
+    public static final String BTN_DELETE_PLAYLIST = "BTN_DELETE_PLAYLIST";
     private JTextArea jtArea;
     private static String[] columnHeaders = {"Title"};
 
@@ -50,6 +50,7 @@ public class DetailedPlaylistView extends JPanel {
      */
     public void addDetailedPlaylistController(DetailedPlaylistViewController detailedPlaylistViewController){
         //jback.addActionListener(detailedPlaylistViewController);
+        jbDeletePlaylist.addActionListener(detailedPlaylistViewController);
     }
 
     /**
@@ -82,8 +83,10 @@ public class DetailedPlaylistView extends JPanel {
         jtArea.setPreferredSize(new Dimension(200, 50));
         north.add(jtArea, BorderLayout.WEST);
         ImageIcon addFileBtnAux = new ImageIcon(String.valueOf(AssetsFiles.DELETE_LIST_BUTTON_IMG));
-        boto1 = utils.buttonImg(addFileBtnAux);
-        north.add(boto1,BorderLayout.CENTER);
+
+        jbDeletePlaylist = utils.buttonImg(addFileBtnAux);
+        jbDeletePlaylist.setActionCommand(BTN_DELETE_PLAYLIST);
+        north.add(jbDeletePlaylist,BorderLayout.CENTER);
         add(north, BorderLayout.NORTH);
 
         //Center
@@ -135,16 +138,23 @@ public class DetailedPlaylistView extends JPanel {
     }
 
     public void fillSongsInPlaylistTable(ArrayList<String> songsInPlaylist) {
-        songListModel.setRowCount(0);
-        System.out.println("Aqui: " + songsInPlaylist.get(0));
-        // Obrim bucle per a mostrar la informació de la cançó
-        for (String s : songsInPlaylist) {
-            Object[] rowData = {s};
-            songListModel.addRow(rowData);
+        if (songsInPlaylist != null) {
+            songListModel.setRowCount(0);
+            System.out.println("Aqui: " + songsInPlaylist.get(0));
+            // Obrim bucle per a mostrar la informació de la cançó
+            for (String s : songsInPlaylist) {
+                Object[] rowData = {s};
+                songListModel.addRow(rowData);
+            }
         }
     }
 
     public void definePlaylistName(String playlistName) {
         jtArea.setText(playlistName);
     }
+
+    public void showPopUp(String error) {
+        JOptionPane.showMessageDialog(this,error);
+    }
+
 }
