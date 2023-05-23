@@ -92,7 +92,7 @@ public class DeleteSongView extends JPanel {
         // Declarem la JTable
         table = new JTable(deleteTableModel);
 
-        // Configurem el JScrollPane per la la taula i l'afegim
+        // Configurem el JScrollPane per la taula i l'afegim
         JScrollPane scrollpane = createSongListTable(table);
         center.add(scrollpane, BorderLayout.CENTER);
         add(center, BorderLayout.CENTER);

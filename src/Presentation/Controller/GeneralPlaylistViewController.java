@@ -48,8 +48,8 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
         int tableClicked = generalPlaylistView.obtainTableClicked(e.getSource());
         String playlistName = generalPlaylistView.obtainPlaylistName(e.getPoint(), tableClicked);
 
-
         detailedView.fillSongsInPlaylistTable(playlistManager.obtainSongsInPlaylist(playlistName));
+        detailedView.definePlaylistName(playlistName);
         //detailedView.configureDetailedPlaylistView();
         mainView.showDetailedPlaylistCard();
 

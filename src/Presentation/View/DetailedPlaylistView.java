@@ -5,6 +5,7 @@ import Presentation.Controller.DetailedPlaylistViewController;
 import Presentation.Utils;
 
 import javax.swing.*;
+import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
@@ -23,6 +24,9 @@ public class DetailedPlaylistView extends JPanel {
     private DefaultTableModel songListModel;
     private JTable songListTable;
 
+    private JTextArea jtArea;
+    private static String[] columnHeaders = {"Title"};
+
     // Preparem els strings per quan es premi un botó
     public static final String BTN_BACK = "BTN_BACK";
     // Preparem els elements de Swing
@@ -35,7 +39,7 @@ public class DetailedPlaylistView extends JPanel {
      */
     public DetailedPlaylistView(Utils utils){
         this.utils = utils;
-        songListModel = new DefaultTableModel(0, 0);
+        songListModel = new DefaultTableModel(columnHeaders, 1);
     }
 
     /**
@@ -45,7 +49,6 @@ public class DetailedPlaylistView extends JPanel {
      * @param detailedPlaylistViewController, controller de la DetailedPlaylistView
      */
     public void addDetailedPlaylistController(DetailedPlaylistViewController detailedPlaylistViewController){
-
         //jback.addActionListener(detailedPlaylistViewController);
     }
 
@@ -68,32 +71,36 @@ public class DetailedPlaylistView extends JPanel {
         // Afegim el Label que desitgem i afegim el Header
         Icon logo = new ImageIcon(String.valueOf(AssetsFiles.LISTMANAGING_LABEL));;
         //north.add(headerView.configureHeader(logo));
-        //add(north, BorderLayout.NORTH);
+
+
+        jtArea = new JTextArea();
+        jtArea.setBackground(Color.BLACK);
+        jtArea.setForeground(Color.GREEN);
+        jtArea.setFont(new Font("Gotham", Font.BOLD, 27));
+        jtArea.setEditable(false);
+        jtArea.setFocusable(false);
+        jtArea.setPreferredSize(new Dimension(200, 50));
+        north.add(jtArea, BorderLayout.WEST);
+        ImageIcon addFileBtnAux = new ImageIcon(String.valueOf(AssetsFiles.DELETE_LIST_BUTTON_IMG));
+        boto1 = utils.buttonImg(addFileBtnAux);
+        north.add(boto1,BorderLayout.CENTER);
+        add(north, BorderLayout.NORTH);
 
         //Center
-        JPanel center = new JPanel(new FlowLayout());
+        JPanel center = new JPanel();
         center.setBackground(Color.black);
 
-        jlListName = new JLabel("Posar el nom de la llista");
-        jlListName.setForeground(Color.GREEN);
-        jlListName.setFont(new Font("Gotham", Font.BOLD, 27));
 
-        boto1 = new JButton("Boto1");
         boto2 = new JButton("Boto2");
 
-        Dimension dimension = new Dimension(300,220);
+        Dimension dimension = new Dimension(700, 350);
         songListTable = new JTable(songListModel);
         JScrollPane scrollMyPlaylists = createSongListTable(songListTable);
         scrollMyPlaylists.setPreferredSize(dimension);
         scrollMyPlaylists.setMinimumSize(dimension);
         scrollMyPlaylists.setMaximumSize(dimension);
+        center.add(scrollMyPlaylists, BorderLayout.CENTER);
 
-
-        center.add(jlListName);
-        center.add(scrollMyPlaylists);
-       /* center.add(boto1);
-        center.add(boto2);
-        center.add(songListTable);*/
 
         add(center,BorderLayout.CENTER);
 
@@ -128,11 +135,15 @@ public class DetailedPlaylistView extends JPanel {
 
     public void fillSongsInPlaylistTable(ArrayList<String> songsInPlaylist) {
         songListModel.setRowCount(0);
-
+        System.out.println("Aqui: " + songsInPlaylist.get(0));
         // Obrim bucle per a mostrar la informació de la cançó
         for (String s : songsInPlaylist) {
             Object[] rowData = {s};
             songListModel.addRow(rowData);
         }
+    }
+
+    public void definePlaylistName(String playlistName) {
+        jtArea.setText(playlistName);
     }
 }

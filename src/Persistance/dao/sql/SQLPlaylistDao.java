@@ -85,9 +85,11 @@ public class SQLPlaylistDao implements PlaylistDao {
             } else {
                 resultSet.beforeFirst();
                 while (resultSet.next()) {
-                    String allSongs = resultSet.getString("songs");
-                    String songs[] = allSongs.split(",");
-                    songsInPlaylist = new ArrayList<>(Arrays.asList(songs));
+                    if (playlistName.equals(resultSet.getString("title"))) {
+                        String allSongs = resultSet.getString("songs");
+                        String songs[] = allSongs.split(",");
+                        songsInPlaylist = new ArrayList<>(Arrays.asList(songs));
+                    }
                 }
             }
         } catch (SQLException e) {

@@ -75,7 +75,6 @@ public class AddSongView extends JPanel {
         jtfArtist = utils.textField();
 
         JLabel genreLabel = utils.label("Genre");
-        //jtfGenre = utils.textField();
 
         String[] options = {"Pop", "Reggaeton", "Techno", "Rock",
                             "Heavy metal", "Rap", "Balada", "Classical"};
