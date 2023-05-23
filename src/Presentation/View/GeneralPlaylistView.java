@@ -1,16 +1,14 @@
 package Presentation.View;
 
-import Business.Entities.Playlist;
-import Business.Entities.Song;
+import javax.swing.Timer;
+
 import Presentation.AssetsFiles;
 import Presentation.Controller.GeneralPlaylistViewController;
-import Presentation.Controller.HeaderController;
 import Presentation.Utils;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableColumn;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -37,6 +35,7 @@ public class GeneralPlaylistView extends JPanel {
 
     private final static String MY_PLAYLISTS = "My playlists";
     private final static String OTHERS_PLAYLISTS = "Others playlists";
+    private Timer timer;
 
     /**
      * Funció que servirà com a constructor de la GeneralPlaylistView
@@ -61,6 +60,8 @@ public class GeneralPlaylistView extends JPanel {
     public void addGeneralPlaylistController(GeneralPlaylistViewController generalPlaylistViewController){
         //set action command
         jNewPlaylist.addActionListener(generalPlaylistViewController);
+        myPlaylistsTable.addMouseListener(generalPlaylistViewController);
+        otherPlaylistsTable.addMouseListener(generalPlaylistViewController);
     }
 
     /**
@@ -125,6 +126,13 @@ public class GeneralPlaylistView extends JPanel {
         jlOthersPlaylists.setForeground(Color.GREEN);
         jlOthersPlaylists.setFont(new Font("Gotham", Font.BOLD, 27));
 
+        timer = new Timer(5000, e -> {
+            // Actualizar los datos del modelo de la JTable
+            //fillMyPlaylistsTable(ArrayList<String> s);
+            // Llamar a fireTableDataChanged() para refrescar la vista
+            myPlaylistsModel.fireTableDataChanged();
+        });
+
         Insets columnSpacing = new Insets(0, 0, 0, 0);
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.gridx = 0;
@@ -188,8 +196,90 @@ public class GeneralPlaylistView extends JPanel {
         return new JScrollPane(table);
     }
 
+    public void fillMyPlaylistsTable(ArrayList<String> playlistsNames) {
+        myPlaylistsModel.setRowCount(0);
+
+        // Obrim bucle per a mostrar la informació de la cançó
+        for (String playlistName : playlistsNames) {
+            Object[] rowData = {playlistName};
+            myPlaylistsModel.addRow(rowData);
+        }
+    }
+
+    public void fillOtherPlaylistsTable(ArrayList<String> playlistsNames) {
+        otherPlaylistsModel.setRowCount(0);
+
+        // Obrim bucle per a mostrar la informació de la cançó
+        for (String playlistName : playlistsNames) {
+            Object[] rowData = {playlistName};
+            otherPlaylistsModel.addRow(rowData);
+        }
+    }
+
+    public int obtainTableClicked(Object object) {
+        int table = 0;
+
+        if (object.equals(myPlaylistsTable)) {
+            table = 0;
+        } else if (object.equals(otherPlaylistsTable)) {
+            table = 1;
+        }
+
+        return table;
+    }
+
+
+
+    public String obtainPlaylistName(Point point, int tableClicked) {
+        String playlistName = null;
+
+        if (tableClicked == 0) {
+            int indexFila = myPlaylistsTable.rowAtPoint(point);
+
+            // Obté la informació a partir de la cançó seleccionada
+            playlistName = (String) myPlaylistsTable.getValueAt(indexFila, 0);
+        } else {
+            int indexFila = otherPlaylistsTable.rowAtPoint(point);
+
+            // Obté la informació a partir de la cançó seleccionada
+            playlistName = (String) otherPlaylistsTable.getValueAt(indexFila, 0);
+        }
+        return playlistName;
+    }
+
+/*
+    public int obtainPlaylistndexToDelete(String playlistName, int tableClicked) {
+        int indexSong = 0;
+
+        if (tableClicked == 0) {
+            // Recorrem el bucle fins a trobar la cançó en qüestió
+            for (int i = 0; i < myPlaylistsTable.getRowCount(); i++) {
+                if (myPlaylistsTable.getValueAt(i, 0).equals(playlistName)) {
+                    indexSong = i;
+                }
+            }
+        } else {
+            for (int i = 0; i < otherPlaylistsTable.getRowCount(); i++) {
+                if (otherPlaylistsTable.getValueAt(i, 0).equals(playlistName)) {
+                    indexSong = i;
+                }
+            }
+        }
+        return indexSong;
+    }*/
+    public void updateViewTable() {
+        // Notificar a la jTable que los datos han cambiado
+        myPlaylistsTable.getModel();
+        myPlaylistsModel.fireTableDataChanged();
+        otherPlaylistsModel.fireTableDataChanged();
+    }
+
     public void showPopUps(String error) {
         JOptionPane.showMessageDialog(this,error);
+    }
+
+    public void stopTimer() {
+        timer.stop();
     }
 
 }

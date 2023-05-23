@@ -166,11 +166,7 @@ public class DeleteSongView extends JPanel {
         return new JScrollPane(table);
     }
 
-    /**
-     * Funció que servirà per a filtrar la cançó que vols esborrar
-     *
-     * @param deleteSongs, array amb la cançó i les seves dades
-     */
+
     public void fillDeleteTable(ArrayList<String> deleteSongs) {
         deleteTableModel.setRowCount(0);
 
@@ -199,12 +195,7 @@ public class DeleteSongView extends JPanel {
         }
     }
 
-    /**
-     * Funció que servirà com a getter per a obtenir
-     * resposta de la DefaultTableModel
-     *
-     * @return sorter
-     */
+
     public TableRowSorter<DefaultTableModel> getSorter() {
         return sorter;
     }
@@ -225,13 +216,7 @@ public class DeleteSongView extends JPanel {
         return songTitle;
     }
 
-    /**
-     * Funció que servirà per a obtenir l'índex de la
-     * cançó que l'usuari desitja eliminar
-     *
-     * @param songTitle, títol de la cançó
-     * @return indexSong, índex de la cançó
-     */
+
     public int obtainSongIndexToDelete(String songTitle) {
         int indexSong = 0;
 

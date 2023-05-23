@@ -1,5 +1,6 @@
 package Presentation.Controller;
 
+import Business.PlaylistManager;
 import Business.SongManager;
 import Business.UserManager;
 import Presentation.View.*;
@@ -13,17 +14,22 @@ public class MainMenuViewController implements ActionListener{
     private final MainView mainView;
     private final SongManager songManager;
     private final UserManager userManager;
+    private final PlaylistManager playlistManager;
     private final DeleteSongView deleteSongView;
     private final GeneralSongListView generalSongListView;
+    private final GeneralPlaylistView generalPlaylistView;
 
     public MainMenuViewController(MainMenuView mainMenuView, MainView mainView, SongManager songManager,
-                                  UserManager userManager, DeleteSongView deleteSongView, GeneralSongListView generalSongListView) {
+                                  UserManager userManager, DeleteSongView deleteSongView,
+                                  GeneralSongListView generalSongListView, GeneralPlaylistView generalPlaylistView,PlaylistManager playlistManager) {
         this.mainMenuView = mainMenuView;
         this.mainView = mainView;
         this.songManager = songManager;
         this.userManager = userManager;
         this.deleteSongView = deleteSongView;
         this.generalSongListView = generalSongListView;
+        this.generalPlaylistView = generalPlaylistView;
+        this.playlistManager = playlistManager;
     }
 
     @Override
@@ -35,7 +41,11 @@ public class MainMenuViewController implements ActionListener{
                 deleteSongView.fillDeleteTable(songManager.listSongs(true, userManager.currentUsername()));
                 mainView.showDeleteSongCard();
             }
-            case MainMenuView.BTN_MANAGE -> mainView.showGeneralPlaylistCard();
+            case MainMenuView.BTN_MANAGE -> {
+                generalPlaylistView.fillOtherPlaylistsTable(playlistManager.obtainPlaylistNames(false, userManager.currentUsername()));
+                generalPlaylistView.fillMyPlaylistsTable(playlistManager.obtainPlaylistNames(true,  userManager.currentUsername()));
+                mainView.showGeneralPlaylistCard();
+            }
             case MainMenuView.BTN_SONG_LIST -> {
                 generalSongListView.fillTable(songManager.listSongs(false, null));
                 mainView.showGeneralSongListCard();
