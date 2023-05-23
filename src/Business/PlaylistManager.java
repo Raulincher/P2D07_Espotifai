@@ -28,19 +28,24 @@ public class PlaylistManager {
     }
 
     public ArrayList<String> obtainPlaylistNames (boolean byUsername, String username) {
-        ArrayList<Playlist> playlists = playlistDao.obtainAllPlaylists();
+
         ArrayList<String> playlistNames = new ArrayList<>();
 
-        if(byUsername) {
-            for (int i = 0; i < playlists.size(); i++) {
-                if (username.equals(playlists.get(i).getUsername())) {
-                    playlistNames.add(playlists.get(i).getTitle());
-                }
-            }
+        if (playlistDao.obtainAllPlaylists() == null) {
+            playlistNames = null;
         } else {
-            for (int i = 0; i < playlists.size(); i++) {
-                if (!(username.equals(playlists.get(i).getUsername()))) {
-                    playlistNames.add(playlists.get(i).getTitle());
+            ArrayList<Playlist> playlists = playlistDao.obtainAllPlaylists();
+            if (byUsername) {
+                for (int i = 0; i < playlists.size(); i++) {
+                    if (username.equals(playlists.get(i).getUsername())) {
+                        playlistNames.add(playlists.get(i).getTitle());
+                    }
+                }
+            } else {
+                for (int i = 0; i < playlists.size(); i++) {
+                    if (!(username.equals(playlists.get(i).getUsername()))) {
+                        playlistNames.add(playlists.get(i).getTitle());
+                    }
                 }
             }
         }
