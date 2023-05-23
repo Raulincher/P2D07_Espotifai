@@ -8,4 +8,8 @@ public class PlaylistManager {
     public PlaylistManager(PlaylistDao playlistDao) {
         this.playlistDao = playlistDao;
     }
+
+    private void getNameNewPlaylist() {
+
+    }
 }

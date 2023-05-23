@@ -31,10 +31,7 @@ public class DeleteSongView extends JPanel {
     private JTextField jBuscador;
     private JButton jCerca;
     private JTable table;
-    private JLabel name;
-    private JTextField input;
-    private JButton delete;
-    private Object[][] dataTableModel;
+
     private TableRowSorter<DefaultTableModel> sorter;
     private static String[] columnHeaders = {"Title", "Artist", "Genre"};
 

@@ -71,6 +71,11 @@ public class Main {
         footerView7.initializeButtons();
         footerView7.addFooterController(footerController7);
 
+        FooterView footerView8 = new FooterView(utils);
+        FooterController footerController8 = new FooterController(footerView8, songManager);
+        footerView8.initializeButtons();
+        footerView8.addFooterController(footerController8);
+
         HeaderView headerView = new HeaderView(utils);
         HeaderController headerController = new HeaderController(headerView, userManager);
         headerView.initilizeButtons();
@@ -100,11 +105,15 @@ public class Main {
         headerView7.initilizeButtons();
         headerView7.addHeaderController(headerController);
 
+        HeaderView headerView8 = new HeaderView(utils);
+        headerView8.initilizeButtons();
+        headerView8.addHeaderController(headerController);
+
         RegisterView registerView = new RegisterView(utils);
         LoginView loginView = new LoginView(utils);
         AddSongView addSongView = new AddSongView(utils, headerView, footerView);
         DeleteSongView deleteSongView = new DeleteSongView(headerView2, utils, footerView2);
-        DetailedPlaylistView detailedPlaylistView = new DetailedPlaylistView(utils);
+        DetailedPlaylistView detailedPlaylistView = new DetailedPlaylistView(headerView8, footerView8, utils);
         DetailedSongView detailedSongView = new DetailedSongView(utils, headerView3, footerView3);
         GeneralPlaylistView generalPlaylistView = new GeneralPlaylistView(headerView4, footerView4, utils);
         GeneralSongListView generalSongListView = new GeneralSongListView(utils, headerView5, footerView5);
