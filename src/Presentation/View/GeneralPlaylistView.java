@@ -193,22 +193,26 @@ public class GeneralPlaylistView extends JPanel {
     }
 
     public void fillMyPlaylistsTable(ArrayList<String> playlistsNames) {
-        myPlaylistsModel.setRowCount(0);
+        if (playlistsNames != null) {
+            myPlaylistsModel.setRowCount(0);
 
-        // Obrim bucle per a mostrar la informació de la cançó
-        for (String playlistName : playlistsNames) {
-            Object[] rowData = {playlistName};
-            myPlaylistsModel.addRow(rowData);
+            // Obrim bucle per a mostrar la informació de la cançó
+            for (String playlistName : playlistsNames) {
+                Object[] rowData = {playlistName};
+                myPlaylistsModel.addRow(rowData);
+            }
         }
     }
 
     public void fillOtherPlaylistsTable(ArrayList<String> playlistsNames) {
-        otherPlaylistsModel.setRowCount(0);
+        if (playlistsNames != null) {
+            otherPlaylistsModel.setRowCount(0);
 
-        // Obrim bucle per a mostrar la informació de la cançó
-        for (String playlistName : playlistsNames) {
-            Object[] rowData = {playlistName};
-            otherPlaylistsModel.addRow(rowData);
+            // Obrim bucle per a mostrar la informació de la cançó
+            for (String playlistName : playlistsNames) {
+                Object[] rowData = {playlistName};
+                otherPlaylistsModel.addRow(rowData);
+            }
         }
     }
 
