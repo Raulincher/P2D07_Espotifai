@@ -37,7 +37,9 @@ public class FooterController implements ActionListener {
             }
 
             case FooterView.BTN_REPEAT -> songManager.loopAudio();
-            case FooterView.BTN_BACKWARD -> songManager.moveBackward();
+            case FooterView.BTN_BACKWARD -> { songManager.moveBackward();
+            }
+
             case FooterView.BTN_FORWARD -> {
                 try {
                     songManager.moveForward();

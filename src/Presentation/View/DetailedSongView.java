@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
@@ -31,7 +32,9 @@ public class DetailedSongView extends JPanel {
     private JLabel jlPlayMe;
     private JButton jPlaylist;
     private JButton jPlay;
-    private JPopupMenu jPopUpPlaylists;
+    private JPopupMenu popupMenuPlaylist;
+    private ArrayList<JMenuItem> listItems = new ArrayList<>();
+    private String songName;
 
     /**
      * Funció que servirà com a constructor de la GeneralPlaylistView
@@ -44,6 +47,7 @@ public class DetailedSongView extends JPanel {
         this.utils = utils;
         defaultTableModel = new DefaultTableModel(columnHeaders, 0);
         jTextArea = new JTextArea();
+        popupMenuPlaylist = new JPopupMenu();
     }
 
     /**
@@ -53,8 +57,11 @@ public class DetailedSongView extends JPanel {
      * @param detailedSongViewController, controller de la DetailedSongView
      */
     public void addDetailedSongController(DetailedSongViewController detailedSongViewController) {
-        jPlaylist.addActionListener(detailedSongViewController);
+        jPlaylist.addMouseListener(detailedSongViewController);
         jPlay.addActionListener(detailedSongViewController);
+        for (JMenuItem item : listItems){
+            item.addActionListener(detailedSongViewController);
+        }
     }
 
     /**
@@ -98,6 +105,10 @@ public class DetailedSongView extends JPanel {
         jPlaylist = utils.buttonImg(playlistBtn);
         jPlaylist.setBackground(gris);
         jPlaylist.setActionCommand(BTN_PLAYLIST);
+
+        //Creem la PopUpMenu del boto playlist
+        //popupMenuPlaylist = createPopUpMenu();
+        createPopUpMenu();
 
         // Creem el JButton per donar-li al play a la cançó en qüestió
         Icon playBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_PLAYBUTTON_IMG));
@@ -286,6 +297,27 @@ public class DetailedSongView extends JPanel {
         jTextArea.setCaretPosition(0);
     }
 
+    public void fillPopMenu(ArrayList<String> playlist){
+        for (String play : playlist) {
+            JMenuItem menuItem = new JMenuItem(play);
+            menuItem.setActionCommand(play);
+            listItems.add(menuItem);
+            popupMenuPlaylist.add(menuItem);
+        }
+    }
+
+    public void createPopUpMenu(){
+        Color gris = new Color(26, 26, 26);
+        popupMenuPlaylist.setBackground(gris);
+        popupMenuPlaylist.setForeground(Color.WHITE);
+        popupMenuPlaylist.setFont(new Font("Gotham", Font.BOLD, 15));
+    }
+
+
+    public void showMenuPopUp(MouseEvent e){
+        popupMenuPlaylist.show(e.getComponent(), e.getX(), e.getY());
+    }
+
     /**
      * Funció que servirà per a mostrar pop ups
      *
@@ -295,4 +327,16 @@ public class DetailedSongView extends JPanel {
         JOptionPane.showMessageDialog(this,error);
     }
 
+    public void setNameSong (String songName){
+        this.songName = songName;
+    }
+    public String getSongName(){
+        return songName;
+    }
+
+    public void clearInfo() {
+        popupMenuPlaylist = null;
+        popupMenuPlaylist = new JPopupMenu();
+        listItems.clear();
+    }
 }

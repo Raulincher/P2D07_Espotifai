@@ -118,7 +118,7 @@ public class FooterView extends JPanel {
         footerS.setBackground(gris);
 
         // Agafem el nom de la cançó
-        JLabel jLogo = utils.label("Song Name");
+        JLabel jLogo = utils.label("Song name");
 
         // Configurem la part NORTH del BorderLayout
         footerN.add(jLogo);
@@ -234,6 +234,7 @@ public class FooterView extends JPanel {
     public void showPopUpError(String error){
         JOptionPane.showMessageDialog(this,error);
     }
+
 
 
 }

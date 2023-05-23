@@ -352,9 +352,7 @@ public class SongManager {
 
     public ArrayList<String> searchLyrics(){
         String name = this.actualSong.substring(0, actualSong.lastIndexOf(".wav"));
-        //ArrayList<String> songActual = searchSong("Dancin");
         String artist = songDao.songArtist(name);
-        System.out.println("Artist: " + artist + " Song: " + name);
         String lyrics = readLyricApi(artist,name);
         ArrayList<String> lyricsSong = new ArrayList<>();
         lyricsSong.add(name);
@@ -379,6 +377,10 @@ public class SongManager {
             temps.add(1,"Unsupported Audio File");
         }
         return temps;
+    }
+
+    public String getActualSong() {
+        return actualSong;
     }
 }
 

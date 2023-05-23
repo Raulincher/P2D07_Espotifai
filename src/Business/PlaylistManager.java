@@ -22,7 +22,6 @@ public class PlaylistManager {
             return true;
         } catch (PlaylistNotSavedException e) {
             System.out.println("La llista NO s'ha guardat!");
-
             return false;
         }
     }

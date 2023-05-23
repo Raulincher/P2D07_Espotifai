@@ -1,7 +1,9 @@
 package Presentation.Controller;
 
 import Business.Entities.Song;
+import Business.PlaylistManager;
 import Business.SongManager;
+import Business.UserManager;
 import Presentation.View.DeleteSongView;
 import Presentation.View.DetailedSongView;
 import Presentation.View.GeneralSongListView;
@@ -20,13 +22,20 @@ public class GeneralSongListViewController implements ActionListener, MouseListe
     private final MainView mainView;
     private SongManager songManager;
     private DetailedSongView detailedSongView;
+    private PlaylistManager playlistManager;
+    private UserManager userManager;
+
+    private DetailedSongViewController detailedSongViewController;
 
 
-    public GeneralSongListViewController(GeneralSongListView generalSongListView, MainView mainView, SongManager songManager, DetailedSongView detailedSongView) {
+    public GeneralSongListViewController(GeneralSongListView generalSongListView, MainView mainView, SongManager songManager, DetailedSongView detailedSongView, PlaylistManager playlistManager, UserManager userManager,DetailedSongViewController detailedSongViewController) {
         this.generalSongListView = generalSongListView;
         this.mainView = mainView;
         this.songManager = songManager;
         this.detailedSongView = detailedSongView;
+        this.playlistManager = playlistManager;
+        this.userManager = userManager;
+        this.detailedSongViewController = detailedSongViewController;
     }
 
     @Override
@@ -50,6 +59,7 @@ public class GeneralSongListViewController implements ActionListener, MouseListe
         JTable table = generalSongListView.getTable();
         int row = table.rowAtPoint(e.getPoint());
         if (row != -1) {
+            detailedSongView.clearInfo();
             selected = (String) table.getValueAt(row, 0);
             ArrayList<String> song = songManager.searchSong(selected);
             detailedSongView.fillDetailedTable(song);
@@ -59,6 +69,12 @@ public class GeneralSongListViewController implements ActionListener, MouseListe
             } else {
                 detailedSongView.fillLyriscText(lyrics);
             }
+            //Preparem la PopUpMenu amb les playlist i configurem el boto per afegir de cadascuna
+            String username = userManager.currentUsername();
+            ArrayList<String> playlist = playlistManager.obtainPlaylistNames(true,username);
+            detailedSongView.fillPopMenu(playlist);
+            detailedSongView.addDetailedSongController(detailedSongViewController);
+            detailedSongView.setNameSong(song.get(0));
             mainView.showDetailedSongCard();
         }
     }
