@@ -80,7 +80,9 @@ public enum AssetsFiles {
 
     DELETE_SONG_FROM_LIST_BUTTON_IMG("files/imgs/deleteSongFromListLittleButton.png"),
     LYRICS_IMG("files/imgs/FlyricsButton.png"),
-    PLAYLIST_PLUS_ADD("files/imgs/addPlaylistButton.png");
+    PLAYLIST_PLUS_ADD("files/imgs/addPlaylistButton.png"),
+
+    GET_STATISTICS_BUTTON_IMG("files/imgs/getActualStatistics.png");
 
     private final String files;
 

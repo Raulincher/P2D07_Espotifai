@@ -9,9 +9,8 @@ import Presentation.Utils;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Map;
+import java.util.*;
+import java.util.HashMap;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
 
@@ -19,12 +18,18 @@ public class StatisticsView extends JPanel {
 
     // Preparem els strings en cas que es premi el botó back
     public static final String BTN_BACK = "BTN_BACK";
+    public static final String BTN_STATISTICS = "BTN_STATISTICS";
 
     // Preparem els atributs
     private final Utils utils;
     private final HeaderView headerView;
     private final FooterView footerView;
-    private final SongManager songManager;
+
+    // Preparem els elements de Swing
+
+    private Map<String, Integer> genreMap;
+
+    private JButton jgetStatistics;
 
     /**
      * Funció que servirà com a constructor de la StatisticsView
@@ -32,13 +37,11 @@ public class StatisticsView extends JPanel {
      * @param headerView, vista per a posar el Header
      * @param utils, per usar tots els seus mètodes
      * @param footerView, vista per a posar el Footer
-     * @param songManager, per a usar les estadístiques
      */
-    public StatisticsView(HeaderView headerView, Utils utils, FooterView footerView, SongManager songManager){
+    public StatisticsView(HeaderView headerView, Utils utils, FooterView footerView){
         this.headerView = headerView;
         this.footerView = footerView;
         this.utils = utils;
-        this.songManager = songManager;
     }
 
     /**
@@ -48,7 +51,12 @@ public class StatisticsView extends JPanel {
      * @param statisticsViewController, controller de les Statistics
      */
     public void addStatisticsController(StatisticsViewController statisticsViewController){
-        //jback.addActionListener(statisticsViewController);
+        jgetStatistics.addActionListener(statisticsViewController);
+    }
+
+    public void setGenreMap(Map<String, Integer> genreMap) {
+        this.genreMap = genreMap;
+        repaint(); // Vuelve a dibujar el gráfico cuando se actualiza el mapa de géneros
     }
 
     /**
@@ -71,9 +79,22 @@ public class StatisticsView extends JPanel {
         north.setBackground(Color.black);
         add(north, BorderLayout.NORTH);
 
+        // WEST
+        // Creem el JPanel de l'esquerra per al botó d'actualitzar estadístiques
+        JPanel west = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        west.setBackground(Color.BLACK);
+
+        // Creem el JButton i l'afegim al JPanel
+        Icon statisticsBtn = new ImageIcon(String.valueOf(AssetsFiles.GET_STATISTICS_BUTTON_IMG));
+        jgetStatistics = utils.buttonImg(statisticsBtn);
+        jgetStatistics.setActionCommand(BTN_STATISTICS);
+        west.add(jgetStatistics);
+        add(west,BorderLayout.WEST);
+
         // CENTER
         // Creem el JPanel del center amb el FlowLayout i el configurem
         JPanel center = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        center.setBorder(createEmptyBorder(0, 0, 0, 130));
         center.setBackground(Color.BLACK);
 
         // Creem un nou sub-JPanel que servirà per visualitzar les estadístiques
@@ -86,12 +107,12 @@ public class StatisticsView extends JPanel {
              */
             @Override
             protected void paintComponent(Graphics graphics) {
+                if (genreMap == null) {
+                    return; // Salir del método si genreMap es nulo
+                }
                 // Preparem les variables i les eines
                 super.paintComponent(graphics);
                 Graphics2D graph2D = (Graphics2D) graphics;
-
-                // Agafem el mapa amb els gèneres i el seu nombre
-                Map<String, Integer> genreMap = songManager.createGenreMap();
 
                 // Agafem el gènere amb el màxim valor
                 int genreValue = Collections.max(genreMap.values());
@@ -114,12 +135,13 @@ public class StatisticsView extends JPanel {
 
                     // Configurem les mides i color de les barres
                     graph2D.setColor(Color.GREEN);
-                    graph2D.fillRect(x, getHeight() - barHeight, barWidth, barHeight -25);
+                    graph2D.fillRect(x, getHeight() - barHeight, barWidth, barHeight -35);
 
                     // Configurem format dels Strings de cada gènere
                     graph2D.setColor(Color.WHITE);
                     graph2D.setFont(new Font("Gotham", Font.BOLD, 12));
                     graph2D.drawString(genre, x, getHeight() - 5);
+                    graph2D.drawString(String.valueOf(count), x, getHeight() -20);
 
                     // Avancem la X per la següent barra
                     x += barWidth * 2;
@@ -127,7 +149,7 @@ public class StatisticsView extends JPanel {
             }
         };
         // Configurem el gràfic del JPanel
-        graphPanel.setPreferredSize(new Dimension(500, 300));
+        graphPanel.setPreferredSize(new Dimension(800, 300));
         graphPanel.setBackground(Color.BLACK);
         center.add(graphPanel);
 
@@ -143,5 +165,4 @@ public class StatisticsView extends JPanel {
         south.add(footerView.configureFooter());
         add(south, BorderLayout.SOUTH);
     }
-
 }

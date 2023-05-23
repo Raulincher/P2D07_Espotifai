@@ -118,7 +118,7 @@ public class Main {
         GeneralPlaylistView generalPlaylistView = new GeneralPlaylistView(headerView4, footerView4, utils);
         GeneralSongListView generalSongListView = new GeneralSongListView(utils, headerView5, footerView5);
         MainMenuView mainMenuView = new MainMenuView(footerView6, utils, headerView6);
-        StatisticsView statisticsView = new StatisticsView(headerView7, utils, footerView7, songManager);
+        StatisticsView statisticsView = new StatisticsView(headerView7, utils, footerView7);
 
         MainView mainView = new MainView(initialView, deleteSongView, statisticsView, mainMenuView, generalPlaylistView, generalSongListView, detailedSongView, detailedPlaylistView, registerView, loginView, addSongView, footerView, headerView);
         headerController.addMainView(mainView);
@@ -133,7 +133,7 @@ public class Main {
         GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView, mainView, songManager,detailedSongView);
         GeneralPlaylistViewController generalPlaylistViewController = new GeneralPlaylistViewController(generalPlaylistView, mainView, playlistManager, userManager, detailedPlaylistView);
         MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView, songManager, userManager, deleteSongView, generalSongListView, generalPlaylistView, playlistManager);
-        StatisticsViewController statisticsViewController = new StatisticsViewController(statisticsView, mainView);
+        StatisticsViewController statisticsViewController = new StatisticsViewController(statisticsView, mainView, songManager);
 
         initialView.addInitialViewController(initialViewController);
         loginView.addLoginController(loginViewController);
