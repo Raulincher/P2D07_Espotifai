@@ -99,6 +99,7 @@ public class DetailedPlaylistView extends JPanel {
         scrollMyPlaylists.setPreferredSize(dimension);
         scrollMyPlaylists.setMinimumSize(dimension);
         scrollMyPlaylists.setMaximumSize(dimension);
+        scrollMyPlaylists.setForeground(Color.DARK_GRAY);
         center.add(scrollMyPlaylists, BorderLayout.CENTER);
 
 
@@ -115,7 +116,7 @@ public class DetailedPlaylistView extends JPanel {
     public JScrollPane createSongListTable(JTable table){
         Color gris = new Color(26,26,26);
 
-        table.setRowHeight(60);
+        table.setRowHeight(40);
         table.setGridColor(Color.gray);
         table.setBackground(gris);
         table.setForeground(Color.WHITE);

@@ -31,7 +31,7 @@ public class DetailedSongView extends JPanel {
     private JLabel jlPlayMe;
     private JButton jPlaylist;
     private JButton jPlay;
-
+    private JPopupMenu jPopUpPlaylists;
 
     /**
      * Funció que servirà com a constructor de la GeneralPlaylistView
@@ -313,4 +313,5 @@ public class DetailedSongView extends JPanel {
     public void showPopUp(String error) {
         JOptionPane.showMessageDialog(this,error);
     }
+
 }

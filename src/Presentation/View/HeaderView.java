@@ -80,7 +80,7 @@ public class HeaderView extends JPanel {
         // Creem el JPanel i el configurem
         JPanel north = new JPanel();
         north.setBackground(Color.black);
-        north.setBorder(createEmptyBorder(40, 0, 0, 0));
+        north.setBorder(createEmptyBorder(10, 0, 0, 0));
 
         // Creem el JLabel, el configurem i l'afegim
         JLabel usedLabel = new JLabel(icon);
