@@ -1,19 +1,15 @@
 package Presentation.View;
 
-import Presentation.AssetsFiles;
+
 import Presentation.Controller.DeleteSongViewController;
 import Presentation.Utils;
 
 import javax.swing.*;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.util.ArrayList;
-
-import static javax.swing.BorderFactory.createEmptyBorder;
 
 public class DeleteSongView extends JPanel {
     private static final String[] COLUMN_NAMES = {"Songs", "Artist", "Genre"};
@@ -69,16 +65,6 @@ public class DeleteSongView extends JPanel {
         setBackground(Color.BLACK);
         Color gris = new Color(26,26,26);
 
-        // NORTH
-        // Creem el JPanel del nord i el configurem
-        JPanel north = new JPanel();
-        north.setBackground(Color.black);
-
-        // Afegim el JLabel i el Header
-        Icon logo = new ImageIcon(String.valueOf(AssetsFiles.DELETE_LABEL));;
-        //north.add(headerView.configureHeader(logo));
-        //add(north, BorderLayout.NORTH);
-
         // CENTER
         // Creem el JPanel del center i el configurem
         JPanel center = new JPanel(new BorderLayout());
@@ -99,14 +85,6 @@ public class DeleteSongView extends JPanel {
 
         sorter.setSortsOnUpdates(true);
         table.setRowSorter(sorter);
-
-        // SOUTH
-        // Creem el JPanel per al sud i afegim el footer
-        JPanel south = new JPanel();
-        south.setBackground(gris);
-        south.setBorder(createEmptyBorder(2, 0, 2, 0));
-        //south.add(footerView.configureFooter());
-        //add(south, BorderLayout.SOUTH);
     }
 
     /**

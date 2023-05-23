@@ -68,16 +68,6 @@ public class GeneralSongListView extends JPanel {
         setBackground(Color.BLACK);
         Color gris = new Color(26,26,26);
 
-        //NORTH
-        // Creem el JPanel i el configurem
-        JPanel north = new JPanel();
-        north.setBackground(Color.black);
-
-        // Afegim el JLabel amb el Header
-        Icon logo = new ImageIcon(String.valueOf(AssetsFiles.MUSIC_LABEL));;
-        //north.add(headerView.configureHeader(logo));
-        //add(north, BorderLayout.NORTH);
-
         //CENTER
         // Creem el JPanel del center i el configurem
         JPanel center = new JPanel(new BorderLayout());
@@ -140,17 +130,6 @@ public class GeneralSongListView extends JPanel {
                 search(jBuscador.getText(), sorter);
             }
         });
-
-        // SOUTH
-        // Creem el JPanel del sud i el configurem
-        JPanel south = new JPanel();
-        south.setBackground(gris);
-        south.setBorder(createEmptyBorder(2, 0, 2, 0));
-
-        // Afegim el Footer i ho afegim tot al BorderLayout
-        //south.add(footerView.configureFooter());
-        //add(south, BorderLayout.SOUTH);
-
     }
 
     /**

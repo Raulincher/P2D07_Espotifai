@@ -16,33 +16,44 @@ import java.sql.Connection;
 
 public class Main {
 
+    /**
+     * Funció que servirà com a constructor del propi main,
+     * és dir, de tot el programa
+     *
+     * @param args
+     */
     public static void main(String[] args) throws IOException {
 
+        // Connectem amb la base de dades
         Connection remoteConnection = DatabaseConnector.getInstance();
         UserDao userDao = new SQLUserDao(remoteConnection);
         SongDao songDao = new SQLSongDao(remoteConnection);
         PlaylistDao playlistDao = new SQLPlaylistDao(remoteConnection);
+
+        // Connectem amb l'API
         ApiHelper apiHelper = new ApiHelper();
         SongLyricsApi songLyricsApi = new SongLyricsApi(apiHelper);
 
+        // Connectem amb els Managers
         UserManager userManager = new UserManager(userDao);
         SongManager songManager = new SongManager(songDao,songLyricsApi);
         PlaylistManager playlistManager = new PlaylistManager(playlistDao);
 
+        // Iniciem utils
         Utils utils = new Utils();
-
 
         songManager.getSong("");
 
+        // Iniciem la primera vista
         InitialView initialView = new InitialView(utils);
 
-
+        // Preparem el header
         HeaderView headerView = new HeaderView(utils);
         HeaderController headerController = new HeaderController(headerView, userManager);
         headerView.initilizeButtons();
         headerView.addHeaderController(headerController);
 
-
+        // Preparem totes les vistes
         FooterView footerView = new FooterView(utils);
         RegisterView registerView = new RegisterView(utils);
         LoginView loginView = new LoginView(utils);
@@ -55,14 +66,15 @@ public class Main {
         MainMenuView mainMenuView = new MainMenuView(utils);
         StatisticsView statisticsView = new StatisticsView(utils);
 
+        // Iniciem la mainView, que tindrà el mateix header i footer
         MainView mainView = new MainView(initialView, deleteSongView, statisticsView, mainMenuView, generalPlaylistView, generalSongListView, detailedSongView, detailedPlaylistView, registerView, loginView, addSongView, footerView, headerView);
         headerController.addMainView(mainView);
 
-
-
+        // Vinculem amb el controller del footer
         FooterController footerController = new FooterController(footerView, songManager);
         footerView.addFooterController(footerController);
 
+        // Vinculem tots els controllers
         InitialViewController initialViewController = new InitialViewController(mainView);
         LoginViewController loginViewController = new LoginViewController(mainView, loginView, userManager,footerView);
         RegisterViewController registerViewController = new RegisterViewController(mainView, registerView, userManager);
@@ -73,8 +85,9 @@ public class Main {
         GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView, mainView, songManager,detailedSongView);
         GeneralPlaylistViewController generalPlaylistViewController = new GeneralPlaylistViewController(generalPlaylistView, mainView, playlistManager, userManager, detailedPlaylistView);
         MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView, songManager, userManager, deleteSongView, generalSongListView, generalPlaylistView, playlistManager);
-        StatisticsViewController statisticsViewController = new StatisticsViewController(statisticsView, mainView, songManager);
+        StatisticsViewController statisticsViewController = new StatisticsViewController(statisticsView, songManager);
 
+        // Vinculem vistes amb controllers
         initialView.addInitialViewController(initialViewController);
         loginView.addLoginController(loginViewController);
         registerView.addRegisterController(registerViewController);

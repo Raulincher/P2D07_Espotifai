@@ -2,17 +2,11 @@ package Presentation.View;
 
 import Presentation.AssetsFiles;
 import Presentation.Controller.AddSongViewController;
-import Presentation.Controller.HeaderController;
 import Presentation.Utils;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import javax.swing.filechooser.FileView;
 import java.awt.*;
-import java.io.File;
-
-import static javax.swing.BorderFactory.createEmptyBorder;
 
 public class AddSongView extends JPanel {
     private final Utils utils;
@@ -26,6 +20,7 @@ public class AddSongView extends JPanel {
     private JTextField jtfSongName;
     private JTextField jtfArtist;
     private JTextField jtfAlbum;
+
     private JTextField jtfGenre;
     private JFileChooser fcAddFile;
     private JComboBox<String> jcbGenre;
@@ -41,14 +36,9 @@ public class AddSongView extends JPanel {
 
     public void configureAddSong() {
         setBackground(Color.black);
-        setLayout(new BorderLayout()); // Fem que sigui border layout
 
-        // NORTH
-        JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        Icon addSongImg = new ImageIcon(String.valueOf(AssetsFiles.ADDSONG_LABEL));
-        //north.add(headerView.configureHeader(addSongImg));
-        north.setBackground(Color.black);
-        //add(north, BorderLayout.NORTH);
+        // Fem que sigui border layout
+        setLayout(new BorderLayout());
 
         // CENTER
         JPanel centerTotal = new JPanel(new GridBagLayout());
@@ -126,14 +116,6 @@ public class AddSongView extends JPanel {
         constraints.gridy++;
         constraints.gridheight = 4;
         center.add(jfile, constraints);
-
-        // SOUTH
-        Color gris = new Color(26,26,26);
-        JPanel south = new JPanel();
-        south.setBackground(gris);
-        south.setBorder(createEmptyBorder(2, 0, 2, 0));
-        //south.add(footerView.configureFooter());
-        //add(south, BorderLayout.SOUTH);
 
         // Botó
         JPanel button = new JPanel();

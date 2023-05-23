@@ -65,15 +65,6 @@ public class MainMenuView extends JPanel {
         // Activem el BorderLayout
         setLayout(new BorderLayout());
 
-        // NORTH
-        // Iniciem el JPanel del nord amb el FlowLayout i li afegim el header amb el seu JLabel
-        JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        Icon menuImg = new ImageIcon(String.valueOf(AssetsFiles.MENU_LABEL));
-        //north.add(headerView.configureHeader(menuImg));
-        //north.setBackground(Color.black);
-        //add(north, BorderLayout.NORTH);
-
-
         // CENTER
         // Iniciem el JPanel del center amb el FlowLayout i el configurem
         JPanel center = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -124,16 +115,5 @@ public class MainMenuView extends JPanel {
         // Afegim els dos sub-JPanels al JPanel del center
         center.add(fila1);
         center.add(fila2);
-
-        // SOUTH
-        // Iniciem el JPanel del sud i el color gris
-        Color gris = new Color(26,26,26);
-        JPanel south = new JPanel();
-
-        // Configurem el JPanel com a footer i l'afegim
-        south.setBackground(gris);
-        south.setBorder(createEmptyBorder(2, 0, 2, 0));
-        //south.add(footerView.configureFooter());
-        //add(south, BorderLayout.SOUTH);
     }
 }

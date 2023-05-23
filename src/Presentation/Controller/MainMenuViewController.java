@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 
 public class MainMenuViewController implements ActionListener{
 
+    // Declarem els atributs
     private final MainMenuView mainMenuView;
     private final MainView mainView;
     private final SongManager songManager;

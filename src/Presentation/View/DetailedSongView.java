@@ -69,16 +69,6 @@ public class DetailedSongView extends JPanel {
         setBackground(Color.BLACK);
         Color gris = new Color(26, 26, 26);
 
-        // NORTH
-        // Creem el JPanel del nord i el configurem
-        JPanel north = new JPanel();
-        north.setBackground(Color.black);
-
-        // Afegim el JLabel corresponent i afegim el Header
-        Icon logo = new ImageIcon(String.valueOf(AssetsFiles.SONG_LABEL));
-        //north.add(headerView.configureHeader(logo));
-        //add(north, BorderLayout.NORTH);
-
         // CENTER
         // Creem el JPanel del center i el configurem
         JPanel center = new JPanel(new GridBagLayout());
@@ -182,15 +172,6 @@ public class DetailedSongView extends JPanel {
 
         // Ho afegim tot al BorderLayout
         add(center, BorderLayout.CENTER);
-
-        // SOUTH
-        // Creem JPanel del sud i li afegim el Footer
-        JPanel south = new JPanel();
-        south.setBackground(gris);
-        south.setBorder(createEmptyBorder(2, 0, 2, 0));
-        //south.add(footerView.configureFooter());
-        //add(south, BorderLayout.SOUTH);
-
     }
 
     /**

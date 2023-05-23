@@ -84,26 +84,34 @@ public class MainView extends JFrame {
         configureLogin();
         configureRegister();
 
+        // Preparem el JPanel general amb el BorderLayout
         main = new JPanel(new BorderLayout());
 
+        // Creem el JPanel del nord que servirà com a Header i el configurem
         JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
         Icon menuImg = new ImageIcon(String.valueOf(AssetsFiles.SONG_LABEL));
         north.add(headerView.configureHeader(menuImg));
         north.setBackground(Color.black);
 
+        // Afegim el JPanel al BorderLayout
         main.add(north, BorderLayout.NORTH);
 
+        // Creem el JPanel del sud que servirà com a Footer i el configurem
         JPanel south = new JPanel();
         Color gris = new Color(26, 26, 26);
         south.setBackground(gris);
         south.setBorder(createEmptyBorder(2, 0, 2, 0));
         south.add(footerView.configureFooter());
 
+        // Afegim el JPanel al BorderLayout
         main.add(south, BorderLayout.SOUTH);
 
+        // Creem el JPanel del center que servirà per canviar de vistes només al centre
         center = new JPanel();
         cardMain = new CardLayout();
         center.setLayout(cardMain);
+
+        // Activem totes les vistes
         configureDetailedSong();
         configureDetailedPlaylist();
         configureMainMenuView();
@@ -114,16 +122,6 @@ public class MainView extends JFrame {
         configureGeneralPlaylist();
         configureAddSong();
         main.add(center, BorderLayout.CENTER);
-
-        //this.getContentPane().add(main, CARD_DETAILED_SONG);
-
-
-
-        // Activarem totes les vistes
-
-
-        //configureMainMenuView();
-
     }
 
 
@@ -181,8 +179,6 @@ public class MainView extends JFrame {
     private void configureAddSong(){
         this.addSongView.configureAddSong();
         this.center.add(addSongView, CARD_ADD_SONG);
-
-        //this.getContentPane().add(addSongView, CARD_ADD_SONG);
     }
 
     /**
@@ -193,8 +189,6 @@ public class MainView extends JFrame {
     private void configureDeleteSong(){
         this.deleteSongView.configureDeleteSongView();
         this.center.add(deleteSongView, CARD_DELETE_SONG);
-        //this.getContentPane().add(deleteSongView, CARD_DELETE_SONG);
-        //this.getContentPane().add(main, CARD_DELETE_SONG);
     }
 
     /**
@@ -206,7 +200,6 @@ public class MainView extends JFrame {
         this.mainMenuView.configureMainMenuView();
         this.center.add(mainMenuView, CARD_MAIN_MENU);
         this.getContentPane().add(main, CARD_MAIN_MENU);
-        //this.getContentPane().add(mainMenuView, CARD_MAIN_MENU);
     }
 
     /**
@@ -217,9 +210,6 @@ public class MainView extends JFrame {
     private void configureGeneralSongList(){
         this.generalSongListView.configureGeneralSonglistView();
         this.center.add(generalSongListView, CARD_GENERAL_SONG);
-        //this.getContentPane().add(main, CARD_GENERAL_SONG);
-
-        //this.getContentPane().add(generalSongListView, CARD_GENERAL_SONG);
     }
 
 

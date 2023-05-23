@@ -1,16 +1,12 @@
 package Presentation.View;
 
-import Business.SongManager;
 import Presentation.AssetsFiles;
-import Presentation.Controller.HeaderController;
 import Presentation.Controller.StatisticsViewController;
 import Presentation.Utils;
 
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.*;
-import java.util.HashMap;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
 
@@ -64,16 +60,6 @@ public class StatisticsView extends JPanel {
     public void configureStatisticsView() {
         // Creem el BorderLayout
         setLayout(new BorderLayout());
-
-        // NORTH
-        // Creem el JPanel del nord amb el FlowLayout
-        JPanel north =  new JPanel(new FlowLayout(FlowLayout.CENTER));
-
-        // Configurem el JPanel i afegim el Label
-        Icon statsImg = new ImageIcon(String.valueOf(AssetsFiles.STATISTICS_LABEL));
-        //north.add(headerView.configureHeader(statsImg));
-        //north.setBackground(Color.black);
-        //add(north, BorderLayout.NORTH);
 
         // WEST
         // Creem el JPanel de l'esquerra per al botó d'actualitzar estadístiques
@@ -151,14 +137,5 @@ public class StatisticsView extends JPanel {
 
         // L'afegim al BorderLayout
         add(center, BorderLayout.CENTER);
-
-        // SOUTH
-        // Creem el JPanel del sud, creant el color gris i configurant mides per al Footer
-        Color gris = new Color(26,26,26);
-        JPanel south = new JPanel();
-        south.setBackground(gris);
-        south.setBorder(createEmptyBorder(2, 0, 2, 0));
-        //south.add(footerView.configureFooter());
-        //add(south, BorderLayout.SOUTH);
     }
 }

@@ -10,21 +10,34 @@ import java.awt.event.ActionListener;
 import java.util.Map;
 
 public class StatisticsViewController implements ActionListener {
-    private final StatisticsView statisticsView;
-    private final MainView mainView;
 
+    // Declarem atributs
+    private final StatisticsView statisticsView;
     private final SongManager songManager;
 
-
-    public StatisticsViewController(StatisticsView statisticsView, MainView mainView, SongManager songManager) {
+    /**
+     * Funció que servirà com a constructor de la StatisticsViewController
+     *
+     * @param statisticsView, view de la classe
+     * @param songManager, manager per a controlar les songs de les estadístiques
+     */
+    public StatisticsViewController(StatisticsView statisticsView, SongManager songManager) {
         this.statisticsView = statisticsView;
-        this.mainView = mainView;
         this.songManager = songManager;
     }
 
+    /**
+     * Funció que servirà com a resposta quan els usuaris premin el botó
+     * i s'activin els listeners
+     *
+     * @param e, resposta de l'usuari
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
+
+            // En cas que es premi l'únic botó, es rebrà el Map amb els gèneres i nombres
+            // i es passarà la informació
             case StatisticsView.BTN_STATISTICS:
                 Map<String, Integer> genreMap = songManager.createGenreMap();
                 statisticsView.setGenreMap(genreMap);
