@@ -23,8 +23,6 @@ public class GeneralSongListView extends JPanel {
 
     // Preparem els atributs
     private final Utils utils;
-    private final HeaderView headerView;
-    private final FooterView footerView;
 
     // Preparem els components de Swing
     private JTextField jBuscador;
@@ -38,14 +36,12 @@ public class GeneralSongListView extends JPanel {
     /**
      * Funció que servirà com a constructor de la StatisticsView
      *
-     * @param headerView, vista per a posar el Header
+     * @param , vista per a posar el Header
      * @param utils, per usar tots els seus mètodes
-     * @param footerView, vista per a posar el Footer
+     * @param , vista per a posar el Footer
      */
-    public GeneralSongListView(Utils utils, HeaderView headerView, FooterView footerView){
+    public GeneralSongListView(Utils utils){
         this.utils = utils;
-        this.footerView = footerView;
-        this.headerView = headerView;
         songsTableModel = new DefaultTableModel(columnHeaders, 0);
     }
 
@@ -79,8 +75,8 @@ public class GeneralSongListView extends JPanel {
 
         // Afegim el JLabel amb el Header
         Icon logo = new ImageIcon(String.valueOf(AssetsFiles.MUSIC_LABEL));;
-        north.add(headerView.configureHeader(logo));
-        add(north, BorderLayout.NORTH);
+        //north.add(headerView.configureHeader(logo));
+        //add(north, BorderLayout.NORTH);
 
         //CENTER
         // Creem el JPanel del center i el configurem
@@ -152,8 +148,8 @@ public class GeneralSongListView extends JPanel {
         south.setBorder(createEmptyBorder(2, 0, 2, 0));
 
         // Afegim el Footer i ho afegim tot al BorderLayout
-        south.add(footerView.configureFooter());
-        add(south, BorderLayout.SOUTH);
+        //south.add(footerView.configureFooter());
+        //add(south, BorderLayout.SOUTH);
 
     }
 

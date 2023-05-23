@@ -12,20 +12,16 @@ import static javax.swing.BorderFactory.createEmptyBorder;
 public class MainMenuView extends JPanel {
 
     // Afegim els atributs
-    private final FooterView footerView;
     private final Utils utils;
-    private final HeaderView headerView;
 
     /**
      * Funció que servirà com a constructor del MainMenuView
      *
-     * @param footerView, vista del footer
+     *
      * @param utils, per utilitzar els seus mètodes
-     * @param headerView, vista del header
+     * @param , vista del header
      */
-    public MainMenuView(FooterView footerView, Utils utils, HeaderView headerView){
-        this.footerView = footerView;
-        this.headerView = headerView;
+    public MainMenuView(Utils utils){
         this.utils = utils;
     }
 
@@ -73,9 +69,9 @@ public class MainMenuView extends JPanel {
         // Iniciem el JPanel del nord amb el FlowLayout i li afegim el header amb el seu JLabel
         JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
         Icon menuImg = new ImageIcon(String.valueOf(AssetsFiles.MENU_LABEL));
-        north.add(headerView.configureHeader(menuImg));
-        north.setBackground(Color.black);
-        add(north, BorderLayout.NORTH);
+        //north.add(headerView.configureHeader(menuImg));
+        //north.setBackground(Color.black);
+        //add(north, BorderLayout.NORTH);
 
 
         // CENTER
@@ -137,7 +133,7 @@ public class MainMenuView extends JPanel {
         // Configurem el JPanel com a footer i l'afegim
         south.setBackground(gris);
         south.setBorder(createEmptyBorder(2, 0, 2, 0));
-        south.add(footerView.configureFooter());
-        add(south, BorderLayout.SOUTH);
+        //south.add(footerView.configureFooter());
+        //add(south, BorderLayout.SOUTH);
     }
 }

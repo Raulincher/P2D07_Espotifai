@@ -111,12 +111,50 @@ public class FooterView extends JPanel {
      * @return border, JPanel del footer
      */
     public JPanel configureFooter() {
+
+
+        // Creem el color de fons
+        Color gris = new Color(26,26,26);
+
+        // Creem les icones
+        Icon playBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_PLAYBUTTON_IMG));
+        Icon forwardBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_NEXTBUTTON_IMG));
+        Icon backwardBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_OLDBUTTON_IMG));
+        Icon repeatBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_REPEATBUTTON_IMG));
+        Icon repeatListBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_REPEAT_PLAYLIST_BUTTON_IMG));
+        Icon lyricsBtn = new ImageIcon(String.valueOf(AssetsFiles.LYRICS_IMG));
+
+        // Activem els JButtons i els hi donem forma
+        jplay = utils.buttonImg(playBtn);
+        jplay.setBackground(gris);
+        jForward = utils.buttonImg(forwardBtn);
+        jForward.setBackground(gris);
+        jBackward = utils.buttonImg(backwardBtn);
+        jBackward.setBackground(gris);
+        jRepeat = utils.buttonImg(repeatBtn);
+        jRepeat.setBackground(gris);
+        jRepeatList = utils.buttonImg(repeatListBtn);
+        jRepeatList.setBackground(gris);
+        jLyrics = utils.buttonImg(lyricsBtn);
+        jLyrics.setBackground(gris);
+
+        // Creem la barra de progrés
+        jProgressBar = utils.progressBar(10,1);
+        jProgressBar.setValue(0);
+
+        // Activem les comandes d'acció en cas que es premi
+        jplay.setActionCommand(BTN_PLAY);
+        jForward.setActionCommand(BTN_FORWARD);
+        jBackward.setActionCommand(BTN_BACKWARD);
+        jRepeat.setActionCommand(BTN_REPEAT);
+        jRepeatList.setActionCommand(BTN_REPEAT_LIST);
+        jLyrics.setActionCommand(BTN_LYRICS);
         // Creem JPanel general i li afegim el BorderLayout
         JPanel border = new JPanel();
         border.setLayout(new BorderLayout());
 
         // Iniciem el color gris
-        Color gris = new Color(26,26,26);
+        //Color gris = new Color(26,26,26);
 
         // Creem els altres sub-JPanels
         JPanel footerN = new JPanel(new FlowLayout(FlowLayout.CENTER));

@@ -21,18 +21,6 @@ public class User {
     }
 
     /**
-     * Funció que servirà com a constructor de l'usuari
-     * sense l'email
-     *
-     * @param username, nom de l'usuari
-     * @param password, contrasenya de l'usuari
-     */
-    public User(String username, String password){
-        this.username = username;
-        this.password = password;
-    }
-
-    /**
      * Funció que servirà com a getter per retornar el username
      *
      * @return username, nom d'usuari en qüestió

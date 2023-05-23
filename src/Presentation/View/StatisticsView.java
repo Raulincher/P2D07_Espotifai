@@ -22,8 +22,6 @@ public class StatisticsView extends JPanel {
 
     // Preparem els atributs
     private final Utils utils;
-    private final HeaderView headerView;
-    private final FooterView footerView;
 
     // Preparem els elements de Swing
 
@@ -34,13 +32,11 @@ public class StatisticsView extends JPanel {
     /**
      * Funció que servirà com a constructor de la StatisticsView
      *
-     * @param headerView, vista per a posar el Header
+     * @param , vista per a posar el Header
      * @param utils, per usar tots els seus mètodes
-     * @param footerView, vista per a posar el Footer
+     * @param , vista per a posar el Footer
      */
-    public StatisticsView(HeaderView headerView, Utils utils, FooterView footerView){
-        this.headerView = headerView;
-        this.footerView = footerView;
+    public StatisticsView(Utils utils){
         this.utils = utils;
     }
 
@@ -75,9 +71,9 @@ public class StatisticsView extends JPanel {
 
         // Configurem el JPanel i afegim el Label
         Icon statsImg = new ImageIcon(String.valueOf(AssetsFiles.STATISTICS_LABEL));
-        north.add(headerView.configureHeader(statsImg));
-        north.setBackground(Color.black);
-        add(north, BorderLayout.NORTH);
+        //north.add(headerView.configureHeader(statsImg));
+        //north.setBackground(Color.black);
+        //add(north, BorderLayout.NORTH);
 
         // WEST
         // Creem el JPanel de l'esquerra per al botó d'actualitzar estadístiques
@@ -162,7 +158,7 @@ public class StatisticsView extends JPanel {
         JPanel south = new JPanel();
         south.setBackground(gris);
         south.setBorder(createEmptyBorder(2, 0, 2, 0));
-        south.add(footerView.configureFooter());
-        add(south, BorderLayout.SOUTH);
+        //south.add(footerView.configureFooter());
+        //add(south, BorderLayout.SOUTH);
     }
 }

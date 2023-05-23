@@ -22,8 +22,6 @@ public class DetailedSongView extends JPanel {
 
     // Preparem els elements de Swing
     private JTextArea jTextArea;
-    private HeaderView headerView;
-    private FooterView footerView;
     private DefaultTableModel defaultTableModel;
     private JTable table;
     private static String[] columnHeaders = {"", ""};
@@ -38,14 +36,12 @@ public class DetailedSongView extends JPanel {
     /**
      * Funció que servirà com a constructor de la GeneralPlaylistView
      *
-     * @param headerView, vista per a posar el Header
+     * @param , vista per a posar el Header
      * @param utils, per usar tots els seus mètodes
-     * @param footerView, vista per a posar el Footer
+     * @param , vista per a posar el Footer
      */
-    public DetailedSongView(Utils utils, HeaderView headerView, FooterView footerView) {
+    public DetailedSongView(Utils utils) {
         this.utils = utils;
-        this.headerView = headerView;
-        this.footerView = footerView;
         defaultTableModel = new DefaultTableModel(columnHeaders, 0);
         jTextArea = new JTextArea();
     }
@@ -80,8 +76,8 @@ public class DetailedSongView extends JPanel {
 
         // Afegim el JLabel corresponent i afegim el Header
         Icon logo = new ImageIcon(String.valueOf(AssetsFiles.SONG_LABEL));
-        north.add(headerView.configureHeader(logo));
-        add(north, BorderLayout.NORTH);
+        //north.add(headerView.configureHeader(logo));
+        //add(north, BorderLayout.NORTH);
 
         // CENTER
         // Creem el JPanel del center i el configurem
@@ -192,8 +188,8 @@ public class DetailedSongView extends JPanel {
         JPanel south = new JPanel();
         south.setBackground(gris);
         south.setBorder(createEmptyBorder(2, 0, 2, 0));
-        south.add(footerView.configureFooter());
-        add(south, BorderLayout.SOUTH);
+        //south.add(footerView.configureFooter());
+        //add(south, BorderLayout.SOUTH);
 
     }
 

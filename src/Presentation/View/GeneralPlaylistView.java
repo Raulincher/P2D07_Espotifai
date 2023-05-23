@@ -18,8 +18,6 @@ public class GeneralPlaylistView extends JPanel {
 
     // Preparem els atributs
     private final Utils utils;
-    private final HeaderView headerView;
-    private final FooterView footerView;
     public static final String BTN_NEW_PLAYLIST = "BTN_NEW_PLAYLIST";
     private JButton jNewPlaylist;
     private DefaultTableModel myPlaylistsModel;
@@ -40,14 +38,12 @@ public class GeneralPlaylistView extends JPanel {
     /**
      * Funció que servirà com a constructor de la GeneralPlaylistView
      *
-     * @param headerView, vista per a posar el Header
+     * @param , vista per a posar el Header
      * @param utils, per usar tots els seus mètodes
-     * @param footerView, vista per a posar el Footer
+     * @param , vista per a posar el Footer
      */
-    public GeneralPlaylistView(HeaderView headerView,FooterView footerView, Utils utils){
+    public GeneralPlaylistView(Utils utils){
         this.utils = utils;
-        this.headerView = headerView;
-        this.footerView = footerView;
         myPlaylistsModel = new DefaultTableModel(myPlaylist, 0);
         otherPlaylistsModel = new DefaultTableModel(otherPlaylist, 0);
     }
@@ -83,8 +79,8 @@ public class GeneralPlaylistView extends JPanel {
 
         // Afegim el Label que desitgem i afegim el Header
         Icon logo = new ImageIcon(String.valueOf(AssetsFiles.LISTMANAGING_LABEL));;
-        north.add(headerView.configureHeader(logo));
-        add(north, BorderLayout.NORTH);
+        //north.add(headerView.configureHeader(logo));
+        //add(north, BorderLayout.NORTH);
 
         // CENTER
         // Creem el JPanel del center i el configurem
@@ -171,8 +167,8 @@ public class GeneralPlaylistView extends JPanel {
         JPanel south = new JPanel();
         south.setBackground(gris);
         south.setBorder(createEmptyBorder(2, 0, 2, 0));
-        south.add(footerView.configureFooter());
-        add(south, BorderLayout.SOUTH);
+        //south.add(footerView.configureFooter());
+        //add(south, BorderLayout.SOUTH);
     }
 
     public JScrollPane createSongListTable(JTable table){

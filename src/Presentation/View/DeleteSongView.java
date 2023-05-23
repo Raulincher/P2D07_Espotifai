@@ -20,8 +20,6 @@ public class DeleteSongView extends JPanel {
 
     // Preparem tots els atributs
     private final Utils utils;
-    private final HeaderView headerView;
-    private final FooterView footerView;
 
     // Preparem els strings en cas de prémer un botó
     public static final String BTN_BUSCADOR = "BTN_BUSCADOR";
@@ -38,14 +36,12 @@ public class DeleteSongView extends JPanel {
     /**
      * Funció que servirà com a constructor de la DeleteSongView
      *
-     * @param headerView, vista per a posar el Header
+     * @param , vista per a posar el Header
      * @param utils, per usar tots els seus mètodes
-     * @param footerView, vista per a posar el Footer
+     * @param , vista per a posar el Footer
      */
-    public DeleteSongView(HeaderView headerView, Utils utils, FooterView footerView){
+    public DeleteSongView(Utils utils){
         this.utils = utils;
-        this.headerView = headerView;
-        this.footerView = footerView;
         deleteTableModel = new DefaultTableModel(columnHeaders, 0);
         sorter =  new TableRowSorter<>(deleteTableModel);
     }
@@ -80,8 +76,8 @@ public class DeleteSongView extends JPanel {
 
         // Afegim el JLabel i el Header
         Icon logo = new ImageIcon(String.valueOf(AssetsFiles.DELETE_LABEL));;
-        north.add(headerView.configureHeader(logo));
-        add(north, BorderLayout.NORTH);
+        //north.add(headerView.configureHeader(logo));
+        //add(north, BorderLayout.NORTH);
 
         // CENTER
         // Creem el JPanel del center i el configurem
@@ -109,8 +105,8 @@ public class DeleteSongView extends JPanel {
         JPanel south = new JPanel();
         south.setBackground(gris);
         south.setBorder(createEmptyBorder(2, 0, 2, 0));
-        south.add(footerView.configureFooter());
-        add(south, BorderLayout.SOUTH);
+        //south.add(footerView.configureFooter());
+        //add(south, BorderLayout.SOUTH);
     }
 
     /**

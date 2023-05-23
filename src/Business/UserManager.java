@@ -61,25 +61,15 @@ public class UserManager {
         return user;
     }
 
-    /* public void Register(User user){
-        userDao.Register(user);
-    }
 
-    */
 
     public boolean login(ArrayList<String> data) throws UserNotFoundException {
-        User user = new User(data.get(0),data.get(1));
-        System.out.println("pepe");
-        System.out.println(data.get(0));
-        System.out.println(data.get(1));
+        User user = new User(data.get(0),data.get(0), data.get(1));
 
         return userDao.login(user);
     }
 
     public void logout(){
-        System.out.println(user.getEmail());
-        System.out.println(user.getUsername());
-        System.out.println(user.getPassword());
 
         user = null;
     }

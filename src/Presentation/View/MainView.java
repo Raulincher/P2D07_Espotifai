@@ -1,3 +1,4 @@
+
 package Presentation.View;
 
 import Business.Entities.Song;
@@ -44,7 +45,7 @@ public class MainView extends JFrame {
     private CardLayout cardMain;
 
 
-     /**
+    /**
      * Funció que servirà per a configurar el programa
      * i servirà com a constructor i punt de referència
      * de les vistes
@@ -61,7 +62,7 @@ public class MainView extends JFrame {
      * @param detailedPlaylistView, vista d'una playlist en concret
      * @param detailedSongView, vista d'una song en concret
      */
-     public MainView(InitialView initialView, DeleteSongView deleteSongView, StatisticsView statisticsView, MainMenuView mainMenuView, GeneralPlaylistView generalPlaylistView, GeneralSongListView generalSongListView, DetailedSongView detailedSongView, DetailedPlaylistView detailedPlaylistView, RegisterView registerView, LoginView loginView, AddSongView addSongView, FooterView footerView, HeaderView headerView) {
+    public MainView(InitialView initialView, DeleteSongView deleteSongView, StatisticsView statisticsView, MainMenuView mainMenuView, GeneralPlaylistView generalPlaylistView, GeneralSongListView generalSongListView, DetailedSongView detailedSongView, DetailedPlaylistView detailedPlaylistView, RegisterView registerView, LoginView loginView, AddSongView addSongView, FooterView footerView, HeaderView headerView) {
         this.initialView = initialView;
         this.registerView = registerView;
         this.loginView = loginView;
@@ -74,23 +75,54 @@ public class MainView extends JFrame {
         this.detailedPlaylistView = detailedPlaylistView;
         this.detailedSongView = detailedSongView;
 
+
         // Crearem el cardLayout
         cardManager = new CardLayout();
         getContentPane().setLayout(cardManager);
         configureWindow();
-
-        // Activarem totes les vistes
         configureInitial();
         configureLogin();
         configureRegister();
-        configureDeleteSong();
+
+        main = new JPanel(new BorderLayout());
+
+        JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
+        Icon menuImg = new ImageIcon(String.valueOf(AssetsFiles.SONG_LABEL));
+        north.add(headerView.configureHeader(menuImg));
+        north.setBackground(Color.black);
+
+        main.add(north, BorderLayout.NORTH);
+
+        JPanel south = new JPanel();
+        Color gris = new Color(26, 26, 26);
+        south.setBackground(gris);
+        south.setBorder(createEmptyBorder(2, 0, 2, 0));
+        south.add(footerView.configureFooter());
+
+        main.add(south, BorderLayout.SOUTH);
+
+        center = new JPanel();
+        cardMain = new CardLayout();
+        center.setLayout(cardMain);
+        configureDetailedSong();
         configureDetailedPlaylist();
+        configureMainMenuView();
+        configureGeneralSongList();
+        configureDeleteSong();
         configureStatisticsView();
         configureGeneralSongList();
-        configureDetailedSong();
         configureGeneralPlaylist();
         configureAddSong();
-        configureMainMenuView();
+        main.add(center, BorderLayout.CENTER);
+
+        //this.getContentPane().add(main, CARD_DETAILED_SONG);
+
+
+
+        // Activarem totes les vistes
+
+
+        //configureMainMenuView();
 
     }
 
@@ -148,7 +180,9 @@ public class MainView extends JFrame {
      */
     private void configureAddSong(){
         this.addSongView.configureAddSong();
-        this.getContentPane().add(addSongView, CARD_ADD_SONG);
+        this.center.add(addSongView, CARD_ADD_SONG);
+
+        //this.getContentPane().add(addSongView, CARD_ADD_SONG);
     }
 
     /**
@@ -158,48 +192,9 @@ public class MainView extends JFrame {
      */
     private void configureDeleteSong(){
         this.deleteSongView.configureDeleteSongView();
-        this.getContentPane().add(deleteSongView, CARD_DELETE_SONG);
-    }
-
-    /**
-     * Funció que servirà per a activar la DetailedPlaylistView
-     *
-     * No tindrà ni param ni return
-     */
-    private void configureDetailedPlaylist(){
-        this.detailedPlaylistView.configureDetailedPlaylistView();
-        this.getContentPane().add(detailedPlaylistView, CARD_DETAILED_PLAYLIST);
-    }
-
-    /**
-     * Funció que servirà per a activar la DetailedSongView
-     *
-     * No tindrà ni param ni return
-     */
-    private void configureDetailedSong(){
-        this.detailedSongView.configureDetailedSongView();
-        this.getContentPane().add(detailedSongView, CARD_DETAILED_SONG);
-    }
-
-    /**
-     * Funció que servirà per a activar la GeneralPlaylistView
-     *
-     * No tindrà ni param ni return
-     */
-    private void configureGeneralPlaylist(){
-        this.generalPlaylistView.configureGeneralPlaylistView();
-        this.getContentPane().add(generalPlaylistView, CARD_GENERAL_PLAYLIST);
-    }
-
-    /**
-     * Funció que servirà per a activar la GeneralSongListView
-     *
-     * No tindrà ni param ni return
-     */
-    private void configureGeneralSongList(){
-        this.generalSongListView.configureGeneralSonglistView();
-        //this.center.add(generalSongListView, CARD_GENERAL_SONG);
-        this.getContentPane().add(generalSongListView, CARD_GENERAL_SONG);
+        this.center.add(deleteSongView, CARD_DELETE_SONG);
+        //this.getContentPane().add(deleteSongView, CARD_DELETE_SONG);
+        //this.getContentPane().add(main, CARD_DELETE_SONG);
     }
 
     /**
@@ -209,9 +204,59 @@ public class MainView extends JFrame {
      */
     private void configureMainMenuView(){
         this.mainMenuView.configureMainMenuView();
-       // this.center.add(mainMenuView, CARD_MAIN_MENU);
-        this.getContentPane().add(mainMenuView, CARD_MAIN_MENU);
+        this.center.add(mainMenuView, CARD_MAIN_MENU);
+        this.getContentPane().add(main, CARD_MAIN_MENU);
+        //this.getContentPane().add(mainMenuView, CARD_MAIN_MENU);
     }
+
+    /**
+     * Funció que servirà per a activar la GeneralSongListView
+     *
+     * No tindrà ni param ni return
+     */
+    private void configureGeneralSongList(){
+        this.generalSongListView.configureGeneralSonglistView();
+        this.center.add(generalSongListView, CARD_GENERAL_SONG);
+        //this.getContentPane().add(main, CARD_GENERAL_SONG);
+
+        //this.getContentPane().add(generalSongListView, CARD_GENERAL_SONG);
+    }
+
+
+    /**
+     * Funció que servirà per a activar la DetailedPlaylistView
+     *
+     * No tindrà ni param ni return
+     */
+    private void configureDetailedPlaylist(){
+        this.detailedPlaylistView.configureDetailedPlaylistView();
+        this.center.add(detailedPlaylistView, CARD_DETAILED_PLAYLIST);
+    }
+
+    /**
+     * Funció que servirà per a activar la DetailedSongView
+     *
+     * No tindrà ni param ni return
+     */
+    private void configureDetailedSong(){
+        this.detailedSongView.configureDetailedSongView();
+        this.center.add(detailedSongView, CARD_DETAILED_SONG);
+    }
+
+
+
+    /**
+     * Funció que servirà per a activar la GeneralPlaylistView
+     *
+     * No tindrà ni param ni return
+     */
+    private void configureGeneralPlaylist(){
+        this.generalPlaylistView.configureGeneralPlaylistView();
+        this.center.add(generalPlaylistView, CARD_GENERAL_PLAYLIST);
+    }
+
+
+
 
     /**
      * Funció que servirà per a activar la StatisticsView
@@ -220,7 +265,7 @@ public class MainView extends JFrame {
      */
     private void configureStatisticsView(){
         this.statisticsView.configureStatisticsView();
-        this.getContentPane().add(statisticsView, CARD_STATISTICS);
+        this.center.add(statisticsView, CARD_STATISTICS);
     }
 
     /**
@@ -257,6 +302,8 @@ public class MainView extends JFrame {
      */
     public void showAddSongCard(){
         cardManager.show(getContentPane(), CARD_ADD_SONG);
+        cardMain.show(center, CARD_ADD_SONG);
+
     }
 
     /**
@@ -266,6 +313,8 @@ public class MainView extends JFrame {
      */
     public void showDeleteSongCard(){
         cardManager.show(getContentPane(), CARD_DELETE_SONG);
+        cardMain.show(center, CARD_DELETE_SONG);
+
     }
 
     /**
@@ -275,6 +324,8 @@ public class MainView extends JFrame {
      */
     public void showDetailedPlaylistCard(){
         cardManager.show(getContentPane(), CARD_DETAILED_PLAYLIST);
+        cardMain.show(center, CARD_DETAILED_PLAYLIST);
+
     }
 
     /**
@@ -284,6 +335,17 @@ public class MainView extends JFrame {
      */
     public void showDetailedSongCard(){
         cardManager.show(getContentPane(), CARD_DETAILED_SONG);
+        cardMain.show(center, CARD_DETAILED_SONG);
+    }
+
+    /**
+     * Funció que servirà per mostrar el main Menú
+     *
+     * No tindrà ni param ni return
+     */
+    public void showMainMenuCard(){
+        cardManager.show(getContentPane(), CARD_MAIN_MENU);
+        cardMain.show(center, CARD_MAIN_MENU);
     }
 
     /**
@@ -293,6 +355,8 @@ public class MainView extends JFrame {
      */
     public void showGeneralPlaylistCard(){
         cardManager.show(getContentPane(), CARD_GENERAL_PLAYLIST);
+        cardMain.show(center, CARD_GENERAL_PLAYLIST);
+
     }
 
     /**
@@ -301,20 +365,11 @@ public class MainView extends JFrame {
      * No tindrà ni param ni return
      */
     public void showGeneralSongListCard(){
-        //cardMain.show(center, CARD_GENERAL_SONG);
         cardManager.show(getContentPane(), CARD_GENERAL_SONG);
+        cardMain.show(center, CARD_GENERAL_SONG);
     }
 
-    /**
-     * Funció que servirà per mostrar el main Menú
-     *
-     * No tindrà ni param ni return
-     */
-    public void showMainMenuCard(){
-        //cardManager.show(getContentPane(), CARD_MAIN_MENU);
-        //cardMain.show(center, CARD_MAIN_MENU);
-        cardManager.show(getContentPane(), CARD_MAIN_MENU);
-    }
+
 
     /**
      * Funció que servirà per mostrar les statistics
@@ -323,6 +378,8 @@ public class MainView extends JFrame {
      */
     public void showStatisticsCard(){
         cardManager.show(getContentPane(), CARD_STATISTICS);
+        cardMain.show(center, CARD_STATISTICS);
+
     }
 
     /**

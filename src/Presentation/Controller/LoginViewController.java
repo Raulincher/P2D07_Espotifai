@@ -31,7 +31,7 @@ public class LoginViewController implements ActionListener {
 
         switch(e.getActionCommand()){
             case LoginView.BTN_LOGIN :
-                mainView.showLoginCard();
+                //mainView.showLoginCard();
                 String username = loginView.getJUsername().getText();
                 String password = new String(loginView.getJPassword().getPassword());
                 data.add(username);
@@ -41,6 +41,7 @@ public class LoginViewController implements ActionListener {
                 }else{
                     try {
                         if (userManager.login(data)) {
+
                             userManager.setUser(username, username, password);
                             mainView.showMainMenuCard();
                         }else{
@@ -50,6 +51,7 @@ public class LoginViewController implements ActionListener {
                         ex.printStackTrace();
                     }
                 }
+                loginView.clearInfo();
                 break;
             case LoginView.BTN_BACK:
                 mainView.showMainCard();

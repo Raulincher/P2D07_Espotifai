@@ -151,4 +151,9 @@ public class LoginView extends JPanel {
     public void showPopUps(String error) {
         JOptionPane.showMessageDialog(this,error);
     }
+
+
+    public void clearInfo() {
+        jUsername.setText("");
+        jPassword.setText("");}
 }

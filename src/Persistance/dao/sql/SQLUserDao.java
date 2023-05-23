@@ -3,7 +3,6 @@ package Persistance.dao.sql;
 import Persistance.dao.UserDao;
 import Business.Entities.User;
 import Persistance.dao.UserNotFoundException;
-import com.mysql.cj.util.StringUtils;
 
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -80,18 +79,37 @@ public class SQLUserDao implements UserDao {
 
     public void delete(User user) throws UserNotFoundException {
         int affected = 0;
+        System.out.println(user.getEmail());
+        System.out.println(user.getUsername());
+        System.out.println(user.getPassword());
+
         try{
+
+            String generatedPassword = null;
+            try{
+                String password = user.getPassword();
+                MessageDigest md = MessageDigest.getInstance("MD5");
+                md.update(password.getBytes());
+                byte[] bytes = md.digest();
+                StringBuilder sb = new StringBuilder();
+                for (int i = 0; i < bytes.length; i++) {
+                    sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+                }
+                generatedPassword = sb.toString();
+                System.out.println(generatedPassword);
+            }catch (NoSuchAlgorithmException e) {
+                e.printStackTrace();
+            }
             Statement statement = remoteConnection.createStatement();
             statement.executeQuery("USE espotifai");
             try{
                 String username = user.getUsername();
                 String email = user.getEmail();
-                String password = user.getPassword();
                 String queryExists = "DELETE FROM user where ((email = ? OR username = ?) AND password = ?)";
                 PreparedStatement prepared = remoteConnection.prepareStatement(queryExists);
                 prepared.setString (1, email);
                 prepared.setString (2, username);
-                prepared.setString (3, password);
+                prepared.setString (3, generatedPassword);
                 affected = prepared.executeUpdate();
 
             }catch(SQLException e){

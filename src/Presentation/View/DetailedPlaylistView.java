@@ -16,8 +16,6 @@ public class DetailedPlaylistView extends JPanel {
 
     // Preparem tots els atributs
     private final Utils utils;
-    private final HeaderView headerView;
-    private final FooterView footerView;
     private JLabel jlListName;
     private JButton boto1;
     private JButton boto2;
@@ -35,10 +33,8 @@ public class DetailedPlaylistView extends JPanel {
      *
      * @param utils, per usar tots els seus mètodes
      */
-    public DetailedPlaylistView(HeaderView headerView, FooterView footerView, Utils utils){
+    public DetailedPlaylistView(Utils utils){
         this.utils = utils;
-        this.headerView = headerView;
-        this.footerView = footerView;
         songListModel = new DefaultTableModel(0, 0);
     }
 
@@ -71,8 +67,8 @@ public class DetailedPlaylistView extends JPanel {
 
         // Afegim el Label que desitgem i afegim el Header
         Icon logo = new ImageIcon(String.valueOf(AssetsFiles.LISTMANAGING_LABEL));;
-        north.add(headerView.configureHeader(logo));
-        add(north, BorderLayout.NORTH);
+        //north.add(headerView.configureHeader(logo));
+        //add(north, BorderLayout.NORTH);
 
         //Center
         JPanel center = new JPanel(new FlowLayout());
@@ -105,8 +101,8 @@ public class DetailedPlaylistView extends JPanel {
         JPanel south = new JPanel();
         south.setBackground(gris);
         south.setBorder(createEmptyBorder(2, 0, 2, 0));
-        south.add(footerView.configureFooter());
-        add(south, BorderLayout.SOUTH);
+        //south.add(footerView.configureFooter());
+        //add(south, BorderLayout.SOUTH);
     }
 
     public JScrollPane createSongListTable(JTable table){

@@ -16,8 +16,6 @@ import static javax.swing.BorderFactory.createEmptyBorder;
 
 public class AddSongView extends JPanel {
     private final Utils utils;
-    private final HeaderView headerView;
-    private final FooterView footerView;
     public static final String BTN_BACK = "BTN_BACK";
     public static final String BTN_ADD_FILE = "BTN_ADD_FILE";
     public static final String BTN_ADD_SONG = "BTN_ADD_SONG";
@@ -32,10 +30,8 @@ public class AddSongView extends JPanel {
     private JFileChooser fcAddFile;
     private JComboBox<String> jcbGenre;
 
-    public AddSongView(Utils utils, HeaderView headerView, FooterView footerView){
+    public AddSongView(Utils utils){
         this.utils = utils;
-        this.headerView = headerView;
-        this.footerView = footerView;
     }
 
     public void addAddSongController(AddSongViewController addSongController) {
@@ -50,9 +46,9 @@ public class AddSongView extends JPanel {
         // NORTH
         JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
         Icon addSongImg = new ImageIcon(String.valueOf(AssetsFiles.ADDSONG_LABEL));
-        north.add(headerView.configureHeader(addSongImg));
+        //north.add(headerView.configureHeader(addSongImg));
         north.setBackground(Color.black);
-        add(north, BorderLayout.NORTH);
+        //add(north, BorderLayout.NORTH);
 
         // CENTER
         JPanel centerTotal = new JPanel(new GridBagLayout());
@@ -137,8 +133,8 @@ public class AddSongView extends JPanel {
         JPanel south = new JPanel();
         south.setBackground(gris);
         south.setBorder(createEmptyBorder(2, 0, 2, 0));
-        south.add(footerView.configureFooter());
-        add(south, BorderLayout.SOUTH);
+        //south.add(footerView.configureFooter());
+        //add(south, BorderLayout.SOUTH);
 
         // Botó
         JPanel button = new JPanel();
