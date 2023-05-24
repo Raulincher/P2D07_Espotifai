@@ -61,8 +61,13 @@ public class PlaylistManager {
         }
     }
 
-    public boolean addSongToPlaylist(String songName, String playlistName) {
-        return playlistDao.addSongToPlaylistDAO(songName,playlistName);
+    public void addSongToPlaylist(String songName, String playlistName) {
+        playlistDao.addSongToPlaylistDAO(songName,playlistName);
+    }
+
+    public boolean checkIfSongInPlaylist(String songName, String playlistName) {
+        boolean inPlaylist = playlistDao.searchSongInPlaylist(songName, playlistName);
+        return inPlaylist;
     }
 
     public void setCurrentPlaylist(String currentPlaylist) {
@@ -75,5 +80,9 @@ public class PlaylistManager {
 
     public boolean deletePlaylist(String playListName) {
         return playlistDao.deletePlaylistFromDAO(playListName);
+    }
+
+    public void deleteSongFromPlaylists(String songTitle) {
+        playlistDao.deleteSongFromPlaylistsDAO(songTitle);
     }
 }

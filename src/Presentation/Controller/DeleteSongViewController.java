@@ -1,5 +1,6 @@
 package Presentation.Controller;
 
+import Business.PlaylistManager;
 import Business.SongManager;
 import Business.UserManager;
 import Presentation.View.AddSongView;
@@ -22,12 +23,15 @@ public class DeleteSongViewController implements ActionListener, DocumentListene
     private final MainView mainView;
     private final SongManager songManager;
     private final UserManager userManager;
+    private final PlaylistManager playlistManager;
 
-    public DeleteSongViewController(DeleteSongView deleteSongView, MainView mainView, SongManager songManager, UserManager userManager) {
+    public DeleteSongViewController(DeleteSongView deleteSongView, MainView mainView, SongManager songManager,
+                                    UserManager userManager, PlaylistManager playlistManager) {
         this.deleteSongView = deleteSongView;
         this.mainView = mainView;
         this.songManager = songManager;
         this.userManager = userManager;
+        this.playlistManager = playlistManager;
     }
 
     public void runDeleteSongView() {
@@ -80,6 +84,7 @@ public class DeleteSongViewController implements ActionListener, DocumentListene
                 ArrayList<String> songsUpdated = songManager.listSongs(true, userManager.currentUsername());
                 deleteSongView.fillDeleteTable(songsUpdated);
                 deleteSongView.clearSearcher();
+                playlistManager.deleteSongFromPlaylists(songTitle);
             }
         }
         else {
@@ -94,33 +99,13 @@ public class DeleteSongViewController implements ActionListener, DocumentListene
 
     @Override
     public void mouseReleased(MouseEvent e) {
-
     }
 
     @Override
     public void mouseEntered(MouseEvent e) {
-
     }
 
     @Override
     public void mouseExited(MouseEvent e) {
-
     }
-
-    /*@Override
-    public void valueChanged(ListSelectionEvent e) {
-        String songTitle = deleteSongView.selectDeleteSong();
-
-
-        if (deleteSongView.confirmationDeletePopUp(songTitle) == 0) {
-            if (songManager.deleteSong(songTitle)) {
-                deleteSongView.showPopUps("Song Deleted Successfully");
-                mainView.showMainMenuCard();
-            }
-        }
-        else {
-            deleteSongView.showPopUps("Song NOT deleted");
-        }
-        deleteSongView.clearSelection();
-    }*/
 }

@@ -61,7 +61,7 @@ public class SQLPlaylistDao implements PlaylistDao {
                     if (allSongs.equals("")) {
                         songNames = null;
                     } else {
-                        String songs[] = allSongs.split(",");
+                        String[] songs = allSongs.split(",");
                          songNames = new ArrayList<>(Arrays.asList(songs));
                     }
                     Playlist playlist = new Playlist(username, title, songNames);
@@ -105,8 +105,43 @@ public class SQLPlaylistDao implements PlaylistDao {
         return songsInPlaylist;
     }
 
+    public boolean searchSongInPlaylist(String songName, String playlist) {
+        boolean inPlaylist = false;
+
+        try {
+            Statement statement = remoteConnection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM playlist");
+
+            if (!resultSet.next()) {
+                System.out.println("Base de dades buida");
+            } else {
+                resultSet.beforeFirst();
+                while (resultSet.next()) {
+                    String title = resultSet.getString("title");
+                    if (title.equals(playlist)) {
+                        String allSongs = resultSet.getString("songs");
+                        if (allSongs.equals("")) {
+                            inPlaylist = false;
+                        } else {
+                            String[] songs = allSongs.split(",");
+                            for (int i = 0; i < songs.length; i++) {
+                                if (songs[i].equals(songName)) {
+                                    inPlaylist = true;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println("Error llegint les cançons de la base de dades: " + e.getMessage());
+        }
+        return inPlaylist;
+    }
     public boolean addSongToPlaylistDAO(String songName, String playlist) {
         boolean saved = false;
+        boolean equals = false;
+
         String allSongs = null;
         try {
             Statement statement = remoteConnection.createStatement();
@@ -122,14 +157,12 @@ public class SQLPlaylistDao implements PlaylistDao {
                         allSongs = resultSet.getString("songs");
                         if (allSongs.equals("")) {
                             allSongs += songName;
-                            System.out.println("hello");
-                            System.out.println(allSongs);
                         } else {
                             allSongs += "," + songName;
                         }
                         String register = "UPDATE playlist SET songs = ? WHERE title = ?";
                         PreparedStatement preparedStmt = remoteConnection.prepareStatement(register);
-                        preparedStmt.setString (1, allSongs);
+                        preparedStmt.setString(1, allSongs);
                         preparedStmt.setString(2, playlist);
                         preparedStmt.execute();
                         saved = true;
@@ -180,5 +213,52 @@ public class SQLPlaylistDao implements PlaylistDao {
             System.out.println("Error llegint les cançons de la base de dades: " + e.getMessage());
         }
         return deleted;
+    }
+
+    public boolean deleteSongFromPlaylistsDAO(String songTitle) {
+        boolean success = true;
+
+        try {
+            Statement statement = remoteConnection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM playlist");
+
+            if (!resultSet.next()) {
+                System.out.println("Base de dades buida");
+            } else {
+                resultSet.beforeFirst();
+
+                while (resultSet.next()) {
+                    String playlist = resultSet.getString("title");
+                    String allSongs = resultSet.getString("songs");
+                    if (!allSongs.equals("")) {
+                        String[] songs = allSongs.split(",");
+                        ArrayList<String> songsPlaylist = new ArrayList<>();
+
+                        for (int i = 0; i < songs.length; i++) {
+                            if (!songs[i].equals(songTitle)) {
+                                songsPlaylist.add(songs[i]);
+                            }
+                        }
+                        String songSave = null;
+                        for (int i = 0; i < songsPlaylist.size(); i++) {
+                            if (i == 0) {
+                                songSave = songsPlaylist.get(i);
+                            } else {
+                                songSave += "," + songsPlaylist.get(i);
+                            }
+                        }
+                        String register = "UPDATE playlist SET songs = ? WHERE title = ?";
+                        PreparedStatement preparedStmt = remoteConnection.prepareStatement(register);
+                        preparedStmt.setString (1, songSave);
+                        preparedStmt.setString(2, playlist);
+                        preparedStmt.execute();
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            success = false;
+            System.out.println("Error llegint les cançons de la base de dades: " + e.getMessage());
+        }
+        return success;
     }
 }

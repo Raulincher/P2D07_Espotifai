@@ -51,7 +51,8 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
         for (String playlist: playlists){
             if (e.getActionCommand().equals(playlist)){
                 // Un cop trobada, afegim la cançó a la playlist escollida i mostrem Pop Ups en funció si 'sha afegit o no.
-                if (playlistManager.addSongToPlaylist(songName, playlist)) {
+                if (!playlistManager.checkIfSongInPlaylist(songName, playlist)) {
+                    playlistManager.addSongToPlaylist(songName, playlist);
                     detailedSongView.showPopUp("Song successfully saved in " + playlist + "!");
                 } else {
                     detailedSongView.showPopUp("There was an error saving the song.");
