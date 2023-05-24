@@ -41,6 +41,13 @@ public class FooterView extends JPanel {
     public FooterView(Utils utils){
         this.utils = utils;
     }
+
+    /**
+     * Funció que servirà per a actualitzar el String que
+     * indica l'actual nom de la cançó
+     *
+     * @param actualSong, String recollit del FooterController
+     */
     public void setActualSong(String actualSong) {
         this.jSongName = actualSong;
         updateSongName(jSongName);
@@ -60,7 +67,6 @@ public class FooterView extends JPanel {
         jRepeat.addActionListener(footerController);
         jRepeatList.addActionListener(footerController);
         jLyrics.addActionListener(footerController);
-        //songName = footerController.getActualSong();
     }
 
     /**
@@ -122,11 +128,11 @@ public class FooterView extends JPanel {
         footerS.setBackground(gris);
 
         // Agafem el nom de la cançó
-
-        // Configurem la part NORTH del BorderLayout
         jLogo.setForeground(Color.WHITE);
         jLogo.setFont(new Font("Gotham", Font.BOLD, 27));
         footerN.add(jLogo);
+
+        // Configurem la part NORTH del BorderLayout
         border.add(footerN, BorderLayout.NORTH);
 
         // Configurem la part CENTER del BorderLayout
@@ -146,6 +152,12 @@ public class FooterView extends JPanel {
         return border;
     }
 
+    /**
+     * Funció que servirà per a actualitzar el nom de la
+     * cançó que s'estigui reproduint i canviar el JLabel
+     *
+     * @param songName, nou nom de la cançó
+     */
     public void updateSongName(String songName) {
         String finalSong = songName.substring(0, songName.length() - 4);
         jLogo.setText(finalSong);
