@@ -52,6 +52,11 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
         detailedView.definePlaylistName(playlistName);
         //TODO
         playlistManager.setCurrentPlaylist(playlistName);
+        if (tableClicked == 0) {
+            detailedView.showButton();
+        } else {
+            detailedView.hideButton();
+        }
         //detailedView.configureDetailedPlaylistView();
         mainView.showDetailedPlaylistCard();
 

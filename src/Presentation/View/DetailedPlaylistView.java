@@ -96,7 +96,7 @@ public class DetailedPlaylistView extends JPanel {
 
         boto2 = new JButton("Boto2");
 
-        Dimension dimension = new Dimension(700, 350);
+        Dimension dimension = new Dimension(700, 250);
         songListTable = new JTable(songListModel);
         JScrollPane scrollMyPlaylists = createSongListTable(songListTable);
         scrollMyPlaylists.setPreferredSize(dimension);
@@ -119,7 +119,7 @@ public class DetailedPlaylistView extends JPanel {
     public JScrollPane createSongListTable(JTable table){
         Color gris = new Color(26,26,26);
 
-        table.setRowHeight(40);
+        table.setRowHeight(50);
         table.setGridColor(Color.gray);
         table.setBackground(gris);
         table.setForeground(Color.WHITE);
@@ -157,4 +157,11 @@ public class DetailedPlaylistView extends JPanel {
         JOptionPane.showMessageDialog(this,error);
     }
 
+    public void hideButton() {
+        jbDeletePlaylist.setVisible(false);
+    }
+
+    public void showButton() {
+        jbDeletePlaylist.setVisible(true);
+    }
 }
