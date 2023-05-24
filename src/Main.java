@@ -86,7 +86,7 @@ public class Main {
         DetailedSongViewController detailedSongViewController = new DetailedSongViewController(detailedSongView, songManager, playlistManager, userManager);
         GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView, mainView, songManager,detailedSongView, playlistManager, userManager, detailedSongViewController);
         GeneralPlaylistViewController generalPlaylistViewController = new GeneralPlaylistViewController(generalPlaylistView, mainView, playlistManager, userManager, detailedPlaylistView);
-        MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView, songManager, userManager, deleteSongView, generalSongListView, statisticsView, generalPlaylistView, playlistManager);
+        MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView, songManager, userManager, deleteSongView, generalSongListView, generalPlaylistView, playlistManager, addSongView, statisticsView);
 
         // Vinculem vistes amb controllers
         initialView.addInitialViewController(initialViewController);

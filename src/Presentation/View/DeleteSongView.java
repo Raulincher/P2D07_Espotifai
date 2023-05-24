@@ -162,7 +162,7 @@ public class DeleteSongView extends JPanel {
         if (query.length() == 0) {
             sorter.setRowFilter(null);
         }
-        // Busca per la primera columna, pel títol de la cançó
+        // Busca per la primera columna, pel títol de la playlist
         else {
             sorter.setRowFilter(RowFilter.regexFilter("(?i)" + query, 0)); // Search by the first column (title)
         }

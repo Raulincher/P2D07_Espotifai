@@ -9,6 +9,7 @@ import Presentation.Utils;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -28,12 +29,13 @@ public class GeneralPlaylistView extends JPanel {
     private JLabel jlOthersPlaylists;
     private JTextField jMyPlaylistBuscador;
     private JTextField jOthersPlaylistBuscador;
+    private TableRowSorter<DefaultTableModel> myPlaylistSorter;
+    private TableRowSorter<DefaultTableModel> otherPlaylistSorter;
     private static String[] myPlaylist = {"Your library:"};
     private static String[] otherPlaylist = {"General library:"};
 
     private final static String MY_PLAYLISTS = "My playlists";
     private final static String OTHERS_PLAYLISTS = "Others playlists";
-    private Timer timer;
 
     /**
      * Funció que servirà com a constructor de la GeneralPlaylistView
@@ -46,6 +48,8 @@ public class GeneralPlaylistView extends JPanel {
         this.utils = utils;
         myPlaylistsModel = new DefaultTableModel(myPlaylist, 0);
         otherPlaylistsModel = new DefaultTableModel(otherPlaylist, 0);
+        myPlaylistSorter =  new TableRowSorter<>(myPlaylistsModel);
+        otherPlaylistSorter =  new TableRowSorter<>(otherPlaylistsModel);
     }
 
     /**
@@ -55,6 +59,8 @@ public class GeneralPlaylistView extends JPanel {
      */
     public void addGeneralPlaylistController(GeneralPlaylistViewController generalPlaylistViewController){
         //set action command
+        jMyPlaylistBuscador.getDocument().addDocumentListener(generalPlaylistViewController);
+        jOthersPlaylistBuscador.getDocument().addDocumentListener(generalPlaylistViewController);
         jNewPlaylist.addActionListener(generalPlaylistViewController);
         myPlaylistsTable.addMouseListener(generalPlaylistViewController);
         otherPlaylistsTable.addMouseListener(generalPlaylistViewController);
@@ -151,6 +157,11 @@ public class GeneralPlaylistView extends JPanel {
 
         add(center, BorderLayout.CENTER);
 
+        myPlaylistSorter.setSortsOnUpdates(true);
+        myPlaylistsTable.setRowSorter(myPlaylistSorter);
+
+        otherPlaylistSorter.setSortsOnUpdates(true);
+        otherPlaylistsTable.setRowSorter(otherPlaylistSorter);
 
         //South
         JPanel south = new JPanel();
@@ -236,6 +247,37 @@ public class GeneralPlaylistView extends JPanel {
         return playlistName;
     }
 
+    public JTextField getMyPlaylistBuscador() {
+        System.out.println("jMyPlaylistBuscador: " + jMyPlaylistBuscador);
+        return jMyPlaylistBuscador;
+    }
+    public JTextField getOtherPlaylistBuscador() {
+        System.out.println("jMyPlaylistBuscador: " + jOthersPlaylistBuscador);
+        return jOthersPlaylistBuscador;
+    }
+
+    public void search(String query, TableRowSorter<DefaultTableModel> sorter) {
+        // Ens assegurem que s'hagi introduït alguna cosa
+        if (query.length() == 0) {
+            sorter.setRowFilter(null);
+        }
+        // Busca per la primera columna, pel títol de la cançó
+        else {
+            sorter.setRowFilter(RowFilter.regexFilter("(?i)" + query, 0)); // Search by the first column (title)
+        }
+    }
+
+    public TableRowSorter<DefaultTableModel> getMyPlaylistSorter() {
+        return myPlaylistSorter;
+    }
+    public TableRowSorter<DefaultTableModel> getOtherPlaylistSorter() {
+        return otherPlaylistSorter;
+    }
+
+    public void clearSearcher() {
+        jMyPlaylistBuscador.setText("");
+        jOthersPlaylistBuscador.setText("");
+    }
 /*
     public int obtainPlaylistndexToDelete(String playlistName, int tableClicked) {
         int indexSong = 0;
@@ -256,13 +298,4 @@ public class GeneralPlaylistView extends JPanel {
         }
         return indexSong;
     }*/
-
-    public void showPopUps(String error) {
-        JOptionPane.showMessageDialog(this,error);
-    }
-
-    public void stopTimer() {
-        timer.stop();
-    }
-
 }

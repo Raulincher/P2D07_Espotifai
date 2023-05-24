@@ -7,6 +7,8 @@ import Business.UserManager;
 import Presentation.View.*;
 
 import javax.swing.*;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -14,7 +16,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-public class GeneralPlaylistViewController implements ActionListener, MouseListener {
+public class GeneralPlaylistViewController implements ActionListener, MouseListener, DocumentListener {
 
     private final GeneralPlaylistView generalPlaylistView;
     private final DetailedPlaylistView detailedView;
@@ -40,6 +42,7 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
                 playlistManager.savePlaylist(username, title);
                 ArrayList<String> playlistNames = playlistManager.obtainPlaylistNames(true,  userManager.currentUsername());
                 generalPlaylistView.fillMyPlaylistsTable(playlistNames);
+                generalPlaylistView.clearSearcher();
             }
         }
     }
@@ -75,6 +78,35 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
         }
 
  */
+    }
+
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        System.out.println("Text: " + generalPlaylistView.getMyPlaylistBuscador().getText());
+
+        if (!(generalPlaylistView.getMyPlaylistBuscador().getText().length() == 0)) {
+            generalPlaylistView.search(generalPlaylistView.getMyPlaylistBuscador().getText(), generalPlaylistView.getMyPlaylistSorter());
+        } else {
+            generalPlaylistView.search(generalPlaylistView.getOtherPlaylistBuscador().getText(), generalPlaylistView.getOtherPlaylistSorter());
+        }
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        if (!(generalPlaylistView.getMyPlaylistBuscador().getText().length() == 0)) {
+            generalPlaylistView.search(generalPlaylistView.getMyPlaylistBuscador().getText(), generalPlaylistView.getMyPlaylistSorter());
+        } else {
+            generalPlaylistView.search(generalPlaylistView.getOtherPlaylistBuscador().getText(), generalPlaylistView.getOtherPlaylistSorter());
+        }
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        if (!(generalPlaylistView.getMyPlaylistBuscador().getText().length() == 0)) {
+            generalPlaylistView.search(generalPlaylistView.getMyPlaylistBuscador().getText(), generalPlaylistView.getMyPlaylistSorter());
+        } else {
+            generalPlaylistView.search(generalPlaylistView.getOtherPlaylistBuscador().getText(), generalPlaylistView.getOtherPlaylistSorter());
+        }
     }
 
     @Override
