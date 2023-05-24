@@ -47,14 +47,12 @@ public class Main {
         // Iniciem la primera vista
         InitialView initialView = new InitialView(utils);
 
-        // Preparem el header
-        HeaderView headerView = new HeaderView(utils);
-        HeaderController headerController = new HeaderController(headerView, userManager);
-        headerView.initilizeButtons();
-        headerView.addHeaderController(headerController);
+
 
         // Preparem totes les vistes
         FooterView footerView = new FooterView(utils);
+        // Preparem el header
+        HeaderView headerView = new HeaderView(utils);
         RegisterView registerView = new RegisterView(utils);
         LoginView loginView = new LoginView(utils);
         AddSongView addSongView = new AddSongView(utils);
@@ -68,6 +66,9 @@ public class Main {
 
         // Iniciem la mainView, que tindrà el mateix header i footer
         MainView mainView = new MainView(initialView, deleteSongView, statisticsView, mainMenuView, generalPlaylistView, generalSongListView, detailedSongView, detailedPlaylistView, registerView, loginView, addSongView, footerView, headerView);
+
+        HeaderController headerController = new HeaderController(headerView, userManager);
+        headerView.addHeaderController(headerController);
         headerController.addMainView(mainView);
 
         // Vinculem amb el controller del footer

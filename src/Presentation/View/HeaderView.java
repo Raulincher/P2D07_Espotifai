@@ -34,28 +34,6 @@ public class HeaderView extends JPanel {
     }
 
     /**
-     * Funció que servirà per crear els botons del header
-     *
-     * No tindrà param ni return
-     */
-    public void initilizeButtons(){
-        // Creem el botó de back i el configurem
-        Icon backbtn = new ImageIcon(String.valueOf(AssetsFiles.BACK_LITTLEBUTTON_IMG));
-        jBack = utils.buttonImg(backbtn);
-        jBack.setActionCommand(BTN_BACK);
-
-        // Creem el botó de LogOut i el configurem
-        Icon logoutBtn = new ImageIcon(String.valueOf(AssetsFiles.LOGOUT_LITTLEBUTTON_IMG));
-        jLogOut = utils.buttonImg(logoutBtn);
-        jLogOut.setActionCommand(BTN_LOGOUT);
-
-        // Creem el botó de delete account i el configurem
-        Icon deleteAccBtn = new ImageIcon(String.valueOf(AssetsFiles.DELETEACC_LITTLEBUTTON_IMG));
-        jDeleteAcc = utils.buttonImg(deleteAccBtn);
-        jDeleteAcc.setActionCommand(BTN_DELETEACC);
-    }
-
-    /**
      * Funció que servirà per a vincular amb el seu controller
      * i activar tots els listeners
      *
@@ -77,6 +55,21 @@ public class HeaderView extends JPanel {
      * @return north, JPanel que composarà el Header
      */
     public JPanel configureHeader(Icon icon) {
+
+        // Creem el botó de back i el configurem
+        Icon backbtn = new ImageIcon(String.valueOf(AssetsFiles.BACK_LITTLEBUTTON_IMG));
+        jBack = utils.buttonImg(backbtn);
+        jBack.setActionCommand(BTN_BACK);
+
+        // Creem el botó de LogOut i el configurem
+        Icon logoutBtn = new ImageIcon(String.valueOf(AssetsFiles.LOGOUT_LITTLEBUTTON_IMG));
+        jLogOut = utils.buttonImg(logoutBtn);
+        jLogOut.setActionCommand(BTN_LOGOUT);
+
+        // Creem el botó de delete account i el configurem
+        Icon deleteAccBtn = new ImageIcon(String.valueOf(AssetsFiles.DELETEACC_LITTLEBUTTON_IMG));
+        jDeleteAcc = utils.buttonImg(deleteAccBtn);
+        jDeleteAcc.setActionCommand(BTN_DELETEACC);
         // Creem el JPanel i el configurem
         JPanel north = new JPanel();
         north.setBackground(Color.black);
