@@ -1,7 +1,6 @@
 package Presentation.View;
 
 import Presentation.AssetsFiles;
-import Presentation.Controller.StatisticsViewController;
 import Presentation.Utils;
 
 import javax.swing.*;
@@ -36,16 +35,6 @@ public class StatisticsView extends JPanel {
         this.utils = utils;
     }
 
-    /**
-     * Funció que servirà per a connectar amb el seu
-     * controller i activar els listeners
-     *
-     * @param statisticsViewController, controller de les Statistics
-     */
-    public void addStatisticsController(StatisticsViewController statisticsViewController){
-        jgetStatistics.addActionListener(statisticsViewController);
-    }
-
     public void setGenreMap(Map<String, Integer> genreMap) {
         this.genreMap = genreMap;
         repaint(); // Vuelve a dibujar el gráfico cuando se actualiza el mapa de géneros
@@ -61,22 +50,10 @@ public class StatisticsView extends JPanel {
         // Creem el BorderLayout
         setLayout(new BorderLayout());
 
-        // WEST
-        // Creem el JPanel de l'esquerra per al botó d'actualitzar estadístiques
-        JPanel west = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        west.setBackground(Color.BLACK);
-
-        // Creem el JButton i l'afegim al JPanel
-        Icon statisticsBtn = new ImageIcon(String.valueOf(AssetsFiles.GET_STATISTICS_BUTTON_IMG));
-        jgetStatistics = utils.buttonImg(statisticsBtn);
-        jgetStatistics.setActionCommand(BTN_STATISTICS);
-        west.add(jgetStatistics);
-        add(west,BorderLayout.WEST);
-
         // CENTER
         // Creem el JPanel del center amb el FlowLayout i el configurem
         JPanel center = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        center.setBorder(createEmptyBorder(0, 0, 0, 130));
+        center.setBorder(createEmptyBorder(30, 140, 0, 0));
         center.setBackground(Color.BLACK);
 
         // Creem un nou sub-JPanel que servirà per visualitzar les estadístiques
@@ -89,8 +66,8 @@ public class StatisticsView extends JPanel {
              */
             @Override
             protected void paintComponent(Graphics graphics) {
-                if (genreMap == null) {
-                    return; // Salir del método si genreMap es nulo
+                if (genreMap.isEmpty()) {
+                    return; // Sortir de mètode si genreMap és null
                 }
                 // Preparem les variables i les eines
                 super.paintComponent(graphics);

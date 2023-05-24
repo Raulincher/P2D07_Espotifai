@@ -22,6 +22,8 @@ public class SongManager {
     private File file;
     private Song song;
     private String actualSong;
+
+    private String thatSong;
     private String pathComputer;
     private SongLyricsApi songLyricsApi;
 
@@ -43,6 +45,14 @@ public class SongManager {
         return duration;
     }
 
+    public String getActualSong() {
+        return thatSong;
+    }
+
+    public void setActualSong(String song) {
+        thatSong = song;
+    }
+
     public void getSong(String songTitle){
         try {
             File music;
@@ -61,12 +71,15 @@ public class SongManager {
                     return;
                 }else {
                     actualSong = files[0].getName();
+                    setActualSong(actualSong);
                     String filePath = "files/music/" + files[0].getName();
                     file = new File(filePath);
                 }
             }else{
                 file = new File(getPath(songTitle));
                 actualSong = file.getName();
+                thatSong = actualSong;
+
             }
             if (file.exists()) {
                 myClip = AudioSystem.getClip();
@@ -133,6 +146,7 @@ public class SongManager {
                 }
                 String filePath = "files/music/" + files[auxPos].getName();
                 actualSong = files[auxPos].getName();
+                setActualSong(actualSong);
                 File file = new File(filePath);
 
                 if (file.exists()) {
@@ -171,6 +185,7 @@ public class SongManager {
                 }
                 String filePath = "files/music/" + files[auxPos].getName();
                 actualSong = files[auxPos].getName();
+                setActualSong(actualSong);
                 File file = new File(filePath);
 
                 if (file.exists()) {
@@ -375,10 +390,6 @@ public class SongManager {
             temps.add(1,"Unsupported Audio File");
         }
         return temps;
-    }
-
-    public String getActualSong() {
-        return actualSong;
     }
 }
 

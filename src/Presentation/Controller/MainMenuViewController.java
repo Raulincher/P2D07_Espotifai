@@ -7,6 +7,7 @@ import Presentation.View.*;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Map;
 
 public class MainMenuViewController implements ActionListener{
 
@@ -17,17 +18,19 @@ public class MainMenuViewController implements ActionListener{
     private final UserManager userManager;
     private final PlaylistManager playlistManager;
     private final DeleteSongView deleteSongView;
+    private final StatisticsView statisticsView;
     private final GeneralSongListView generalSongListView;
     private final GeneralPlaylistView generalPlaylistView;
 
     public MainMenuViewController(MainMenuView mainMenuView, MainView mainView, SongManager songManager,
                                   UserManager userManager, DeleteSongView deleteSongView,
-                                  GeneralSongListView generalSongListView, GeneralPlaylistView generalPlaylistView,PlaylistManager playlistManager) {
+                                  GeneralSongListView generalSongListView, StatisticsView statisticsView, GeneralPlaylistView generalPlaylistView,PlaylistManager playlistManager) {
         this.mainMenuView = mainMenuView;
         this.mainView = mainView;
         this.songManager = songManager;
         this.userManager = userManager;
         this.deleteSongView = deleteSongView;
+        this.statisticsView = statisticsView;
         this.generalSongListView = generalSongListView;
         this.generalPlaylistView = generalPlaylistView;
         this.playlistManager = playlistManager;
@@ -51,7 +54,12 @@ public class MainMenuViewController implements ActionListener{
                 generalSongListView.fillTable(songManager.listSongs(false, null));
                 mainView.showGeneralSongListCard();
             }
-            case MainMenuView.BTN_STATISTICS -> mainView.showStatisticsCard();
+            case MainMenuView.BTN_STATISTICS -> {
+                Map<String, Integer> genreMap = songManager.createGenreMap();
+                statisticsView.setGenreMap(genreMap);
+                statisticsView.repaint();
+                mainView.showStatisticsCard();
+            }
 
         }
     }

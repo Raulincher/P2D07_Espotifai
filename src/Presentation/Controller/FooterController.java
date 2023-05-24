@@ -25,6 +25,8 @@ public class FooterController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case FooterView.BTN_PLAY -> {
+                String actualS = songManager.getActualSong();
+                footerView.setActualSong(actualS);
                 footerView.jProgressBar.setMinimum(0);
                 footerView.jProgressBar.setMaximum(songManager.clipDuration());
                 boolean stop = songManager.simpleAudioPlayer();
@@ -37,12 +39,17 @@ public class FooterController implements ActionListener {
             }
 
             case FooterView.BTN_REPEAT -> songManager.loopAudio();
-            case FooterView.BTN_BACKWARD -> { songManager.moveBackward();
+            case FooterView.BTN_BACKWARD -> {
+                songManager.moveBackward();
+                String actualS = songManager.getActualSong();
+                footerView.setActualSong(actualS);
             }
 
             case FooterView.BTN_FORWARD -> {
                 try {
                     songManager.moveForward();
+                    String actualS = songManager.getActualSong();
+                    footerView.setActualSong(actualS);
                 } catch (LineUnavailableException | IOException | UnsupportedAudioFileException ex) {
                     ex.printStackTrace();
                 }
@@ -58,4 +65,8 @@ public class FooterController implements ActionListener {
             }
         }
     }
+
+    /*public String getActualSong(){
+        return songManager.getActualSong();
+    }*/
 }

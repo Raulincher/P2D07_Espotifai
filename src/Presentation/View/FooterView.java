@@ -28,6 +28,8 @@ public class FooterView extends JPanel {
     private JButton jRepeat;
     private JButton jRepeatList;
     private JButton jLyrics;
+    private JLabel jLogo = new JLabel("Nothing playing");
+    private String jSongName;
     private ProgressBarThread progressBarThread;
     public JProgressBar jProgressBar;
 
@@ -38,6 +40,11 @@ public class FooterView extends JPanel {
      */
     public FooterView(Utils utils){
         this.utils = utils;
+    }
+    public void setActualSong(String actualSong) {
+        this.jSongName = actualSong;
+        updateSongName(jSongName);
+        repaint();
     }
 
     /**
@@ -53,6 +60,7 @@ public class FooterView extends JPanel {
         jRepeat.addActionListener(footerController);
         jRepeatList.addActionListener(footerController);
         jLyrics.addActionListener(footerController);
+        //songName = footerController.getActualSong();
     }
 
     /**
@@ -114,9 +122,10 @@ public class FooterView extends JPanel {
         footerS.setBackground(gris);
 
         // Agafem el nom de la cançó
-        JLabel jLogo = utils.label("Song name");
 
         // Configurem la part NORTH del BorderLayout
+        jLogo.setForeground(Color.WHITE);
+        jLogo.setFont(new Font("Gotham", Font.BOLD, 27));
         footerN.add(jLogo);
         border.add(footerN, BorderLayout.NORTH);
 
@@ -132,8 +141,14 @@ public class FooterView extends JPanel {
         footerS.add(jLyrics);
         footerS.add(jProgressBar);
         border.add(footerS, BorderLayout.SOUTH);
+        Dimension dimension = new Dimension(10,10);
 
         return border;
+    }
+
+    public void updateSongName(String songName) {
+        String finalSong = songName.substring(0, songName.length() - 4);
+        jLogo.setText(finalSong);
     }
 
     /**

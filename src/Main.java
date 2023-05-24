@@ -86,8 +86,7 @@ public class Main {
         DetailedSongViewController detailedSongViewController = new DetailedSongViewController(detailedSongView, songManager, playlistManager, userManager);
         GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView, mainView, songManager,detailedSongView, playlistManager, userManager, detailedSongViewController);
         GeneralPlaylistViewController generalPlaylistViewController = new GeneralPlaylistViewController(generalPlaylistView, mainView, playlistManager, userManager, detailedPlaylistView);
-        MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView, songManager, userManager, deleteSongView, generalSongListView, generalPlaylistView, playlistManager);
-        StatisticsViewController statisticsViewController = new StatisticsViewController(statisticsView, songManager);
+        MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView, songManager, userManager, deleteSongView, generalSongListView, statisticsView, generalPlaylistView, playlistManager);
 
         // Vinculem vistes amb controllers
         initialView.addInitialViewController(initialViewController);
@@ -100,7 +99,6 @@ public class Main {
         generalSongListView.addGeneralSongListController(generalSongListViewController);
         generalPlaylistView.addGeneralPlaylistController(generalPlaylistViewController);
         mainMenuView.addMainMenuController(mainMenuViewController);
-        statisticsView.addStatisticsController(statisticsViewController);
 
         mainView.start();
     }
