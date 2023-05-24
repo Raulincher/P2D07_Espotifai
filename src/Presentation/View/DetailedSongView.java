@@ -35,6 +35,8 @@ public class DetailedSongView extends JPanel {
     private JPopupMenu popupMenuPlaylist;
     private ArrayList<JMenuItem> listItems;
     private String songName;
+    private JTextField filterMenuPlaylist;
+
 
     /**
      * Funció que servirà com a constructor de la GeneralPlaylistView
@@ -47,6 +49,7 @@ public class DetailedSongView extends JPanel {
         jTextArea = new JTextArea();
         popupMenuPlaylist = new JPopupMenu();
         listItems = new ArrayList<>();
+        filterMenuPlaylist = new JTextField();
     }
 
     /**
@@ -61,6 +64,8 @@ public class DetailedSongView extends JPanel {
         for (JMenuItem item : listItems){
             item.addActionListener(detailedSongViewController);
         }
+        filterMenuPlaylist.getDocument().addDocumentListener(detailedSongViewController);
+        jPlaylist.addActionListener(detailedSongViewController);
     }
 
     /**
@@ -303,11 +308,18 @@ public class DetailedSongView extends JPanel {
      * @param playlist, ArrayList d'Strings que conté el nom de les playlist de l'usuari loguejat
      */
     public void fillPopMenu(ArrayList<String> playlist){
-        for (String play : playlist) {
-            JMenuItem menuItem = new JMenuItem(play);
-            menuItem.setActionCommand(play);
-            listItems.add(menuItem);
-            popupMenuPlaylist.add(menuItem);
+
+        JPanel filterPanel = new JPanel(new BorderLayout());
+        filterPanel.add(filterMenuPlaylist, BorderLayout.NORTH);
+        popupMenuPlaylist.add(filterPanel, 0);
+        int countAdd = 0;
+        if (!playlist.isEmpty()) {
+            for (String play : playlist) {
+                JMenuItem menuItem = new JMenuItem(play);
+                menuItem.setActionCommand(play);
+                listItems.add(menuItem);
+                popupMenuPlaylist.add(menuItem);
+            }
         }
     }
 
@@ -321,6 +333,15 @@ public class DetailedSongView extends JPanel {
         popupMenuPlaylist.setBackground(gris);
         popupMenuPlaylist.setForeground(Color.WHITE);
         popupMenuPlaylist.setFont(new Font("Gotham", Font.BOLD, 15));
+        popupMenuPlaylist.setLightWeightPopupEnabled(false);
+        popupMenuPlaylist.setPreferredSize(new Dimension(60,90));
+       /* for (int i = 0; i < listItems.size(); i++) {
+            if (i < 5) {
+                listItems.get(i).setVisible(true);
+            } else {
+                listItems.get(i).setVisible(false);
+            }
+        }*/
     }
 
     /**
@@ -386,5 +407,18 @@ public class DetailedSongView extends JPanel {
     public void start(){
         Icon playBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_PLAYBUTTON_IMG));
         jPlay.setIcon(playBtn);
+    }
+
+    public void cleanFilter(){
+        filterMenuPlaylist.setText("");
+    }
+
+    public void filteredPopUpMenu() {
+        String searchTerm = filterMenuPlaylist.getText().toLowerCase();
+        // Recorrem tots els elements de la JPopupMenu i els filtrem depenen de la busqueda
+        for (int i = 0; i < listItems.size(); i++) {
+            String text = listItems.get(i).getText().toLowerCase();
+            listItems.get(i).setVisible(text.contains(searchTerm));
+        }
     }
 }

@@ -117,8 +117,6 @@ public class SongManager {
         return stopped;
     }
 
-
-
     public void loopAudio() {
         if(myClip != null) {
             myClip.loop(Clip.LOOP_CONTINUOUSLY);

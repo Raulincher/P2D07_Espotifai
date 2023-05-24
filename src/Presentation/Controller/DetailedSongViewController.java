@@ -4,13 +4,16 @@ import Business.PlaylistManager;
 import Business.SongManager;
 import Business.UserManager;
 import Presentation.View.*;
+
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import java.awt.event.*;
 import java.util.ArrayList;
 
 /**
  * Classe per controlar la vista del detailedSongView i les interaccions d'aquesta
  */
-public class DetailedSongViewController  implements ActionListener, MouseListener {
+public class DetailedSongViewController  implements ActionListener, MouseListener, DocumentListener {
 
     // Declarem atributs
     private final DetailedSongView detailedSongView;
@@ -56,15 +59,21 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
             }
         }
 
-        // Controlem el play de la pròpia cançó
-        if (e.getActionCommand().equals(DetailedSongView.BTN_PLAYME)){
-            songManager.getSong(songName);
-            boolean stop = songManager.simpleAudioPlayer();
-            if(stop){
-                detailedSongView.stop();
-            }else{
-                detailedSongView.start();
-            }
+        // Controlem el play de la pròpia cançó i el boto de add Playlist
+        switch (e.getActionCommand()){
+            case DetailedSongView.BTN_PLAYME:
+                songManager.getSong(songName);
+                boolean stop = songManager.simpleAudioPlayer();
+                //Canviar imatge de la vista
+                if(stop){
+                    detailedSongView.stop();
+                }else{
+                    detailedSongView.start();
+                }
+                break;
+            case DetailedSongView.BTN_PLAYLIST:
+                detailedSongView.cleanFilter();
+                break;
         }
     }
 
@@ -88,4 +97,22 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
 
     @Override
     public void mouseExited(MouseEvent e) {}
+
+    @Override
+    public void insertUpdate(DocumentEvent e) {
+        //Filtre per les playlist
+        detailedSongView.filteredPopUpMenu();
+    }
+
+    @Override
+    public void removeUpdate(DocumentEvent e) {
+        //Filtre per les playlist
+        detailedSongView.filteredPopUpMenu();
+    }
+
+    @Override
+    public void changedUpdate(DocumentEvent e) {
+        //Filtre per les playlist
+        detailedSongView.filteredPopUpMenu();
+    }
 }
