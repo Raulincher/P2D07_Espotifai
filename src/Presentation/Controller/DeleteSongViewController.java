@@ -77,7 +77,8 @@ public class DeleteSongViewController implements ActionListener, DocumentListene
         if (deleteSongView.confirmationDeletePopUp(songTitle) == 0) {
             if (songManager.deleteSong(songTitle)) {
                 deleteSongView.showPopUps("Song Deleted Successfully");
-                mainView.showMainMenuCard();
+                ArrayList<String> songsUpdated = songManager.listSongs(true, userManager.currentUsername());
+                deleteSongView.fillDeleteTable(songsUpdated);
                 deleteSongView.clearSearcher();
             }
         }

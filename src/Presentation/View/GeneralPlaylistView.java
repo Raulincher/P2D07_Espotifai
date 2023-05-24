@@ -256,12 +256,6 @@ public class GeneralPlaylistView extends JPanel {
         }
         return indexSong;
     }*/
-    public void updateViewTable() {
-        // Notificar a la jTable que los datos han cambiado
-        myPlaylistsTable.getModel();
-        myPlaylistsModel.fireTableDataChanged();
-        otherPlaylistsModel.fireTableDataChanged();
-    }
 
     public void showPopUps(String error) {
         JOptionPane.showMessageDialog(this,error);
