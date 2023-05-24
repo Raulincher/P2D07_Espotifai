@@ -69,13 +69,9 @@ public class SongManager {
                 actualSong = file.getName();
             }
             if (file.exists()) {
-
                 myClip = AudioSystem.getClip();
                 AudioInputStream ais = AudioSystem.getAudioInputStream(file.toURI().toURL());
                 myClip.open(ais);
-                if(!songTitle.equals("")){
-                    myClip.start();
-                }
             }
             else {
                 throw new RuntimeException("Sound: file not found: " + filePath);
@@ -107,6 +103,8 @@ public class SongManager {
         }
         return stopped;
     }
+
+
 
     public void loopAudio() {
         if(myClip != null) {

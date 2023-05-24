@@ -1,6 +1,5 @@
 package Presentation.View;
 
-import Presentation.AssetsFiles;
 import Presentation.Controller.GeneralSongListViewController;
 import Presentation.Utils;
 
@@ -13,13 +12,10 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.util.ArrayList;
 
-import static javax.swing.BorderFactory.createEmptyBorder;
-
+/**
+ * Classe per mostrar la vista el llistat de cançons
+ */
 public class GeneralSongListView extends JPanel {
-
-    // Iniciem els strings per quan es premi un botó
-    public static final String BTN_BACK = "BTN_BACK";
-    public static final String BTN_BUSCADOR = "BTN_BUSCADOR";
 
     // Preparem els atributs
     private final Utils utils;
@@ -52,8 +48,7 @@ public class GeneralSongListView extends JPanel {
      * @param generalSongListViewController, controller en de la vista
      */
     public void addGeneralSongListController(GeneralSongListViewController generalSongListViewController){
-        jCerca.addActionListener(generalSongListViewController);
-        table.addMouseListener(generalSongListViewController);
+       table.addMouseListener(generalSongListViewController);
     }
 
     /**
@@ -74,10 +69,6 @@ public class GeneralSongListView extends JPanel {
         center.setBackground(Color.BLACK);
         center.setBorder(BorderFactory.createEmptyBorder(0, 200, 80, 200));
 
-        // Afegim el JButton per al buscador
-        Icon buscadorBtn = new ImageIcon(String.valueOf(AssetsFiles.BUSCADOR_BUTTON_IMG));
-        jCerca = new JButton(buscadorBtn);
-        jCerca.setActionCommand(BTN_BUSCADOR);
 
         // Afegim el JTextField per a buscar la cançó
         jBuscador = new JTextField();
@@ -159,7 +150,7 @@ public class GeneralSongListView extends JPanel {
         table.getTableHeader().setDefaultRenderer(header);
 
         // Definim la font dels continguts de la taula
-        table.setFont(new Font("Gotham", Font.BOLD, 20));
+        table.setFont(new Font("Gotham", Font.BOLD, 15));
 
         return new JScrollPane(table);
     }

@@ -9,15 +9,15 @@ import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.util.ArrayList;
 
-import static javax.swing.BorderFactory.createEmptyBorder;
-
+/**
+ * Classe per mostrar la vista de la cançó detallada i les interaccions d'aquesta
+ */
 public class DetailedSongView extends JPanel {
 
     // Preparem els atributs
     private final Utils utils;
 
     // Preparem els strings per quan es premi un botó
-    public static final String BTN_BACK = "BTN_BACK";
     public static final String BTN_PLAYLIST = "BTN_PLAYLIST";
     public static final String BTN_PLAYME = "BTN_PLAYME";
 
@@ -33,21 +33,20 @@ public class DetailedSongView extends JPanel {
     private JButton jPlaylist;
     private JButton jPlay;
     private JPopupMenu popupMenuPlaylist;
-    private ArrayList<JMenuItem> listItems = new ArrayList<>();
+    private ArrayList<JMenuItem> listItems;
     private String songName;
 
     /**
      * Funció que servirà com a constructor de la GeneralPlaylistView
      *
-     * @param , vista per a posar el Header
      * @param utils, per usar tots els seus mètodes
-     * @param , vista per a posar el Footer
      */
     public DetailedSongView(Utils utils) {
         this.utils = utils;
         defaultTableModel = new DefaultTableModel(columnHeaders, 0);
         jTextArea = new JTextArea();
         popupMenuPlaylist = new JPopupMenu();
+        listItems = new ArrayList<>();
     }
 
     /**
@@ -261,7 +260,7 @@ public class DetailedSongView extends JPanel {
 
         // Obrim un bucle que recorri tot l'ArrayList amb la song
         for (String s : song) {
-            // Anem afegint la informació a la taula
+            // Afegim la informació a la taula
             String[] songInfo = s.split("-");
             Object[] rowData = {row[countRow], songInfo[0]};
             defaultTableModel.addRow(rowData);
@@ -278,17 +277,17 @@ public class DetailedSongView extends JPanel {
     public void fillLyriscText(String lyrics) {
         Color gris = new Color(26, 26, 26);
 
-        // Configurem el JTextArea per a que no sigui editable i li donem format
+        // Configurem el JTextArea perquè no sigui editable i li donem format
         jTextArea.setEditable(false);
         jTextArea.setBackground(gris);
         jTextArea.setForeground(Color.decode("#00DC00"));
         jTextArea.setFont(new Font("Gotham", Font.BOLD, 15));
 
-        // Preparem el StringBuilder per a afegir tota la lletra
+        // Preparem el StringBuilder per a afegir un marge
         String[] lines = lyrics.split("\n");
         StringBuilder centeredText = new StringBuilder();
 
-        // Obrim bucle per a construir les lyrics
+        // Afegim el marge a la lírica perquè es llegeixi millor
         for (String line : lines) {
             centeredText.append(String.format("%" + 10 + "s%s\n", "", line));
         }
@@ -297,6 +296,12 @@ public class DetailedSongView extends JPanel {
         jTextArea.setCaretPosition(0);
     }
 
+    /**
+     *
+     * Funció per crear la Pop Up Menu un cop pulsada la canço que es vol veure en detall des del GeneralSongListViewController
+     *
+     * @param playlist, ArrayList d'Strings que conté el nom de les playlist de l'usuari loguejat
+     */
     public void fillPopMenu(ArrayList<String> playlist){
         for (String play : playlist) {
             JMenuItem menuItem = new JMenuItem(play);
@@ -306,6 +311,11 @@ public class DetailedSongView extends JPanel {
         }
     }
 
+    /**
+     * Funció per personalitzar la PopUpMenu d'afegir cançons a les playlists mostrades
+     *
+     * No tindrà param ni return
+     */
     public void createPopUpMenu(){
         Color gris = new Color(26, 26, 26);
         popupMenuPlaylist.setBackground(gris);
@@ -313,7 +323,10 @@ public class DetailedSongView extends JPanel {
         popupMenuPlaylist.setFont(new Font("Gotham", Font.BOLD, 15));
     }
 
-
+    /**
+     * Funció que mostrara per pantalla la popUpMenu
+     * @param e, component de MouseEvent per detectar quan l'ha de mostrar
+     */
     public void showMenuPopUp(MouseEvent e){
         popupMenuPlaylist.show(e.getComponent(), e.getX(), e.getY());
     }
@@ -327,16 +340,51 @@ public class DetailedSongView extends JPanel {
         JOptionPane.showMessageDialog(this,error);
     }
 
+    /**
+     * Funció per inicialitzar i guardar el nom de la cançó seleccionada i que sesta mostrant els seus detalls per pantalla
+     * @param songName, String amb el nom de la cançó
+     */
     public void setNameSong (String songName){
         this.songName = songName;
     }
+
+    /**
+     * Funció per obtenir el nom de la cançó de la llista seleccionada
+     * @return songName, Strign amb el nom de la cançó
+     */
     public String getSongName(){
         return songName;
     }
 
+    /**
+     * Funció que netjara la informació de la PopUpMenu de les playlist i l'arraylist de items per no acumular cançons
+     *
+     * No tindrà param ni return
+     */
     public void clearInfo() {
         popupMenuPlaylist = null;
         popupMenuPlaylist = new JPopupMenu();
         listItems.clear();
+    }
+    /**
+     * Funció que servirà per a canviar d'icona del play
+     * en cas que es premi el botó i deixar-ho en pause
+     *
+     * No tindrà param ni return
+     */
+    public void stop(){
+        Icon pauseBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_PAUSEBUTTON_IMG));
+        jPlay.setIcon(pauseBtn);
+    }
+
+    /**
+     * Funció que servirà per a canviar d'icona del pause
+     * en cas que es premi el botó i deixar-ho en play
+     *
+     * No tindrà param ni return
+     */
+    public void start(){
+        Icon playBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_PLAYBUTTON_IMG));
+        jPlay.setIcon(playBtn);
     }
 }

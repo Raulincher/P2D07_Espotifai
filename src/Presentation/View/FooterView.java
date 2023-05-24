@@ -29,9 +29,6 @@ public class FooterView extends JPanel {
     private JButton jRepeatList;
     private JButton jLyrics;
     private ProgressBarThread progressBarThread;
-
-    //private String songName;
-
     public JProgressBar jProgressBar;
 
     /**
@@ -56,7 +53,6 @@ public class FooterView extends JPanel {
         jRepeat.addActionListener(footerController);
         jRepeatList.addActionListener(footerController);
         jLyrics.addActionListener(footerController);
-        //songName = footerController.getActualSong();
     }
 
     /**
@@ -136,10 +132,10 @@ public class FooterView extends JPanel {
         footerS.add(jLyrics);
         footerS.add(jProgressBar);
         border.add(footerS, BorderLayout.SOUTH);
-        Dimension dimension = new Dimension(10,10);
 
         return border;
     }
+
     /**
      * Funció que servirà per a canviar d'icona del play
      * en cas que es premi el botó i deixar-ho en pause

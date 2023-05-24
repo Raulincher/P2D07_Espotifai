@@ -16,18 +16,31 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
-public class GeneralSongListViewController implements ActionListener, MouseListener {
+/**
+ * Classe per controlar la vista del detailedSongView i les interaccions d'aquesta
+ */
+public class GeneralSongListViewController implements MouseListener {
 
+    // Declarem atributs
     private final GeneralSongListView generalSongListView;
     private final MainView mainView;
     private SongManager songManager;
     private DetailedSongView detailedSongView;
     private PlaylistManager playlistManager;
     private UserManager userManager;
-
     private DetailedSongViewController detailedSongViewController;
 
 
+    /**
+     * Constructor de la classe GeneralSongListView
+     * @param generalSongListView, view de la classe
+     * @param mainView, vista que controla totes les vistes del programa
+     * @param songManager, manager per obtenir les songs en la general list View
+     * @param detailedSongView, vista per poder emplenar les taules de la següent vista amb la informació obtinguda
+     * @param playlistManager, manager per obtenir les playlists de l'usuari registrat.
+     * @param userManager, manager per obtenir l'usuari actual
+     * @param detailedSongViewController, controller de la classe detailed Song View per poder activar el listener de les playlists
+     */
     public GeneralSongListViewController(GeneralSongListView generalSongListView, MainView mainView, SongManager songManager, DetailedSongView detailedSongView, PlaylistManager playlistManager, UserManager userManager,DetailedSongViewController detailedSongViewController) {
         this.generalSongListView = generalSongListView;
         this.mainView = mainView;
@@ -38,21 +51,10 @@ public class GeneralSongListViewController implements ActionListener, MouseListe
         this.detailedSongViewController = detailedSongViewController;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-
-        switch (e.getActionCommand()) {
-            case GeneralSongListView.BTN_BACK:
-                mainView.showMainMenuCard();
-                break;
-            case GeneralSongListView.BTN_BUSCADOR:
-                mainView.showMainMenuCard();
-                break;
-        }
-
-    }
-
-
+    /**
+     * Funció que servirà quan els usuaris premin una cançó de la taula, els portarà a la següent vista de la cançó detallada
+     * @param e l'esdeveniment a tramitar
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         String selected;
@@ -80,22 +82,15 @@ public class GeneralSongListViewController implements ActionListener, MouseListe
     }
 
     @Override
-    public void mousePressed(MouseEvent e) {
-
-    }
+    public void mousePressed(MouseEvent e) {}
 
     @Override
-    public void mouseReleased(MouseEvent e) {
-
-    }
+    public void mouseReleased(MouseEvent e) {}
 
     @Override
-    public void mouseEntered(MouseEvent e) {
-
-    }
+    public void mouseEntered(MouseEvent e) {}
 
     @Override
-    public void mouseExited(MouseEvent e) {
+    public void mouseExited(MouseEvent e) {}
 
-    }
 }

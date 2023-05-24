@@ -58,8 +58,4 @@ public class FooterController implements ActionListener {
             }
         }
     }
-
-    /*public String getActualSong(){
-        return songManager.getActualSong();
-    }*/
 }
