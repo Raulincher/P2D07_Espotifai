@@ -88,6 +88,7 @@ public class HeaderView extends JPanel {
         return north;
     }
 
+
     /**
      * Funció que servirà per a mostrar tots els pop ups
      * en cas que es necessiti

@@ -1,11 +1,9 @@
 package Presentation.View;
 
-import Business.Entities.Song;
 import Presentation.AssetsFiles;
 
 import javax.swing.*;
 import java.awt.*;
-import java.util.ArrayList;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
 
@@ -42,7 +40,7 @@ public class MainView extends JFrame {
     private JPanel main;
     private JPanel center;
     private CardLayout cardMain;
-
+    private HeaderView headerView;
 
     /**
      * Funció que servirà per a configurar el programa
@@ -73,6 +71,7 @@ public class MainView extends JFrame {
         this.generalSongListView = generalSongListView;
         this.detailedPlaylistView = detailedPlaylistView;
         this.detailedSongView = detailedSongView;
+        this.headerView = headerView;
 
 
         // Crearem el cardLayout
@@ -354,6 +353,8 @@ public class MainView extends JFrame {
      * No tindrà ni param ni return
      */
     public void showGeneralSongListCard(){
+       // Icon generalSong = new ImageIcon(String.valueOf(AssetsFiles.YOURLIST_LABEL));
+       // configureNord(generalSong);
         cardManager.show(getContentPane(), CARD_GENERAL_SONG);
         cardMain.show(center, CARD_GENERAL_SONG);
     }

@@ -1,5 +1,6 @@
 package Presentation.Controller;
 
+import Business.SongManager;
 import Business.UserManager;
 import Persistance.dao.UserNotFoundException;
 import Presentation.View.HeaderView;
@@ -12,10 +13,12 @@ public class HeaderController implements ActionListener {
     private final HeaderView headerView;
     private final UserManager userManager;
     private MainView mainView;
+    private final SongManager songManager;
 
-    public HeaderController(HeaderView headerView, UserManager userManager) {
+    public HeaderController(HeaderView headerView, UserManager userManager, SongManager songManager) {
         this.headerView = headerView;
         this.userManager = userManager;
+        this.songManager = songManager;
     }
 
     public void addMainView(MainView mainView){
@@ -42,6 +45,7 @@ public class HeaderController implements ActionListener {
             case HeaderView.BTN_LOGOUT:
                 int resposta = headerView.showPopUps("Are you sure?","Log Out");
                 if (resposta == 0) {
+                    songManager.stopClip();
                     userManager.logout();
                     mainView.showMainCard();
                 }
