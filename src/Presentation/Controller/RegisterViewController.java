@@ -55,7 +55,7 @@ public class RegisterViewController implements ActionListener {
                                 if(userManager.userExistence(username, email, password)){
                                     registerView.userExistence();
                                 }else{
-                                    userManager.Register(username, email, password);
+                                    userManager.register(username, email, password);
                                     userManager.setUser(username, email, password);
                                     mainView.showMainMenuCard();
                                 }

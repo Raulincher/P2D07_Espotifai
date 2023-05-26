@@ -47,7 +47,7 @@ public class UserManager {
         return error;
     }
 
-    public void Register(String username, String email, String password){
+    public void register(String username, String email, String password){
         user = new User(username,email,password);
         userDao.register(user);
     }
