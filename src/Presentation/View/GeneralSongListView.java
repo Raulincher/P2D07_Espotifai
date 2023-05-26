@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  * Classe per mostrar la vista el llistat de cançons
@@ -202,9 +203,18 @@ public class GeneralSongListView extends JPanel {
         if (query.length() == 0) {
             sorter.setRowFilter(null);
         }
-        // Busca per la primera columna, pel títol de la cançó
+        // Busca per el títol/album/owner/artist de la cançó
         else {
-            sorter.setRowFilter(RowFilter.regexFilter("(?i)" + query, 0));
+            RowFilter<DefaultTableModel, Object> nameSong = RowFilter.regexFilter("(?i)" + query, 0);
+            RowFilter<DefaultTableModel, Object> artist = RowFilter.regexFilter("(?i)" + query, 1);
+            RowFilter<DefaultTableModel, Object> album = RowFilter.regexFilter("(?i)" + query, 3);
+            RowFilter<DefaultTableModel, Object> uploadedBy = RowFilter.regexFilter("(?i)" + query, 4);
+
+            // Combinar tots els buscadors en un
+            RowFilter<DefaultTableModel, Object> combinedSorter = RowFilter.orFilter(Arrays.asList(nameSong, artist, album, uploadedBy));
+
+            // Afegir els buscadors al sorter
+            sorter.setRowFilter(combinedSorter);
         }
     }
 }
