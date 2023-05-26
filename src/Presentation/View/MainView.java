@@ -87,7 +87,7 @@ public class MainView extends JFrame {
 
         // Creem el JPanel del nord que servirà com a Header i el configurem
         JPanel north = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        Icon menuImg = new ImageIcon(String.valueOf(AssetsFiles.SONG_LABEL));
+        Icon menuImg = new ImageIcon(String.valueOf(AssetsFiles.ESPOTYFAI_LABEL));
         north.add(headerView.configureHeader(menuImg));
         north.setBackground(Color.black);
 

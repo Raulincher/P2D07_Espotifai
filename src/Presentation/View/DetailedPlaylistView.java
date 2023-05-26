@@ -77,10 +77,6 @@ public class DetailedPlaylistView extends JPanel {
         JPanel north = new JPanel();
         north.setBackground(Color.black);
 
-        // Afegim el Label que desitgem i afegim el Header
-        Icon logo = new ImageIcon(String.valueOf(AssetsFiles.LISTMANAGING_LABEL));;
-        //north.add(headerView.configureHeader(logo));
-
 
         jtArea = new JTextArea();
         jtArea.setBackground(Color.BLACK);

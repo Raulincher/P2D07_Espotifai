@@ -12,21 +12,7 @@ public enum AssetsFiles {
 
     REGISTER_LABEL("files/imgs/registerLabel.png"),
 
-    MENU_LABEL("files/imgs/menuLabel.png"),
-
-    DELETE_LABEL("files/imgs/deleteLabel.png"),
-
-    ADDSONG_LABEL("files/imgs/addSongLabel.png"),
-
-    LISTMANAGING_LABEL("files/imgs/listManagingLabel.png"),
-
-    MUSIC_LABEL("files/imgs/musicLabel.png"),
-
-    SONG_LABEL("files/imgs/songLabel.png"),
-
-    STATISTICS_LABEL("files/imgs/statisticsLabel.png"),
-
-    YOURLIST_LABEL("files/imgs/yourListLabel.png"),
+    ESPOTYFAI_LABEL("files/imgs/espotyfaiLabel.png"),
     LOGIN_BUTTON_IMG("files/imgs/loginButton.png"),
 
     REGISTER_BUTTON_IMG("files/imgs/registerButton.png"),
