@@ -35,6 +35,9 @@ public class FooterView extends JPanel {
     private ProgressBarThread progressBarThread;
     public JProgressBar jProgressBar;
 
+    //thread
+    private Thread thread;
+
     /**
      * Funció que servirà per com a constructor del FooterView
      *
@@ -88,7 +91,7 @@ public class FooterView extends JPanel {
         Icon backwardBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_OLDBUTTON_IMG));
         Icon repeatBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_REPEATBUTTON_IMG));
         Icon repeatListBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_REPEAT_PLAYLIST_BUTTON_IMG));
-        Icon stopSongBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_REPEAT_PLAYLIST_BUTTON_IMG));
+        Icon stopSongBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_STOPBUTTON_IMG));
         Icon lyricsBtn = new ImageIcon(String.valueOf(AssetsFiles.LYRICS_IMG));
 
         // Activem els JButtons i els hi donem forma
@@ -183,16 +186,19 @@ public class FooterView extends JPanel {
     }
 
 
-    public void iterateProgressBar(int maxValue){
+    public void iterateProgressBar(int maxValue, int check, boolean stop){
         jProgressBar.setMaximum(maxValue);
         jProgressBar.setMinimum(0);
-        progressBarThread = new ProgressBarThread(jProgressBar);
+        if(check == 0) {
+            progressBarThread = new ProgressBarThread(jProgressBar);
+            progressBarThread.setPlaying(true);
+            // Start the playback thread in a separate thread
+            thread = new Thread(progressBarThread);
+            thread.start();
+        }else{
+            progressBarThread.setPlaying(stop);
+        }
 
-        progressBarThread.setPlaying(true);
-
-        // Start the playback thread in a separate thread
-        Thread thread = new Thread(progressBarThread);
-        thread.start();
     }
 
     /**

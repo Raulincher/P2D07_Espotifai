@@ -45,6 +45,8 @@ public enum AssetsFiles {
 
     FOOT_PAUSEBUTTON_IMG("files/imgs/FpauseButton.png"),
 
+    FOOT_STOPBUTTON_IMG("files/imgs/FstopButton.png"),
+
     FOOT_OLDBUTTON_IMG("files/imgs/FoldButton.png"),
 
     FOOT_NEXTBUTTON_IMG("files/imgs/FnextButton.png"),

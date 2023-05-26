@@ -35,9 +35,12 @@ public class FooterController implements ActionListener {
                 } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
                     ex.printStackTrace();
                 }
-                footerView.iterateProgressBar(songManager.clipDuration());
+                int check = songManager.checkMyClip();
+                footerView.iterateProgressBar(songManager.clipDuration(), check, stop);
+
                 if(stop){
                     footerView.stop();
+
                 }else{
                     footerView.start();
                 }
@@ -48,6 +51,10 @@ public class FooterController implements ActionListener {
                 songManager.moveBackward();
                 String actualS = songManager.getActualSong();
                 footerView.setActualSong(actualS);
+                footerView.jProgressBar.setMinimum(0);
+                footerView.jProgressBar.setMaximum(songManager.clipDuration());
+                int check = songManager.checkMyClip();
+                footerView.iterateProgressBar(songManager.clipDuration(), check, false);
             }
 
             case FooterView.BTN_FORWARD -> {
@@ -55,6 +62,10 @@ public class FooterController implements ActionListener {
                     songManager.moveForward();
                     String actualS = songManager.getActualSong();
                     footerView.setActualSong(actualS);
+                    footerView.jProgressBar.setMinimum(0);
+                    footerView.jProgressBar.setMaximum(songManager.clipDuration());
+                    int check = songManager.checkMyClip();
+                    footerView.iterateProgressBar(songManager.clipDuration(), check, false);
                 } catch (LineUnavailableException | IOException | UnsupportedAudioFileException ex) {
                     ex.printStackTrace();
                 }

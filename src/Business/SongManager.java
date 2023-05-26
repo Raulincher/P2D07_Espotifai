@@ -37,6 +37,10 @@ public class SongManager {
 
     public int getSongDurationFromDatabase(String songName){return songDao.songDuration(songName);}
 
+    public int checkMyClip(){
+        return myClip.getFramePosition();
+    }
+
     public int clipDuration(){
         int duration = 0;
 
