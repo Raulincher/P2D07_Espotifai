@@ -23,7 +23,7 @@ public class SQLPlaylistDao implements PlaylistDao {
             try {
                 String title = playlist.getTitle();
                 String username = playlist.getUsername();
-                String song = "";
+                String song = null;
                 String register = "INSERT INTO playlist (username, title, songs)  VALUES (?, ?, ?)";
                 PreparedStatement preparedStmt = remoteConnection.prepareStatement(register);
                 preparedStmt.setString (1, username);
@@ -53,16 +53,17 @@ public class SQLPlaylistDao implements PlaylistDao {
                 playlists = null;
             } else {
                 resultSet.beforeFirst();
+                ArrayList<String> songNames = null;
                 while (resultSet.next()) {
                     String title = resultSet.getString("title");
                     String username = resultSet.getString("username");
                     String allSongs = resultSet.getString("songs");
-                    ArrayList<String> songNames;
-                    if (allSongs.equals("")) {
+
+                    if (allSongs == null) {
                         songNames = null;
                     } else {
                         String[] songs = allSongs.split(",");
-                         songNames = new ArrayList<>(Arrays.asList(songs));
+                        songNames = new ArrayList<>(Arrays.asList(songs));
                     }
                     Playlist playlist = new Playlist(username, title, songNames);
                     playlists.add(playlist);
@@ -90,11 +91,11 @@ public class SQLPlaylistDao implements PlaylistDao {
                 while (resultSet.next()) {
                     if (playlistName.equals(resultSet.getString("title"))) {
                         String allSongs = resultSet.getString("songs");
-                        if (allSongs.equals("")) {
+                        if (allSongs == null) {
                             songsInPlaylist = null;
                         } else {
-                            String songs[] = allSongs.split(",");
-                            songsInPlaylist = new ArrayList<>(Arrays.asList(songs));
+                           String songs[] = allSongs.split(",");
+                           songsInPlaylist = new ArrayList<>(Arrays.asList(songs));
                         }
                     }
                 }
@@ -120,7 +121,7 @@ public class SQLPlaylistDao implements PlaylistDao {
                     String title = resultSet.getString("title");
                     if (title.equals(playlist)) {
                         String allSongs = resultSet.getString("songs");
-                        if (allSongs.equals("")) {
+                        if (allSongs == null) {
                             inPlaylist = false;
                         } else {
                             String[] songs = allSongs.split(",");
@@ -155,8 +156,8 @@ public class SQLPlaylistDao implements PlaylistDao {
                     String title = resultSet.getString("title");
                     if (title.equals(playlist)) {
                         allSongs = resultSet.getString("songs");
-                        if (allSongs.equals("")) {
-                            allSongs += songName;
+                        if (allSongs == null) {
+                            allSongs = songName;
                         } else {
                             allSongs += "," + songName;
                         }
@@ -230,7 +231,7 @@ public class SQLPlaylistDao implements PlaylistDao {
                 while (resultSet.next()) {
                     String playlist = resultSet.getString("title");
                     String allSongs = resultSet.getString("songs");
-                    if (!allSongs.equals("")) {
+                    if (allSongs != null) {
                         String[] songs = allSongs.split(",");
                         ArrayList<String> songsPlaylist = new ArrayList<>();
 
@@ -252,6 +253,55 @@ public class SQLPlaylistDao implements PlaylistDao {
                         preparedStmt.setString (1, songSave);
                         preparedStmt.setString(2, playlist);
                         preparedStmt.execute();
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            success = false;
+            System.out.println("Error llegint les cançons de la base de dades: " + e.getMessage());
+        }
+        return success;
+    }
+
+    public boolean deleteSongFromPlaylistDAO(String playlistName, String songTitle) {
+        boolean success = true;
+
+        try {
+            Statement statement = remoteConnection.createStatement();
+            ResultSet resultSet = statement.executeQuery("SELECT * FROM playlist");
+
+            if (!resultSet.next()) {
+                System.out.println("Base de dades buida");
+            } else {
+                resultSet.beforeFirst();
+
+                while (resultSet.next()) {
+                    String playlist = resultSet.getString("title");
+                    if (playlistName.equals(playlist)) {
+                        String allSongs = resultSet.getString("songs");
+                        String[] songs = allSongs.split(",");
+                        ArrayList<String> songsPlaylist = new ArrayList<>();
+
+                        for (int i = 0; i < songs.length; i++) {
+                            if (!songs[i].equals(songTitle)) {
+                                songsPlaylist.add(songs[i]);
+                            }
+                        }
+
+                        String songSave = null;
+                        for (int i = 0; i < songsPlaylist.size(); i++) {
+                            if (i == 0) {
+                                songSave = songsPlaylist.get(i);
+                            } else {
+                                songSave += "," + songsPlaylist.get(i);
+                            }
+                        }
+                        String register = "UPDATE playlist SET songs = ? WHERE title = ?";
+                        PreparedStatement preparedStmt = remoteConnection.prepareStatement(register);
+                        preparedStmt.setString (1, songSave);
+                        preparedStmt.setString(2, playlist);
+                        preparedStmt.execute();
+
                     }
                 }
             }

@@ -19,11 +19,16 @@ public class DetailedPlaylistView extends JPanel {
     private final Utils utils;
     private JLabel jlListName;
     private JButton jbDeletePlaylist;
-    private JButton boto2;
+    private JButton jbDeleteSong;
+    private JButton jbSongUp;
+    private JButton jbSongDown;
 
     private DefaultTableModel songListModel;
     private JTable songListTable;
     public static final String BTN_DELETE_PLAYLIST = "BTN_DELETE_PLAYLIST";
+    public static final String BTN_SONG_UP = "BTN_SONG_UP";
+    public static final String BTN_SONG_DOWN = "BTN_SONG_DOWN";
+    public static final String BTN_DELETE_SONG_FROM_PLAYLIST = "BTN_DELETE_SONG_FROM_PLAYLIST";
     private JTextArea jtArea;
     private static String[] columnHeaders = {"Title"};
 
@@ -49,8 +54,11 @@ public class DetailedPlaylistView extends JPanel {
      * @param detailedPlaylistViewController, controller de la DetailedPlaylistView
      */
     public void addDetailedPlaylistController(DetailedPlaylistViewController detailedPlaylistViewController){
-        //jback.addActionListener(detailedPlaylistViewController);
         jbDeletePlaylist.addActionListener(detailedPlaylistViewController);
+        songListTable.addMouseListener(detailedPlaylistViewController);
+        jbDeleteSong.addActionListener(detailedPlaylistViewController);
+        jbSongDown.addActionListener(detailedPlaylistViewController);
+        jbSongUp.addActionListener(detailedPlaylistViewController);
     }
 
     /**
@@ -82,8 +90,25 @@ public class DetailedPlaylistView extends JPanel {
         jtArea.setFocusable(false);
         jtArea.setPreferredSize(new Dimension(200, 50));
         north.add(jtArea, BorderLayout.WEST);
-        ImageIcon addFileBtnAux = new ImageIcon(String.valueOf(AssetsFiles.DELETE_LIST_BUTTON_IMG));
 
+        ImageIcon addFileBtnUp = new ImageIcon(String.valueOf(AssetsFiles.SONG_GO_UP_BUTTON_IMG));
+        jbSongUp = utils.buttonImg(addFileBtnUp);
+        jbSongUp.setActionCommand(BTN_SONG_UP);
+        north.add(jbSongUp,BorderLayout.CENTER);
+        add(north, BorderLayout.NORTH);
+
+        ImageIcon addFileBtnDown = new ImageIcon(String.valueOf(AssetsFiles.SONG_GO_DOWN_BUTTON_IMG));
+        jbSongDown = utils.buttonImg(addFileBtnDown);
+        jbSongDown.setActionCommand(BTN_SONG_DOWN);
+        north.add(jbSongDown,BorderLayout.CENTER);
+        add(north, BorderLayout.NORTH);
+
+        ImageIcon addFileBtnAuxDelete = new ImageIcon(String.valueOf(AssetsFiles.DELETE_SONG_FROM_LIST_BUTTON_IMG));
+        jbDeleteSong = utils.buttonImg(addFileBtnAuxDelete);
+        jbDeleteSong.setActionCommand(BTN_DELETE_SONG_FROM_PLAYLIST);
+        north.add(jbDeleteSong,BorderLayout.NORTH);
+
+        ImageIcon addFileBtnAux = new ImageIcon(String.valueOf(AssetsFiles.DELETE_LIST_BUTTON_IMG));
         jbDeletePlaylist = utils.buttonImg(addFileBtnAux);
         jbDeletePlaylist.setActionCommand(BTN_DELETE_PLAYLIST);
         north.add(jbDeletePlaylist,BorderLayout.CENTER);
@@ -92,9 +117,6 @@ public class DetailedPlaylistView extends JPanel {
         //Center
         JPanel center = new JPanel();
         center.setBackground(Color.black);
-
-
-        boto2 = new JButton("Boto2");
 
         Dimension dimension = new Dimension(700, 250);
         songListTable = new JTable(songListModel);
@@ -138,9 +160,8 @@ public class DetailedPlaylistView extends JPanel {
     }
 
     public void fillSongsInPlaylistTable(ArrayList<String> songsInPlaylist) {
+        songListModel.setRowCount(0);
         if (songsInPlaylist != null) {
-            songListModel.setRowCount(0);
-            System.out.println("Aqui: " + songsInPlaylist.get(0));
             // Obrim bucle per a mostrar la informació de la cançó
             for (String s : songsInPlaylist) {
                 Object[] rowData = {s};
@@ -159,9 +180,38 @@ public class DetailedPlaylistView extends JPanel {
 
     public void hideButton() {
         jbDeletePlaylist.setVisible(false);
+        jbDeleteSong.setVisible(false);
     }
 
     public void showButton() {
         jbDeletePlaylist.setVisible(true);
+        jbDeleteSong.setVisible(true);
+    }
+
+    public String obtainSongName(Point point) {
+        int indexFila = songListTable.rowAtPoint(point);
+        String playlistName = (String) songListTable.getValueAt(indexFila, 0);
+        return playlistName;
+    }
+
+    public String getPlaylistName() {
+        return jtArea.getText();
+    }
+
+    public void moveSelectedRowUp() {
+        int selectedRow = songListTable.getSelectedRow();
+        if (selectedRow > 0) {
+            songListModel.moveRow(selectedRow, selectedRow, selectedRow - 1);
+            songListTable.setRowSelectionInterval(selectedRow - 1, selectedRow - 1);
+        }
+    }
+    public void moveSelectedRowDown() {
+        int selectedRow = songListTable.getSelectedRow();
+        int rowCount = songListTable.getRowCount();
+
+        if (selectedRow >= 0 && selectedRow < rowCount - 1) {
+            songListModel.moveRow(selectedRow, selectedRow, selectedRow + 1);
+            songListTable.setRowSelectionInterval(selectedRow + 1, selectedRow + 1);
+        }
     }
 }

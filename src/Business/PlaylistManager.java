@@ -85,4 +85,8 @@ public class PlaylistManager {
     public void deleteSongFromPlaylists(String songTitle) {
         playlistDao.deleteSongFromPlaylistsDAO(songTitle);
     }
+
+    public void deleteSongFromPlaylist(String playlistName, String songTitle) {
+        playlistDao.deleteSongFromPlaylistDAO(playlistName,songTitle);
+    }
 }

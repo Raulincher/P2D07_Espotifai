@@ -52,6 +52,7 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
         int tableClicked = generalPlaylistView.obtainTableClicked(e.getSource());
         String playlistName = generalPlaylistView.obtainPlaylistName(e.getPoint(), tableClicked);
 
+        System.out.println("Nom de la playlist al clicar una taula: " + playlistName);
         detailedView.fillSongsInPlaylistTable(playlistManager.obtainSongsInPlaylist(playlistName));
         detailedView.definePlaylistName(playlistName);
         //TODO
@@ -82,9 +83,9 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
 
     @Override
     public void insertUpdate(DocumentEvent e) {
-        System.out.println("Text: " + generalPlaylistView.getMyPlaylistBuscador().getText());
+        System.out.println("TextInsert: " + generalPlaylistView.getMyPlaylistBuscador().getText());
 
-        if (!(generalPlaylistView.getMyPlaylistBuscador().getText().length() == 0)) {
+        if (e.getDocument() == generalPlaylistView.getMyPlaylistBuscador().getDocument()) {
             generalPlaylistView.search(generalPlaylistView.getMyPlaylistBuscador().getText(), generalPlaylistView.getMyPlaylistSorter());
         } else {
             generalPlaylistView.search(generalPlaylistView.getOtherPlaylistBuscador().getText(), generalPlaylistView.getOtherPlaylistSorter());
@@ -93,7 +94,8 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
 
     @Override
     public void removeUpdate(DocumentEvent e) {
-        if (!(generalPlaylistView.getMyPlaylistBuscador().getText().length() == 0)) {
+        System.out.println("TextRemove: " + generalPlaylistView.getMyPlaylistBuscador().getText());
+        if (e.getDocument() == generalPlaylistView.getMyPlaylistBuscador().getDocument()) {
             generalPlaylistView.search(generalPlaylistView.getMyPlaylistBuscador().getText(), generalPlaylistView.getMyPlaylistSorter());
         } else {
             generalPlaylistView.search(generalPlaylistView.getOtherPlaylistBuscador().getText(), generalPlaylistView.getOtherPlaylistSorter());
@@ -102,7 +104,8 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
 
     @Override
     public void changedUpdate(DocumentEvent e) {
-        if (!(generalPlaylistView.getMyPlaylistBuscador().getText().length() == 0)) {
+        System.out.println("TextChange: " + generalPlaylistView.getMyPlaylistBuscador().getText());
+        if (e.getDocument() == generalPlaylistView.getMyPlaylistBuscador().getDocument()) {
             generalPlaylistView.search(generalPlaylistView.getMyPlaylistBuscador().getText(), generalPlaylistView.getMyPlaylistSorter());
         } else {
             generalPlaylistView.search(generalPlaylistView.getOtherPlaylistBuscador().getText(), generalPlaylistView.getOtherPlaylistSorter());
