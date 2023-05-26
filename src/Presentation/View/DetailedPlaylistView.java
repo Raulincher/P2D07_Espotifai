@@ -181,11 +181,15 @@ public class DetailedPlaylistView extends JPanel {
     public void hideButton() {
         jbDeletePlaylist.setVisible(false);
         jbDeleteSong.setVisible(false);
+        jbSongUp.setVisible(false);
+        jbSongDown.setVisible(false);
     }
 
     public void showButton() {
         jbDeletePlaylist.setVisible(true);
         jbDeleteSong.setVisible(true);
+        jbSongUp.setVisible(true);
+        jbSongDown.setVisible(true);
     }
 
     public String obtainSongName(Point point) {
