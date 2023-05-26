@@ -313,7 +313,7 @@ public class DetailedSongView extends JPanel {
         filterPanel.add(filterMenuPlaylist, BorderLayout.NORTH);
         popupMenuPlaylist.add(filterPanel, 0);
         int countAdd = 0;
-        if (!playlist.isEmpty()) {
+        if (playlist != null) {
             for (String play : playlist) {
                 JMenuItem menuItem = new JMenuItem(play);
                 menuItem.setActionCommand(play);

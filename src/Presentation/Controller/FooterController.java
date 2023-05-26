@@ -29,7 +29,12 @@ public class FooterController implements ActionListener {
                 footerView.setActualSong(actualS);
                 footerView.jProgressBar.setMinimum(0);
                 footerView.jProgressBar.setMaximum(songManager.clipDuration());
-                boolean stop = songManager.simpleAudioPlayer();
+                boolean stop = false;
+                try {
+                    stop = songManager.simpleAudioPlayer();
+                } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                    ex.printStackTrace();
+                }
                 footerView.iterateProgressBar(songManager.clipDuration());
                 if(stop){
                     footerView.stop();
@@ -55,6 +60,7 @@ public class FooterController implements ActionListener {
                 }
             }
             case FooterView.BTN_REPEAT_LIST -> songManager.loopList();
+            case FooterView.BTN_STOP -> songManager.endSong();
             case FooterView.BTN_LYRICS -> {
                 ArrayList<String> lyrics = songManager.searchLyrics();
                 if (lyrics == null){

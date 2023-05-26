@@ -19,6 +19,7 @@ public class FooterView extends JPanel {
     public static final String BTN_BACKWARD = "BTN_BACKWARD";
     public static final String BTN_REPEAT = "BTN_REPEAT";
     public static final String BTN_REPEAT_LIST = "BTN_REPEAT_LIST";
+    public static final String BTN_STOP = "BTN_STOP";
     public static final String BTN_LYRICS = "BTN_LYRICS";
 
     // Preparem JButtons
@@ -27,6 +28,7 @@ public class FooterView extends JPanel {
     private JButton jBackward;
     private JButton jRepeat;
     private JButton jRepeatList;
+    private JButton jStopSong;
     private JButton jLyrics;
     private JLabel jLogo = new JLabel("Nothing playing");
     private String jSongName;
@@ -65,6 +67,7 @@ public class FooterView extends JPanel {
         jForward.addActionListener(footerController);
         jBackward.addActionListener(footerController);
         jRepeat.addActionListener(footerController);
+        jStopSong.addActionListener(footerController);
         jRepeatList.addActionListener(footerController);
         jLyrics.addActionListener(footerController);
     }
@@ -85,6 +88,7 @@ public class FooterView extends JPanel {
         Icon backwardBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_OLDBUTTON_IMG));
         Icon repeatBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_REPEATBUTTON_IMG));
         Icon repeatListBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_REPEAT_PLAYLIST_BUTTON_IMG));
+        Icon stopSongBtn = new ImageIcon(String.valueOf(AssetsFiles.FOOT_REPEAT_PLAYLIST_BUTTON_IMG));
         Icon lyricsBtn = new ImageIcon(String.valueOf(AssetsFiles.LYRICS_IMG));
 
         // Activem els JButtons i els hi donem forma
@@ -98,6 +102,8 @@ public class FooterView extends JPanel {
         jRepeat.setBackground(gris);
         jRepeatList = utils.buttonImg(repeatListBtn);
         jRepeatList.setBackground(gris);
+        jStopSong = utils.buttonImg(stopSongBtn);
+        jStopSong.setBackground(gris);
         jLyrics = utils.buttonImg(lyricsBtn);
         jLyrics.setBackground(gris);
 
@@ -111,6 +117,7 @@ public class FooterView extends JPanel {
         jBackward.setActionCommand(BTN_BACKWARD);
         jRepeat.setActionCommand(BTN_REPEAT);
         jRepeatList.setActionCommand(BTN_REPEAT_LIST);
+        jStopSong.setActionCommand(BTN_STOP);
         jLyrics.setActionCommand(BTN_LYRICS);
 
         // Creem JPanel general i li afegim el BorderLayout
@@ -141,6 +148,7 @@ public class FooterView extends JPanel {
         footer.add(jplay);
         footer.add(jForward);
         footer.add(jRepeatList);
+        footer.add(jStopSong);
         border.add(footer, BorderLayout.CENTER);
 
         // Configurem la part SOUTH del BorderLayout

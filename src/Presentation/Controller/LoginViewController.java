@@ -40,12 +40,18 @@ public class LoginViewController implements ActionListener {
                     loginView.showPopUps("It's Empty!");
                 }else{
                     try {
+                        boolean userExists = userManager.userExistence(data.get(0), data.get(0), data.get(1));
                         if (userManager.login(data)) {
 
                             userManager.setUser(username, username, password);
                             mainView.showMainMenuCard();
                         }else{
-                            loginView.showPopUps("User not found!");
+                            if(!userExists){
+                                loginView.showPopUps("User not found!");
+
+                            }else{
+                                loginView.showPopUps("Incorrect password!");
+                            }
                         }
                     } catch (UserNotFoundException ex) {
                         ex.printStackTrace();

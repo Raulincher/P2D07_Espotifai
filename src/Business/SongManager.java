@@ -6,6 +6,7 @@ import Persistance.dao.SongLyricsApi;
 
 import javax.sound.sampled.*;
 import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
@@ -22,7 +23,6 @@ public class SongManager {
     private File file;
     private Song song;
     private String actualSong;
-
     private String thatSong;
     private String pathComputer;
     private SongLyricsApi songLyricsApi;
@@ -34,6 +34,7 @@ public class SongManager {
     public String getPath(String songName){
         return songDao.songPath(songName);
     }
+
     public int getSongDurationFromDatabase(String songName){return songDao.songDuration(songName);}
 
     public int clipDuration(){
@@ -79,6 +80,7 @@ public class SongManager {
                 file = new File(getPath(songTitle));
                 actualSong = file.getName();
                 thatSong = actualSong;
+                System.out.println(actualSong);
 
             }
             if (file.exists()) {
@@ -104,14 +106,31 @@ public class SongManager {
         }
     }
 
-    public boolean simpleAudioPlayer() {
+    public boolean simpleAudioPlayer() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         boolean stopped = true;
         if(myClip != null) {
-            if (myClip.isRunning()) {
-                myClip.stop();
-                stopped = false;
-            } else {
-                myClip.start();
+            System.out.println("no es nulo");
+            if(myClip.isOpen()){
+                System.out.println("abierto");
+
+                if (myClip.isRunning()) {
+                    myClip.stop();
+                    stopped = false;
+                } else {
+                    myClip.start();
+                }
+            }else{
+                System.out.println("cerrado");
+                System.out.println(actualSong);
+                String filePath = "files/music/" + actualSong;
+                System.out.println(filePath);
+                file = new File(filePath);
+
+                if (file.exists()) {
+                    AudioInputStream ais = AudioSystem.getAudioInputStream(file.toURI().toURL());
+                    myClip.open(ais);
+                    myClip.start();
+                }
             }
         }
         return stopped;
@@ -217,6 +236,7 @@ public class SongManager {
 
     public boolean fileSongSelector() {
         JFileChooser fileChooser = new JFileChooser();
+        fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("wav audios", "wav"));
         String[] aux;
         int response = fileChooser.showOpenDialog(null);
         boolean fileFormatCorrect = false;
@@ -246,6 +266,14 @@ public class SongManager {
         return file.getName();
     }
 
+    public void endSong(){
+        if(myClip != null){
+            myClip.close();
+        }
+
+
+    }
+
     public boolean isEmpty(String songName, String artist, String album, String genre) {
         boolean emptyField = false;
 
@@ -269,6 +297,14 @@ public class SongManager {
         }
 
         return songSaved;
+    }
+
+    public void closeFile(){
+
+        if(myClip != null){
+            myClip.stop();
+            myClip.close();
+        }
     }
 
 

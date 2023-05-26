@@ -5,9 +5,12 @@ import Business.SongManager;
 import Business.UserManager;
 import Presentation.View.*;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import java.awt.event.*;
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -48,14 +51,16 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
         String songName = detailedSongView.getSongName();
 
         // Recorrem un bucle per trobar quina playlists de la PopUpMenu ha estat premuda
-        for (String playlist: playlists){
-            if (e.getActionCommand().equals(playlist)){
-                // Un cop trobada, afegim la cançó a la playlist escollida i mostrem Pop Ups en funció si 'sha afegit o no.
-                if (!playlistManager.checkIfSongInPlaylist(songName, playlist)) {
-                    playlistManager.addSongToPlaylist(songName, playlist);
-                    detailedSongView.showPopUp("Song successfully saved in " + playlist + "!");
-                } else {
-                    detailedSongView.showPopUp("There was an error saving the song.");
+        if(playlists != null) {
+            for (String playlist: playlists){
+                if (e.getActionCommand().equals(playlist)) {
+                    // Un cop trobada, afegim la cançó a la playlist escollida i mostrem Pop Ups en funció si 'sha afegit o no.
+                    if (!playlistManager.checkIfSongInPlaylist(songName, playlist)) {
+                        playlistManager.addSongToPlaylist(songName, playlist);
+                        detailedSongView.showPopUp("Song successfully saved in " + playlist + "!");
+                    } else {
+                        detailedSongView.showPopUp("There was an error saving the song.");
+                    }
                 }
             }
         }
@@ -64,7 +69,12 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
         switch (e.getActionCommand()){
             case DetailedSongView.BTN_PLAYME:
                 songManager.getSong(songName);
-                boolean stop = songManager.simpleAudioPlayer();
+                boolean stop = false;
+                try {
+                    stop = songManager.simpleAudioPlayer();
+                } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                    ex.printStackTrace();
+                }
                 //Canviar imatge de la vista
                 if(stop){
                     detailedSongView.stop();
