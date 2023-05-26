@@ -5,11 +5,12 @@ import javax.swing.*;
 public class ProgressBarThread implements Runnable{
     private boolean isPlaying = false;
     private JProgressBar progressBar;
+    private JLabel actualTime;
     private int i = 0;
-    private int progressOfBar;
 
-    public ProgressBarThread(JProgressBar progressBar) {
+    public ProgressBarThread(JProgressBar progressBar, JLabel actualTime) {
         this.progressBar = progressBar;
+        this.actualTime = actualTime;
     }
 
     public void setPlaying(boolean isPlaying) {
@@ -34,8 +35,15 @@ public class ProgressBarThread implements Runnable{
                 if (progressBar.getValue() != progressBar.getMaximum()) {
 
                     progressBar.setValue(i);
-                    System.out.println(i);
-                    progressOfBar = progressBar.getValue();
+                    int minutes = i / 60;
+                    int seconds = i % 60;
+
+                    String minutesString = String.format("%02d", minutes);
+                    String secondsString = String.format("%02d", seconds);
+
+                    String time = minutesString + ":" + secondsString;
+
+                    actualTime.setText(time);
                     i++;
                     Thread.sleep(1000);
                 } else {

@@ -213,13 +213,32 @@ public class SQLSongDao implements SongDao {
                 int minutes = Integer.parseInt(timeSplit[0]);
                 int seconds = Integer.parseInt(timeSplit[1]);
                 duration = (minutes * 60) + seconds;
-                System.out.println(duration);
             }
         } catch (SQLException e) {
             System.out.println("Error llegint les cançons de la base de dades: " + e.getMessage());
         }
 
-
         return duration;
+    }
+
+
+    public String songDurationInString(String songName){
+
+        String time ="";
+        songName = "files/music/" + songName;
+
+        try {
+            String queryExists = "SELECT * FROM song WHERE filePath = ?";
+            PreparedStatement prepared = remoteConnection.prepareStatement(queryExists);
+            prepared.setString (1, songName);
+            ResultSet rs = prepared.executeQuery();
+            while (rs.next()) {
+                time = rs.getString("time");
+            }
+        } catch (SQLException e) {
+            System.out.println("Error llegint les cançons de la base de dades: " + e.getMessage());
+        }
+
+        return time;
     }
 }

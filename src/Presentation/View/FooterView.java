@@ -34,6 +34,10 @@ public class FooterView extends JPanel {
     private String jSongName;
     private ProgressBarThread progressBarThread;
     public JProgressBar jProgressBar;
+    private JLabel totalTime;
+    private JLabel actualTime;
+
+
 
     //thread
     private Thread thread;
@@ -113,6 +117,13 @@ public class FooterView extends JPanel {
         // Creem la barra de progrés
         jProgressBar = utils.progressBar(10,1);
         jProgressBar.setValue(0);
+        jProgressBar.setStringPainted(true);
+
+        // Creem les labels de temps
+        totalTime = new JLabel();
+        totalTime.setForeground(Color.WHITE);
+        actualTime = new JLabel();
+        actualTime.setForeground(Color.WHITE);
 
         // Activem les comandes d'acció en cas que es premi
         jplay.setActionCommand(BTN_PLAY);
@@ -156,7 +167,10 @@ public class FooterView extends JPanel {
 
         // Configurem la part SOUTH del BorderLayout
         footerS.add(jLyrics);
+        footerS.add(actualTime);
         footerS.add(jProgressBar);
+        footerS.add(totalTime);
+
         border.add(footerS, BorderLayout.SOUTH);
         Dimension dimension = new Dimension(10,10);
 
@@ -185,18 +199,33 @@ public class FooterView extends JPanel {
         jplay.setIcon(pauseBtn);
     }
 
+    public void setSongTotalTime(String text) {
+        totalTime.setText(text);
+    }
 
-    public void iterateProgressBar(int maxValue, int check, boolean stop){
+    public void setSongActualTime(String text) {
+        actualTime.setText(text);
+    }
+
+    public void iterateProgressBar(int maxValue, int check, boolean stop, boolean killProcess){
         jProgressBar.setMaximum(maxValue);
         jProgressBar.setMinimum(0);
-        if(check == 0) {
-            progressBarThread = new ProgressBarThread(jProgressBar);
+        if(check == 0 && !killProcess) {
+            progressBarThread = new ProgressBarThread(jProgressBar, actualTime);
             progressBarThread.setPlaying(true);
             // Start the playback thread in a separate thread
             thread = new Thread(progressBarThread);
             thread.start();
         }else{
-            progressBarThread.setPlaying(stop);
+            if(!killProcess) {
+                progressBarThread.setPlaying(stop);
+            }
+        }
+
+        if(killProcess){
+            progressBarThread.setPlaying(false);
+            jProgressBar.setValue(0);
+            actualTime.setText("00:00");
         }
 
     }

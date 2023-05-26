@@ -16,8 +16,10 @@ public interface SongDao {
 
     String songPath(String songName);
 
-    public String songArtist(String songName);
+    String songArtist(String songName);
 
     int songDuration(String songName);
+
+    String songDurationInString(String songName);
 
 }

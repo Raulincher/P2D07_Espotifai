@@ -29,6 +29,7 @@ public class FooterController implements ActionListener {
                 footerView.setActualSong(actualS);
                 footerView.jProgressBar.setMinimum(0);
                 footerView.jProgressBar.setMaximum(songManager.clipDuration());
+                footerView.setSongTotalTime(songManager.songDurationInString(actualS));
                 boolean stop = false;
                 try {
                     stop = songManager.simpleAudioPlayer();
@@ -36,7 +37,7 @@ public class FooterController implements ActionListener {
                     ex.printStackTrace();
                 }
                 int check = songManager.checkMyClip();
-                footerView.iterateProgressBar(songManager.clipDuration(), check, stop);
+                footerView.iterateProgressBar(songManager.clipDuration(), check, stop, false);
 
                 if(stop){
                     footerView.stop();
@@ -54,7 +55,9 @@ public class FooterController implements ActionListener {
                 footerView.jProgressBar.setMinimum(0);
                 footerView.jProgressBar.setMaximum(songManager.clipDuration());
                 int check = songManager.checkMyClip();
-                footerView.iterateProgressBar(songManager.clipDuration(), check, false);
+                footerView.iterateProgressBar(songManager.clipDuration(), check, false, false);
+                footerView.setSongTotalTime(songManager.songDurationInString(actualS));
+                footerView.setSongActualTime("00:00");
             }
 
             case FooterView.BTN_FORWARD -> {
@@ -65,13 +68,18 @@ public class FooterController implements ActionListener {
                     footerView.jProgressBar.setMinimum(0);
                     footerView.jProgressBar.setMaximum(songManager.clipDuration());
                     int check = songManager.checkMyClip();
-                    footerView.iterateProgressBar(songManager.clipDuration(), check, false);
+                    footerView.iterateProgressBar(songManager.clipDuration(), check, false, false);
+                    footerView.setSongTotalTime(songManager.songDurationInString(actualS));
+                    footerView.setSongActualTime("00:00");
                 } catch (LineUnavailableException | IOException | UnsupportedAudioFileException ex) {
                     ex.printStackTrace();
                 }
             }
             case FooterView.BTN_REPEAT_LIST -> songManager.loopList();
-            case FooterView.BTN_STOP -> songManager.endSong();
+            case FooterView.BTN_STOP -> {
+                footerView.iterateProgressBar(songManager.clipDuration(), 0, true, true);
+                songManager.endSong();
+            }
             case FooterView.BTN_LYRICS -> {
                 ArrayList<String> lyrics = songManager.searchLyrics();
                 if (lyrics == null){
