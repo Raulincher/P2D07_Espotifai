@@ -17,6 +17,7 @@ import java.util.Map;
 
 public class SongManager {
 
+    // Preparem els atributs
     private final SongDao songDao;
     private Clip myClip;
     private String filePath;
@@ -26,6 +27,7 @@ public class SongManager {
     private String thatSong;
     private String pathComputer;
     private SongLyricsApi songLyricsApi;
+
 
     public SongManager(SongDao songDao,SongLyricsApi songLyricsApi) {
         this.songDao = songDao;
@@ -142,10 +144,19 @@ public class SongManager {
         return stopped;
     }
 
+    /**
+     * Funció per trobar si una cançó en concret s'està reproduint i així obtenir si la podem eliminar.
+     *
+     * @param songDelete, String amb el nom de la cançó a buscar
+     * @return boolean depenent si la podem eliminar o no
+     */
     public boolean isPlaying(String songDelete){
         return !(myClip.isRunning() & actualSong.equals(songDelete));
     }
 
+    /**
+     * Funció per parar la reproducció de la cançó actual
+     */
     public void stopClip() {
         if(myClip != null) {
             if (myClip.isRunning()) {
@@ -329,6 +340,7 @@ public class SongManager {
         return deletedOk;
     }
 
+
     public ArrayList<String> listSongs(boolean toDelete, String currentUsername) {
         ArrayList<String> information = new ArrayList<>();
         ArrayList<Song> allSongs = songDao.readAllSongsSQL();
@@ -350,6 +362,12 @@ public class SongManager {
         return information;
     }
 
+    /**
+     * Funció per retornar la informació completa d'una cançó en concret.
+     *
+     * @param nameSong, String amb el nom de la cançó a buscar
+     * @return ArrayList de Strings amb la informació de la cançó
+     */
     public ArrayList<String> searchSong(String nameSong){
         ArrayList<String> songSelected = new ArrayList<>();
         ArrayList<Song> listSongs = songDao.readAllSongsSQL();
@@ -372,8 +390,12 @@ public class SongManager {
         if (!in) {
             return null;
         } else {
-            getSong(songTitle);
-            return songSelected;
+            try {
+                getSong(songTitle);
+                return songSelected;
+            } catch (RuntimeException e){
+                return null;
+            }
         }
     }
 
@@ -416,6 +438,11 @@ public class SongManager {
         return songLyricsApi.readLyrics(artist,songName);
     }
 
+    /**
+     * Funció per buscar la lírica de la cançó que està sonant
+     *
+     * @return un ArrayList amb el nom de la cançó i la seva lírica
+     */
     public ArrayList<String> searchLyrics(){
         String name = this.actualSong.substring(0, actualSong.lastIndexOf(".wav"));
         String artist = songDao.songArtist(name);
@@ -427,6 +454,11 @@ public class SongManager {
     }
 
 
+    /**
+     * Funció per calcular el temps que dura una cançó
+     *
+     * @return un ArrayList d'Strings amb el temps i un flag per controlar errors
+     */
     public ArrayList<String> timeSong() {
         ArrayList<String> temps = new ArrayList<>();
         try {

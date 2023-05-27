@@ -95,6 +95,7 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
                 }
                 break;
             case DetailedSongView.BTN_PLAYLIST:
+                // Netejem el filtre cada cop que pulsem el boto
                 detailedSongView.cleanFilter();
                 break;
         }
@@ -109,30 +110,58 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
         detailedSongView.showMenuPopUp(e);
     }
 
+    /**
+     * Funció per poder obtenir MouseListener
+     * @param e l'esdeveniment a tramitar
+     */
     @Override
     public void mousePressed(MouseEvent e) {}
 
+    /**
+     * Funció per poder obtenir MouseListener
+     * @param e l'esdeveniment a tramitar
+     */
     @Override
     public void mouseReleased(MouseEvent e) {}
 
+    /**
+     * Funció per poder obtenir MouseListener
+     * @param e l'esdeveniment a tramitar
+     */
     @Override
     public void mouseEntered(MouseEvent e) {}
 
+    /**
+     * Funció per poder obtenir MouseListener
+     * @param e l'esdeveniment a tramitar
+     */
     @Override
     public void mouseExited(MouseEvent e) {}
 
+    /**
+     * Funció per isntertar el filtre de la PopUpMenu i modificar-la
+     * @param e l'esdeveniment de document a tramitar
+     */
     @Override
     public void insertUpdate(DocumentEvent e) {
         //Filtre per les playlist
         detailedSongView.filteredPopUpMenu();
     }
 
+    /**
+     * Funció per eliminar de la vista del PopUpMenu les cançons que no s'assemblen a la filtarda
+     * @param e l'esdeveniment de document a tramitar
+     */
     @Override
     public void removeUpdate(DocumentEvent e) {
         //Filtre per les playlist
         detailedSongView.filteredPopUpMenu();
     }
 
+    /**
+     * Funció per actualitzar els canvis del filtre a ala PopUpMenu
+     * @param e l'esdeveniment de document a tramitar
+     */
     @Override
     public void changedUpdate(DocumentEvent e) {
         //Filtre per les playlist

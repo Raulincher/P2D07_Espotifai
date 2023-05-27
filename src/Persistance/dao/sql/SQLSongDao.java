@@ -6,9 +6,15 @@ import Persistance.dao.SongDao;
 import java.sql.*;
 import java.util.ArrayList;
 
+/**
+ * Classe per poder obtenir, afegir i eliminar valors de la classe Song a la base de dades.
+ */
 public class SQLSongDao implements SongDao {
 
+    // Preparem els atributs
     private final Connection remoteConnection;
+
+
     public SQLSongDao(Connection remoteConnection){
         this.remoteConnection = remoteConnection;
     }
@@ -135,11 +141,18 @@ public class SQLSongDao implements SongDao {
         return exist;
     }
 
+
+    /**
+     * Funció per buscar l'artista d'una cançó determinada
+     *
+     * @param songName, String amb el nom d ela cançó a buscar
+     * @return String amb el nom de l'artista
+     */
     public String songArtist(String songName) {
         String exist = "";
 
         try {
-            Statement statement = remoteConnection.createStatement();
+            remoteConnection.createStatement();
             String queryExists = "SELECT author FROM song WHERE title = ?";
             PreparedStatement prepared = remoteConnection.prepareStatement(queryExists);
             prepared.setString (1, songName);

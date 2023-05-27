@@ -1,5 +1,8 @@
 package Business.Entities;
 
+/**
+ * Classe que ens permet crear cançons al programa
+ */
 public class Song {
 
     // Preparem els atributs

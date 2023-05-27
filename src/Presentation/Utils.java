@@ -3,6 +3,9 @@ package Presentation;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Classe per crear variables determinades i poder seguir un format homogeni
+ */
 public class Utils extends JFrame {
 
     /**

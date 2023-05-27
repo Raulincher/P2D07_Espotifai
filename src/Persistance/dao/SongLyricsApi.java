@@ -13,8 +13,9 @@ public class SongLyricsApi  {
     private final ApiHelper apiHelper;
 
     /**
-     * Constructir de la classe SongLyricsApi
-     * @param apiHelper, variable per poder llegir la Api
+     * Constructor de la classe SongLyricsApi
+     *
+     * @param apiHelper, variable per poder llegir l'Api
      */
     public SongLyricsApi(ApiHelper apiHelper){
         this.apiHelper = apiHelper;
@@ -22,6 +23,7 @@ public class SongLyricsApi  {
 
     /**
      * Metode per llegir l'Api de lírics amb el nom i artista de la cançó i aquesta retorna el líric
+     *
      * @param artist, String amb el nom de l'artista
      * @param nameSong, String amb el nom de la cançó
      * @return String amb el líric de la cançó solicitada

@@ -14,6 +14,9 @@ import Presentation.View.*;
 import java.io.IOException;
 import java.sql.Connection;
 
+/**
+ * Classe que controla el programa
+ */
 public class Main {
 
     /**
@@ -46,8 +49,6 @@ public class Main {
 
         // Iniciem la primera vista
         InitialView initialView = new InitialView(utils);
-
-
 
         // Preparem totes les vistes
         FooterView footerView = new FooterView(utils);

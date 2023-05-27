@@ -3,10 +3,7 @@ package Business;
 import Business.Entities.Playlist;
 import Persistance.dao.PlaylistDao;
 import Persistance.dao.PlaylistNotSavedException;
-
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.SimpleTimeZone;
 
 public class PlaylistManager {
     private final PlaylistDao playlistDao;

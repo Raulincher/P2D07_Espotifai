@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Classe per mostrar la vista el llistat de cançons
+ * Classe per mostrar la vista del llistat de cançons
  */
 public class GeneralSongListView extends JPanel {
 
@@ -194,7 +194,7 @@ public class GeneralSongListView extends JPanel {
         if (query.length() == 0) {
             sorter.setRowFilter(null);
         }
-        // Busca per el títol/album/owner/artist de la cançó
+        // Busca pel títol/album/owner/artist de la cançó
         else {
             RowFilter<DefaultTableModel, Object> nameSong = RowFilter.regexFilter("(?i)" + query, 0);
             RowFilter<DefaultTableModel, Object> artist = RowFilter.regexFilter("(?i)" + query, 1);

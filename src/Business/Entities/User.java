@@ -1,5 +1,8 @@
 package Business.Entities;
 
+/**
+ * Classe que ens permet crear usuaris al programa
+ */
 public class User {
 
     // Preparem els atributs
