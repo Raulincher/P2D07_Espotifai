@@ -134,4 +134,8 @@ public class PlaylistManager {
     public void deleteSongFromPlaylist(String playlistName, String songTitle) {
         playlistDao.deleteSongFromPlaylistDAO(playlistName,songTitle);
     }
+
+    public void deletePlaylists(ArrayList<String> songsByUser, String username) {
+        playlistDao.deleteSongsOrPlaylistByUser(songsByUser,username);
+    }
 }

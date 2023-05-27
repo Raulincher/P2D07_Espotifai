@@ -22,4 +22,7 @@ public interface SongDao {
 
     String songDurationInString(String songName);
 
+    ArrayList<String> filterSongsByUser(String userName);
+
+    ArrayList<String> deleteSongsByUsername(ArrayList<String> songsByUser);
 }

@@ -68,7 +68,7 @@ public class Main {
         // Iniciem la mainView, que tindrà el mateix header i footer
         MainView mainView = new MainView(initialView, deleteSongView, statisticsView, mainMenuView, generalPlaylistView, generalSongListView, detailedSongView, detailedPlaylistView, registerView, loginView, addSongView, footerView, headerView);
 
-        HeaderController headerController = new HeaderController(headerView, userManager, songManager);
+        HeaderController headerController = new HeaderController(headerView, userManager, songManager, playlistManager);
         headerView.addHeaderController(headerController);
         headerController.addMainView(mainView);
 

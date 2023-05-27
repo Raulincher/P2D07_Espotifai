@@ -93,6 +93,7 @@ public class SongManager {
                 file = new File(getPath(songTitle));
                 actualSong = file.getName();
                 thatSong = actualSong;
+                System.out.println(actualSong);
 
             }
             if (file.exists()) {
@@ -133,7 +134,9 @@ public class SongManager {
     public boolean simpleAudioPlayer() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         boolean stopped = true;
         if(myClip != null) {
+            System.out.println("no es nulo");
             if(myClip.isOpen()){
+                System.out.println("abierto");
 
                 if (myClip.isRunning()) {
                     myClip.stop();
@@ -142,7 +145,10 @@ public class SongManager {
                     myClip.start();
                 }
             }else{
+                System.out.println("cerrado");
+                System.out.println(actualSong);
                 String filePath = "files/music/" + actualSong;
+                System.out.println(filePath);
                 file = new File(filePath);
 
                 if (file.exists()) {
@@ -164,7 +170,7 @@ public class SongManager {
     }
 
     public boolean isPlaying(String songDelete){
-        return myClip.isRunning() && actualSong.equals(songDelete);
+        return !(myClip.isRunning() & actualSong.equals(songDelete));
     }
 
     public void stopClip() {
@@ -508,6 +514,27 @@ public class SongManager {
             temps.add(1,"Unsupported Audio File");
         }
         return temps;
+    }
+
+
+    //Borrem la cançó de la base de dades i retornem l'array de cançons per treure-les de les playlists
+    public ArrayList<String> obtainSongsByUser(String userName) {
+        return songDao.filterSongsByUser(userName);
+    }
+
+    public ArrayList<String> deleteSongsByUsername(ArrayList<String> songsByUser) {
+        return songDao.deleteSongsByUsername(songsByUser);
+    }
+
+    public void deletePaths(ArrayList<String> pathsToDelete) {
+        int i = 0;
+
+        while(i < pathsToDelete.size()) {
+            file = new File(pathsToDelete.get(i));
+            file.delete();
+
+            i++;
+        }
     }
 }
 

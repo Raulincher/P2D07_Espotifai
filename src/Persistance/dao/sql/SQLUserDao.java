@@ -84,7 +84,6 @@ public class SQLUserDao implements UserDao {
         System.out.println(user.getPassword());
 
         try{
-
             String generatedPassword = null;
             try{
                 String password = user.getPassword();

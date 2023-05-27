@@ -17,4 +17,6 @@ public interface PlaylistDao {
     boolean searchSongInPlaylist(String songName, String playlist);
 
     boolean deleteSongFromPlaylistDAO(String playlistName, String songTitle);
+
+    void deleteSongsOrPlaylistByUser(ArrayList<String> songsByUser, String username);
 }
