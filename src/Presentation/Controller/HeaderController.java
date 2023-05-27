@@ -35,7 +35,9 @@ public class HeaderController implements ActionListener {
                 try {
                     int resposta = headerView.showPopUps("Are you sure?","Delete Account");
                     if (resposta == 0) {
+                        songManager.stopClip();
                         userManager.delete();
+                        userManager.logout();
                         mainView.showMainCard();
                     }
                 } catch (UserNotFoundException ex) {

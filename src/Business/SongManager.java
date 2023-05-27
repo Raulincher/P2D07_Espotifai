@@ -150,6 +150,7 @@ public class SongManager {
         if(myClip != null) {
             if (myClip.isRunning()) {
                 myClip.stop();
+                myClip.close();
             }
         }
     }
