@@ -23,7 +23,6 @@ public class GeneralSongListView extends JPanel {
 
     // Preparem els components de Swing
     private JTextField jBuscador;
-    private JButton jCerca;
     private JTable table;
     private DefaultTableModel songsTableModel;
 
@@ -156,14 +155,6 @@ public class GeneralSongListView extends JPanel {
         return new JScrollPane(table);
     }
 
-    /**
-     * Funció per a retornar el valor introduït del buscador
-     *
-     * @return jBuscador, informació resultant
-     */
-    public JTextField getjBuscador() {
-        return jBuscador;
-    }
 
     /**
      * Funció per a retornar el la JTable

@@ -335,13 +335,6 @@ public class DetailedSongView extends JPanel {
         popupMenuPlaylist.setFont(new Font("Gotham", Font.BOLD, 15));
         popupMenuPlaylist.setLightWeightPopupEnabled(false);
         popupMenuPlaylist.setPreferredSize(new Dimension(60,90));
-       /* for (int i = 0; i < listItems.size(); i++) {
-            if (i < 5) {
-                listItems.get(i).setVisible(true);
-            } else {
-                listItems.get(i).setVisible(false);
-            }
-        }*/
     }
 
     /**

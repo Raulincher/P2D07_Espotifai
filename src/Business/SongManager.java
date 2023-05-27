@@ -142,6 +142,10 @@ public class SongManager {
         return stopped;
     }
 
+    public boolean isPlaying(String songDelete){
+        return !(myClip.isRunning() & actualSong.equals(songDelete));
+    }
+
     public void stopClip() {
         if(myClip != null) {
             if (myClip.isRunning()) {

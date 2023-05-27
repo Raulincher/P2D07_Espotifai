@@ -41,15 +41,16 @@ public class AddSongViewController implements ActionListener {
                 String artist = addSongView.getJtfArtist().getText();
                 String album = addSongView.getJtfAlbum().getText();
                 String genre = (String) addSongView.getJcbGenre().getSelectedItem();
-                ArrayList<String> temps = songManager.timeSong();
-                String flag = temps.get(0);
-                String time = temps.get(1);
+                Boolean file = addSongView.fileCheckEmpty();
 
-                if (songManager.isEmpty(songName, artist, album, genre)) {
+                if (songManager.isEmpty(songName, artist, album, genre) & !file) {
                     addSongView.showPopUps("Error, empty field, can't upload the song!");
                 } else {
                     if (!songManager.songExists(songName)) {
                         String username = userManager.currentUsername();
+                        ArrayList<String> temps = songManager.timeSong();
+                        String flag = temps.get(0);
+                        String time = temps.get(1);
                         if (flag.equals("true")) {
                             if (songManager.addSong(songName, artist, album, genre, username, time)) {
                                 addSongView.showPopUps("Song saved!");
@@ -59,13 +60,13 @@ public class AddSongViewController implements ActionListener {
                                 addSongView.showPopUps("Error while saving the song!");
                             }
                         } else {
-                            addSongView.showPopUps("Song previously added!\n" +
-                                    "Please, add another one.");
-                            addSongView.clearFields();
-                            mainView.showAddSongCard();
+                            addSongView.showPopUps(time);
                         }
                     } else {
-                        addSongView.showPopUps(time);
+                        addSongView.showPopUps("Song previously added!\n" +
+                                "Please, add another one.");
+                        addSongView.clearFields();
+                        mainView.showAddSongCard();
                     }
                 }
                 break;

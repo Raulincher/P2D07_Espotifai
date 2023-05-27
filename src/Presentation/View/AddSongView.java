@@ -190,6 +190,10 @@ public class AddSongView extends JPanel {
 
     }
 
+    public Boolean fileCheckEmpty(){
+        return jfile == null;
+    }
+
     public JFileChooser getFcAddFile() {
         return fcAddFile;
     }
