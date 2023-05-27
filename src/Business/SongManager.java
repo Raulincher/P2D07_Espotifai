@@ -71,6 +71,7 @@ public class SongManager {
 
             if(myClip != null){
                 myClip.close();
+                System.out.println("entro para cambiar clip");
             }
 
             if(songTitle.equals("")){
@@ -96,17 +97,6 @@ public class SongManager {
                 AudioInputStream ais = AudioSystem.getAudioInputStream(file.toURI().toURL());
                 myClip.open(ais);
 
-                /*myClip.addLineListener(event -> {
-                    if (event.getType() == LineEvent.Type.STOP) {
-                        if(!loopCondition) {
-                            if(playlistName != null){
-                                moveForward(playlistName, nextSong);
-                            }else{
-                                moveForward(null, null);
-                            }
-                        }
-                    }
-                });*/
             }
             else {
                 throw new RuntimeException("Sound: file not found: " + filePath);

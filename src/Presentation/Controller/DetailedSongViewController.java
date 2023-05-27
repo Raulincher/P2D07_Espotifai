@@ -83,7 +83,8 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
                 } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
                     ex.printStackTrace();
                 }
-                //footerView.iterateProgressBar(songManager.clipDuration(), 0, false, true);
+                footerView.iterateProgressBar(songManager.clipDuration(), 0, true, true);
+                footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false);
 
                 if(stop){
                     detailedSongView.stop();

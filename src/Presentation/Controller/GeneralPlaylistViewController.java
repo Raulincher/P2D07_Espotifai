@@ -63,6 +63,7 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
             detailedView.hideButton();
         }
         //detailedView.configureDetailedPlaylistView();
+
         mainView.showDetailedPlaylistCard();
     }
 

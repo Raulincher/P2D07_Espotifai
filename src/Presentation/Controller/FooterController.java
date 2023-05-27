@@ -45,13 +45,20 @@ public class FooterController implements ActionListener {
                         ex.printStackTrace();
                     }
                     int check = songManager.checkMyClip();
+                    System.out.println(lastSong + "sin lista");
+                    System.out.println(actualS + "sin lista");
                     if(lastSong == null){
                         System.out.println("entro en nulo sin playlists");
+                        if(footerView.progressBarThread != null) {
+                            footerView.iterateProgressBar(songManager.clipDuration(), 0, false, true);
+                        }
+                        footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false);
                         lastSong = actualS;
-                        footerView.iterateProgressBar(songManager.clipDuration(), 0, false, clipRunning);
+
                     }else if(lastSong.equals(actualS)){
                         System.out.println("entro en igual sin playlists");
                         footerView.iterateProgressBar(songManager.clipDuration(), check, stop, false);
+                        lastSong = actualS;
                     }else{
                         System.out.println("entro en diferente sin playlists");
                         footerView.iterateProgressBar(songManager.clipDuration(), 0, true, true);
@@ -101,16 +108,24 @@ public class FooterController implements ActionListener {
                     } else {
                         footerView.start();
                     }
+                    actualS = actualS + "playlist";
+                    System.out.println(lastSong);
+                    System.out.println(actualS);
 
                     if(lastSong == null){
-                        lastSong = actualS;
-                        footerView.iterateProgressBar(songManager.clipDuration(), 0, false, clipRunning);
+                        if(footerView.progressBarThread != null) {
+                            System.out.println("entro en reset de bar playlist");
+                            footerView.iterateProgressBar(songManager.clipDuration(), 0, false, true);
+                        }
+                        footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false);
+                        lastSong = actualS + "playlist";
                     }else if(lastSong.equals(actualS)){
                         footerView.iterateProgressBar(songManager.clipDuration(), check, stop, false);
+                        lastSong = actualS + "playlist";
                     }else{
                         footerView.iterateProgressBar(songManager.clipDuration(), 0, true, true);
                         footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false);
-                        lastSong = actualS;
+                        lastSong = actualS + "playlist";
 
                     }
 
