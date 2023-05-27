@@ -29,7 +29,6 @@ public class FooterController implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case FooterView.BTN_PLAY -> {
-                boolean clipRunning = songManager.anyClipRunning();
                 String playlistName = playlistManager.getCurrentPlaylist();
                 if(playlistName == null){
                     songManager.setLoopListCondition(false);
