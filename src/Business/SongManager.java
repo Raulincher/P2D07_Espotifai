@@ -26,6 +26,9 @@ public class SongManager {
     private String thatSong;
     private String pathComputer;
     private SongLyricsApi songLyricsApi;
+    private boolean loopCondition;
+    private String actualPlaylist;
+    private String nextSongInPlaylist;
 
     public SongManager(SongDao songDao,SongLyricsApi songLyricsApi) {
         this.songDao = songDao;
@@ -64,7 +67,7 @@ public class SongManager {
         thatSong = song;
     }
 
-    public void getSong(String songTitle){
+    public void getSong(String songTitle, String playlistName, String nextSong){
         try {
             File music;
             File[] files;
@@ -96,6 +99,18 @@ public class SongManager {
                 myClip = AudioSystem.getClip();
                 AudioInputStream ais = AudioSystem.getAudioInputStream(file.toURI().toURL());
                 myClip.open(ais);
+
+                myClip.addLineListener(event -> {
+                    if (event.getType() == LineEvent.Type.STOP) {
+                        if(!loopCondition) {
+                            if(playlistName != null){
+                                moveForward(playlistName, nextSong);
+                            }else{
+                                moveForward(null, null);
+                            }
+                        }
+                    }
+                });
             }
             else {
                 throw new RuntimeException("Sound: file not found: " + filePath);
@@ -163,6 +178,7 @@ public class SongManager {
 
     public void loopAudio() {
         if(myClip != null) {
+            loopCondition = true;
             myClip.loop(Clip.LOOP_CONTINUOUSLY);
         }
     }
@@ -421,7 +437,7 @@ public class SongManager {
         if (!in) {
             return null;
         } else {
-            getSong(songTitle);
+            getSong(songTitle, null, null);
             return songSelected;
         }
     }

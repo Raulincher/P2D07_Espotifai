@@ -45,7 +45,7 @@ public class Main {
         // Iniciem utils
         Utils utils = new Utils();
 
-        songManager.getSong("");
+        songManager.getSong("", null, null);
 
         // Iniciem la primera vista
         InitialView initialView = new InitialView(utils);

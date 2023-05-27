@@ -44,8 +44,8 @@ public class FooterController implements ActionListener {
                         ex.printStackTrace();
                     }
                     int check = songManager.checkMyClip();
-                    footerView.iterateProgressBar(songManager.clipDuration(), 0, true, clipRunning);
-                    footerView.iterateProgressBar(songManager.clipDuration(), check, stop, false);
+                    footerView.iterateProgressBar(songManager.clipDuration(), 0, true, clipRunning, false);
+                    footerView.iterateProgressBar(songManager.clipDuration(), check, stop, false, false);
 
                     if (stop) {
                         footerView.stop();
@@ -59,15 +59,18 @@ public class FooterController implements ActionListener {
                     String actualSongInPlaylist = playlistManager.getClickedSong();
                     String actualS;
                     if(actualSongInPlaylist != null){
+                        String nextSong = playlistManager.getNextSongInPlaylist(playlistName);
                         actualS = songManager.getPath(actualSongInPlaylist);
                         String[] auxSplit = actualS.split("/");
                         actualS = auxSplit[2];
-                        songManager.getSong(actualSongInPlaylist);
+                        songManager.getSong(actualSongInPlaylist, playlistName, nextSong);
                     }else{
                         actualS = songManager.getPath(playListSongs.get(0));
                         String[] auxSplit = actualS.split("/");
                         actualS = auxSplit[2];
-                        songManager.getSong(actualS);
+                        String nextSong = playlistManager.getNextSongInPlaylist(playlistName);
+
+                        songManager.getSong(actualS, playlistName, nextSong);
                     }
 
                     footerView.setActualSong(actualS);
@@ -79,12 +82,12 @@ public class FooterController implements ActionListener {
 
                     if(lastSong == null){
                         lastSong = actualS;
-                        footerView.iterateProgressBar(songManager.clipDuration(), 0, false, clipRunning);
+                        footerView.iterateProgressBar(songManager.clipDuration(), 0, false, clipRunning, false);
                     }else if(lastSong.equals(actualS)){
-                        footerView.iterateProgressBar(songManager.clipDuration(), check, true, false);
+                        footerView.iterateProgressBar(songManager.clipDuration(), check, true, false, false);
                     }else{
-                        footerView.iterateProgressBar(songManager.clipDuration(), 0, true, true);
-                        footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false);
+                        footerView.iterateProgressBar(songManager.clipDuration(), 0, true, true, false);
+                        footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false, false);
                         lastSong = actualS;
 
                     }
@@ -104,7 +107,11 @@ public class FooterController implements ActionListener {
                 }
             }
 
-            case FooterView.BTN_REPEAT -> songManager.loopAudio();
+            case FooterView.BTN_REPEAT -> {
+                songManager.loopAudio();
+                footerView.iterateProgressBar(songManager.clipDuration(), 20, false, false, true);
+            }
+
             case FooterView.BTN_BACKWARD -> {
                 String playlistName = playlistManager.getCurrentPlaylist();
                 String actualS;
@@ -121,8 +128,8 @@ public class FooterController implements ActionListener {
                 footerView.setActualSong(actualS);
                 footerView.jProgressBar.setMinimum(0);
                 footerView.jProgressBar.setMaximum(songManager.clipDuration());
-                footerView.iterateProgressBar(0, 0, false, true);
-                footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false);
+                footerView.iterateProgressBar(0, 0, false, true, false);
+                footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false, false);
                 footerView.setSongTotalTime(songManager.songDurationInString(actualS));
                 footerView.setSongActualTime("00:00");
             }
@@ -142,15 +149,21 @@ public class FooterController implements ActionListener {
                 footerView.setActualSong(actualS);
                 footerView.jProgressBar.setMinimum(0);
                 footerView.jProgressBar.setMaximum(songManager.clipDuration());
-                footerView.iterateProgressBar(0, 0, false, true);
-                footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false);
+                footerView.iterateProgressBar(0, 0, false, true,false);
+                footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false, false);
                 footerView.setSongTotalTime(songManager.songDurationInString(actualS));
                 footerView.setSongActualTime("00:00");
 
             }
-            case FooterView.BTN_REPEAT_LIST -> songManager.loopList();
+            case FooterView.BTN_REPEAT_LIST -> {
+                String playlistName = playlistManager.getCurrentPlaylist();
+                if(playlistName != null) {
+                    String nextSong = playlistManager.getNextSongInPlaylist(playlistName);
+                    songManager.loopList();
+                }
+            }
             case FooterView.BTN_STOP -> {
-                footerView.iterateProgressBar(songManager.clipDuration(), 0, true, true);
+                footerView.iterateProgressBar(songManager.clipDuration(), 0, true, true,false);
                 songManager.endSong();
                 footerView.start();
             }

@@ -140,7 +140,7 @@ public class FooterView extends JPanel {
 
         // Creem els altres sub-JPanels
         JPanel footerN = new JPanel(new FlowLayout(FlowLayout.CENTER));
-        JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER));;
+        JPanel footer = new JPanel(new FlowLayout(FlowLayout.CENTER));
         JPanel footerS = new JPanel(new FlowLayout(FlowLayout.CENTER));
 
         // Posem background a cada footer
@@ -206,18 +206,26 @@ public class FooterView extends JPanel {
         actualTime.setText(text);
     }
 
-    public void iterateProgressBar(int maxValue, int check, boolean stop, boolean killProcess){
+    public String getActualTime(){
+        return actualTime.getText();
+    }
+
+    public void iterateProgressBar(int maxValue, int check, boolean stop, boolean killProcess, boolean setLoop){
         jProgressBar.setMaximum(maxValue);
         jProgressBar.setMinimum(0);
         if(check == 0 && !killProcess) {
+            System.out.println("entro en inicio" + setLoop);
             progressBarThread = new ProgressBarThread(jProgressBar, actualTime);
             progressBarThread.setPlaying(true);
+            progressBarThread.setLoop(setLoop);
             // Start the playback thread in a separate thread
             thread = new Thread(progressBarThread);
             thread.start();
         }else{
             if(!killProcess) {
+                System.out.println("entro en no inicio" + setLoop);
                 progressBarThread.setPlaying(stop);
+                progressBarThread.setLoop(setLoop);
             }
         }
 
