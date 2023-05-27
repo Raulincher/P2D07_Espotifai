@@ -3,17 +3,31 @@ package Presentation;
 import javax.swing.*;
 
 public class ProgressBarThread implements Runnable{
+
+    // Preparem atributs
     private boolean isPlaying = false;
-    private boolean isLooping;
     private JProgressBar progressBar;
     private JLabel actualTime;
     private int i = 0;
 
+    /**
+     * Funció que servirà per com a constructor del ProgressBarThread
+     *
+     * @param progressBar, progress bar que s'actualitzarà amb el threat
+     * @param actualTime, jlabel que mostrarà el temps actual i el cual actualitzarem amb el Threat
+     *
+     */
     public ProgressBarThread(JProgressBar progressBar, JLabel actualTime) {
         this.progressBar = progressBar;
         this.actualTime = actualTime;
     }
-
+    /**
+     *
+     * Funció que servirà per parar l'execució del Threat en cas de rebre que la song s'ha parat
+     *
+     * @param isPlaying, progress bar que s'actualitzarà amb el threat
+     *
+     */
     public void setPlaying(boolean isPlaying) {
         this.isPlaying = isPlaying;
         if (isPlaying) {
@@ -22,20 +36,20 @@ public class ProgressBarThread implements Runnable{
             }
         }
     }
-
-    public void setLoop(boolean isLooping) {
-        this.isLooping = isLooping;
-        if (isLooping) {
-            synchronized (this) {
-                notify();
-            }
-        }
-    }
-
+    /**
+     *
+     * Funció que servirà per executar el nostre Threat
+     *
+     * no te params ni returns
+     *
+     */
     @Override
     public void run() {
+        //mentre que el nostre Threat no sigui interrumpt
         while (!Thread.currentThread().isInterrupted()) {
             try {
+                //mirem de forma sincrona si l'usuari ha parat la reproducció de la canço
+                //així podem parar el Threat i deixar d'actualitzar la barra i el temps actual durant la pausa
                 synchronized (this) {
 
                     while (!isPlaying) {
@@ -43,6 +57,7 @@ public class ProgressBarThread implements Runnable{
                     }
                 }
 
+                //dins la condició dem l'actualització del valor de la barra i del temps actual
                 if (progressBar.getValue() != progressBar.getMaximum()) {
                     progressBar.setValue(i);
                     int minutes = i / 60;
@@ -55,6 +70,7 @@ public class ProgressBarThread implements Runnable{
 
                     actualTime.setText(time);
                     i++;
+                    //cada segon
                     Thread.sleep(1000);
                 }else{
                     break;
