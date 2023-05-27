@@ -2,6 +2,9 @@ package Business.Entities;
 
 import java.util.ArrayList;
 
+/**
+ * Classe que ens permet crear Playlist al programa
+ */
 public class Playlist {
 
     // Preparem els atributs

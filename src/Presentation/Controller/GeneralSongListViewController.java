@@ -33,7 +33,7 @@ public class GeneralSongListViewController implements MouseListener {
 
     /**
      * Constructor de la classe GeneralSongListView
-     * @param generalSongListView, view de la classe
+     * @param generalSongListView, vista de la classe
      * @param mainView, vista que controla totes les vistes del programa
      * @param songManager, manager per obtenir les songs en la general list View
      * @param detailedSongView, vista per poder emplenar les taules de la següent vista amb la informació obtinguda
@@ -60,37 +60,55 @@ public class GeneralSongListViewController implements MouseListener {
         String selected;
         JTable table = generalSongListView.getTable();
         int row = table.rowAtPoint(e.getPoint());
+        // Condicional per controlar si s'ha pulsat una fila
         if (row != -1) {
             detailedSongView.clearInfo();
+            // Trobem el valor pulsat i carguem la següent vista amb els valors
             selected = (String) table.getValueAt(row, 0);
             ArrayList<String> song = songManager.searchSong(selected);
-            detailedSongView.fillDetailedTable(song);
-            String  lyrics = songManager.readLyricApi(song.get(2),song.get(0));
-            if (lyrics == null){
-                detailedSongView.fillLyriscText("Song not found");
-            } else {
+            if (song == null){
+                detailedSongView.showPopUp("Sound: file not found");
+            }else {
+                // Preparem la lyrics de la cançó
+                detailedSongView.fillDetailedTable(song);
+                String lyrics = songManager.readLyricApi(song.get(2), song.get(0));
                 detailedSongView.fillLyriscText(lyrics);
+                //Preparem la PopUpMenu amb les playlist i configurem el boto per afegir de cadascuna
+                String username = userManager.currentUsername();
+                ArrayList<String> playlist = playlistManager.obtainPlaylistNames(true, username);
+                detailedSongView.fillPopMenu(playlist);
+                detailedSongView.addDetailedSongController(detailedSongViewController);
+                detailedSongView.setNameSong(song.get(0));
+                mainView.showDetailedSongCard();
             }
-            //Preparem la PopUpMenu amb les playlist i configurem el boto per afegir de cadascuna
-            String username = userManager.currentUsername();
-            ArrayList<String> playlist = playlistManager.obtainPlaylistNames(true,username);
-            detailedSongView.fillPopMenu(playlist);
-            detailedSongView.addDetailedSongController(detailedSongViewController);
-            detailedSongView.setNameSong(song.get(0));
-            playlistManager.setCurrentPlaylist(null);
-            mainView.showDetailedSongCard();
         }
     }
 
+    /**
+     * Funció per poder obtenir MouseListener
+     * @param e l'esdeveniment a tramitar
+     */
     @Override
     public void mousePressed(MouseEvent e) {}
 
+    /**
+     * Funció per poder obtenir MouseListener
+     * @param e l'esdeveniment a tramitar
+     */
     @Override
     public void mouseReleased(MouseEvent e) {}
 
+    /**
+     * Funció per poder obtenir MouseListener
+     * @param e l'esdeveniment a tramitar
+     */
     @Override
     public void mouseEntered(MouseEvent e) {}
 
+    /**
+     * Funció per poder obtenir MouseListener
+     * @param e l'esdeveniment a tramitar
+     */
     @Override
     public void mouseExited(MouseEvent e) {}
 
