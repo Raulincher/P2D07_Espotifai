@@ -33,6 +33,25 @@ public class FooterController implements ActionListener {
         }
     }
 
+    public void controlBarFromDetailed(String songName){
+        if(footerView.progressBarThread != null){
+            footerView.iterateProgressBar(0, 0, false, true);
+        }
+        footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false);
+        footerView.jProgressBar.setMaximum(songManager.clipDuration());
+
+        int minutes = songManager.clipDuration() / 60;
+        int seconds = songManager.clipDuration() % 60;
+
+        String minutesString = String.format("%02d", minutes);
+        String secondsString = String.format("%02d", seconds);
+
+        String time = minutesString + ":" + secondsString;
+
+        footerView.setSongTotalTime(time);
+
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {

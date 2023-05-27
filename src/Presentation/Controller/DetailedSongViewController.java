@@ -21,9 +21,9 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
     // Declarem atributs
     private final DetailedSongView detailedSongView;
     private final SongManager songManager;
-    private  final PlaylistManager playlistManager;
+    private final PlaylistManager playlistManager;
     private final UserManager userManager;
-    private final FooterView footerView;
+    private final FooterController footerController;
 
     /**
      * Constructor de la classe DetailedSongViewController
@@ -32,12 +32,12 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
      * @param playlistManager, manager per obtenir les playlists en la detailed View
      * @param userManager, manager per obtenir l'usuari loguejat
      */
-    public DetailedSongViewController(DetailedSongView detailedSongView,SongManager songManager, PlaylistManager playlistManager, UserManager userManager, FooterView footerView) {
+    public DetailedSongViewController(DetailedSongView detailedSongView,SongManager songManager, PlaylistManager playlistManager, UserManager userManager, FooterController footerController) {
         this.detailedSongView = detailedSongView;
         this.songManager = songManager;
         this.userManager = userManager;
         this.playlistManager = playlistManager;
-        this.footerView = footerView;
+        this.footerController = footerController;
     }
 
     /**
@@ -71,28 +71,13 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
         switch (e.getActionCommand()){
             case FooterView.BTN_PLAY:
             case DetailedSongView.BTN_PLAYME:
-                String actualS = songManager.getActualSong();
-                footerView.setActualSong(actualS);
-                footerView.jProgressBar.setMinimum(0);
-                footerView.jProgressBar.setMaximum(songManager.clipDuration());
-                footerView.setSongTotalTime(songManager.songDurationInString(actualS));
                 songManager.getSong(songName);
-                boolean stop = false;
                 try {
-                    stop = songManager.simpleAudioPlayer();
+                    songManager.simpleAudioPlayer();
                 } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
                     ex.printStackTrace();
                 }
-                footerView.iterateProgressBar(songManager.clipDuration(), 0, true, true);
-                footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false);
-
-                if(stop){
-                    detailedSongView.stop();
-                    footerView.stop();
-                }else{
-                    detailedSongView.start();
-                    footerView.start();
-                }
+                footerController.controlBarFromDetailed(songName);
                 break;
             case DetailedSongView.BTN_PLAYLIST:
                 // Netejem el filtre cada cop que pulsem el boto
