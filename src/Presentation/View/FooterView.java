@@ -32,7 +32,7 @@ public class FooterView extends JPanel {
     private JButton jLyrics;
     private JLabel jLogo = new JLabel("Nothing playing");
     private String jSongName;
-    private ProgressBarThread progressBarThread;
+    public ProgressBarThread progressBarThread;
     public JProgressBar jProgressBar;
     private JLabel totalTime;
     private JLabel actualTime;
@@ -210,26 +210,26 @@ public class FooterView extends JPanel {
         return actualTime.getText();
     }
 
-    public void iterateProgressBar(int maxValue, int check, boolean stop, boolean killProcess, boolean setLoop){
+    public void iterateProgressBar(int maxValue, int check, boolean stop, boolean killProcess){
         jProgressBar.setMaximum(maxValue);
         jProgressBar.setMinimum(0);
+        System.out.println("entro 1 vez");
         if(check == 0 && !killProcess) {
-            System.out.println("entro en inicio" + setLoop);
+            System.out.println("inicio el thread " + stop + check + killProcess + maxValue);
             progressBarThread = new ProgressBarThread(jProgressBar, actualTime);
             progressBarThread.setPlaying(true);
-            progressBarThread.setLoop(setLoop);
             // Start the playback thread in a separate thread
             thread = new Thread(progressBarThread);
             thread.start();
         }else{
             if(!killProcess) {
-                System.out.println("entro en no inicio" + setLoop);
+                System.out.println("paro el thread " + stop + check + killProcess + maxValue);
                 progressBarThread.setPlaying(stop);
-                progressBarThread.setLoop(setLoop);
             }
         }
 
         if(killProcess){
+            System.out.println("interrumpo el thread " + stop + check + killProcess + maxValue);
             progressBarThread.setPlaying(false);
             jProgressBar.setValue(0);
             actualTime.setText("00:00");

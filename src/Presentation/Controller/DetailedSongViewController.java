@@ -76,7 +76,7 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
                 footerView.jProgressBar.setMinimum(0);
                 footerView.jProgressBar.setMaximum(songManager.clipDuration());
                 footerView.setSongTotalTime(songManager.songDurationInString(actualS));
-                songManager.getSong(songName, null, null);
+                songManager.getSong(songName);
                 boolean stop = false;
                 try {
                     stop = songManager.simpleAudioPlayer();

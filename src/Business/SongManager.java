@@ -26,9 +26,7 @@ public class SongManager {
     private String thatSong;
     private String pathComputer;
     private SongLyricsApi songLyricsApi;
-    private boolean loopCondition;
-    private String actualPlaylist;
-    private String nextSongInPlaylist;
+    private boolean loopListCondition = false;
 
     public SongManager(SongDao songDao,SongLyricsApi songLyricsApi) {
         this.songDao = songDao;
@@ -41,7 +39,6 @@ public class SongManager {
     public int getSongDurationFromDatabase(String songName){return songDao.songDuration(songName);}
 
     public String songDurationInString(String songName){
-        System.out.println(songName + " in managaer");
         return songDao.songDurationInString(songName);
     }
 
@@ -52,7 +49,6 @@ public class SongManager {
     public int clipDuration(){
         int duration = 0;
 
-        System.out.println(actualSong + "clip duration");
         if(actualSong != null){
             duration = getSongDurationFromDatabase(actualSong);
         }
@@ -67,7 +63,7 @@ public class SongManager {
         thatSong = song;
     }
 
-    public void getSong(String songTitle, String playlistName, String nextSong){
+    public void getSong(String songTitle){
         try {
             File music;
             File[] files;
@@ -93,7 +89,6 @@ public class SongManager {
                 file = new File(getPath(songTitle));
                 actualSong = file.getName();
                 thatSong = actualSong;
-                System.out.println(actualSong);
 
             }
             if (file.exists()) {
@@ -101,7 +96,7 @@ public class SongManager {
                 AudioInputStream ais = AudioSystem.getAudioInputStream(file.toURI().toURL());
                 myClip.open(ais);
 
-                myClip.addLineListener(event -> {
+                /*myClip.addLineListener(event -> {
                     if (event.getType() == LineEvent.Type.STOP) {
                         if(!loopCondition) {
                             if(playlistName != null){
@@ -111,7 +106,7 @@ public class SongManager {
                             }
                         }
                     }
-                });
+                });*/
             }
             else {
                 throw new RuntimeException("Sound: file not found: " + filePath);
@@ -134,10 +129,7 @@ public class SongManager {
     public boolean simpleAudioPlayer() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         boolean stopped = true;
         if(myClip != null) {
-            System.out.println("no es nulo");
             if(myClip.isOpen()){
-                System.out.println("abierto");
-
                 if (myClip.isRunning()) {
                     myClip.stop();
                     stopped = false;
@@ -145,10 +137,7 @@ public class SongManager {
                     myClip.start();
                 }
             }else{
-                System.out.println("cerrado");
-                System.out.println(actualSong);
                 String filePath = "files/music/" + actualSong;
-                System.out.println(filePath);
                 file = new File(filePath);
 
                 if (file.exists()) {
@@ -184,7 +173,6 @@ public class SongManager {
 
     public void loopAudio() {
         if(myClip != null) {
-            loopCondition = true;
             myClip.loop(Clip.LOOP_CONTINUOUSLY);
         }
     }
@@ -228,11 +216,9 @@ public class SongManager {
             }else{
                 try {
                     String songPath = getPath(nextSong);
-                    System.out.println("song path in manager" + songPath);
                     String[] split = songPath.split("/");
                     actualSong = split[2];
                     thatSong = split[2];
-                    System.out.println(actualSong + "actual song in manager");
 
                     File file = new File(songPath);
 
@@ -315,9 +301,16 @@ public class SongManager {
 
     public void loopList() {
         if(myClip != null) {
-
-            System.out.println("loopeo lista");
+            loopListCondition = !loopListCondition;
         }
+    }
+
+    public boolean isLoopListCondition() {
+        return loopListCondition;
+    }
+
+    public void setLoopListCondition(boolean loopListCondition) {
+        this.loopListCondition = loopListCondition;
     }
 
     public boolean fileSongSelector() {
@@ -443,7 +436,7 @@ public class SongManager {
         if (!in) {
             return null;
         } else {
-            getSong(songTitle, null, null);
+            getSong(songTitle);
             return songSelected;
         }
     }

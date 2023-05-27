@@ -37,43 +37,28 @@ public class ProgressBarThread implements Runnable{
         while (!Thread.currentThread().isInterrupted()) {
             try {
                 synchronized (this) {
-                    while (isLooping) {
-                        if(progressBar.getValue() == progressBar.getMaximum()){
-                            i = 0;
-                            progressBar.setValue(i);
-                            int minutes = i / 60;
-                            int seconds = i % 60;
-
-                            String minutesString = String.format("%02d", minutes);
-                            String secondsString = String.format("%02d", seconds);
-
-                            String time = minutesString + ":" + secondsString;
-
-                            actualTime.setText(time);
-                            i++;
-                        }
-                    }
-                    if (progressBar.getValue() != progressBar.getMaximum()) {
-                        progressBar.setValue(i);
-                        int minutes = i / 60;
-                        int seconds = i % 60;
-
-                        String minutesString = String.format("%02d", minutes);
-                        String secondsString = String.format("%02d", seconds);
-
-                        String time = minutesString + ":" + secondsString;
-
-                        actualTime.setText(time);
-                        i++;
-                        Thread.sleep(1000);
-                    }
 
                     while (!isPlaying) {
                         wait();
                     }
                 }
 
+                if (progressBar.getValue() != progressBar.getMaximum()) {
+                    progressBar.setValue(i);
+                    int minutes = i / 60;
+                    int seconds = i % 60;
 
+                    String minutesString = String.format("%02d", minutes);
+                    String secondsString = String.format("%02d", seconds);
+
+                    String time = minutesString + ":" + secondsString;
+
+                    actualTime.setText(time);
+                    i++;
+                    Thread.sleep(1000);
+                }else{
+                    break;
+                }
 
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();

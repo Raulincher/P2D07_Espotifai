@@ -211,8 +211,6 @@ public class SQLSongDao implements SongDao {
 
         int duration = 0;
         String time ="";
-        System.out.println("entro");
-        System.out.println(songName);
         songName = "files/music/" + songName;
 
         try {

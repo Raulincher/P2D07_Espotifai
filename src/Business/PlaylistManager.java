@@ -68,7 +68,7 @@ public class PlaylistManager {
         return inPlaylist;
     }
 
-    public String getNextSongInPlaylist(String playListName){
+    public String getNextSongInPlaylist(String playListName, boolean loopCondition){
         String song;
         String actualSong = this.clickedSong;
         int songPosition = 0;
@@ -81,7 +81,13 @@ public class PlaylistManager {
         }
 
         if(songPosition == allTitles.size() - 1){
-            song = allTitles.get(0);
+            if(loopCondition){
+                song = allTitles.get(0);
+
+            }else{
+                song = allTitles.get(allTitles.size() - 1);
+            }
+
         }else{
             song = allTitles.get(songPosition + 1);
         }
