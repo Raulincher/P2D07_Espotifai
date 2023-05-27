@@ -11,6 +11,7 @@ import java.util.SimpleTimeZone;
 public class PlaylistManager {
     private final PlaylistDao playlistDao;
     private String currentPlaylist;
+    private String clickedSong;
 
     public PlaylistManager(PlaylistDao playlistDao) {
         this.playlistDao = playlistDao;
@@ -70,6 +71,49 @@ public class PlaylistManager {
         return inPlaylist;
     }
 
+    public String getNextSongInPlaylist(String playListName){
+        String song;
+        String actualSong = this.clickedSong;
+        int songPosition = 0;
+        ArrayList<String> allTitles = obtainSongsInPlaylist(playListName);
+
+        for(int i = 0; i < allTitles.size(); i++){
+            if(actualSong.equals(allTitles.get(i))){
+                songPosition = i;
+            }
+        }
+
+        if(songPosition == allTitles.size() - 1){
+            song = allTitles.get(0);
+        }else{
+            song = allTitles.get(songPosition + 1);
+        }
+        clickedSong = song;
+        return song;
+    }
+
+    public String getPreviousSongInPlaylist(String playListName){
+        String song;
+        String actualSong = this.clickedSong;
+        int songPosition = 0;
+        ArrayList<String> allTitles = obtainSongsInPlaylist(playListName);
+
+        for(int i = 0; i < allTitles.size(); i++){
+            if(actualSong.equals(allTitles.get(i))){
+                songPosition = i;
+            }
+        }
+
+        if(songPosition == 0){
+            song = allTitles.get(0);
+        }else{
+            song = allTitles.get(songPosition - 1);
+        }
+        clickedSong = song;
+
+        return song;
+    }
+
     public void setCurrentPlaylist(String currentPlaylist) {
         this.currentPlaylist = currentPlaylist;
     }
@@ -77,6 +121,10 @@ public class PlaylistManager {
     public String getCurrentPlaylist() {
         return currentPlaylist;
     }
+
+    public void setClickedSong(String clickedSong){this.clickedSong = clickedSong;}
+
+    public String getClickedSong(){return this.clickedSong;}
 
     public boolean deletePlaylist(String playListName) {
         return playlistDao.deletePlaylistFromDAO(playListName);

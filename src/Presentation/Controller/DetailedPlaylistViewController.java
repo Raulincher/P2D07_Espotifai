@@ -60,6 +60,7 @@ public class DetailedPlaylistViewController implements ActionListener, MouseList
     @Override
     public void mouseClicked(MouseEvent e) {
         whichSongName  = detailedPlaylistView.obtainSongName(e.getPoint());
+        playlistManager.setClickedSong(whichSongName);
       //  System.out.println("Cançó clicada: " + whichSongInPlaylist);
     }
 

@@ -72,7 +72,7 @@ public class Main {
         headerController.addMainView(mainView);
 
         // Vinculem amb el controller del footer
-        FooterController footerController = new FooterController(footerView, songManager);
+        FooterController footerController = new FooterController(footerView, songManager, playlistManager);
         footerView.addFooterController(footerController);
 
         // Vinculem tots els controllers

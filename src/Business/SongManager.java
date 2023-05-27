@@ -37,7 +37,10 @@ public class SongManager {
 
     public int getSongDurationFromDatabase(String songName){return songDao.songDuration(songName);}
 
-    public String songDurationInString(String songName){return songDao.songDurationInString(songName);}
+    public String songDurationInString(String songName){
+        System.out.println(songName + " in managaer");
+        return songDao.songDurationInString(songName);
+    }
 
     public int checkMyClip(){
         return myClip.getFramePosition();
@@ -46,6 +49,7 @@ public class SongManager {
     public int clipDuration(){
         int duration = 0;
 
+        System.out.println(actualSong + "clip duration");
         if(actualSong != null){
             duration = getSongDurationFromDatabase(actualSong);
         }
@@ -86,7 +90,6 @@ public class SongManager {
                 file = new File(getPath(songTitle));
                 actualSong = file.getName();
                 thatSong = actualSong;
-                System.out.println(actualSong);
 
             }
             if (file.exists()) {
@@ -115,9 +118,7 @@ public class SongManager {
     public boolean simpleAudioPlayer() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         boolean stopped = true;
         if(myClip != null) {
-            System.out.println("no es nulo");
             if(myClip.isOpen()){
-                System.out.println("abierto");
 
                 if (myClip.isRunning()) {
                     myClip.stop();
@@ -126,10 +127,7 @@ public class SongManager {
                     myClip.start();
                 }
             }else{
-                System.out.println("cerrado");
-                System.out.println(actualSong);
                 String filePath = "files/music/" + actualSong;
-                System.out.println(filePath);
                 file = new File(filePath);
 
                 if (file.exists()) {
@@ -142,8 +140,16 @@ public class SongManager {
         return stopped;
     }
 
+    public boolean anyClipRunning(){
+        boolean run = false;
+        if(myClip != null){
+            run = myClip.isRunning();
+        }
+        return run;
+    }
+
     public boolean isPlaying(String songDelete){
-        return !(myClip.isRunning() & actualSong.equals(songDelete));
+        return myClip.isRunning() && actualSong.equals(songDelete);
     }
 
     public void stopClip() {
@@ -161,79 +167,126 @@ public class SongManager {
         }
     }
 
-    public void moveForward() throws LineUnavailableException, IOException, UnsupportedAudioFileException {
+    public void moveForward(String playlistName, String nextSong){
         int auxPos = 0;
         if(myClip != null) {
             if (myClip.isRunning()) {
                 myClip.close();
             }
-            try {
-                File music = new File("files/music/");
-                File[] files = music.listFiles();
-                assert files != null;
-                for (int i = 0; i < files.length; i++) {
-                    if (files[i].getName().equals(actualSong)) {
-                        auxPos = i + 1;
-                        i = files.length;
+            if(playlistName == null){
+                try {
+                    File music = new File("files/music/");
+                    File[] files = music.listFiles();
+                    assert files != null;
+                    for (int i = 0; i < files.length; i++) {
+                        if (files[i].getName().equals(actualSong)) {
+                            auxPos = i + 1;
+                            i = files.length;
+                        }
                     }
-                }
-                if (auxPos == files.length) {
-                    auxPos = 0;
-                }
-                String filePath = "files/music/" + files[auxPos].getName();
-                actualSong = files[auxPos].getName();
-                setActualSong(actualSong);
-                File file = new File(filePath);
+                    if (auxPos == files.length) {
+                        auxPos = 0;
+                    }
+                    String filePath = "files/music/" + files[auxPos].getName();
+                    actualSong = files[auxPos].getName();
+                    setActualSong(actualSong);
+                    File file = new File(filePath);
 
-                if (file.exists()) {
-                    myClip = AudioSystem.getClip();
-                    AudioInputStream ais = AudioSystem.getAudioInputStream(file.toURI().toURL());
-                    myClip.open(ais);
-                    myClip.start();
-                } else {
-                    throw new RuntimeException("Sound: file not found: " + filePath);
+                    if (file.exists()) {
+                        myClip = AudioSystem.getClip();
+                        AudioInputStream ais = AudioSystem.getAudioInputStream(file.toURI().toURL());
+                        myClip.open(ais);
+                        myClip.start();
+                    } else {
+                        throw new RuntimeException("Sound: file not found: " + filePath);
+                    }
+                } catch (LineUnavailableException | UnsupportedAudioFileException | RuntimeException | IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (LineUnavailableException | UnsupportedAudioFileException | RuntimeException | IOException e) {
-                e.printStackTrace();
+            }else{
+                try {
+                    String songPath = getPath(nextSong);
+                    System.out.println("song path in manager" + songPath);
+                    String[] split = songPath.split("/");
+                    actualSong = split[2];
+                    thatSong = split[2];
+                    System.out.println(actualSong + "actual song in manager");
+
+                    File file = new File(songPath);
+
+                    if (file.exists()) {
+                        myClip = AudioSystem.getClip();
+                        AudioInputStream ais = AudioSystem.getAudioInputStream(file.toURI().toURL());
+                        myClip.open(ais);
+                        myClip.start();
+                    } else {
+                        throw new RuntimeException("Sound: file not found: " + filePath);
+                    }
+                } catch (LineUnavailableException | UnsupportedAudioFileException | RuntimeException | IOException e) {
+                    e.printStackTrace();
+                }
             }
+
         }
 
     }
 
-    public void moveBackward(){
+    public void moveBackward(String playlistName, String previousSong){
         int auxPos = 0;
         if(myClip != null) {
             if (myClip.isRunning()) {
                 myClip.close();
             }
-            try {
-                File music = new File("files/music/");
-                File[] files = music.listFiles();
-                assert files != null;
-                for (int i = 0; i < files.length; i++) {
-                    if (files[i].getName().equals(actualSong)) {
-                        auxPos = i - 1;
-                        i = files.length;
+            if(playlistName == null) {
+                try {
+                    File music = new File("files/music/");
+                    File[] files = music.listFiles();
+                    assert files != null;
+                    for (int i = 0; i < files.length; i++) {
+                        if (files[i].getName().equals(actualSong)) {
+                            auxPos = i - 1;
+                            i = files.length;
+                        }
                     }
-                }
-                if (auxPos < 0) {
-                    auxPos = 0;
-                }
-                String filePath = "files/music/" + files[auxPos].getName();
-                actualSong = files[auxPos].getName();
-                setActualSong(actualSong);
-                File file = new File(filePath);
+                    if (auxPos < 0) {
+                        auxPos = 0;
+                    }
+                    String filePath = "files/music/" + files[auxPos].getName();
+                    actualSong = files[auxPos].getName();
+                    setActualSong(actualSong);
+                    File file = new File(filePath);
 
-                if (file.exists()) {
-                    myClip = AudioSystem.getClip();
-                    AudioInputStream ais = AudioSystem.getAudioInputStream(file.toURI().toURL());
-                    myClip.open(ais);
-                    myClip.start();
-                } else {
-                    throw new RuntimeException("Sound: file not found: " + filePath);
+                    if (file.exists()) {
+                        myClip = AudioSystem.getClip();
+                        AudioInputStream ais = AudioSystem.getAudioInputStream(file.toURI().toURL());
+                        myClip.open(ais);
+                        myClip.start();
+                    } else {
+                        throw new RuntimeException("Sound: file not found: " + filePath);
+                    }
+                } catch (LineUnavailableException | UnsupportedAudioFileException | RuntimeException | IOException e) {
+                    e.printStackTrace();
                 }
-            } catch (LineUnavailableException | UnsupportedAudioFileException | RuntimeException | IOException e) {
-                e.printStackTrace();
+            }else{
+                try {
+                    String songPath = getPath(previousSong);
+                    String[] split = songPath.split("/");
+                    actualSong = split[2];
+                    thatSong = split[2];
+
+                    File file = new File(songPath);
+
+                    if (file.exists()) {
+                        myClip = AudioSystem.getClip();
+                        AudioInputStream ais = AudioSystem.getAudioInputStream(file.toURI().toURL());
+                        myClip.open(ais);
+                        myClip.start();
+                    } else {
+                        throw new RuntimeException("Sound: file not found: " + filePath);
+                    }
+                } catch (LineUnavailableException | UnsupportedAudioFileException | RuntimeException | IOException e) {
+                    e.printStackTrace();
+                }
             }
         }
     }
@@ -262,8 +315,6 @@ public class SongManager {
             if(aux[1].equals("wav")){
                 filePath = "files/music/" + fileName;
                 fileFormatCorrect = true;
-            }else{
-                System.out.println("error, solo .wav");
             }
         }
 
@@ -278,8 +329,6 @@ public class SongManager {
         if(myClip != null){
             myClip.close();
         }
-
-
     }
 
     public boolean isEmpty(String songName, String artist, String album, String genre) {

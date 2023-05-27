@@ -225,6 +225,7 @@ public class FooterView extends JPanel {
             progressBarThread.setPlaying(false);
             jProgressBar.setValue(0);
             actualTime.setText("00:00");
+            thread.interrupt();
         }
     }
 
