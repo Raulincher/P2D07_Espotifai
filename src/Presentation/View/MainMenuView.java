@@ -47,7 +47,6 @@ public class MainMenuView extends JPanel {
      * @param mainMenuController, controller del MainMenuView
      */
     public void addMainMenuController(MainMenuViewController mainMenuController){
-        //set action command
         jSongList.addActionListener(mainMenuController);
         jAddSong.addActionListener(mainMenuController);
         jDeleteSong.addActionListener(mainMenuController);

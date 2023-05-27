@@ -20,8 +20,6 @@ public class AddSongView extends JPanel {
     private JTextField jtfSongName;
     private JTextField jtfArtist;
     private JTextField jtfAlbum;
-
-    private JTextField jtfGenre;
     private JFileChooser fcAddFile;
     private JComboBox<String> jcbGenre;
 
@@ -192,9 +190,5 @@ public class AddSongView extends JPanel {
 
     public Boolean fileCheckEmpty(){
         return jfile == null;
-    }
-
-    public JFileChooser getFcAddFile() {
-        return fcAddFile;
     }
 }

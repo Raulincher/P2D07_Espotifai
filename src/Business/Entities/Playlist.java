@@ -40,7 +40,4 @@ public class Playlist {
         return title;
     }
 
-    public ArrayList<String> getSongs() {
-        return songs;
-    }
 }

@@ -23,6 +23,7 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
     private final SongManager songManager;
     private  final PlaylistManager playlistManager;
     private final UserManager userManager;
+    private final FooterView footerView;
 
     /**
      * Constructor de la classe DetailedSongViewController
@@ -31,11 +32,12 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
      * @param playlistManager, manager per obtenir les playlists en la detailed View
      * @param userManager, manager per obtenir l'usuari loguejat
      */
-    public DetailedSongViewController(DetailedSongView detailedSongView,SongManager songManager, PlaylistManager playlistManager, UserManager userManager) {
+    public DetailedSongViewController(DetailedSongView detailedSongView,SongManager songManager, PlaylistManager playlistManager, UserManager userManager, FooterView footerView) {
         this.detailedSongView = detailedSongView;
         this.songManager = songManager;
         this.userManager = userManager;
         this.playlistManager = playlistManager;
+        this.footerView = footerView;
     }
 
     /**
@@ -67,7 +69,13 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
 
         // Controlem el play de la pròpia cançó i el boto de add Playlist
         switch (e.getActionCommand()){
+            case FooterView.BTN_PLAY:
             case DetailedSongView.BTN_PLAYME:
+                String actualS = songManager.getActualSong();
+                footerView.setActualSong(actualS);
+                footerView.jProgressBar.setMinimum(0);
+                footerView.jProgressBar.setMaximum(songManager.clipDuration());
+                footerView.setSongTotalTime(songManager.songDurationInString(actualS));
                 songManager.getSong(songName);
                 boolean stop = false;
                 try {
@@ -75,11 +83,15 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
                 } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
                     ex.printStackTrace();
                 }
-                //Canviar imatge de la vista
+                int check = songManager.checkMyClip();
+                footerView.iterateProgressBar(songManager.clipDuration(), check, stop, false);
+
                 if(stop){
                     detailedSongView.stop();
+                    footerView.stop();
                 }else{
                     detailedSongView.start();
+                    footerView.start();
                 }
                 break;
             case DetailedSongView.BTN_PLAYLIST:

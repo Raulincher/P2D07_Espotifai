@@ -16,8 +16,7 @@ public class DetailedPlaylistViewController implements ActionListener, MouseList
     private final GeneralPlaylistView generalPlaylistView;
     private String whichSongName;
 
-
-    private UserManager userManager;
+    private final UserManager userManager;
 
     public DetailedPlaylistViewController(DetailedPlaylistView detailedPlaylistView, MainView mainView,
                                           PlaylistManager playlistManager, GeneralPlaylistView generalPlaylistView,

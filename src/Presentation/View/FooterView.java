@@ -160,9 +160,9 @@ public class FooterView extends JPanel {
         footer.add(jRepeat);
         footer.add(jBackward);
         footer.add(jplay);
+        footer.add(jStopSong);
         footer.add(jForward);
         footer.add(jRepeatList);
-        footer.add(jStopSong);
         border.add(footer, BorderLayout.CENTER);
 
         // Configurem la part SOUTH del BorderLayout
@@ -172,7 +172,6 @@ public class FooterView extends JPanel {
         footerS.add(totalTime);
 
         border.add(footerS, BorderLayout.SOUTH);
-        Dimension dimension = new Dimension(10,10);
 
         return border;
     }
@@ -227,7 +226,6 @@ public class FooterView extends JPanel {
             jProgressBar.setValue(0);
             actualTime.setText("00:00");
         }
-
     }
 
     /**

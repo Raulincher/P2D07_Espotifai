@@ -13,31 +13,20 @@ public class StatisticsView extends JPanel {
 
     // Preparem els strings en cas que es premi el botó back
     public static final String BTN_BACK = "BTN_BACK";
-    public static final String BTN_STATISTICS = "BTN_STATISTICS";
-
-    // Preparem els atributs
-    private final Utils utils;
 
     // Preparem els elements de Swing
-
     private Map<String, Integer> genreMap;
-
-    private JButton jgetStatistics;
 
     /**
      * Funció que servirà com a constructor de la StatisticsView
      *
-     * @param , vista per a posar el Header
-     * @param utils, per usar tots els seus mètodes
-     * @param , vista per a posar el Footer
+     * No tindrà param ni return
      */
-    public StatisticsView(Utils utils){
-        this.utils = utils;
-    }
+    public StatisticsView(){}
 
     public void setGenreMap(Map<String, Integer> genreMap) {
         this.genreMap = genreMap;
-        repaint(); // Vuelve a dibujar el gráfico cuando se actualiza el mapa de géneros
+        repaint();
     }
 
     /**

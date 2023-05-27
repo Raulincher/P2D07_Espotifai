@@ -259,12 +259,9 @@ public class SongManager {
             aux = fileName.split("\\.");
 
             if(aux[1].equals("wav")){
-                //file.renameTo(new File("files/music/" + fileName));
                 filePath = "files/music/" + fileName;
-                //errorInUpload = fileName;
                 fileFormatCorrect = true;
             }else{
-                //error;
                 System.out.println("error, solo .wav");
             }
         }
@@ -308,16 +305,6 @@ public class SongManager {
 
         return songSaved;
     }
-
-    public void closeFile(){
-
-        if(myClip != null){
-            myClip.stop();
-            myClip.close();
-        }
-    }
-
-
 
     public boolean songExists(String songName) {
         // Si troba la cançó EN EL DAO
@@ -389,18 +376,31 @@ public class SongManager {
         }
     }
 
+    /**
+     * Funció per a crear un mapa String-Integer que retornarà
+     * tots els gèneres i el seu valor màxim agregats
+     *
+     * @return genreMap, Mapa amb els valors necessaris per les statistics
+     */
     public Map<String, Integer> createGenreMap() {
         Map<String, Integer> genreMap = new HashMap<>();
 
         try {
+            // Llegim les cançons
             ArrayList<Song> songs = songDao.readAllSongsSQL();
 
+            // Obrim un bucle a través de l'Array
             for (Song song : songs) {
                 String genre = song.getGenre();
+
+                // Un cop agafat el nom ens assegurem que no el tinguem ja agregat al mapa
                 if (genreMap.containsKey(genre)) {
+                    // Si ja el tenim sumem 1 al valor del gènere
                     int count = genreMap.get(genre);
                     genreMap.put(genre, count + 1);
-                } else {
+                }
+                // En cas contrari l'afegim al Mapa
+                else {
                     genreMap.put(genre, 1);
                 }
             }

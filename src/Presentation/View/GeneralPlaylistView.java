@@ -276,24 +276,4 @@ public class GeneralPlaylistView extends JPanel {
         jMyPlaylistBuscador.setText("");
         jOthersPlaylistBuscador.setText("");
     }
-/*
-    public int obtainPlaylistndexToDelete(String playlistName, int tableClicked) {
-        int indexSong = 0;
-
-        if (tableClicked == 0) {
-            // Recorrem el bucle fins a trobar la cançó en qüestió
-            for (int i = 0; i < myPlaylistsTable.getRowCount(); i++) {
-                if (myPlaylistsTable.getValueAt(i, 0).equals(playlistName)) {
-                    indexSong = i;
-                }
-            }
-        } else {
-            for (int i = 0; i < otherPlaylistsTable.getRowCount(); i++) {
-                if (otherPlaylistsTable.getValueAt(i, 0).equals(playlistName)) {
-                    indexSong = i;
-                }
-            }
-        }
-        return indexSong;
-    }*/
 }

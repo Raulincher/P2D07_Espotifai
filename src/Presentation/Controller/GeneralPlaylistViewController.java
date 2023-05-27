@@ -64,21 +64,6 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
         }
         //detailedView.configureDetailedPlaylistView();
         mainView.showDetailedPlaylistCard();
-
-        //int index = generalPlaylistView.obtainSongIndexToDelete(songTitle);
-/*
-        if (generalPlaylistView.confirmationDeletePopUp(songTitle) == 0) {
-            if (songManager.deleteSong(songTitle)) {
-                deleteSongView.showPopUps("Song Deleted Successfully");
-                mainView.showMainMenuCard();
-                deleteSongView.clearSearcher();
-            }
-        }
-        else {
-            deleteSongView.showPopUps("Song NOT deleted");
-        }
-
- */
     }
 
     @Override

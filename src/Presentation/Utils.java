@@ -13,24 +13,6 @@ public class Utils extends JFrame {
     public Utils(){}
 
     /**
-     * Funció de tipus JButton que servirà com a constructor del text dels botons
-     * que no tinguin imatge
-     *
-     * @param text, text a transformar del botó
-     * @return button, JButton construït
-     */
-    public JButton buttonText(String text){
-        // Creem el JButton
-        JButton button = new JButton(text);
-
-        // Li donem el format desitjat amb background, font i size
-        button.setBackground(Color.decode("#00000000"));
-        button.setFont(new Font("Gotham", Font.BOLD, 27));
-        button.setMaximumSize(new Dimension (200,100));
-        return button;
-    }
-
-    /**
      * Funció de tipus JProgressBar que servirà com a constructor
      * de la barra de progrés de la cançó al footer
      *

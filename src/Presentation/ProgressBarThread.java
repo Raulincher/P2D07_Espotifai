@@ -47,7 +47,7 @@ public class ProgressBarThread implements Runnable{
                     i++;
                     Thread.sleep(1000);
                 } else {
-                    break;  // Exit the loop when the progress reaches the maximum
+                    break;
                 }
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();

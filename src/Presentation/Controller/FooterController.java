@@ -79,6 +79,7 @@ public class FooterController implements ActionListener {
             case FooterView.BTN_STOP -> {
                 footerView.iterateProgressBar(songManager.clipDuration(), 0, true, true);
                 songManager.endSong();
+                footerView.start();
             }
             case FooterView.BTN_LYRICS -> {
                 ArrayList<String> lyrics = songManager.searchLyrics();
@@ -90,8 +91,4 @@ public class FooterController implements ActionListener {
             }
         }
     }
-
-    /*public String getActualSong(){
-        return songManager.getActualSong();
-    }*/
 }

@@ -24,11 +24,11 @@ public class GeneralSongListViewController implements MouseListener {
     // Declarem atributs
     private final GeneralSongListView generalSongListView;
     private final MainView mainView;
-    private SongManager songManager;
-    private DetailedSongView detailedSongView;
-    private PlaylistManager playlistManager;
-    private UserManager userManager;
-    private DetailedSongViewController detailedSongViewController;
+    private final SongManager songManager;
+    private final DetailedSongView detailedSongView;
+    private final PlaylistManager playlistManager;
+    private final UserManager userManager;
+    private final DetailedSongViewController detailedSongViewController;
 
 
     /**

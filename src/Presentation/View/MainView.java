@@ -353,8 +353,6 @@ public class MainView extends JFrame {
      * No tindrà ni param ni return
      */
     public void showGeneralSongListCard(){
-       // Icon generalSong = new ImageIcon(String.valueOf(AssetsFiles.YOURLIST_LABEL));
-       // configureNord(generalSong);
         cardManager.show(getContentPane(), CARD_GENERAL_SONG);
         cardMain.show(center, CARD_GENERAL_SONG);
     }

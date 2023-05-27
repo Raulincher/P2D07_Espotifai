@@ -12,7 +12,7 @@ import java.util.Arrays;
 public class RegisterViewController implements ActionListener {
     private final MainView mainView;
     private final RegisterView registerView;
-    private UserManager userManager;
+    private final UserManager userManager;
 
     public RegisterViewController(MainView mainView, RegisterView registerView, UserManager userManager) {
         this.mainView = mainView;

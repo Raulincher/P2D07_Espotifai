@@ -17,7 +17,6 @@ public class MainMenuViewController implements ActionListener{
     private final SongManager songManager;
     private final UserManager userManager;
     private final PlaylistManager playlistManager;
-    private final AddSongView addSongView;
     private final DeleteSongView deleteSongView;
     private final StatisticsView statisticsView;
     private final GeneralSongListView generalSongListView;
@@ -36,7 +35,6 @@ public class MainMenuViewController implements ActionListener{
         this.generalSongListView = generalSongListView;
         this.generalPlaylistView = generalPlaylistView;
         this.playlistManager = playlistManager;
-        this.addSongView = addSongView;
     }
 
     @Override
@@ -44,7 +42,6 @@ public class MainMenuViewController implements ActionListener{
         switch (e.getActionCommand()) {
             case MainMenuView.BTN_BACK -> mainView.showMainCard();
             case MainMenuView.BTN_ADD_SONG -> {
-            //    addSongView.clearFields();
                 mainView.showAddSongCard();
             }
             case MainMenuView.BTN_DELETE_SONG -> {

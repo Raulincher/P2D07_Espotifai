@@ -20,41 +20,24 @@ import javax.swing.event.DocumentEvent;
 
 public class DeleteSongViewController implements ActionListener, DocumentListener, MouseListener {
     private final DeleteSongView deleteSongView;
-    private final MainView mainView;
     private final SongManager songManager;
     private final UserManager userManager;
     private final PlaylistManager playlistManager;
 
-    public DeleteSongViewController(DeleteSongView deleteSongView, MainView mainView, SongManager songManager,
+    public DeleteSongViewController(DeleteSongView deleteSongView, SongManager songManager,
                                     UserManager userManager, PlaylistManager playlistManager) {
         this.deleteSongView = deleteSongView;
-        this.mainView = mainView;
         this.songManager = songManager;
         this.userManager = userManager;
         this.playlistManager = playlistManager;
     }
 
-    public void runDeleteSongView() {
-
-    }
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
             case DeleteSongView.BTN_BUSCADOR -> {
                 String input = deleteSongView.getjtfBuscador().toString();
             }
-            //case DeleteSongView.BTN_DELETE -> {
-                /*String songToDelete = deleteSongView.getInput().getText();
-
-                if (songManager.songExists(songToDelete)) {
-                    if (songManager.deleteSong(songToDelete)) {
-                        deleteSongView.showPopUps("Song Deleted Successfully");
-                        mainView.showMainMenuCard();
-                    }
-                }
-                else {
-                    deleteSongView.showPopUps("This song doesn't exist!");
-                }*/
         }
     }
 

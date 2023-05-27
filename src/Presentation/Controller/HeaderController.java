@@ -12,8 +12,8 @@ import java.awt.event.ActionListener;
 public class HeaderController implements ActionListener {
     private final HeaderView headerView;
     private final UserManager userManager;
-    private MainView mainView;
     private final SongManager songManager;
+    private MainView mainView;
 
     public HeaderController(HeaderView headerView, UserManager userManager, SongManager songManager) {
         this.headerView = headerView;
