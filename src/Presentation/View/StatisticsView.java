@@ -91,6 +91,20 @@ public class StatisticsView extends JPanel {
                     String genre = entry.getKey();
                     int count = entry.getValue();
 
+                    // Configurem l'alçada del nom del gènere i nombre segons els gèneres afegits
+                    int numAdded = genreMap.size();
+                    float valors = 0;
+                    if (numAdded == 1) {
+                        valors = 20;
+                    }
+                    else if(numAdded > 1  && numAdded < 4) {
+                        valors = y + barHeight/8;
+                    }else if (numAdded > 3 && numAdded < 6) {
+                        valors = y + barHeight/4;
+                    }
+                    else if (numAdded > 5 && numAdded < 9) {
+                        valors = y + barHeight/2;
+                    }
                     // Dibuixem l'amplada de la barra
                     // Important recalcar: passem el count a double per a poder fer la operació
                     // i un cop feta la operació, passem el resultat a int
@@ -103,8 +117,8 @@ public class StatisticsView extends JPanel {
                     // Configurem format dels Strings de cada gènere
                     graph2D.setColor(Color.WHITE);
                     graph2D.setFont(new Font("Gotham", Font.BOLD, 12));
-                    graph2D.drawString(genre, 5, y + barHeight / 2);
-                    graph2D.drawString(String.valueOf(count), barWidth - 20, y + barHeight / 2);
+                    graph2D.drawString(genre, 5, valors);
+                    graph2D.drawString(String.valueOf(count), barWidth - 20, valors);
 
                     // Avancem la Y per la següent barra
                     y += barHeight;
