@@ -17,12 +17,15 @@ public class HeaderController implements ActionListener {
     private final SongManager songManager;
     private final PlaylistManager playlistManager;
     private MainView mainView;
+    private FooterController footerController;
 
-    public HeaderController(HeaderView headerView, UserManager userManager, SongManager songManager, PlaylistManager playlistManager) {
+
+    public HeaderController(HeaderView headerView, UserManager userManager, SongManager songManager, PlaylistManager playlistManager, FooterController footerController) {
         this.headerView = headerView;
         this.userManager = userManager;
         this.songManager = songManager;
         this.playlistManager = playlistManager;
+        this.footerController = footerController;
     }
 
     public void addMainView(MainView mainView){
@@ -48,6 +51,7 @@ public class HeaderController implements ActionListener {
                         songManager.stopClip();
                         userManager.delete();
                         userManager.logout();
+                        footerController.outOfTheProgram();
                         mainView.showMainCard();
 
                        // userManager.delete();
@@ -62,6 +66,7 @@ public class HeaderController implements ActionListener {
                 if (resposta2 == 0) {
                     songManager.stopClip();
                     userManager.logout();
+                    footerController.outOfTheProgram();
                     mainView.showMainCard();
                 }
                 break;

@@ -19,10 +19,18 @@ public class FooterController implements ActionListener {
     private final PlaylistManager playlistManager;
     private String lastSong;
 
+
     public FooterController(FooterView footerView, SongManager songManager, PlaylistManager playlistManager) {
         this.footerView = footerView;
         this.songManager = songManager;
         this.playlistManager = playlistManager;
+
+    }
+
+    public void outOfTheProgram(){
+        if(footerView.progressBarThread != null){
+            footerView.iterateProgressBar(songManager.clipDuration(), 0, false, true);
+        }
     }
 
     @Override
@@ -209,6 +217,7 @@ public class FooterController implements ActionListener {
                     footerView.showPopUpLyrics(lyrics.get(1),lyrics.get(0));
                 }
             }
+
         }
     }
 }
