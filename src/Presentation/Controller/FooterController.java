@@ -14,26 +14,46 @@ import java.util.ArrayList;
 
 public class FooterController implements ActionListener {
 
+    // Preparem atributs
     private final FooterView footerView;
     private final SongManager songManager;
     private final PlaylistManager playlistManager;
     private String lastSong;
 
-
+    /**
+     * Funció que servirà per com a constructor del FooterController
+     *
+     * @param footerView, per a utilitzar alguns del seus atributs com la barra del footer
+     * @param songManager, per a utilitzar els seus mètodes, aquí tractarem tota la cançó
+     * @param playlistManager, per a utilitzar els seus mètodes, aquí tractarem tot el tema de reproduir playlist
+     *
+     */
     public FooterController(FooterView footerView, SongManager songManager, PlaylistManager playlistManager) {
         this.footerView = footerView;
         this.songManager = songManager;
         this.playlistManager = playlistManager;
 
     }
-
+    /**
+     * Funció que servirà per parar el thread quan volguem fer logout o delete account.
+     * Es necesari per un bon funcionament de la barra de reproducció
+     *
+     * No tindrà param ni return
+     */
     public void outOfTheProgram(){
         if(footerView.progressBarThread != null){
             footerView.iterateProgressBar(songManager.clipDuration(), 0, false, true);
         }
     }
 
-    public void controlBarFromDetailed(String songName){
+    /**
+     * Funció que servirà per parar el thread quan volguem fer logout o delete account.
+     * Es necesari per un bon funcionament de la barra de reproducció
+     *
+     * No tindrà param ni return
+     */
+
+    public void controlBarFromDetailed(){
         if(footerView.progressBarThread != null){
             footerView.iterateProgressBar(0, 0, false, true);
         }

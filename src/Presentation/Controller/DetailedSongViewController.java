@@ -77,7 +77,7 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
                 } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
                     ex.printStackTrace();
                 }
-                footerController.controlBarFromDetailed(songName);
+                footerController.controlBarFromDetailed();
                 break;
             case DetailedSongView.BTN_PLAYLIST:
                 // Netejem el filtre cada cop que pulsem el boto

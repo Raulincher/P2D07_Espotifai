@@ -30,8 +30,7 @@ public class FooterView extends JPanel {
     private JButton jRepeatList;
     private JButton jStopSong;
     private JButton jLyrics;
-    private JLabel jLogo = new JLabel("Nothing playing");
-    private String jSongName;
+    private final JLabel jLogo = new JLabel("Nothing playing");
     public ProgressBarThread progressBarThread;
     public JProgressBar jProgressBar;
     private JLabel totalTime;
@@ -58,8 +57,7 @@ public class FooterView extends JPanel {
      * @param actualSong, String recollit del FooterController
      */
     public void setActualSong(String actualSong) {
-        this.jSongName = actualSong;
-        updateSongName(jSongName);
+        updateSongName(actualSong);
         repaint();
     }
 
@@ -198,24 +196,40 @@ public class FooterView extends JPanel {
         jplay.setIcon(pauseBtn);
     }
 
+    /**
+     * Funció que servirà per actualitzar el temps total de la cancó
+     *
+     * @param text, temps en format minuts:segons
+     * No tindrà return
+     */
     public void setSongTotalTime(String text) {
         totalTime.setText(text);
     }
 
+    /**
+     * Funció que servirà per actualitzar el temps actual de la cançó
+     *
+     * @param text, temps en format minuts:segons
+     * No tindrà return
+     */
     public void setSongActualTime(String text) {
         actualTime.setText(text);
     }
 
-    public String getActualTime(){
-        return actualTime.getText();
-    }
-
+    /**
+     * Funció que ens permetrà controlar tot l'apartat del Thread dins del reproductor
+     * (parar-lo si s'executa, excutarlo per iniciar la barra i fer l'stop i resume d'una mateixa cançó)
+     *
+     * @param maxValue, valor total en segons de la cançó
+     * @param check, frame actual de la cançó
+     * @param stop, boolean que indica si la cançó vol ser parada
+     * @param killProcess, boolean que indica si volem para el Thread que s'està executant
+     * No tindrà return
+     */
     public void iterateProgressBar(int maxValue, int check, boolean stop, boolean killProcess){
         jProgressBar.setMaximum(maxValue);
         jProgressBar.setMinimum(0);
-        System.out.println("entro 1 vez");
         if(check == 0 && !killProcess) {
-            System.out.println("inicio el thread " + stop + check + killProcess + maxValue);
             progressBarThread = new ProgressBarThread(jProgressBar, actualTime);
             progressBarThread.setPlaying(true);
             // Start the playback thread in a separate thread
@@ -223,13 +237,11 @@ public class FooterView extends JPanel {
             thread.start();
         }else{
             if(!killProcess) {
-                System.out.println("paro el thread " + stop + check + killProcess + maxValue);
                 progressBarThread.setPlaying(stop);
             }
         }
 
         if(killProcess){
-            System.out.println("interrumpo el thread " + stop + check + killProcess + maxValue);
             progressBarThread.setPlaying(false);
             jProgressBar.setValue(0);
             actualTime.setText("00:00");
