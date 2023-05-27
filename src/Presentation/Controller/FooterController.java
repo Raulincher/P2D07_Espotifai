@@ -78,17 +78,14 @@ public class FooterController implements ActionListener {
 
 
                     if(lastSong == null){
-                        System.out.println("soy null");
                         lastSong = actualS;
                         footerView.iterateProgressBar(songManager.clipDuration(), 0, false, clipRunning);
                     }else if(lastSong.equals(actualS)){
-                        System.out.println("soy igual");
-
                         footerView.iterateProgressBar(songManager.clipDuration(), check, true, false);
                     }else{
-                        System.out.println("soy diferente");
                         footerView.iterateProgressBar(songManager.clipDuration(), 0, true, true);
                         footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false);
+                        lastSong = actualS;
 
                     }
 

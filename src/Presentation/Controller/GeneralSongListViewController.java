@@ -79,6 +79,7 @@ public class GeneralSongListViewController implements MouseListener {
                 detailedSongView.fillPopMenu(playlist);
                 detailedSongView.addDetailedSongController(detailedSongViewController);
                 detailedSongView.setNameSong(song.get(0));
+                playlistManager.setCurrentPlaylist(null);
                 mainView.showDetailedSongCard();
             }
         }
