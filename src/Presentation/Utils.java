@@ -120,6 +120,12 @@ public class Utils extends JFrame {
         return panelBuscador;
     }
 
+    /**
+     * Funció de tipus JTextField que servirà com a constructor
+     * d'un textfield per playlists
+     *
+     * @return jUsername, textField ja fet
+     */
     public JTextField textFieldPlaylists(){
         JTextField jUsername = new JTextField();
         jUsername.setFont(new Font("Gotham", Font.BOLD, 15));

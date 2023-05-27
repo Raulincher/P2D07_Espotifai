@@ -17,6 +17,7 @@ import java.util.Map;
 
 public class SongManager {
 
+    // Preparem atributs
     private final SongDao songDao;
     private Clip myClip;
     private String filePath;
@@ -28,24 +29,69 @@ public class SongManager {
     private SongLyricsApi songLyricsApi;
     private boolean loopListCondition = false;
 
+    /**
+     * Funció que servirà per com a constructor del SongManager
+     *
+     * @param songDao, interface que comunica la clase que parla amb la base de dades, així podrem gestionar les dades
+     * @param songLyricsApi, conexió amb la api per agafar les lletres de les cançons disponibles dins la mateixa
+     *
+     */
     public SongManager(SongDao songDao,SongLyricsApi songLyricsApi) {
         this.songDao = songDao;
         this.songLyricsApi = songLyricsApi;
     }
+
+    /**
+     * Funció que servirà per agafar el path sencer d'una cançó dins la base de dades
+     *
+     * @param songName, string que utilitzarem per buscar la canço dins la abse de dades
+     *
+     * @return path, string amb el path de la song
+     *
+     */
     public String getPath(String songName){
         return songDao.songPath(songName);
     }
 
+    /**
+     * Funció que servirà per agafar el temps total d'una cançó en format int
+     *
+     * @param songName, string que utilitzarem per buscar la canço dins la base de dades
+     *
+     * @return time, int de la duració de la cançó
+     */
     public int getSongDurationFromDatabase(String songName){return songDao.songDuration(songName);}
 
+    /**
+     * Funció que servirà per agafar el temps total d'una cançó en format String minutes:seconds
+     *
+     * @param songName, string que utilitzarem per buscar la canço dins la base de dades
+     *
+     *
+     * @return time, String de la duració de la cançó minutes:seconds format
+     */
     public String songDurationInString(String songName){
         return songDao.songDurationInString(songName);
     }
 
+    /**
+     * Funció que ens permet veure la posició del frames del clip actual
+     *
+     * no params
+     *
+     * @return actualFrame, frame actual en forma d'int
+     */
     public int checkMyClip(){
         return myClip.getFramePosition();
     }
 
+    /**
+     * Funció que ens permet veure la duració total del clip actual
+     *
+     * no params
+     *
+     * @return duration, duració total del clip
+     */
     public int clipDuration(){
         int duration = 0;
 
@@ -55,14 +101,36 @@ public class SongManager {
         return duration;
     }
 
+    /**
+     * Funció que ens permet agafar la cançó actual guardada dins de thatSong
+     *
+     * no params
+     *
+     * @return thatSong, String de la cançó actual
+     */
     public String getActualSong() {
         return thatSong;
     }
 
+    /**
+     * Funció que ens permet cambiar la cançó actual guardada dins de thatSong
+     *
+     * @param song, string que fara cambiar la variable thatSong
+     *
+     * no return
+     */
     public void setActualSong(String song) {
         thatSong = song;
     }
 
+
+    /**
+     * Funció que ens permet, agafar la cançó que volguem reproduir i a més parar la que ya s'está reproduint per evitar sorolls dobles
+     *
+     * @param songTitle, string que ens dira quin titol te la cançó que volem reproduir
+     *
+     * no return
+     */
     public void getSong(String songTitle){
         try {
             File music;
@@ -74,6 +142,7 @@ public class SongManager {
                 System.out.println("entro para cambiar clip");
             }
 
+            //comprovem el title, si es no hem escollit cap cançó es reproduira la primera dins la vista general
             if(songTitle.equals("")){
                 music = new File("files/music/");
                 files = music.listFiles();
@@ -116,6 +185,13 @@ public class SongManager {
         }
     }
 
+    /**
+     * Funció que ens permet para la cançó que s'está reproduint i a més ens serveix per avisar a la vista, que té que cambiar, amb una flag
+     *
+     * @return stopped, boolean que indica si la cançó s'ha parat
+     *
+     * no param
+     */
     public boolean simpleAudioPlayer() throws IOException, UnsupportedAudioFileException, LineUnavailableException {
         boolean stopped = true;
         if(myClip != null) {
@@ -140,18 +216,24 @@ public class SongManager {
         return stopped;
     }
 
-    public boolean anyClipRunning(){
-        boolean run = false;
-        if(myClip != null){
-            run = myClip.isRunning();
-        }
-        return run;
-    }
-
+    /**
+     * Funció que ens permet detectar si la cançó que volem esborrar s'està reproduint
+     *
+     * @param songDelete, cançó a comparar amb l'actual
+     *
+     * @return boolean amb la flag esmentada a la funció
+     *
+     * no param
+     */
     public boolean isPlaying(String songDelete){
         return (myClip.isRunning() & actualSong.equals(songDelete));
     }
 
+    /**
+     * Funció que ens permet parar i tancar l'arxiu de so myclip
+     *
+     * no param ni return
+     */
     public void stopClip() {
         if(myClip != null) {
             if (myClip.isRunning()) {
@@ -161,18 +243,34 @@ public class SongManager {
         }
     }
 
+    /**
+     * Funció que ens permet fer un bucle a la cançó actual
+     *
+     * no param ni return
+     */
     public void loopAudio() {
         if(myClip != null) {
             myClip.loop(Clip.LOOP_CONTINUOUSLY);
         }
     }
 
+    /**
+     * Funció que ens permet avançar cap a la següent cançó si es posible
+     *
+     * @param playlistName, nom de la playlist, si existeix
+     * @param nextSong, següent cançó de la llista, en cas de ser una playlist
+     *
+     * no return
+     */
     public void moveForward(String playlistName, String nextSong){
         int auxPos = 0;
+        //assegurem que el nostre clip no es null
         if(myClip != null) {
+            //assegurem que tanquem el clip anterior per evitar sorolls dobles
             if (myClip.isRunning()) {
                 myClip.close();
             }
+            //detecció en cas de ser una playlist o una cançó per separat
             if(playlistName == null){
                 try {
                     File music = new File("files/music/");
@@ -229,12 +327,24 @@ public class SongManager {
 
     }
 
+    /**
+     * Funció que ens permet retrocedir cap a l'anterior cançó si és posible
+     *
+     * @param playlistName, nom de la playlist, si existeix
+     * @param previousSong, anterior cançó de la llista, en cas de ser una playlist
+     *
+     * no return
+     */
     public void moveBackward(String playlistName, String previousSong){
         int auxPos = 0;
+        //assegurem que el nostre clip no es null
         if(myClip != null) {
+            //assegurem que tanquem el clip anterior per evitar sorolls dobles
             if (myClip.isRunning()) {
                 myClip.close();
             }
+
+            //detecció en cas de ser una playlist o una cançó per separat
             if(playlistName == null) {
                 try {
                     File music = new File("files/music/");
@@ -289,22 +399,48 @@ public class SongManager {
         }
     }
 
+    /**
+     * Funció que ens permet activar el camp de loop list, aquí indicarem si una llista pot loopejar quan arriba el final o no
+     *
+     * no return ni param
+     */
     public void loopList() {
         if(myClip != null) {
             loopListCondition = !loopListCondition;
         }
     }
-
+    /**
+     * Funció que ens permet obtenir el camp de loop list
+     *
+     * @return boolean amb l'estat de la variable loop list
+     *
+     * no param
+     */
     public boolean isLoopListCondition() {
         return loopListCondition;
     }
 
+    /**
+     * Funció que ens permet sobreescriure el camp de loop list
+     *
+     * @param loopListCondition, boolean que ens marca la condició desitjada
+     *
+     * no return
+     */
     public void setLoopListCondition(boolean loopListCondition) {
         this.loopListCondition = loopListCondition;
     }
 
+    /**
+     * Funció que ens permet agafar un fitxer del nostre ordinador per poder guardar-lo localment
+     *
+     * @return boolean amb la flag de si tot a anat bé amb la selecció
+     *
+     * no param
+     */
     public boolean fileSongSelector() {
         JFileChooser fileChooser = new JFileChooser();
+        //mirem de fer un filtre d'extensions wav
         fileChooser.addChoosableFileFilter(new FileNameExtensionFilter("wav audios", "wav"));
         String[] aux;
         int response = fileChooser.showOpenDialog(null);
@@ -317,6 +453,7 @@ public class SongManager {
             String fileName = file.getName();
             aux = fileName.split("\\.");
 
+            //comprobem que l'extensió sigui correcte
             if(aux[1].equals("wav")){
                 filePath = "files/music/" + fileName;
                 fileFormatCorrect = true;
@@ -326,16 +463,38 @@ public class SongManager {
         return fileFormatCorrect;
     }
 
+    /**
+     * Funció que ens permet agafar el path d'un fitxer en local, el nom sense el path sencer
+     *
+     * @return string amb el nom en format path de la cançó, exemple -> cançó.wav
+     *
+     * no param
+     */
     public String obtainFilePath() {
         return file.getName();
     }
 
+    /**
+     * Funció que ens permet tancar el nostre clip en cas de sortir del programa
+     *
+     * no param no return
+     */
     public void endSong(){
         if(myClip != null){
             myClip.close();
         }
     }
 
+    /**
+     * Funció que ens permet comprovar si el camps son empty
+     *
+     * @param songName, nom de la cançó escollida per l'usuari
+     * @param artist, nom de l'artista escollit per l'usuari.
+     * @param album, nom de l'album escollit per l'usuari.
+     * @param genre, nom del genere escollit per l'usuari.
+     *
+     * @return songSaved, flag que indicará que algun camp esta buit
+     */
     public boolean isEmpty(String songName, String artist, String album, String genre) {
         boolean emptyField = false;
 
@@ -344,7 +503,20 @@ public class SongManager {
         }
         return emptyField;
     }
-    public boolean addSong(String songName, String artist, String album, String genre, String username,String time) {
+
+    /**
+     * Funció que ens permet tcomprovar que a l'hora de guardar una cançó cumplim tots els parametres
+     *
+     * @param songName, nom de la cançó escollida per l'usuari
+     * @param artist, nom de l'artista escollit per l'usuari.
+     * @param album, nom de l'album escollit per l'usuari.
+     * @param genre, nom del genere escollit per l'usuari.
+     * @param username, nom de l'usuari que puja la cançó
+     * @param time, temps total de la cançó
+     *
+     * @return songSaved, flag que indicará que el procés ha estat correcte
+     */
+    public boolean addSong(String songName, String artist, String album, String genre, String username, String time) {
         boolean songSaved = true;
         // Guardar fitxer
         file.renameTo(new File(filePath));
@@ -361,6 +533,14 @@ public class SongManager {
         return songSaved;
     }
 
+
+    /**
+     * Funció que ens permet comprovar que una cançó existeix
+     *
+     * @param songName, nom de la cançó
+     *
+     * @return songExists, flag que indicará que la cançó existeix
+     */
     public boolean songExists(String songName) {
         // Si troba la cançó EN EL DAO
         if (songDao.songInDatabase(songName) ) {
@@ -371,6 +551,13 @@ public class SongManager {
         }
     }
 
+    /**
+     * Funció que ens permet esborrar una cançó amb title x
+     *
+     * @param name, nom de la cançó
+     *
+     * @return songExists, flag que indicará que la cançó ha sigut esborrada
+     */
     public boolean deleteSong(String name) {
         boolean deletedOk = false;
 
@@ -386,6 +573,14 @@ public class SongManager {
         return deletedOk;
     }
 
+    /**
+     * Funció que ens permet obtenir el llistat de les cançons a la base de dades
+     *
+     * @param toDelete, boolean que indica si es per esborrar
+     * @param currentUsername, nom d'usuari actual
+     *
+     * @return information, arrayList de totes les cançons recollides de la BBDD
+     */
     public ArrayList<String> listSongs(boolean toDelete, String currentUsername) {
         ArrayList<String> information = new ArrayList<>();
         ArrayList<Song> allSongs = songDao.readAllSongsSQL();
@@ -407,6 +602,14 @@ public class SongManager {
         return information;
     }
 
+
+    /**
+     * Funció que ens permet obtenir el llistat de les cançons a partir d'uns parametres de busqueda
+     *
+     * @param nameSong, nom de la cançó per filtrar
+     *
+     * @return songSelected, arrayList de les cançons filtrades
+     */
     public ArrayList<String> searchSong(String nameSong){
         ArrayList<String> songSelected = new ArrayList<>();
         ArrayList<Song> listSongs = songDao.readAllSongsSQL();
@@ -469,10 +672,23 @@ public class SongManager {
         return genreMap;
     }
 
+    /**
+     * Funció que ens permet llegir les lyrics d'una cançó, si existeixen a la API
+     *
+     * @param artist, artista de la cançó
+     * @param songName, nom de la cançó
+     *
+     * @return lyricsSong, arrayList de les lyrics
+     */
     public String readLyricApi(String artist, String songName){
         return songLyricsApi.readLyrics(artist,songName);
     }
 
+    /**
+     * Funció que ens permet buscar les lyrics d'una cançó
+     *
+     * @return lyricsSong, arrayList de les lyrics
+     */
     public ArrayList<String> searchLyrics(){
         String name = this.actualSong.substring(0, actualSong.lastIndexOf(".wav"));
         String artist = songDao.songArtist(name);
@@ -483,7 +699,11 @@ public class SongManager {
         return lyricsSong;
     }
 
-
+    /**
+     * Funció que ens permet calcular el temps total d'una cançó
+     *
+     * @return temps, arrayList del temps total de la cançó en format (boolean, minuts:segons)
+     */
     public ArrayList<String> timeSong() {
         ArrayList<String> temps = new ArrayList<>();
         try {
@@ -502,16 +722,35 @@ public class SongManager {
         return temps;
     }
 
-
-    //Borrem la cançó de la base de dades i retornem l'array de cançons per treure-les de les playlists
+    /**
+     * Funció que ens permet obtenir les cançons pujades per un usuari a la BBDD
+     *
+     * @param userName, usuari que va pujar la cançó
+     *
+     * @return songs, array de cançons per treure-les de les playlists
+     */
     public ArrayList<String> obtainSongsByUser(String userName) {
         return songDao.filterSongsByUser(userName);
     }
 
+    /**
+     * Funció que ens permet borrar les cançons d'un usuari de la base de dades
+     *
+     * @param songsByUser, arraylist de cançons a esborrar
+     *
+     * @return filePath, array de paths locals per esborrar els fitxers
+     */
     public ArrayList<String> deleteSongsByUsername(ArrayList<String> songsByUser) {
         return songDao.deleteSongsByUsername(songsByUser);
     }
 
+    /**
+     * Funció que ens permet borrar les cançons en local
+     *
+     * @param pathsToDelete, arraylist de paths de cançons a esborrar
+     *
+     * no return
+     */
     public void deletePaths(ArrayList<String> pathsToDelete) {
         int i = 0;
 
