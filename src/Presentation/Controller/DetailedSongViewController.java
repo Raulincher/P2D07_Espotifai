@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Classe per controlar la vista del detailedSongView i les interaccions d'aquesta
+ * Classe per controlar la vista del detailedSongView i les  d'aquesta
  */
 public class DetailedSongViewController  implements ActionListener, MouseListener, DocumentListener {
 

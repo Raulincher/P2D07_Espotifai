@@ -22,6 +22,7 @@ public class MainView extends JFrame {
     private final GeneralPlaylistView generalPlaylistView;
     private final MainMenuView mainMenuView;
     private final StatisticsView statisticsView;
+    private final HeaderView headerView;
 
     // Afegim els strings finals per a referir-se a cada View
     private static final String CARD_MAIN = "CARD_MAIN";
@@ -40,7 +41,6 @@ public class MainView extends JFrame {
     private JPanel main;
     private JPanel center;
     private CardLayout cardMain;
-    private HeaderView headerView;
 
     /**
      * Funció que servirà per a configurar el programa

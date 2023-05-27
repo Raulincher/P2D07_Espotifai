@@ -40,8 +40,7 @@ public class GeneralSongListViewController implements MouseListener {
      * @param playlistManager, manager per obtenir les playlists de l'usuari registrat.
      * @param userManager, manager per obtenir l'usuari actual
      * @param detailedSongViewController, controller de la classe detailed Song View per poder activar el listener de les playlists
-     */
-    public GeneralSongListViewController(GeneralSongListView generalSongListView, MainView mainView, SongManager songManager, DetailedSongView detailedSongView, PlaylistManager playlistManager, UserManager userManager,DetailedSongViewController detailedSongViewController) {
+     */    public GeneralSongListViewController(GeneralSongListView generalSongListView, MainView mainView, SongManager songManager, DetailedSongView detailedSongView, PlaylistManager playlistManager, UserManager userManager,DetailedSongViewController detailedSongViewController) {
         this.generalSongListView = generalSongListView;
         this.mainView = mainView;
         this.songManager = songManager;

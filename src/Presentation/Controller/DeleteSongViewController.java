@@ -62,20 +62,14 @@ public class DeleteSongViewController implements ActionListener, DocumentListene
         deleteSongView.obtainSongIndexToDelete(songTitle);
 
         if (deleteSongView.confirmationDeletePopUp(songTitle) == 0) {
-            boolean playing = songManager.isPlaying(songTitle);
-            System.out.println("Playing: " + playing);
-            if (!playing) {
-                if (songManager.deleteSong(songTitle)) {
-                    deleteSongView.showPopUps("Song Deleted Successfully");
-                    ArrayList<String> songsUpdated = songManager.listSongs(true, userManager.currentUsername());
-                    deleteSongView.fillDeleteTable(songsUpdated);
-                    deleteSongView.clearSearcher();
-                    playlistManager.deleteSongFromPlaylists(songTitle);
-                } else {
-                    deleteSongView.showPopUps("The song couldn't delete!");
-                }
+            if (songManager.deleteSong(songTitle)) {
+                deleteSongView.showPopUps("Song Deleted Successfully");
+                ArrayList<String> songsUpdated = songManager.listSongs(true, userManager.currentUsername());
+                deleteSongView.fillDeleteTable(songsUpdated);
+                deleteSongView.clearSearcher();
+                playlistManager.deleteSongFromPlaylists(songTitle);
             } else {
-                deleteSongView.showPopUps("The song is playing. You can't delete!");
+                deleteSongView.showPopUps("The song is playing!");
             }
         } else {
             deleteSongView.showPopUps("Song NOT deleted");

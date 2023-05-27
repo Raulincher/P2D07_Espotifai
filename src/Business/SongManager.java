@@ -149,7 +149,7 @@ public class SongManager {
     }
 
     public boolean isPlaying(String songDelete){
-        return !(myClip.isRunning() & actualSong.equals(songDelete));
+        return (myClip.isRunning() & actualSong.equals(songDelete));
     }
 
     public void stopClip() {
@@ -374,12 +374,15 @@ public class SongManager {
     public boolean deleteSong(String name) {
         boolean deletedOk = false;
 
-        // Si troba la cançó EN EL DAO
-        String filePath = songDao.deleteSong(name);
-        file = new File(filePath);
-        if (file.delete()) {
-            deletedOk = true;
+        if (!isPlaying(name)) {
+            // Si troba la cançó EN EL DAO
+            String filePath = songDao.deleteSong(name);
+            file = new File(filePath);
+            if (file.delete()) {
+                deletedOk = true;
+            }
         }
+
         return deletedOk;
     }
 
