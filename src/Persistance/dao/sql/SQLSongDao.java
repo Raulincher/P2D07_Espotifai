@@ -15,7 +15,7 @@ public class SQLSongDao implements SongDao {
     private final Connection remoteConnection;
 
     /**
-     * Funció que servirà per com a constructor del SongManager
+     * Funció que servirà per com a constructor del SQLSongDao
      *
      * @param remoteConnection, connexió remota amb la BBDD
      */

@@ -11,11 +11,24 @@ import java.sql.*;
 
 public class SQLUserDao implements UserDao {
 
+    // Preparem atributs
     private final Connection remoteConnection;
+
+    /**
+     * Funció que servirà per com a constructor del SQLUserDao
+     *
+     * @param remoteConnection, connexió remota amb la BBDD
+     */
     public SQLUserDao(Connection remoteConnection){
         this.remoteConnection = remoteConnection;
     }
 
+
+    /**
+     * Funció que servirà per guardar un user a BBDD
+     *
+     * @param user, user per guardar
+     */
     public void register(User user) {
         try {
             String generatedPassword = null;
@@ -51,6 +64,13 @@ public class SQLUserDao implements UserDao {
         }
     }
 
+    /**
+     * Funció que servirà per comprobar que un user estigui ja a BBDD, (només comprobant el username)
+     *
+     * @param user, user a comprobar
+     *
+     * @return error, boolean amb la existencia del user dins la base de dades
+     */
     public boolean userExists(User user){
         boolean error = false;
         try{
@@ -77,6 +97,13 @@ public class SQLUserDao implements UserDao {
         return error;
     }
 
+
+    /**
+     * Funció que servirà per borrar un user de la BBDD
+     *
+     * @param user, user a esborrar
+     *
+     */
     public void delete(User user) throws UserNotFoundException {
         int affected = 0;
         System.out.println(user.getEmail());
@@ -126,6 +153,13 @@ public class SQLUserDao implements UserDao {
         }
     }
 
+    /**
+     * Funció que servirà per comprobar si un user existeix
+     *
+     * @param user, user per comprobar
+     *
+     * @return error, boolean amb la existencia del user dins la base de dades
+     */
     public boolean login(User user) throws UserNotFoundException{
         boolean error = false;
 
