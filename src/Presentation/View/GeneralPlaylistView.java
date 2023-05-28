@@ -169,6 +169,14 @@ public class GeneralPlaylistView extends JPanel {
         //add(south, BorderLayout.SOUTH);
     }
 
+    /**
+     * Funció que servirà per crear una taula amb scrollpane
+     *
+     * @param table, taula a crear
+     *
+     * @return table, retornem la taula ja montada
+     *
+     */
     public JScrollPane createSongListTable(JTable table){
         Color gris = new Color(26,26,26);
 
@@ -190,6 +198,12 @@ public class GeneralPlaylistView extends JPanel {
         return new JScrollPane(table);
     }
 
+    /**
+     * Funció que servirà per omplir la taula de playlist de l'esquerra, que es la del usuari
+     *
+     * @param playlistsNames, playlist de la BBDD (array de noms)
+     *
+     */
     public void fillMyPlaylistsTable(ArrayList<String> playlistsNames) {
         if (playlistsNames != null) {
             myPlaylistsModel.setRowCount(0);
@@ -202,6 +216,12 @@ public class GeneralPlaylistView extends JPanel {
         }
     }
 
+    /**
+     * Funció que servirà per omplir la taula de playlist de l'esquerra, que es la de altres usuaris
+     *
+     * @param playlistsNames, playlist de la BBDD (array de noms)
+     *
+     */
     public void fillOtherPlaylistsTable(ArrayList<String> playlistsNames) {
         if (playlistsNames != null) {
             otherPlaylistsModel.setRowCount(0);
@@ -214,6 +234,13 @@ public class GeneralPlaylistView extends JPanel {
         }
     }
 
+    /**
+     * Funció que servirà per obtenir quina taula hem clicat, si la nostra o la de altra user
+     *
+     * @param object, objecte clicat
+     *
+     * @return table, boolean que indica si es nostra o no
+     */
     public int obtainTableClicked(Object object) {
         int table = 0;
 
@@ -227,7 +254,14 @@ public class GeneralPlaylistView extends JPanel {
     }
 
 
-
+    /**
+     * Funció que servirà per obtenir el nom de la playlist clicada
+     *
+     * @param point, punt on es clica
+     * @param tableClicked, taula clicada
+     *
+     * @return playlistName, String amb el nom de la playlist
+     */
     public String obtainPlaylistName(Point point, int tableClicked) {
         String playlistName = null;
 
@@ -245,15 +279,32 @@ public class GeneralPlaylistView extends JPanel {
         return playlistName;
     }
 
+    /**
+     * Funció que servirà per obtenir el buscador de la nostra playlist
+     *
+     * @return jMyPlaylistBuscador, Jtextfield amb el nostre buscador
+     */
     public JTextField getMyPlaylistBuscador() {
         System.out.println("jMyPlaylistBuscador: " + jMyPlaylistBuscador);
         return jMyPlaylistBuscador;
     }
+
+    /**
+     * Funció que servirà per obtenir el buscador de la playlist d'altres users
+     *
+     * @return jOthersPlaylistBuscador, jtextfield amb el buscador
+     */
     public JTextField getOtherPlaylistBuscador() {
         System.out.println("jMyPlaylistBuscador: " + jOthersPlaylistBuscador);
         return jOthersPlaylistBuscador;
     }
 
+    /**
+     * Funció que servirà com a buscador dins la playlist
+     *
+     * @param query, query amb la info
+     * @param sorter, sorter de la taula
+     */
     public void search(String query, TableRowSorter<DefaultTableModel> sorter) {
         // Ens assegurem que s'hagi introduït alguna cosa
         if (query.length() == 0) {
@@ -265,13 +316,27 @@ public class GeneralPlaylistView extends JPanel {
         }
     }
 
+    /**
+     * Funció que retorna el sorter de la taula amb les playlist del usuari
+     *
+     * @return myPlaylistSorter
+     */
     public TableRowSorter<DefaultTableModel> getMyPlaylistSorter() {
         return myPlaylistSorter;
     }
+
+    /**
+     * Funció que retorna el sorter de la taula amb les playlist d'altres usuaris
+     *
+     * @return otherPlaylistSorter
+     */
     public TableRowSorter<DefaultTableModel> getOtherPlaylistSorter() {
         return otherPlaylistSorter;
     }
 
+    /**
+     * Funció que neteja el buscador
+     */
     public void clearSearcher() {
         jMyPlaylistBuscador.setText("");
         jOthersPlaylistBuscador.setText("");
