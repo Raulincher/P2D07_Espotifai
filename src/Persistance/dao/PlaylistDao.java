@@ -4,6 +4,9 @@ import Business.Entities.Playlist;
 
 import java.util.ArrayList;
 
+/**
+ * Interfície que conté els mètodes de les playlists
+ */
 public interface PlaylistDao {
 
     /**

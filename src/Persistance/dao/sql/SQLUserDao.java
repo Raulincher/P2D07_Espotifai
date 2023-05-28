@@ -8,7 +8,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
-
+/**
+ * Classe que implementa els mètodes per communicar-se amb la base de dades del user
+ */
 public class SQLUserDao implements UserDao {
 
     // Preparem atributs

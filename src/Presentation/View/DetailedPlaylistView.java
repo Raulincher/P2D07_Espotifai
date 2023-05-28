@@ -13,6 +13,9 @@ import java.util.ArrayList;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
 
+/**
+ * Classe de la vista detailed playlist la qual fa extend d'un jpanel
+ */
 public class DetailedPlaylistView extends JPanel {
 
     // Preparem tots els atributs

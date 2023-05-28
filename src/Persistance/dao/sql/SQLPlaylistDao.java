@@ -10,6 +10,9 @@ import java.sql.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Classe que implementa els mètodes per communicar-se amb la base de dades de la playlist
+ */
 public class SQLPlaylistDao implements PlaylistDao {
 
     // Preparem atributs

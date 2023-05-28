@@ -4,6 +4,9 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * Funcio que prepara i llegeix el configuration file
+ */
 public class DatabaseConnector {
 
     private static DatabaseConnector instance = null;

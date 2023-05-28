@@ -7,7 +7,9 @@ import java.awt.*;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
 
-
+/**
+ * Classe de la vista Main la qual fa extend d'un jpanel
+ */
 public class MainView extends JFrame {
 
     // Afegirem totes les vistes com a atributs final

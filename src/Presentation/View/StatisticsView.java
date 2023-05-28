@@ -9,6 +9,9 @@ import java.util.*;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
 
+/**
+ * Classe de la vista statistics la qual fa extend d'un jpanel
+ */
 public class StatisticsView extends JPanel {
 
     // Preparem els strings en cas que es premi el botó back

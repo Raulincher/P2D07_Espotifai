@@ -11,6 +11,9 @@ import Presentation.Utils;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
 
+/**
+ * Classe de la vista login la qual fa extend d'un jpanel
+ */
 public class LoginView extends JPanel {
 
     // Afegim atributs i components

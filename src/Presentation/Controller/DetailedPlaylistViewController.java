@@ -9,6 +9,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
+/**
+ * Classe que controla la vista del DetailedPlaylist.
+ */
 public class DetailedPlaylistViewController implements ActionListener, MouseListener {
     // Preparem atributs
     private final DetailedPlaylistView detailedPlaylistView;

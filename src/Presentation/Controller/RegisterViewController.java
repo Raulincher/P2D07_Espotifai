@@ -9,6 +9,9 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+/**
+ * Classe per controlar la vista del Register i les interaccions d'aquesta
+ */
 public class RegisterViewController implements ActionListener {
 
     // Declare atributs

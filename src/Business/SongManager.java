@@ -16,7 +16,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Classe que ens permet controla la classe Song
+ * Classe que ens permet controlar la classe Song
  */
 public class SongManager {
 

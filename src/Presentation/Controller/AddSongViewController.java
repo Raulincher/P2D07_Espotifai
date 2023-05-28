@@ -12,6 +12,9 @@ import java.awt.event.ActionListener;
 import java.io.File;
 import java.util.ArrayList;
 
+/**
+ * Classe que controla la vista del Add Song.
+ */
 public class AddSongViewController implements ActionListener {
 
     // Preparem atributs
@@ -25,9 +28,9 @@ public class AddSongViewController implements ActionListener {
      * Funció que servirà per com a constructor del FooterController
      *
      * @param addSongView, per detectar els clics dins de add song view
-     * @param mainView, per cambiar de cards
-     * @param songManager, per poder utilitzar la lógica d'algunes funcions de song manager
-     * @param userManager, per poder utilitzar la lógica d'algunes funcions de user manager
+     * @param mainView, per canviar de cards
+     * @param songManager, per poder utilitzar la lògica d'algunes funcions de song manager
+     * @param userManager, per poder utilitzar la lògica d'algunes funcions de user manager
      *
      */
     public AddSongViewController(AddSongView addSongView, MainView mainView, SongManager songManager, UserManager userManager) {
@@ -39,7 +42,7 @@ public class AddSongViewController implements ActionListener {
 
 
     /**
-     * Funció que servirà per detectar si hem premut qualsevol boto de la vista d'add song
+     * Funció que servirà per detectar si hem premut qualsevol botó de la vista d'add song
      * @param e l'esdeveniment a tramitar
      */
     @Override

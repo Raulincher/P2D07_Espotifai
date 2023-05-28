@@ -9,6 +9,9 @@ import java.awt.*;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
 
+/**
+ * Classe de la vista register la qual fa extend d'un jpanel
+ */
 public class RegisterView extends JPanel {
 
     // Activem els action commands

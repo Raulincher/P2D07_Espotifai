@@ -9,6 +9,9 @@ import java.awt.*;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
 
+/**
+ * Classe de la vista header la qual fa extend d'un jpanel i mostra el logo del Espotifai així com botons de capçalera
+ */
 public class HeaderView extends JPanel {
 
     // Preparem els botons

@@ -17,7 +17,7 @@ import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 /**
- * Classe per controlar la vista del detailedSongView i les interaccions d'aquesta
+ * Classe per controlar la vista del GeneralSongView i les interaccions d'aquesta
  */
 public class GeneralSongListViewController implements MouseListener {
 

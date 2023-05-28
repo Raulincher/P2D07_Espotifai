@@ -9,6 +9,9 @@ import java.awt.*;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
 
+/**
+ * Classe de la vista Main Menu la qual fa extend d'un jpanel
+ */
 public class MainMenuView extends JPanel {
 
     // Afegim els atributs

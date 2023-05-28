@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Map;
 
+/**
+ * Classe per controlar la vista del Main Menu i les interaccions d'aquesta
+ */
 public class MainMenuViewController implements ActionListener{
 
     // Declarem els atributs

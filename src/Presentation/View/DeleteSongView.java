@@ -11,6 +11,9 @@ import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.util.ArrayList;
 
+/**
+ * Classe de la vista delete song la qual fa extend d'un jpanel
+ */
 public class DeleteSongView extends JPanel {
 
     // Preparem tots els atributs

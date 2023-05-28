@@ -5,6 +5,9 @@ import Business.Entities.Song;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+/**
+ * Interfície que conté els mètodes de les songs
+ */
 public interface SongDao {
     /**
      * Funció que servirà per guardar una song a BBDD

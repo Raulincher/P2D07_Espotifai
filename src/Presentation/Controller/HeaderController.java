@@ -11,6 +11,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+/**
+ * Classe per controlar la vista del Footer i les interaccions d'aquesta
+ */
 public class HeaderController implements ActionListener {
     private final HeaderView headerView;
     private final UserManager userManager;

@@ -18,6 +18,9 @@ import java.util.ArrayList;
 import javax.swing.event.DocumentEvent;
 
 
+/**
+ * Classe que controla la vista del Delete Song.
+ */
 public class DeleteSongViewController implements ActionListener, DocumentListener, MouseListener {
 
     // Preparem atributs
@@ -31,9 +34,9 @@ public class DeleteSongViewController implements ActionListener, DocumentListene
      * Funció que servirà per com a constructor del FooterController
      *
      * @param deleteSongView, per detectar els clics dins de delete song view
-     * @param playlistManager, per poder utilitzar la lógica d'algunes funcions de playlist manager
-     * @param songManager, per poder utilitzar la lógica d'algunes funcions de song manager
-     * @param userManager, per poder utilitzar la lógica d'algunes funcions de user manager
+     * @param playlistManager, per poder utilitzar la lògica d'algunes funcions de playlist manager
+     * @param songManager, per poder utilitzar la lògica d'algunes funcions de song manager
+     * @param userManager, per poder utilitzar la lògica d'algunes funcions de user manager
      *
      */
     public DeleteSongViewController(DeleteSongView deleteSongView, SongManager songManager,
@@ -45,7 +48,7 @@ public class DeleteSongViewController implements ActionListener, DocumentListene
     }
 
     /**
-     * Funció que servirà per detectar si hem premut qualsevol boto de la vista del delete song view
+     * Funció que servirà per detectar si hem premut qualsevol botó de la vista del delete song view
      * @param e l'esdeveniment a tramitar
      */
     @Override

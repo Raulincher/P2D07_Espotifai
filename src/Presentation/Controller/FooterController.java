@@ -11,7 +11,9 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
-
+/**
+ * Classe per controlar la vista del Footer i les interaccions d'aquesta
+ */
 public class FooterController implements ActionListener {
 
     // Preparem atributs

@@ -5,6 +5,9 @@ import Persistance.dao.PlaylistDao;
 import Persistance.dao.PlaylistNotSavedException;
 import java.util.ArrayList;
 
+/**
+ * Classe que ens permet controlar la classe Playlist
+ */
 public class PlaylistManager {
 
     // Preparem els atributs

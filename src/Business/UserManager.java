@@ -5,7 +5,9 @@ import Persistance.dao.UserDao;
 import Persistance.dao.UserNotFoundException;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
-
+/**
+ * Classe que ens permet controlar la classe User
+ */
 public class UserManager {
 
     // Preparem atributs

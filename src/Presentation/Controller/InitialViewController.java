@@ -6,6 +6,9 @@ import java.awt.event.ActionListener;
 import Presentation.View.InitialView;
 import Presentation.View.MainView;
 
+/**
+ * Classe per controlar la vista Initial i les interaccions d'aquesta
+ */
 public class InitialViewController implements ActionListener {
 
     // Preparem atributs

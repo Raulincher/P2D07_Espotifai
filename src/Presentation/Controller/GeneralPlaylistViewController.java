@@ -16,6 +16,9 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
+/**
+ * Classe per controlar la vista del General Playlist View i les interaccions d'aquesta
+ */
 public class GeneralPlaylistViewController implements ActionListener, MouseListener, DocumentListener {
 
     // Preparem atributs

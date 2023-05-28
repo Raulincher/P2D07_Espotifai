@@ -9,6 +9,9 @@ import java.awt.*;
 
 import static javax.swing.BorderFactory.createEmptyBorder;
 
+/**
+ * Classe de la vista Initial la qual fa extend d'un jpanel
+ */
 public class InitialView extends JPanel {
 
     // Afegim atributs i components

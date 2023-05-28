@@ -8,6 +8,9 @@ import Presentation.Utils;
 import javax.swing.*;
 import java.awt.*;
 
+/**
+ * Classe de la vista Footer la qual fa extend d'un jpanel i mostra la barra del reproductor
+ */
 public class FooterView extends JPanel {
 
     // Preparem atributs

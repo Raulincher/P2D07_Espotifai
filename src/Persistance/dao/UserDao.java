@@ -2,7 +2,10 @@ package Persistance.dao;
 
 import Business.Entities.User;
 
-public interface UserDao {
+
+/**
+ * Interfície que conté els mètodes dels users
+ */public interface UserDao {
     /**
      * Funció que servirà per guardar un user a BBDD
      *
