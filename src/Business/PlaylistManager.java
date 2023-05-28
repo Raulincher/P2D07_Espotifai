@@ -13,11 +13,9 @@ public class PlaylistManager {
     private String clickedSong;
 
     /**
-     * Constructor de la clase PlaylistManager
+     * Constructor de la classe PlaylistManager
      *
-     * @param playlistDao, interface que ens permet conectar amb l'apartat de playlists dins la BBDD
-     *
-     * no return
+     * @param playlistDao, interface que ens permet connectar amb l'apartat de playlists dins la BBDD
      */
     public PlaylistManager(PlaylistDao playlistDao) {
         this.playlistDao = playlistDao;
