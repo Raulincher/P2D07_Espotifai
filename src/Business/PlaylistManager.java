@@ -16,12 +16,11 @@ public class PlaylistManager {
 
     public boolean savePlaylist(String username, String title) {
         Playlist playlist = new Playlist(username, title, null);
+
         try {
             playlistDao.savePlaylist(playlist);
-            System.out.println("La llista s'ha guardat!");
             return true;
         } catch (PlaylistNotSavedException e) {
-            System.out.println("La llista NO s'ha guardat!");
             return false;
         }
     }

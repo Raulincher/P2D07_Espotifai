@@ -139,7 +139,6 @@ public class SongManager {
 
             if(myClip != null){
                 myClip.close();
-                System.out.println("entro para cambiar clip");
             }
 
             //comprovem el title, si es no hem escollit cap cançó es reproduira la primera dins la vista general
