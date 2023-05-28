@@ -132,7 +132,7 @@ public class SQLPlaylistDao implements PlaylistDao {
     }
 
     /**
-     * Funció que servirà per buscar una canço a una playlist
+     * Funció que servirà per buscar una cançó a una playlist
      *
      * @param songName, nom de la cançó
      * @param playlist, nom de la playlist
@@ -376,7 +376,11 @@ public class SQLPlaylistDao implements PlaylistDao {
         return success;
     }
     /**
-     * Funció que servirà per esborrar una cançó pujada per un user de totes les playlist
+     * Funció que servirà per esborrar una cançó pujada per un user de totes les playlist. Primer mirem si la playlist
+     * es de l'usuari, si ho és la borrem sencera, i si no ho és mirem cançó a canço quines s'han de treure.
+     * Per a trobar les cançons, fem un bucle que llegeix una playlist, d'aquella playlist llegim totes les songs,
+     * i comparem cada una de les songs de la playlist amb cada cançó l'ArrayList<String> songsByUser.
+     * Fem aquest procés amb cada una de les playlists que no siguin de l'usuari.
      *
      * @param songsByUser, totes les cançons d'un user
      * @param username, nom de l'usuari
@@ -398,60 +402,45 @@ public class SQLPlaylistDao implements PlaylistDao {
                     String allSongs = resultSet.getString("songs");
                     boolean save = true;
 
-                    //for (int i = 0; i < songsByUser.size(); i++) {
-                        // Si la playlist es del user, la borrem
-                        if (username.equals(usernameFromDataBase)) {
-                            try {
-                                String deleteQuery = "DELETE FROM playlist WHERE title = ?";
-                                PreparedStatement preparedStatement = remoteConnection.prepareStatement(deleteQuery);
-                                preparedStatement.setString(1, title);
-                                int affectedRows = preparedStatement.executeUpdate();
-                                if (affectedRows == 0) {
-                                    System.out.println("Song not found in the database");
-                                }
-                            } catch (SQLException e) {
-                                System.out.println("Error eliminating the song");
+                    if (username.equals(usernameFromDataBase)) {
+                        try {
+                            String deleteQuery = "DELETE FROM playlist WHERE title = ?";
+                            PreparedStatement preparedStatement = remoteConnection.prepareStatement(deleteQuery);
+                            preparedStatement.setString(1, title);
+                            int affectedRows = preparedStatement.executeUpdate();
+                            if (affectedRows == 0) {
+                                System.out.println("Song not found in the database");
                             }
-                        } else {
-                            // HEM DE LLEGIR LA PLAYLIST I TREURE LES CANÇONS DEL NOSTRE USER
-                       //     try {
-
-                                if (allSongs != null) {
-                                    String[] songs = allSongs.split(",");
-                                    ArrayList<String> songsUpdated = new ArrayList<>();
-
-                                    System.out.println("songsUpdated TOP: " + songsUpdated);
-
-                                    for (int j = 0; j < songs.length; j++) {
-                                        System.out.println("---------Song: " + songs[j]);
-                                        for (int k = 0; k < songsByUser.size(); k++) {
-                                            System.out.println("SongsByUser: " + songsByUser.get(k));
-                                            if ((songsByUser.get(k).equals(songs[j]))) {
-                                                save = false;
-                                            }
-                                        }
-
-                                        if (save) {
-                                            songsUpdated.add(songs[j]);
-                                        }
-                                        save = true;
-                                    }
-                                    System.out.println("songsUpdated: " + songsUpdated);
-                                    String songsCorrectFormat = String.join(",", songsUpdated);
-                                    System.out.println("Songs correct format: " + songsUpdated);
-                                    allSongs = songsCorrectFormat.substring(0);
-                                }
-
-                                String register = "UPDATE playlist SET songs = ? WHERE title = ?";
-                                PreparedStatement preparedStmt = remoteConnection.prepareStatement(register);
-                                preparedStmt.setString(1, allSongs);
-                                preparedStmt.setString(2, title);
-                                preparedStmt.execute();
-
-                         /*   } catch (SQLException e) {
-                            }*/
+                        } catch (SQLException e) {
+                            System.out.println("Error eliminating the song");
                         }
-                   // }
+                    } else {
+                            if (allSongs != null) {
+                                String[] songs = allSongs.split(",");
+                                ArrayList<String> songsUpdated = new ArrayList<>();
+
+                                for (int j = 0; j < songs.length; j++) {
+                                    for (int k = 0; k < songsByUser.size(); k++) {
+                                        if ((songsByUser.get(k).equals(songs[j]))) {
+                                            save = false;
+                                        }
+                                    }
+
+                                    if (save) {
+                                       songsUpdated.add(songs[j]);
+                                    }
+                                    save = true;
+                                }
+                                String songsCorrectFormat = String.join(",", songsUpdated);
+                                allSongs = songsCorrectFormat.substring(0);
+                            }
+
+                            String register = "UPDATE playlist SET songs = ? WHERE title = ?";
+                            PreparedStatement preparedStmt = remoteConnection.prepareStatement(register);
+                            preparedStmt.setString(1, allSongs);
+                            preparedStmt.setString(2, title);
+                            preparedStmt.execute();
+                        }
                 }
             }
         } catch (SQLException e) {

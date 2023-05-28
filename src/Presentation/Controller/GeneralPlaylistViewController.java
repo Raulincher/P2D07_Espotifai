@@ -86,7 +86,8 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
     }
 
     /**
-     * Funció per isntertar el filtre
+     * Funció que serveix per a detectar quan s'ha insertat text en el buscador. Amb el if(...getDocument()) podem veure de quin dels 2
+     * buscador es tracta l'esdeveniment generat.
      *
      * @param e l'esdeveniment de document a tramitar
      */
@@ -99,8 +100,7 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
         }
     }
     /**
-     * Funció per eliminar de la vista les playlists que no s'assemblen a la filtarda
-     *
+     * Funció que s'encarrega de gestionar l'eliminació del text introduit en el JTextfield.     *
      * @param e l'esdeveniment de document a tramitar
      */
     @Override
@@ -113,8 +113,7 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
     }
 
     /**
-     * Funció per actualitzar els canvis del filtre
-     *
+     * Funció per actualitzar els resultats de cerca en la vista de les playlists generals.
      * @param e l'esdeveniment de document a tramitar
      */
     @Override
