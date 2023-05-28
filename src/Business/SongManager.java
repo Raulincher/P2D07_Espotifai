@@ -3,11 +3,11 @@ package Business;
 import Business.Entities.Song;
 import Persistance.dao.SongDao;
 import Persistance.dao.SongLyricsApi;
-
 import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.sql.SQLException;
@@ -15,6 +15,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Classe que ens permet controla la classe Song
+ */
 public class SongManager {
 
     // Preparem atributs
@@ -713,7 +716,7 @@ public class SongManager {
             temps.add(0,"true");
             temps.add(1,minuts + ":" + segons);
             audioInputStream.close();
-        } catch (UnsupportedAudioFileException | IOException e) {
+        } catch (UnsupportedAudioFileException | IOException | NullPointerException e) {
             temps.add(0,"false");
             temps.add(1,"Unsupported Audio File");
         }

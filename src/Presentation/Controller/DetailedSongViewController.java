@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Classe per controlar la vista del detailedSongView i les  d'aquesta
+ * Classe per controlar la vista del detailedSongView i les interaccions d'aquesta
  */
 public class DetailedSongViewController  implements ActionListener, MouseListener, DocumentListener {
 
@@ -27,6 +27,7 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
 
     /**
      * Constructor de la classe DetailedSongViewController
+     *
      * @param detailedSongView, view de la classe
      * @param songManager, manager per a controlar les songs en la detailed View
      * @param playlistManager, manager per obtenir les playlists en la detailed View
@@ -43,6 +44,7 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
     /**
      * Funció que servirà com a resposta quan els usuaris premin el botó
      * i s'activin els listeners
+     *
      * @param e l'esdeveniment a tramitar
      */
     @Override
@@ -88,7 +90,8 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
 
     /**
      * Funció que servirà per mostrar la Pop Up Menu quan els usuaris premin el botó adjunt a aquesta, BTN_PLAYLIST
-     * @param e l'esdeveniment a tramitar
+     *
+     *  @param e l'esdeveniment a tramitar
      */
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -97,6 +100,7 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
 
     /**
      * Funció per poder obtenir MouseListener
+     *
      * @param e l'esdeveniment a tramitar
      */
     @Override
@@ -104,6 +108,7 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
 
     /**
      * Funció per poder obtenir MouseListener
+     *
      * @param e l'esdeveniment a tramitar
      */
     @Override
@@ -111,6 +116,7 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
 
     /**
      * Funció per poder obtenir MouseListener
+     *
      * @param e l'esdeveniment a tramitar
      */
     @Override
@@ -118,6 +124,7 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
 
     /**
      * Funció per poder obtenir MouseListener
+     *
      * @param e l'esdeveniment a tramitar
      */
     @Override
@@ -125,6 +132,7 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
 
     /**
      * Funció per isntertar el filtre de la PopUpMenu i modificar-la
+     *
      * @param e l'esdeveniment de document a tramitar
      */
     @Override
@@ -135,6 +143,7 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
 
     /**
      * Funció per eliminar de la vista del PopUpMenu les cançons que no s'assemblen a la filtarda
+     *
      * @param e l'esdeveniment de document a tramitar
      */
     @Override
@@ -145,6 +154,7 @@ public class DetailedSongViewController  implements ActionListener, MouseListene
 
     /**
      * Funció per actualitzar els canvis del filtre a ala PopUpMenu
+     *
      * @param e l'esdeveniment de document a tramitar
      */
     @Override
