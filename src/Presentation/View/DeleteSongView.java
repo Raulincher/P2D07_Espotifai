@@ -139,7 +139,11 @@ public class DeleteSongView extends JPanel {
         return new JScrollPane(table);
     }
 
-
+    /**
+     * Funció que servirà per omplir la taula de la vista delete
+     *
+     * @param deleteSongs, valor introduït de l'usuari
+     */
     public void fillDeleteTable(ArrayList<String> deleteSongs) {
         deleteTableModel.setRowCount(0);
 
@@ -169,6 +173,11 @@ public class DeleteSongView extends JPanel {
     }
 
 
+    /**
+     * Funció que servirà per fer un sort a la taula
+     *
+     * @return sorter, taula sorted
+     */
     public TableRowSorter<DefaultTableModel> getSorter() {
         return sorter;
     }
@@ -189,7 +198,11 @@ public class DeleteSongView extends JPanel {
         return songTitle;
     }
 
-
+    /**
+     * Funció que servirà per obtenir l'index de la cançó escollida
+     * @param songTitle, song title
+     * @return indexSong, int amb l'index de la cançó
+     */
     public int obtainSongIndexToDelete(String songTitle) {
         int indexSong = 0;
 
