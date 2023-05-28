@@ -14,7 +14,11 @@ public class SQLSongDao implements SongDao {
     // Preparem els atributs
     private final Connection remoteConnection;
 
-
+    /**
+     * Funció que servirà per com a constructor del SongManager
+     *
+     * @param remoteConnection, connexió remota amb la BBDD
+     */
     public SQLSongDao(Connection remoteConnection){
         this.remoteConnection = remoteConnection;
     }

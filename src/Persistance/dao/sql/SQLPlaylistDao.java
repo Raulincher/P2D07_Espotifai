@@ -16,7 +16,7 @@ public class SQLPlaylistDao implements PlaylistDao {
     private final Connection remoteConnection;
 
     /**
-     * Funció que servirà per com a constructor del SongManager
+     * Funció que servirà per com a constructor del SQLPlaylistDao
      *
      * @param remoteConnection, connexió remota amb la BBDD
      */
