@@ -7,6 +7,7 @@ import Presentation.Utils;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
+import java.io.File;
 
 public class AddSongView extends JPanel {
     private final Utils utils;
@@ -185,10 +186,9 @@ public class AddSongView extends JPanel {
         Icon addFileBtn = new ImageIcon(scaledAddFileBtn);
         jfile.remove(jlFilename);
         jfile.setIcon(addFileBtn);
-
     }
 
-    public Boolean fileCheckEmpty(){
-        return jfile == null;
+    public Boolean fileCheckExists() {
+        return jlFilename != null;
     }
 }

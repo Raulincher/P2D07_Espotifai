@@ -18,10 +18,8 @@ public class LoginView extends JPanel {
     private JButton jSubmitBack;
     private JTextField jUsername;
     private JPasswordField jPassword;
-
     public static final String BTN_LOGIN = "BTN_LOGIN";
     public static final String BTN_BACK = "BTN_BACK";
-
     private final Utils utils;
 
     /**
@@ -36,8 +34,6 @@ public class LoginView extends JPanel {
     /**
      * Funció que servirà per a configurar la vista i
      * generar totes les funcions de Swing
-     *
-     * No tindrà ni param ni return
      */
     public void configureLoginView() {
 
@@ -153,6 +149,9 @@ public class LoginView extends JPanel {
     }
 
 
+    /**
+     * Mètode que neteja els camps un cop l'usuari s'ha registrat.
+     */
     public void clearInfo() {
         jUsername.setText("");
         jPassword.setText("");}

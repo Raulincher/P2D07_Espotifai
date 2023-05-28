@@ -400,8 +400,6 @@ public class SongManager {
 
     /**
      * Funció que ens permet activar el camp de loop list, aquí indicarem si una llista pot loopejar quan arriba el final o no
-     *
-     * no return ni param
      */
     public void loopList() {
         if(myClip != null) {
@@ -413,7 +411,6 @@ public class SongManager {
      *
      * @return boolean amb l'estat de la variable loop list
      *
-     * no param
      */
     public boolean isLoopListCondition() {
         return loopListCondition;
@@ -434,8 +431,6 @@ public class SongManager {
      * Funció que ens permet agafar un fitxer del nostre ordinador per poder guardar-lo localment
      *
      * @return boolean amb la flag de si tot a anat bé amb la selecció
-     *
-     * no param
      */
     public boolean fileSongSelector() {
         JFileChooser fileChooser = new JFileChooser();
@@ -485,20 +480,24 @@ public class SongManager {
     }
 
     /**
-     * Funció que ens permet comprovar si el camps son empty
+     * Funció que ens permet comprovar si el camps estan buits
      *
      * @param songName, nom de la cançó escollida per l'usuari
      * @param artist, nom de l'artista escollit per l'usuari.
      * @param album, nom de l'album escollit per l'usuari.
-     * @param genre, nom del genere escollit per l'usuari.
+     * @param genre, nom del gènere escollit per l'usuari.
      *
-     * @return songSaved, flag que indicará que algun camp esta buit
+     * @return songSaved, flag que indicarà que algun camp està buit
      */
     public boolean isEmpty(String songName, String artist, String album, String genre) {
         boolean emptyField = false;
 
-        if (songName.isEmpty() || artist.isEmpty() || album.isEmpty() || genre.isEmpty()) {
+        if (songName == null || artist == null || album == null || genre == null) {
             emptyField = true;
+        } else {
+            if (songName.isEmpty() || artist.isEmpty() || album.isEmpty() || genre.isEmpty()) {
+                emptyField = true;
+            }
         }
         return emptyField;
     }

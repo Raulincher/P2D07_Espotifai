@@ -192,8 +192,6 @@ public class RegisterView extends JPanel {
     /**
      * Funció que servirà per a mostrar el pop up en cas
      * que s'hagi introduït dues contrasenyes diferents
-     *
-     * No tindrà param ni return
      */
     public void differentPassword() {
         JOptionPane.showMessageDialog(this, DIFFERENT_PASSWORD_MESSAGE);
@@ -202,8 +200,6 @@ public class RegisterView extends JPanel {
     /**
      * Funció que servirà per a mostrar el pop up en cas
      * que s'hagi introduït un usuari ja existent
-     *
-     * No tindrà param ni return
      */
     public void userExistence() {
         JOptionPane.showMessageDialog(this, USER_EXISTENCE_MESSAGE);
@@ -212,8 +208,6 @@ public class RegisterView extends JPanel {
     /**
      * Funció que servirà per a mostrar el pop up en cas
      * que s'hagi introduït un email erroni
-     *
-     * No tindrà param ni return
      */
     public void mailError() {
         JOptionPane.showMessageDialog(this, MAIL_ERROR);
@@ -222,8 +216,6 @@ public class RegisterView extends JPanel {
     /**
      * Funció que servirà per a mostrar el pop up en cas
      * que no s'hagi respectat les normes de la contrasenya
-     *
-     * No tindrà param ni return
      */
     public void passwordError() {
         JOptionPane.showMessageDialog(this, PASSWORD_ERROR);
@@ -238,5 +230,16 @@ public class RegisterView extends JPanel {
     public void addRegisterController(RegisterViewController registerController) {
         jbBack.addActionListener(registerController);
         jbRegister.addActionListener(registerController);
+    }
+
+    /**
+     * Mètode que neteja els camps un cop l'usuari s'ha registrat.
+     */
+    public void clearFields() {
+        jtfEmail.setText("");
+        jtfPassword.setText("");
+        jtfRepeatPassword.setText("");
+        jtfUsername.setText("");
+
     }
 }

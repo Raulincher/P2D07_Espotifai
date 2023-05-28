@@ -52,6 +52,7 @@ public class Main {
 
         // Preparem totes les vistes
         FooterView footerView = new FooterView(utils);
+
         // Preparem el header
         HeaderView headerView = new HeaderView(utils);
         RegisterView registerView = new RegisterView(utils);
@@ -66,31 +67,38 @@ public class Main {
         StatisticsView statisticsView = new StatisticsView();
 
         // Iniciem la mainView, que tindrà el mateix header i footer
-        MainView mainView = new MainView(initialView, deleteSongView, statisticsView, mainMenuView, generalPlaylistView, generalSongListView, detailedSongView, detailedPlaylistView, registerView, loginView, addSongView, footerView, headerView);
+        MainView mainView = new MainView(initialView, deleteSongView, statisticsView, mainMenuView, generalPlaylistView,
+                                        generalSongListView, detailedSongView, detailedPlaylistView, registerView,
+                                        loginView, addSongView, footerView, headerView);
 
         // Vinculem amb el controller del footer
         FooterController footerController = new FooterController(footerView, songManager, playlistManager);
         footerView.addFooterController(footerController);
-
-
-        HeaderController headerController = new HeaderController(headerView, userManager, songManager, playlistManager, footerController);
+        HeaderController headerController = new HeaderController(headerView, userManager, songManager,
+                                                                    playlistManager, footerController);
         headerView.addHeaderController(headerController);
         headerController.addMainView(mainView);
-
-
 
         // Vinculem tots els controllers
         InitialViewController initialViewController = new InitialViewController(mainView);
         LoginViewController loginViewController = new LoginViewController(mainView, loginView, userManager);
         RegisterViewController registerViewController = new RegisterViewController(mainView, registerView, userManager);
-        AddSongViewController addSongViewController = new AddSongViewController(addSongView, mainView, songManager, userManager);
-        DeleteSongViewController deleteSongViewController = new DeleteSongViewController(deleteSongView, songManager, userManager, playlistManager);
-        DetailedPlaylistViewController detailedPlaylistViewController = new DetailedPlaylistViewController(detailedPlaylistView, mainView,
-                playlistManager, generalPlaylistView, userManager);
-        DetailedSongViewController detailedSongViewController = new DetailedSongViewController(detailedSongView, songManager, playlistManager, userManager, footerController);
-        GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView, mainView, songManager,detailedSongView, playlistManager, userManager, detailedSongViewController);
-        GeneralPlaylistViewController generalPlaylistViewController = new GeneralPlaylistViewController(generalPlaylistView, mainView, playlistManager, userManager, detailedPlaylistView);
-        MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView, songManager, userManager, deleteSongView, generalSongListView, generalPlaylistView, playlistManager, addSongView, statisticsView);
+        AddSongViewController addSongViewController = new AddSongViewController(addSongView, mainView, songManager,
+                                                                                userManager);
+        DeleteSongViewController deleteSongViewController = new DeleteSongViewController(deleteSongView, songManager,
+                                                                                        userManager, playlistManager);
+        DetailedPlaylistViewController detailedPlaylistViewController = new DetailedPlaylistViewController(detailedPlaylistView,
+                                                                mainView, playlistManager, generalPlaylistView, userManager);
+        DetailedSongViewController detailedSongViewController = new DetailedSongViewController(detailedSongView, songManager,
+                                                                playlistManager, userManager, footerController);
+        GeneralSongListViewController generalSongListViewController = new GeneralSongListViewController(generalSongListView,
+                                                                    mainView, songManager,detailedSongView, playlistManager,
+                                                                    userManager, detailedSongViewController);
+        GeneralPlaylistViewController generalPlaylistViewController = new GeneralPlaylistViewController(generalPlaylistView,
+                                                                        mainView, playlistManager, userManager, detailedPlaylistView);
+        MainMenuViewController mainMenuViewController = new MainMenuViewController(mainMenuView, mainView, songManager,
+                                                                        userManager, deleteSongView, generalSongListView,
+                                                                        generalPlaylistView, playlistManager, addSongView, statisticsView);
 
         // Vinculem vistes amb controllers
         initialView.addInitialViewController(initialViewController);
