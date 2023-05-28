@@ -93,40 +93,42 @@ public class FooterController implements ActionListener {
                     footerView.jProgressBar.setMaximum(songManager.clipDuration());
                     footerView.setSongTotalTime(songManager.songDurationInString(actualS));
                     //detectem si hem premut el botó de pause paer canviar la img més endavant
-                    boolean stop = false;
-                    try {
-                        stop = songManager.simpleAudioPlayer();
-                    } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
-                        ex.printStackTrace();
-                    }
-
-                    if (stop) {
-                        footerView.stop();
-
-                    } else {
-                        footerView.start();
-                    }
-
-                    //aquí comprovem si la cançó anterior és la mateixa, és diferent o és la primera cançó que es reprodueix
-                    int check = songManager.checkMyClip();
-                    if(lastSong == null){
-                        //si es la primera cançó primer farem reset de la barra en cas que sigui necessari
-                        if(footerView.progressBarThread != null) {
-                            footerView.iterateProgressBar(songManager.clipDuration(), 0, false, true);
+                    if(actualS != null && !actualS.equals(" ")) {
+                        boolean stop = false;
+                        try {
+                            stop = songManager.simpleAudioPlayer();
+                        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                            ex.printStackTrace();
                         }
-                        //aqui iniciem la barra de progrés de la cançó
-                        footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false);
-                        lastSong = actualS;
 
-                    }else if(lastSong.equals(actualS)){
-                        //si la cançó és la mateixa pausarem el thread conservat el frame actual de la cançó
-                        footerView.iterateProgressBar(songManager.clipDuration(), check, stop, false);
-                        lastSong = actualS;
-                    }else{
-                        //si les cançons són diferents farem reset i iniciarem el procés amb la nova cançó
-                        footerView.iterateProgressBar(songManager.clipDuration(), 0, true, true);
-                        footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false);
-                        lastSong = actualS;
+                        if (stop) {
+                            footerView.stop();
+
+                        } else {
+                            footerView.start();
+                        }
+
+                        //aquí comprovem si la cançó anterior és la mateixa, és diferent o és la primera cançó que es reprodueix
+                        int check = songManager.checkMyClip();
+                        if (lastSong == null) {
+                            //si es la primera cançó primer farem reset de la barra en cas que sigui necessari
+                            if (footerView.progressBarThread != null) {
+                                footerView.iterateProgressBar(songManager.clipDuration(), 0, false, true);
+                            }
+                            //aqui iniciem la barra de progrés de la cançó
+                            footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false);
+                            lastSong = actualS;
+
+                        } else if (lastSong.equals(actualS)) {
+                            //si la cançó és la mateixa pausarem el thread conservat el frame actual de la cançó
+                            footerView.iterateProgressBar(songManager.clipDuration(), check, stop, false);
+                            lastSong = actualS;
+                        } else {
+                            //si les cançons són diferents farem reset i iniciarem el procés amb la nova cançó
+                            footerView.iterateProgressBar(songManager.clipDuration(), 0, true, true);
+                            footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false);
+                            lastSong = actualS;
+                        }
                     }
 
 
@@ -146,50 +148,49 @@ public class FooterController implements ActionListener {
                         actualS = auxSplit[2];
                         songManager.getSong(actualS);
                     }
-
-                    footerView.setActualSong(actualS);
-                    footerView.jProgressBar.setMinimum(0);
-                    footerView.jProgressBar.setMaximum(songManager.clipDuration());
-                    footerView.setSongTotalTime(songManager.songDurationInString(actualS));
-                    int check = songManager.checkMyClip();
-                    //detectem si hem premut el botó de pause per canviar la img més endavant
-                    boolean stop = false;
-                    try {
-                        stop = songManager.simpleAudioPlayer();
-                    } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
-                        ex.printStackTrace();
-                    }
-
-                    if (stop) {
-                        footerView.stop();
-                    } else {
-                        footerView.start();
-                    }
-                    //afegim un playlist al final de la song guardada per així diferenciar-les de les normals
-                    actualS = actualS + "playlist";
-
-                    //aquí comprovem si la cançó anterior és la mateixa, és diferent o és la primera cançó que es reprodueix
-                    if(lastSong == null){
-                        //si és la primera cançó primer farem reset de la barra en cas que sigui necessari
-                        if(footerView.progressBarThread != null) {
-                            footerView.iterateProgressBar(songManager.clipDuration(), 0, false, true);
+                    if(actualS != null && !actualS.equals(" ")) {
+                        footerView.setActualSong(actualS);
+                        footerView.jProgressBar.setMinimum(0);
+                        footerView.jProgressBar.setMaximum(songManager.clipDuration());
+                        footerView.setSongTotalTime(songManager.songDurationInString(actualS));
+                        int check = songManager.checkMyClip();
+                        //detectem si hem premut el botó de pause per canviar la img més endavant
+                        boolean stop = false;
+                        try {
+                            stop = songManager.simpleAudioPlayer();
+                        } catch (IOException | UnsupportedAudioFileException | LineUnavailableException ex) {
+                            ex.printStackTrace();
                         }
-                        //aquí iniciem la barra de progrés de la cançó
-                        footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false);
-                        lastSong = actualS + "playlist";
-                    }else if(lastSong.equals(actualS)){
-                        //si la cançó és la mateixa pausarem el thread conservat el frame actual de la cançó
-                        footerView.iterateProgressBar(songManager.clipDuration(), check, stop, false);
-                        lastSong = actualS + "playlist";
-                    }else{
-                        //si les cançons són diferents farem reset i iniciarem el procés amb la nova cançó
-                        footerView.iterateProgressBar(songManager.clipDuration(), 0, true, true);
-                        footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false);
-                        lastSong = actualS + "playlist";
 
+                        if (stop) {
+                            footerView.stop();
+                        } else {
+                            footerView.start();
+                        }
+                        //afegim un playlist al final de la song guardada per així diferenciar-les de les normals
+                        actualS = actualS + "playlist";
+
+                        //aquí comprovem si la cançó anterior és la mateixa, és diferent o és la primera cançó que es reprodueix
+                        if (lastSong == null) {
+                            //si és la primera cançó primer farem reset de la barra en cas que sigui necessari
+                            if (footerView.progressBarThread != null) {
+                                footerView.iterateProgressBar(songManager.clipDuration(), 0, false, true);
+                            }
+                            //aquí iniciem la barra de progrés de la cançó
+                            footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false);
+                            lastSong = actualS + "playlist";
+                        } else if (lastSong.equals(actualS)) {
+                            //si la cançó és la mateixa pausarem el thread conservat el frame actual de la cançó
+                            footerView.iterateProgressBar(songManager.clipDuration(), check, stop, false);
+                            lastSong = actualS + "playlist";
+                        } else {
+                            //si les cançons són diferents farem reset i iniciarem el procés amb la nova cançó
+                            footerView.iterateProgressBar(songManager.clipDuration(), 0, true, true);
+                            footerView.iterateProgressBar(songManager.clipDuration(), 0, false, false);
+                            lastSong = actualS + "playlist";
+
+                        }
                     }
-
-
                 }
             }
             //repeat case, aquest esencialment crida un metode dins de songmanager per fer un bucle a la canço actual

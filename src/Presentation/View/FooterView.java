@@ -181,8 +181,10 @@ public class FooterView extends JPanel {
      * @param songName, nou nom de la cançó
      */
     public void updateSongName(String songName) {
-        String finalSong = songName.substring(0, songName.length() - 4);
-        jLogo.setText(finalSong);
+        if(songName != null) {
+            String finalSong = songName.substring(0, songName.length() - 4);
+            jLogo.setText(finalSong);
+        }
     }
 
     /**

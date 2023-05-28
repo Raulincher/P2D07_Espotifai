@@ -79,7 +79,11 @@ public class SongManager {
      * @return actualFrame, frame actual en forma d'int
      */
     public int checkMyClip(){
-        return myClip.getFramePosition();
+        int number = 0;
+        if(myClip != null){
+            number = myClip.getFramePosition();
+        }
+        return number;
     }
 
     /**
@@ -122,39 +126,30 @@ public class SongManager {
         try {
             File music;
             File[] files;
-            File file;
+            File file = null;
 
             if(myClip != null){
                 myClip.close();
             }
 
-            //comprovem el title, si es no hem escollit cap cançó es reproduira la primera dins la vista general
-            if(songTitle.equals("")){
-                music = new File("files/music/");
-                files = music.listFiles();
-                assert files != null;
-                if(files.length == 0){
-                    return;
-                }else {
-                    actualSong = files[0].getName();
-                    setActualSong(actualSong);
-                    String filePath = "files/music/" + files[0].getName();
-                    file = new File(filePath);
-                }
-            }else{
+            //comprovem el title
+            if(!songTitle.equals("")){
                 file = new File(getPath(songTitle));
                 actualSong = file.getName();
                 thatSong = actualSong;
-
             }
-            if (file.exists()) {
-                myClip = AudioSystem.getClip();
-                AudioInputStream ais = AudioSystem.getAudioInputStream(file.toURI().toURL());
-                myClip.open(ais);
 
-            }
-            else {
-                throw new RuntimeException("Sound: file not found: " + filePath);
+            if(file != null) {
+                if (file.exists()) {
+                    myClip = AudioSystem.getClip();
+                    AudioInputStream ais = AudioSystem.getAudioInputStream(file.toURI().toURL());
+                    myClip.open(ais);
+
+                } else {
+                    throw new RuntimeException("Sound: file not found: " + filePath);
+                }
+            }else{
+                myClip = null;
             }
         }
         catch (MalformedURLException e) {
