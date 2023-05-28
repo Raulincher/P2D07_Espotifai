@@ -46,7 +46,7 @@ public class DeleteSongViewController implements ActionListener, DocumentListene
 
     /**
      * Funció que servirà per detectar si hem premut qualsevol boto de la vista del delete song view
-     *
+     * @param e l'esdeveniment a tramitar
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -59,7 +59,7 @@ public class DeleteSongViewController implements ActionListener, DocumentListene
 
     /**
      * Funció que servirà per detectar si hem insertat dades al buscador
-     *
+     * @param e l'esdeveniment a tramitar
      */
     @Override
     public void insertUpdate(DocumentEvent e) {
@@ -68,7 +68,7 @@ public class DeleteSongViewController implements ActionListener, DocumentListene
 
     /**
      * Funció que servirà per detectar si hem eliminat dades
-     *
+     * @param e l'esdeveniment a tramitar
      */
     @Override
     public void removeUpdate(DocumentEvent e) {
@@ -77,6 +77,7 @@ public class DeleteSongViewController implements ActionListener, DocumentListene
 
     /**
      * Funció que servirà per detectar si hem cambiat dades
+     * @param e l'esdeveniment a tramitar
      */
     @Override
     public void changedUpdate(DocumentEvent e) {
@@ -85,6 +86,7 @@ public class DeleteSongViewController implements ActionListener, DocumentListene
 
     /**
      * Funció que servirà per detectar si hem premut qualsevol boto de la vista del delete song view amb el ratolí
+     * @param e l'esdeveniment a tramitar
      */
     @Override
     public void mouseClicked(MouseEvent e) {

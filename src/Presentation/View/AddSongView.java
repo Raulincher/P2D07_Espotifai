@@ -10,11 +10,15 @@ import java.awt.*;
 import java.io.File;
 
 public class AddSongView extends JPanel {
+
+    // Afegim atributs
     private final Utils utils;
-    public static final String BTN_BACK = "BTN_BACK";
+
+    // Preparem els botons
     public static final String BTN_ADD_FILE = "BTN_ADD_FILE";
     public static final String BTN_ADD_SONG = "BTN_ADD_SONG";
 
+    // Afegim JFunctions, como buttons
     private JLabel jlFilename;
     private JButton jadd;
     private JButton jfile;
@@ -24,15 +28,31 @@ public class AddSongView extends JPanel {
     private JFileChooser fcAddFile;
     private JComboBox<String> jcbGenre;
 
+    /**
+     * Funció que servirà com a constructor del AddSongView
+     *
+     * @param utils, per a utilitzar els mètodes d'utils
+     */
     public AddSongView(Utils utils){
         this.utils = utils;
     }
 
+    /**
+     * Funció que servirà per a vincular amb el seu controller
+     * i activar tots els listeners
+     *
+     * @param addSongController, controller del AddSongView
+     */
     public void addAddSongController(AddSongViewController addSongController) {
         jfile.addActionListener(addSongController);
         jadd.addActionListener(addSongController);
     }
 
+
+    /**
+     * Funció de tipus void que ens servirá per configurar la vista
+     * de l'add song
+     */
     public void configureAddSong() {
         setBackground(Color.black);
 
@@ -132,30 +152,68 @@ public class AddSongView extends JPanel {
         centerTotal.add(button);
     }
 
+    /**
+     * Funció que servirà per recollir el valor introduït
+     * a song name
+     *
+     * @return jtfSongName, song name que haurà introduït el propi usuari
+     */
     public JTextField getJtfSongName() {
         return jtfSongName;
     }
 
+    /**
+     * Funció que servirà per recollir el valor introduït
+     * a album
+     *
+     * @return jtfAlbum, album que haurà introduït el propi usuari
+     */
     public JTextField getJtfAlbum() {
         return jtfAlbum;
     }
 
+    /**
+     * Funció que servirà per recollir el valor escollit
+     * a album
+     *
+     * @return jcbGenre, genere que haurà escollit el propi usuari
+     */
     public JComboBox<String> getJcbGenre() {
         return jcbGenre;
     }
 
+    /**
+     * Funció que servirà per recollir el valor introduït
+     * a artist
+     *
+     * @return jtfArtist, artista que haurà introduït el propi usuari
+     */
     public JTextField getJtfArtist() {
         return jtfArtist;
     }
 
+    /**
+     * Funció que servirà per mostrar amb una pop up l'error, en cas d'haver-hi
+     *
+     * @param error, string amb el missatge d'error
+     */
     public void showPopUps(String error) {
         JOptionPane.showMessageDialog(this,error);
     }
 
+    /**
+     * Funció que servirà per recollir el valor introduït
+     * a file
+     *
+     * @return filename, nom de l'arxiu que haurà introduït el propi usuari
+     */
     public void setJlFilename(String filename) {
         jlFilename = new JLabel(filename);
     }
 
+    /**
+     * Funció que servirà per afegir el nom de l'arxiu
+     */
     public void addFileName(String filename) {
         //JLabel label = new JLabel(filename);
         setJlFilename(filename);
@@ -173,6 +231,9 @@ public class AddSongView extends JPanel {
         jfile.setPreferredSize(dimension);
     }
 
+    /**
+     * Funció que servirà per esborrar els camps
+     */
     public void clearFields() {
         jtfSongName.setText("");
         jtfAlbum.setText("");
@@ -188,6 +249,11 @@ public class AddSongView extends JPanel {
         jfile.setIcon(addFileBtn);
     }
 
+    /**
+     * Funció que servirà per saber si hi ha file pujat
+     *
+     * @return boolean que serveix de comprovant.
+     */
     public Boolean fileCheckExists() {
         return jlFilename != null;
     }

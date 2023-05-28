@@ -18,12 +18,24 @@ import java.util.ArrayList;
 
 public class GeneralPlaylistViewController implements ActionListener, MouseListener, DocumentListener {
 
+    // Preparem atributs
     private final GeneralPlaylistView generalPlaylistView;
     private final DetailedPlaylistView detailedView;
     private final MainView mainView;
     private final UserManager userManager;
     private final PlaylistManager playlistManager;
 
+
+    /**
+     * Funció que servirà per com a constructor del FooterController
+     *
+     * @param generalPlaylistView, per a poder veure les accions dins la vista de general playlist
+     * @param mainView, per poder cambiar de card dins la vista
+     * @param detailedView, per poder pasar alguns parametres dins la vista de detailed
+     * @param userManager, per a utilitzar els seus mètodes, aquí tractarem tota l'usuari
+     * @param playlistManager, per a utilitzar els seus mètodes, aquí tractarem tot el tema de reproduir playlist
+     *
+     */
     public GeneralPlaylistViewController(GeneralPlaylistView generalPlaylistView, MainView mainView, PlaylistManager playlistManager,
                                          UserManager userManager, DetailedPlaylistView detailedView) {
         this.generalPlaylistView = generalPlaylistView;
@@ -33,9 +45,14 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
         this.detailedView = detailedView;
     }
 
+    /**
+     * Funció que servirà per detectar si hem premut qualsevol botó de la vista del footer
+     * @param e l'esdeveniment a tramitar
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
+            //new playlist case, botó per crear playlist
             case GeneralPlaylistView.BTN_NEW_PLAYLIST -> {
                 String title = JOptionPane.showInputDialog("Playlist Name:");
                 String username = userManager.currentUsername();
@@ -46,7 +63,11 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
             }
         }
     }
-
+    /**
+     * Funció que servirà quan els usuaris premin una playlist de la taula, els portarà a la següent vista de la playlist detallada
+     *
+     *  @param e l'esdeveniment a tramitar
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         int tableClicked = generalPlaylistView.obtainTableClicked(e.getSource());
@@ -64,6 +85,11 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
         mainView.showDetailedPlaylistCard();
     }
 
+    /**
+     * Funció per isntertar el filtre
+     *
+     * @param e l'esdeveniment de document a tramitar
+     */
     @Override
     public void insertUpdate(DocumentEvent e) {
         if (e.getDocument() == generalPlaylistView.getMyPlaylistBuscador().getDocument()) {
@@ -72,7 +98,11 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
             generalPlaylistView.search(generalPlaylistView.getOtherPlaylistBuscador().getText(), generalPlaylistView.getOtherPlaylistSorter());
         }
     }
-
+    /**
+     * Funció per eliminar de la vista les playlists que no s'assemblen a la filtarda
+     *
+     * @param e l'esdeveniment de document a tramitar
+     */
     @Override
     public void removeUpdate(DocumentEvent e) {
         if (e.getDocument() == generalPlaylistView.getMyPlaylistBuscador().getDocument()) {
@@ -82,6 +112,11 @@ public class GeneralPlaylistViewController implements ActionListener, MouseListe
         }
     }
 
+    /**
+     * Funció per actualitzar els canvis del filtre
+     *
+     * @param e l'esdeveniment de document a tramitar
+     */
     @Override
     public void changedUpdate(DocumentEvent e) {
         if (e.getDocument() == generalPlaylistView.getMyPlaylistBuscador().getDocument()) {

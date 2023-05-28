@@ -49,7 +49,7 @@ public class HeaderController implements ActionListener {
     /**
      * Funció que servirà per detectar si hem premut qualsevol botó de la vista del header
      *
-     * No tindrà param ni return
+     * @param e l'esdeveniment a tramitar
      */
 
     @Override

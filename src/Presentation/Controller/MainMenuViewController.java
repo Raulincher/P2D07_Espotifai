@@ -56,7 +56,7 @@ public class MainMenuViewController implements ActionListener{
 
     /**
      * Funció que servirà per detectar si hem premut qualsevol botó de la vista de menu
-     *
+     * @param e l'esdeveniment a tramitar
      */
     @Override
     public void actionPerformed(ActionEvent e) {

@@ -40,7 +40,7 @@ public class AddSongViewController implements ActionListener {
 
     /**
      * Funció que servirà per detectar si hem premut qualsevol boto de la vista d'add song
-     *
+     * @param e l'esdeveniment a tramitar
      */
     @Override
     public void actionPerformed(ActionEvent e) {

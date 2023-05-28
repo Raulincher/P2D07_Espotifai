@@ -41,6 +41,8 @@ public class DetailedPlaylistViewController implements ActionListener, MouseList
 
     /**
      * Funció que servirà per detectar si hem premut qualsevol boto de la vista de detailed playlist view
+     *
+     * @param e l'esdeveniment a tramitar
      */
     @Override
     public void actionPerformed(ActionEvent e) {
@@ -78,6 +80,7 @@ public class DetailedPlaylistViewController implements ActionListener, MouseList
 
     /**
      * Funció que servirà per detectar si hem premut qualsevol click amb ratolí
+     * @param e l'esdeveniment a tramitar
      */
     @Override
     public void mouseClicked(MouseEvent e) {
