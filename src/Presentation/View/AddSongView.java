@@ -9,12 +9,17 @@ import javax.swing.filechooser.FileNameExtensionFilter;
 import java.awt.*;
 import java.io.File;
 
+/**
+ * Classe de la vista add song la qual extend un jpanel
+ */
 public class AddSongView extends JPanel {
 
     // Afegim atributs
     private final Utils utils;
 
-    // Preparem els botons
+    /**
+     * preparem els botons
+     */
     public static final String BTN_ADD_FILE = "BTN_ADD_FILE";
     public static final String BTN_ADD_SONG = "BTN_ADD_SONG";
 
@@ -205,7 +210,7 @@ public class AddSongView extends JPanel {
      * Funció que servirà per recollir el valor introduït
      * a file
      *
-     * @return filename, nom de l'arxiu que haurà introduït el propi usuari
+     * @param filename, nom arxiu
      */
     public void setJlFilename(String filename) {
         jlFilename = new JLabel(filename);
@@ -213,6 +218,8 @@ public class AddSongView extends JPanel {
 
     /**
      * Funció que servirà per afegir el nom de l'arxiu
+     *
+     * @param filename, nom arxiu
      */
     public void addFileName(String filename) {
         //JLabel label = new JLabel(filename);

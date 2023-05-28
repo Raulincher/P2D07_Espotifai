@@ -16,10 +16,7 @@ public class MainMenuView extends JPanel {
 
     /**
      * Funció que servirà com a constructor del MainMenuView
-     *
-     *
      * @param utils, per utilitzar els seus mètodes
-     * @param , vista del header
      */
     public MainMenuView(Utils utils){
         this.utils = utils;

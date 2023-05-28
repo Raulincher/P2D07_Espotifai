@@ -182,8 +182,6 @@ public class RegisterView extends JPanel {
     /**
      * Funció que servirà per recollir el valor introduït
      * en el username
-     *
-     * @return jtfUsername, usuari que haurà introduït el propi usuari
      */
     public void emptyFields() {
         JOptionPane.showMessageDialog(this, EMPTY_FIELDS_MESSAGE);

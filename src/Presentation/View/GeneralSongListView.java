@@ -31,10 +31,7 @@ public class GeneralSongListView extends JPanel {
 
     /**
      * Funció que servirà com a constructor de la StatisticsView
-     *
-     * @param , vista per a posar el Header
      * @param utils, per usar tots els seus mètodes
-     * @param , vista per a posar el Footer
      */
     public GeneralSongListView(Utils utils){
         this.utils = utils;

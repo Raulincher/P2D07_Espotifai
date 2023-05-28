@@ -30,10 +30,7 @@ public class DeleteSongView extends JPanel {
 
     /**
      * Funció que servirà com a constructor de la DeleteSongView
-     *
-     * @param , vista per a posar el Header
      * @param utils, per usar tots els seus mètodes
-     * @param , vista per a posar el Footer
      */
     public DeleteSongView(Utils utils){
         this.utils = utils;
