@@ -214,7 +214,7 @@ public class GeneralPlaylistView extends JPanel {
     }
 
     /**
-     * Funció que servirà per omplir la taula de playlist de l'esquerra, que es la de altres usuaris
+     * Funció que servirà per omplir la taula de playlist de la dreta, que es la de altres usuaris
      *
      * @param playlistsNames, playlist de la BBDD (array de noms)
      *
@@ -232,7 +232,7 @@ public class GeneralPlaylistView extends JPanel {
     }
 
     /**
-     * Funció que servirà per obtenir quina taula hem clicat, si la nostra o la de altra user
+     * Funció que servirà per obtenir quina taula hem clicat, si la nostra o la de altre user
      *
      * @param object, objecte clicat
      *
@@ -282,7 +282,6 @@ public class GeneralPlaylistView extends JPanel {
      * @return jMyPlaylistBuscador, Jtextfield amb el nostre buscador
      */
     public JTextField getMyPlaylistBuscador() {
-        System.out.println("jMyPlaylistBuscador: " + jMyPlaylistBuscador);
         return jMyPlaylistBuscador;
     }
 
@@ -292,7 +291,6 @@ public class GeneralPlaylistView extends JPanel {
      * @return jOthersPlaylistBuscador, jtextfield amb el buscador
      */
     public JTextField getOtherPlaylistBuscador() {
-        System.out.println("jMyPlaylistBuscador: " + jOthersPlaylistBuscador);
         return jOthersPlaylistBuscador;
     }
 

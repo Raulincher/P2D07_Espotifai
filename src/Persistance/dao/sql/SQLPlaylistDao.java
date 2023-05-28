@@ -415,32 +415,31 @@ public class SQLPlaylistDao implements PlaylistDao {
                             System.out.println("Error eliminating the song");
                         }
                     } else {
-                            if (allSongs != null) {
-                                String[] songs = allSongs.split(",");
-                                ArrayList<String> songsUpdated = new ArrayList<>();
+                        if (allSongs != null) {
+                           String[] songs = allSongs.split(",");
+                           ArrayList<String> songsUpdated = new ArrayList<>();
 
-                                for (int j = 0; j < songs.length; j++) {
-                                    for (int k = 0; k < songsByUser.size(); k++) {
-                                        if ((songsByUser.get(k).equals(songs[j]))) {
-                                            save = false;
-                                        }
-                                    }
-
-                                    if (save) {
-                                       songsUpdated.add(songs[j]);
-                                    }
-                                    save = true;
-                                }
-                                String songsCorrectFormat = String.join(",", songsUpdated);
-                                allSongs = songsCorrectFormat.substring(0);
-                            }
-
-                            String register = "UPDATE playlist SET songs = ? WHERE title = ?";
-                            PreparedStatement preparedStmt = remoteConnection.prepareStatement(register);
-                            preparedStmt.setString(1, allSongs);
-                            preparedStmt.setString(2, title);
-                            preparedStmt.execute();
+                           for (int j = 0; j < songs.length; j++) {
+                               for (int k = 0; k < songsByUser.size(); k++) {
+                                   if ((songsByUser.get(k).equals(songs[j]))) {
+                                       save = false;
+                                   }
+                               }
+                               if (save) {
+                                   songsUpdated.add(songs[j]);
+                               }
+                               save = true;
+                           }
+                           String songsCorrectFormat = String.join(",", songsUpdated);
+                           allSongs = songsCorrectFormat.substring(0);
                         }
+
+                        String register = "UPDATE playlist SET songs = ? WHERE title = ?";
+                        PreparedStatement preparedStmt = remoteConnection.prepareStatement(register);
+                        preparedStmt.setString(1, allSongs);
+                        preparedStmt.setString(2, title);
+                        preparedStmt.execute();
+                    }
                 }
             }
         } catch (SQLException e) {

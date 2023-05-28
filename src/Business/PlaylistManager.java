@@ -43,7 +43,8 @@ public class PlaylistManager {
     /**
      * Funció que ens serveix per obtenir els noms de totes les playlists
      *
-     * @param byUsername, boolean que indica si la playlist es nostra
+     * @param byUsername, boolean que indica si la playlist es nostra. Serveix per a reaprofitar el codi per a generar
+     *                    el contingut de les 2 taules (my playlists) i (others playlists) en funció d'aquesta variable.
      * @param username, nom de l'usuari actual
      *
      * @return playlistNames, arraylist d'Strings on s'emmagatzemen el noms
@@ -102,7 +103,7 @@ public class PlaylistManager {
 
 
     /**
-     * Funció que ens serveix per poder comprobar si una cançó ja existeix a una playlist
+     * Funció que ens serveix per poder comprovar si una cançó ja existeix a una playlist
      *
      * @param songName, el nom de la cançó
      * @param playlistName, el nom de la playlist
@@ -180,7 +181,7 @@ public class PlaylistManager {
     }
 
     /**
-     * Funció que ens fer set del nom de la playlist actual
+     * Funció que ens fa set del nom de la playlist actual
      *
      * @param currentPlaylist, el nom de la playlist actual
      *
@@ -232,7 +233,7 @@ public class PlaylistManager {
     }
 
     /**
-     * Funció que ens serveix per poder esborrar una cançó de la playlist seleccionada
+     * Funció que ens serveix per poder esborrar una cançó de totes les playlists en les que hi és
      *
      * @param songTitle, el nom de la cançó
      *
@@ -243,7 +244,7 @@ public class PlaylistManager {
     }
 
     /**
-     * Funció que ens serveix per poder esborrar una cançó desde fora de la playlist
+     * Funció que ens serveix per poder esborrar una cançó d'una playlist concreta
      *
      * @param playlistName, el nom de la playlist
      * @param songTitle, el nom de la cançó
