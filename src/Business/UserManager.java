@@ -3,9 +3,7 @@ package Business;
 import Business.Entities.User;
 import Persistance.dao.UserDao;
 import Persistance.dao.UserNotFoundException;
-
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.regex.Pattern;
 
 public class UserManager {

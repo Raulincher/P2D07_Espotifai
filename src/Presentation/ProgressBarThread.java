@@ -2,6 +2,9 @@ package Presentation;
 
 import javax.swing.*;
 
+/**
+ * Classe per controlar la barra de música
+ */
 public class ProgressBarThread implements Runnable{
 
     // Preparem atributs

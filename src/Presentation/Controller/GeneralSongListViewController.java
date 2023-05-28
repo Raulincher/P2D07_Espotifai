@@ -33,6 +33,7 @@ public class GeneralSongListViewController implements MouseListener {
 
     /**
      * Constructor de la classe GeneralSongListView
+     *
      * @param generalSongListView, vista de la classe
      * @param mainView, vista que controla totes les vistes del programa
      * @param songManager, manager per obtenir les songs en la general list View
@@ -52,7 +53,8 @@ public class GeneralSongListViewController implements MouseListener {
 
     /**
      * Funció que servirà quan els usuaris premin una cançó de la taula, els portarà a la següent vista de la cançó detallada
-     * @param e l'esdeveniment a tramitar
+     *
+     *  @param e l'esdeveniment a tramitar
      */
     @Override
     public void mouseClicked(MouseEvent e) {
@@ -86,6 +88,7 @@ public class GeneralSongListViewController implements MouseListener {
 
     /**
      * Funció per poder obtenir MouseListener
+     *
      * @param e l'esdeveniment a tramitar
      */
     @Override
@@ -93,6 +96,7 @@ public class GeneralSongListViewController implements MouseListener {
 
     /**
      * Funció per poder obtenir MouseListener
+     *
      * @param e l'esdeveniment a tramitar
      */
     @Override
@@ -100,6 +104,7 @@ public class GeneralSongListViewController implements MouseListener {
 
     /**
      * Funció per poder obtenir MouseListener
+     *
      * @param e l'esdeveniment a tramitar
      */
     @Override
@@ -107,6 +112,7 @@ public class GeneralSongListViewController implements MouseListener {
 
     /**
      * Funció per poder obtenir MouseListener
+     *
      * @param e l'esdeveniment a tramitar
      */
     @Override

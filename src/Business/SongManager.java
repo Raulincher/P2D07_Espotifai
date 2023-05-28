@@ -3,7 +3,6 @@ package Business;
 import Business.Entities.Song;
 import Persistance.dao.SongDao;
 import Persistance.dao.SongLyricsApi;
-
 import javax.sound.sampled.*;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
@@ -15,6 +14,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * Classe que ens permet controla la classe Song
+ */
 public class SongManager {
 
     // Preparem atributs

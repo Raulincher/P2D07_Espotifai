@@ -72,7 +72,7 @@ public class DetailedSongView extends JPanel {
      * Funció que servirà per a construir la vista amb tots
      * els elements de Swing
      *
-     * No tindrà param ni retur n
+     * No tindrà param ni return
      */
     public void configureDetailedSongView() {
         // Creem el BorderLayout i el configurem
@@ -212,9 +212,9 @@ public class DetailedSongView extends JPanel {
              * @param value
              * @param isSelected, bool per confirmar si s'ha seleccionat
              * @param hasFocus,
-             * @param row,
-             * @param column
-             * @return cellComponent
+             * @param row, enter amb la fila a modificar
+             * @param column, enter amb la columna a modificar
+             * @return cellComponent, amb la cel·la modificada
              */
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -234,9 +234,9 @@ public class DetailedSongView extends JPanel {
              * @param value,
              * @param isSelected, bool per confirmar si la cançó ha sigut seleccionada
              * @param hasFocus,
-             * @param row,
-             * @param column,
-             * @return cellComponent,
+             * @param row, enter amb la fila a modificar
+             * @param column, enter amb la columna a modificar
+             * @return cellComponent, amb la cel·la modificada
              */
             @Override
             public Component getTableCellRendererComponent(JTable table, Object value, boolean isSelected, boolean hasFocus, int row, int column) {
@@ -307,7 +307,6 @@ public class DetailedSongView extends JPanel {
      * @param playlist, ArrayList d'Strings que conté el nom de les playlist de l'usuari loguejat
      */
     public void fillPopMenu(ArrayList<String> playlist){
-
         JPanel filterPanel = new JPanel(new BorderLayout());
         filterPanel.add(filterMenuPlaylist, BorderLayout.NORTH);
         popupMenuPlaylist.add(filterPanel, 0);
@@ -334,13 +333,6 @@ public class DetailedSongView extends JPanel {
         popupMenuPlaylist.setFont(new Font("Gotham", Font.BOLD, 15));
         popupMenuPlaylist.setLightWeightPopupEnabled(false);
         popupMenuPlaylist.setPreferredSize(new Dimension(60,90));
-       /* for (int i = 0; i < listItems.size(); i++) {
-            if (i < 5) {
-                listItems.get(i).setVisible(true);
-            } else {
-                listItems.get(i).setVisible(false);
-            }
-        }*/
     }
 
     /**
@@ -408,10 +400,16 @@ public class DetailedSongView extends JPanel {
         jPlay.setIcon(playBtn);
     }
 
+    /**
+     * Funció per netejar el filtre de cerca de la popUpMenu playlists
+     */
     public void cleanFilter(){
         filterMenuPlaylist.setText("");
     }
 
+    /**
+     * Funció per filtra la popUpMenu de les playlists
+     */
     public void filteredPopUpMenu() {
         String searchTerm = filterMenuPlaylist.getText().toLowerCase();
         // Recorrem tots els elements de la JPopupMenu i els filtrem depenen de la busqueda
