@@ -23,6 +23,11 @@ public class SQLSongDao implements SongDao {
         this.remoteConnection = remoteConnection;
     }
 
+    /**
+     * Funció que servirà per guardar una song a BBDD
+     *
+     * @param song, song per guardar
+     */
     public void saveSong(Song song) throws SQLException {
         try {
             Statement statement = remoteConnection.createStatement();
@@ -62,7 +67,11 @@ public class SQLSongDao implements SongDao {
     }
 
 
-
+    /**
+     * Funció que servirà per obtenir totes les cançons de la BBDD
+     *
+     * @return songList, arraylist de tipus string amb totes les songs de la BBDD
+     */
     public ArrayList<Song> readAllSongsSQL() {
         ArrayList<Song> songList = new ArrayList<>();
 
@@ -98,6 +107,13 @@ public class SQLSongDao implements SongDao {
         return songList;
     }
 
+    /**
+     * Funció que servirà per comprobar que la cançó estigui ja a BBDD
+     *
+     * @param songName, nom de la song
+     *
+     * @return exist, boolean amb la existencia de la cançó dins la base de dades
+     */
     public boolean songInDatabase(String songName) {
         boolean exist = false;
 
@@ -125,7 +141,13 @@ public class SQLSongDao implements SongDao {
         return exist;
     }
 
-
+    /**
+     * Funció que servirà per agafar el path relatiu d'un arxiu d'audio
+     *
+     * @param songName, nom de la song
+     *
+     * @return exist, String amb el path de la cançó, si no existeis retornará un ""
+     */
     public String songPath(String songName) {
         String exist = "";
 
@@ -171,6 +193,13 @@ public class SQLSongDao implements SongDao {
         return exist;
     }
 
+    /**
+     * Funció que servirà per borrar una cançó de la BBDD
+     *
+     * @param songName, nom de la song
+     *
+     * @return exist, String amb el path de la cançó, si s'ha esborrat retornara un ""
+     */
     public String deleteSong(String songName) {
         String filePath = null;
 
@@ -210,7 +239,13 @@ public class SQLSongDao implements SongDao {
         return filePath;
     }
 
-
+    /**
+     * Funció que servirà per agafar la duració d'una cançó en format int
+     *
+     * @param songName, nom de la song
+     *
+     * @return duration, int amb el temps total de cançó
+     */
     public int songDuration(String songName){
 
         int duration = 0;
@@ -236,7 +271,13 @@ public class SQLSongDao implements SongDao {
         return duration;
     }
 
-
+    /**
+     * Funció que servirà per agafar la duració d'una cançó en format String
+     *
+     * @param songName, nom de la song
+     *
+     * @return time, string amb el temps total de cançó
+     */
     public String songDurationInString(String songName){
 
         String time ="";
@@ -257,6 +298,13 @@ public class SQLSongDao implements SongDao {
         return time;
     }
 
+    /**
+     * Funció que servirà per agafar les cançons d'un user en concret
+     *
+     * @param userName, nom d'usuari
+     *
+     * @return songsByUser, arraylist d'Strings amb el title de les cançons
+     */
     public ArrayList<String> filterSongsByUser(String userName) {
         ArrayList<String> songsByUser = new ArrayList<>();
 
@@ -284,7 +332,13 @@ public class SQLSongDao implements SongDao {
         return songsByUser;
     }
 
-
+    /**
+     * Funció que servirà per poder borrar totes les songs d'un user
+     *
+     * @param songNames, nom de les cançons
+     *
+     * @return filePaths, arraylist d'Strings amb el path de les cançons esborrades
+     */
     //Retorna un arraylist dels paths i borrem les cançons de la Base de Dades
     public ArrayList<String> deleteSongsByUsername(ArrayList<String> songNames) {
         ArrayList<String> filePaths = new ArrayList<>();
