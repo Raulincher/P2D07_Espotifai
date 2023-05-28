@@ -75,9 +75,6 @@ public class HeaderController implements ActionListener {
                         userManager.logout();
                         footerController.outOfTheProgram();
                         mainView.showMainCard();
-
-                       // userManager.delete();
-
                     }
                 } catch (UserNotFoundException ex) {
                     ex.printStackTrace();

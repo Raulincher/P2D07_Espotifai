@@ -208,7 +208,10 @@ public class SongManager {
      * @return boolean amb la flag esmentada a la funció
      */
     public boolean isPlaying(String songDelete){
-        return (myClip.isRunning() & actualSong.equals(songDelete));
+        if(myClip != null) {
+            return myClip.isRunning() && actualSong.equals(songDelete);
+        }
+        return false;
     }
 
     /**
