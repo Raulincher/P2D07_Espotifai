@@ -19,11 +19,23 @@ import javax.swing.event.DocumentEvent;
 
 
 public class DeleteSongViewController implements ActionListener, DocumentListener, MouseListener {
+
+    // Preparem atributs
     private final DeleteSongView deleteSongView;
     private final SongManager songManager;
     private final UserManager userManager;
     private final PlaylistManager playlistManager;
 
+
+    /**
+     * Funció que servirà per com a constructor del FooterController
+     *
+     * @param deleteSongView, per detectar els clics dins de delete song view
+     * @param playlistManager, per poder utilitzar la lógica d'algunes funcions de playlist manager
+     * @param songManager, per poder utilitzar la lógica d'algunes funcions de song manager
+     * @param userManager, per poder utilitzar la lógica d'algunes funcions de user manager
+     *
+     */
     public DeleteSongViewController(DeleteSongView deleteSongView, SongManager songManager,
                                     UserManager userManager, PlaylistManager playlistManager) {
         this.deleteSongView = deleteSongView;
@@ -32,6 +44,10 @@ public class DeleteSongViewController implements ActionListener, DocumentListene
         this.playlistManager = playlistManager;
     }
 
+    /**
+     * Funció que servirà per detectar si hem premut qualsevol boto de la vista del delete song view
+     *
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
@@ -41,21 +57,36 @@ public class DeleteSongViewController implements ActionListener, DocumentListene
         }
     }
 
+    /**
+     * Funció que servirà per detectar si hem insertat dades al buscador
+     *
+     */
     @Override
     public void insertUpdate(DocumentEvent e) {
         deleteSongView.search(deleteSongView.getjtfBuscador().getText(), deleteSongView.getSorter());
     }
 
+    /**
+     * Funció que servirà per detectar si hem eliminat dades
+     *
+     */
     @Override
     public void removeUpdate(DocumentEvent e) {
         deleteSongView.search(deleteSongView.getjtfBuscador().getText(), deleteSongView.getSorter());
     }
 
+    /**
+     * Funció que servirà per detectar si hem cambiar dades
+     *
+     */
     @Override
     public void changedUpdate(DocumentEvent e) {
         deleteSongView.search(deleteSongView.getjtfBuscador().getText(), deleteSongView.getSorter());
     }
 
+    /**
+     * Funció que servirà per detectar si hem premut qualsevol boto de la vista del delete song view amb el ratolí
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         String songTitle = deleteSongView.obtainSongNameToDelete(e.getPoint());

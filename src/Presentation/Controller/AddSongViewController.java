@@ -13,11 +13,23 @@ import java.io.File;
 import java.util.ArrayList;
 
 public class AddSongViewController implements ActionListener {
+
+    // Preparem atributs
     private final AddSongView addSongView;
     private final MainView mainView;
     private final SongManager songManager;
     private final UserManager userManager;
 
+
+    /**
+     * Funció que servirà per com a constructor del FooterController
+     *
+     * @param addSongView, per detectar els clics dins de add song view
+     * @param mainView, per cambiar de cards
+     * @param songManager, per poder utilitzar la lógica d'algunes funcions de song manager
+     * @param userManager, per poder utilitzar la lógica d'algunes funcions de user manager
+     *
+     */
     public AddSongViewController(AddSongView addSongView, MainView mainView, SongManager songManager, UserManager userManager) {
         this.addSongView = addSongView;
         this.mainView = mainView;
@@ -25,9 +37,15 @@ public class AddSongViewController implements ActionListener {
         this.userManager = userManager;
     }
 
+
+    /**
+     * Funció que servirà per detectar si hem premut qualsevol boto de la vista d'add song
+     *
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
+            //add file, aquest botó ens permetrà afegir un file desde aquesta vista
             case AddSongView.BTN_ADD_FILE:
                 if (!songManager.fileSongSelector()) {
                     addSongView.showPopUps("Error, the song should be in .wav format!");
@@ -36,6 +54,7 @@ public class AddSongViewController implements ActionListener {
                 }
                 break;
 
+            //add song, aquest botó ens permetrà afegir una cançó
             case AddSongView.BTN_ADD_SONG:
                 String songName = addSongView.getJtfSongName().getText();
                 String artist = addSongView.getJtfArtist().getText();
