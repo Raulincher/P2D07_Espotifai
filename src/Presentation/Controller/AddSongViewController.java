@@ -41,9 +41,8 @@ public class AddSongViewController implements ActionListener {
                 String artist = addSongView.getJtfArtist().getText();
                 String album = addSongView.getJtfAlbum().getText();
                 String genre = (String) addSongView.getJcbGenre().getSelectedItem();
-                Boolean file = addSongView.fileCheckEmpty();
 
-                if (songManager.isEmpty(songName, artist, album, genre) & !file) {
+                if (songManager.isEmpty(songName, artist, album, genre)) {
                     addSongView.showPopUps("Error, empty field, can't upload the song!");
                 } else {
                     if (!songManager.songExists(songName)) {

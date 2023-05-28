@@ -188,7 +188,7 @@ public class AddSongView extends JPanel {
 
     }
 
-    public Boolean fileCheckEmpty(){
-        return jfile == null;
+    public boolean fileCheckEmpty(){
+        return fcAddFile.getSelectedFile() == null;
     }
 }
