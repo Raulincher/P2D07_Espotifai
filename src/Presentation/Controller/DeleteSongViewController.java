@@ -76,8 +76,7 @@ public class DeleteSongViewController implements ActionListener, DocumentListene
     }
 
     /**
-     * Funció que servirà per detectar si hem cambiar dades
-     *
+     * Funció que servirà per detectar si hem cambiat dades
      */
     @Override
     public void changedUpdate(DocumentEvent e) {

@@ -10,14 +10,25 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
 public class DetailedPlaylistViewController implements ActionListener, MouseListener {
+    // Preparem atributs
     private final DetailedPlaylistView detailedPlaylistView;
     private final MainView mainView;
     private final PlaylistManager playlistManager;
     private final GeneralPlaylistView generalPlaylistView;
     private String whichSongName;
-
     private final UserManager userManager;
 
+
+    /**
+     * Funció que servirà per com a constructor del FooterController
+     *
+     * @param detailedPlaylistView, per detectar els clics dins de delete song view
+     * @param mainView, per poder cambiar entre cards
+     * @param playlistManager, per poder utilitzar la lógica d'algunes funcions de playlist manager
+     * @param generalPlaylistView, per poder omplir amb informació de la vista general de playlists
+     * @param userManager, per poder utilitzar la lógica d'algunes funcions de user manager
+     *
+     */
     public DetailedPlaylistViewController(DetailedPlaylistView detailedPlaylistView, MainView mainView,
                                           PlaylistManager playlistManager, GeneralPlaylistView generalPlaylistView,
                                           UserManager userManager) {
@@ -28,9 +39,13 @@ public class DetailedPlaylistViewController implements ActionListener, MouseList
         this.userManager = userManager;
     }
 
+    /**
+     * Funció que servirà per detectar si hem premut qualsevol boto de la vista de detailed playlist view
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         switch (e.getActionCommand()) {
+            //case delete playlist, serveix per poder esborrar la playlist seleccionada
             case DetailedPlaylistView.BTN_DELETE_PLAYLIST -> {
                 String playlistName = playlistManager.getCurrentPlaylist();
                 if (playlistManager.deletePlaylist(playlistName)) {
@@ -43,6 +58,7 @@ public class DetailedPlaylistViewController implements ActionListener, MouseList
                 }
             }
 
+            //case delete song from playlist, serveix per poder esborrar una song de la playlist escollida
             case DetailedPlaylistView.BTN_DELETE_SONG_FROM_PLAYLIST -> {
                 // Primer elimino la cançó de la base de dades
                 String playlistName = detailedPlaylistView.getPlaylistName();
@@ -52,11 +68,17 @@ public class DetailedPlaylistViewController implements ActionListener, MouseList
                 detailedPlaylistView.fillSongsInPlaylistTable(playlistManager.obtainSongsInPlaylist(playlistName));
             }
 
+            //case song go down, permet baixar una cançó
             case DetailedPlaylistView.BTN_SONG_DOWN -> detailedPlaylistView.moveSelectedRowDown();
+
+            //case song go up, permet pujar una cançó
             case DetailedPlaylistView.BTN_SONG_UP -> detailedPlaylistView.moveSelectedRowUp();
         }
     }
 
+    /**
+     * Funció que servirà per detectar si hem premut qualsevol click amb ratolí
+     */
     @Override
     public void mouseClicked(MouseEvent e) {
         whichSongName  = detailedPlaylistView.obtainSongName(e.getPoint());
