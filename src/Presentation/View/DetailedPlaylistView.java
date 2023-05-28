@@ -64,8 +64,6 @@ public class DetailedPlaylistView extends JPanel {
     /**
      * Funció que servirà per a configurar tots els elements
      * de Swing de la vista
-     *
-     * No tindrà ni param ni return
      */
     public void configureDetailedPlaylistView() {
         setLayout(new BorderLayout());
@@ -134,6 +132,14 @@ public class DetailedPlaylistView extends JPanel {
         //add(south, BorderLayout.SOUTH);
     }
 
+    /**
+     * Funció que servirà per crear una taula amb scrollpane
+     *
+     * @param table, taula a crear
+     *
+     * @return table, retornem la taula ja montada
+     *
+     */
     public JScrollPane createSongListTable(JTable table){
         Color gris = new Color(26,26,26);
 
@@ -155,6 +161,12 @@ public class DetailedPlaylistView extends JPanel {
         return new JScrollPane(table);
     }
 
+    /**
+     * Funció que servirà per omplir la taula de cançons
+     *
+     * @param songsInPlaylist, cançons dins de la playlist seleccionada (array de titles)
+     *
+     */
     public void fillSongsInPlaylistTable(ArrayList<String> songsInPlaylist) {
         songListModel.setRowCount(0);
         if (songsInPlaylist != null) {
@@ -166,14 +178,29 @@ public class DetailedPlaylistView extends JPanel {
         }
     }
 
+    /**
+     * Funció per definir el nom de la playlist
+     *
+     * @param playlistName, nom de la playlist
+     *
+     */
     public void definePlaylistName(String playlistName) {
         jtArea.setText(playlistName);
     }
 
+    /**
+     * Funció per mostrar pop ups amb errors
+     *
+     * @param error, string amb l'error a mostrar
+     *
+     */
     public void showPopUp(String error) {
         JOptionPane.showMessageDialog(this,error);
     }
 
+    /**
+     * Funció per amagar botons quan sigui necessari
+     */
     public void hideButton() {
         jbDeletePlaylist.setVisible(false);
         jbDeleteSong.setVisible(false);
@@ -181,6 +208,9 @@ public class DetailedPlaylistView extends JPanel {
         jbSongDown.setVisible(false);
     }
 
+    /**
+     * Funció per mostrar botons quan sigui necessari
+     */
     public void showButton() {
         jbDeletePlaylist.setVisible(true);
         jbDeleteSong.setVisible(true);
@@ -188,16 +218,32 @@ public class DetailedPlaylistView extends JPanel {
         jbSongDown.setVisible(true);
     }
 
+    /**
+     * Funció per obtenir el nom d'una cançó de la taula
+     *
+     * @param point, punt seleccionat
+     *
+     * @return playlistName, string el nom nom obtingut
+     */
     public String obtainSongName(Point point) {
         int indexFila = songListTable.rowAtPoint(point);
         String playlistName = (String) songListTable.getValueAt(indexFila, 0);
         return playlistName;
     }
 
+    /**
+     * Funció per agafar el nom de la playlist
+     *
+     * @return playlistName, nom de la playlist
+     *
+     */
     public String getPlaylistName() {
         return jtArea.getText();
     }
 
+    /**
+     * Funció per moure la fila escollida cap a dalt
+     */
     public void moveSelectedRowUp() {
         int selectedRow = songListTable.getSelectedRow();
         if (selectedRow > 0) {
@@ -205,6 +251,10 @@ public class DetailedPlaylistView extends JPanel {
             songListTable.setRowSelectionInterval(selectedRow - 1, selectedRow - 1);
         }
     }
+
+    /**
+     * Funció per moure la fila escollida cap abaix
+     */
     public void moveSelectedRowDown() {
         int selectedRow = songListTable.getSelectedRow();
         int rowCount = songListTable.getRowCount();
